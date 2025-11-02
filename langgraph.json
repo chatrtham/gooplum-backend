@@ -1,7 +1,10 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "graphie": "./src/agent.py:agent"
+    "goopie": "./src/agent.py:agent"
   },
-  "env": ".env"
+  "env": ".env",
+  "http": {
+    "app": "./src/main.py:app"
+  }
 }

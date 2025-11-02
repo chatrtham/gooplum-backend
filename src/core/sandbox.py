@@ -30,7 +30,6 @@ async def run_python_code(code: str):
         packages = [
             "langchain-mcp-adapters>=0.1.11",
             "langchain-openai>=0.3.35",
-            "langgraph>=0.6.10",
             "python-dotenv>=1.1.1",
         ]
 

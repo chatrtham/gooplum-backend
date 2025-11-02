@@ -1,4 +1,4 @@
-# GraphLoop Backend
+# GoopLum Backend
 
 ## Quick Start
 
