@@ -1,7 +1,6 @@
 """Flow discovery system for parsing generated code and extracting flow signatures."""
 
 import ast
-import inspect
 from typing import Dict, List, Any, Optional
 import re
 from dataclasses import dataclass
@@ -10,6 +9,7 @@ from dataclasses import dataclass
 @dataclass
 class FlowParameter:
     """Represents a parameter in a flow function."""
+
     name: str
     type: str
     default: Optional[str] = None
@@ -20,6 +20,7 @@ class FlowParameter:
 @dataclass
 class FlowMetadata:
     """Metadata for a discovered flow."""
+
     name: str
     description: str
     parameters: List[FlowParameter]
@@ -64,21 +65,25 @@ class FlowDiscovery:
 
         return self.flows
 
-    def _extract_flow_metadata(self, node: ast.AsyncFunctionDef, source_code: str) -> Optional[FlowMetadata]:
+    def _extract_flow_metadata(
+        self, node: ast.AsyncFunctionDef, source_code: str
+    ) -> Optional[FlowMetadata]:
         """Extract metadata from an async function definition."""
         try:
             # Extract function name
             name = node.name
 
             # Skip private functions (starting with _)
-            if name.startswith('_'):
+            if name.startswith("_"):
                 return None
 
             # Extract docstring
             docstring = ast.get_docstring(node) or ""
 
             # Extract description from docstring (first line)
-            description = docstring.split('\n')[0].strip() if docstring else f"Flow: {name}"
+            description = (
+                docstring.split("\n")[0].strip() if docstring else f"Flow: {name}"
+            )
 
             # Extract parameters
             parameters = self._extract_parameters(node)
@@ -95,7 +100,7 @@ class FlowDiscovery:
                 parameters=parameters,
                 return_type=return_type,
                 docstring=docstring,
-                source_code=source_code
+                source_code=source_code,
             )
 
         except Exception as e:
@@ -107,10 +112,7 @@ class FlowDiscovery:
         parameters = []
 
         # Skip self parameter for methods
-        skip_first = (
-            node.args.args and
-            node.args.args[0].arg == "self"
-        )
+        skip_first = node.args.args and node.args.args[0].arg == "self"
 
         args_to_process = node.args.args[1:] if skip_first else node.args.args
 
@@ -137,13 +139,15 @@ class FlowDiscovery:
             # Extract parameter description from docstring
             param_description = self._extract_param_description(node, param_name)
 
-            parameters.append(FlowParameter(
-                name=param_name,
-                type=param_type,
-                default=default_value,
-                required=required,
-                description=param_description
-            ))
+            parameters.append(
+                FlowParameter(
+                    name=param_name,
+                    type=param_type,
+                    default=default_value,
+                    required=required,
+                    description=param_description,
+                )
+            )
 
         return parameters
 
@@ -192,21 +196,23 @@ class FlowDiscovery:
         except:
             return None
 
-    def _extract_param_description(self, node: ast.AsyncFunctionDef, param_name: str) -> Optional[str]:
+    def _extract_param_description(
+        self, node: ast.AsyncFunctionDef, param_name: str
+    ) -> Optional[str]:
         """Extract parameter description from docstring."""
         docstring = ast.get_docstring(node)
         if not docstring:
             return None
 
         # Look for "Args:" section
-        args_match = re.search(r'Args:\s*\n((?:\s*.*:\s*.*\n?)*)', docstring)
+        args_match = re.search(r"Args:\s*\n((?:\s*.*:\s*.*\n?)*)", docstring)
         if not args_match:
             return None
 
         args_section = args_match.group(1)
 
         # Look for specific parameter
-        param_pattern = rf'{param_name}:\s*(.*?)(?=\n\s*\w+:|$)'
+        param_pattern = rf"{param_name}:\s*(.*?)(?=\n\s*\w+:|$)"
         param_match = re.search(param_pattern, args_section, re.DOTALL)
 
         if param_match:
@@ -223,27 +229,32 @@ class FlowDiscovery:
     def _extract_source_code(self, node: ast.AsyncFunctionDef, full_source: str) -> str:
         """Extract the source code for a specific function."""
         try:
-            lines = full_source.split('\n')
+            lines = full_source.split("\n")
             start_line = node.lineno - 1  # AST is 1-indexed, we need 0-indexed
 
             # Find the end line by looking for dedentation or end of function
             end_line = len(lines)
 
             # Simple heuristic: find the next line at the same or lower indentation level
-            if hasattr(node, 'end_lineno') and node.end_lineno:
+            if hasattr(node, "end_lineno") and node.end_lineno:
                 end_line = node.end_lineno
             else:
                 # Fallback: look for dedentation
-                current_indent = len(lines[start_line]) - len(lines[start_line].lstrip())
+                current_indent = len(lines[start_line]) - len(
+                    lines[start_line].lstrip()
+                )
                 for i in range(start_line + 1, len(lines)):
                     line = lines[i]
-                    if line.strip() and len(line) - len(line.lstrip()) <= current_indent:
+                    if (
+                        line.strip()
+                        and len(line) - len(line.lstrip()) <= current_indent
+                    ):
                         end_line = i
                         break
 
             # Extract the function source
             function_lines = lines[start_line:end_line]
-            return '\n'.join(function_lines)
+            return "\n".join(function_lines)
 
         except Exception as e:
             print(f"Error extracting source code: {e}")
@@ -270,7 +281,7 @@ class FlowDiscovery:
         for param in flow.parameters:
             param_schema = {
                 "type": self._map_type_to_json_schema(param.type),
-                "description": param.description or f"Parameter {param.name}"
+                "description": param.description or f"Parameter {param.name}",
             }
 
             if param.default is not None:
@@ -287,9 +298,9 @@ class FlowDiscovery:
             "parameters": {
                 "type": "object",
                 "properties": properties,
-                "required": required
+                "required": required,
             },
-            "return_type": flow.return_type
+            "return_type": flow.return_type,
         }
 
     def _map_type_to_json_schema(self, python_type: str) -> str:
@@ -301,7 +312,7 @@ class FlowDiscovery:
             "bool": "boolean",
             "list": "array",
             "dict": "object",
-            "any": "object"
+            "any": "object",
         }
 
         # Handle generic types like List[str], Dict[str, int]
@@ -316,12 +327,16 @@ class FlowDiscovery:
         flows_list = []
 
         for flow_name, flow_metadata in self.flows.items():
-            flows_list.append({
-                "name": flow_name,
-                "description": flow_metadata.description,
-                "parameter_count": len(flow_metadata.parameters),
-                "required_parameters": len([p for p in flow_metadata.parameters if p.required]),
-                "return_type": flow_metadata.return_type
-            })
+            flows_list.append(
+                {
+                    "name": flow_name,
+                    "description": flow_metadata.description,
+                    "parameter_count": len(flow_metadata.parameters),
+                    "required_parameters": len(
+                        [p for p in flow_metadata.parameters if p.required]
+                    ),
+                    "return_type": flow_metadata.return_type,
+                }
+            )
 
         return flows_list

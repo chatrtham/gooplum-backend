@@ -15,8 +15,8 @@ async def get_sandbox():
                 "GUMCP_CREDENTIALS": os.getenv("GUMCP_CREDENTIALS", ""),
                 "ZAI_API_KEY": os.getenv("ZAI_API_KEY", ""),
             },
-            timeout=3600
-        ) # 1 hour timeout
+            timeout=3600,
+        )  # 1 hour timeout
         yield sandbox
     finally:
         if sandbox:

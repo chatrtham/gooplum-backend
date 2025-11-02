@@ -1,14 +1,13 @@
 """FastAPI endpoints for flow management and execution."""
 
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
-import uuid
 from datetime import datetime
 
-from src.core.flow_executor import FlowExecutor, ExecutionResult
+from src.core.flow_executor import FlowExecutor
 from src.core.flow_discovery import FlowDiscovery
-from src.core.flow_validator import FlowValidator, ValidationResult
+from src.core.flow_validator import FlowValidator
 
 
 # Pydantic models for API
@@ -18,7 +17,9 @@ class FlowCodeRequest(BaseModel):
 
 
 class FlowExecutionRequest(BaseModel):
-    parameters: Dict[str, Any] = Field(..., description="Parameters to pass to the flow")
+    parameters: Dict[str, Any] = Field(
+        ..., description="Parameters to pass to the flow"
+    )
     timeout: Optional[int] = Field(300, description="Execution timeout in seconds")
 
 
@@ -86,26 +87,24 @@ async def compile_flows(request: FlowCodeRequest):
         # Convert to response format
         flow_infos = []
         for flow_name, flow_metadata in flows.items():
-            flow_infos.append(FlowInfo(
-                name=flow_name,
-                description=flow_metadata.description,
-                parameter_count=len(flow_metadata.parameters),
-                required_parameters=len([p for p in flow_metadata.parameters if p.required]),
-                return_type=flow_metadata.return_type
-            ))
+            flow_infos.append(
+                FlowInfo(
+                    name=flow_name,
+                    description=flow_metadata.description,
+                    parameter_count=len(flow_metadata.parameters),
+                    required_parameters=len(
+                        [p for p in flow_metadata.parameters if p.required]
+                    ),
+                    return_type=flow_metadata.return_type,
+                )
+            )
 
         return CompilationResponse(
-            success=True,
-            flows=flow_infos,
-            compiled_count=len(flows)
+            success=True, flows=flow_infos, compiled_count=len(flows)
         )
 
     except ValueError as e:
-        return CompilationResponse(
-            success=False,
-            errors=[str(e)],
-            compiled_count=0
-        )
+        return CompilationResponse(success=False, errors=[str(e)], compiled_count=0)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Compilation error: {str(e)}")
 
@@ -145,7 +144,9 @@ async def get_flow_schema(flow_name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error getting flow schema: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error getting flow schema: {str(e)}"
+        )
 
 
 @router.post("/{flow_name}/validate", response_model=ValidationResponse)
@@ -167,20 +168,24 @@ async def validate_flow_parameters(flow_name: str, parameters: Dict[str, Any]):
             raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
 
         # Recreate flow metadata for validation
-        flows = flow_discovery.discover_flows(flow_executor._compiled_flows.get(flow_name, ""))
+        flows = flow_discovery.discover_flows(
+            flow_executor._compiled_flows.get(flow_name, "")
+        )
         if flow_name not in flows:
-            raise HTTPException(status_code=404, detail=f"Flow metadata not found")
+            raise HTTPException(status_code=404, detail="Flow metadata not found")
 
         flow_metadata = flows[flow_name]
 
         # Validate parameters
-        validation_result = flow_validator.validate_parameters(flow_metadata, parameters)
+        validation_result = flow_validator.validate_parameters(
+            flow_metadata, parameters
+        )
 
         return ValidationResponse(
             is_valid=validation_result.is_valid,
             errors=[error.message for error in validation_result.errors],
             warnings=[warning.message for warning in validation_result.warnings],
-            sanitized_parameters=validation_result.sanitized_parameters
+            sanitized_parameters=validation_result.sanitized_parameters,
         )
 
     except HTTPException:
@@ -203,12 +208,14 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
     """
     try:
         # Validate parameters first
-        validation_result = await validate_flow_parameters(flow_name, request.parameters)
+        validation_result = await validate_flow_parameters(
+            flow_name, request.parameters
+        )
         if not validation_result.is_valid:
             return ExecutionResponse(
                 success=False,
                 error=f"Parameter validation failed: {'; '.join(validation_result.errors)}",
-                metadata={"validation_errors": validation_result.errors}
+                metadata={"validation_errors": validation_result.errors},
             )
 
         # Use validated/sanitized parameters if available
@@ -216,9 +223,7 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
 
         # Execute the flow
         result = await flow_executor.execute_flow(
-            flow_name=flow_name,
-            parameters=parameters,
-            timeout=request.timeout
+            flow_name=flow_name, parameters=parameters, timeout=request.timeout
         )
 
         return ExecutionResponse(
@@ -226,7 +231,7 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
             data=result.data,
             error=result.error,
             execution_time=result.execution_time,
-            metadata=result.metadata
+            metadata=result.metadata,
         )
 
     except HTTPException:
@@ -272,10 +277,7 @@ async def clear_all_flows():
         flow_count = len(flow_executor._compiled_flows)
         flow_executor.clear_compiled_flows()
 
-        return {
-            "success": True,
-            "message": f"Cleared {flow_count} flows successfully"
-        }
+        return {"success": True, "message": f"Cleared {flow_count} flows successfully"}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error clearing flows: {str(e)}")
@@ -308,7 +310,9 @@ async def get_flow_code(flow_name: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error getting flow code: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Error getting flow code: {str(e)}"
+        )
 
 
 @router.get("/health")
@@ -323,5 +327,5 @@ async def health_check():
         "status": "healthy",
         "timestamp": datetime.utcnow().isoformat(),
         "compiled_flows": len(flow_executor._compiled_flows),
-        "service": "flow-executor"
+        "service": "flow-executor",
     }

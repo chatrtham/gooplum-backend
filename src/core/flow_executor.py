@@ -14,6 +14,7 @@ from src.core.flow_discovery import FlowDiscovery, FlowMetadata
 @dataclass
 class ExecutionResult:
     """Result of flow execution."""
+
     success: bool
     data: Any = None
     error: Optional[str] = None
@@ -44,24 +45,26 @@ class FlowExecutor:
             for node in ast.walk(tree):
                 if isinstance(node, ast.If):
                     # Check if this is a __name__ == '__main__' block
-                    if (isinstance(node.test, ast.Compare) and
-                        len(node.test.ops) == 1 and
-                        isinstance(node.test.ops[0], ast.Eq) and
-                        isinstance(node.test.left, ast.Name) and
-                        node.test.left.id == '__name__' and
-                        len(node.test.comparators) > 0 and
-                        isinstance(node.test.comparators[0], ast.Constant) and
-                        node.test.comparators[0].value == '__main__'):
+                    if (
+                        isinstance(node.test, ast.Compare)
+                        and len(node.test.ops) == 1
+                        and isinstance(node.test.ops[0], ast.Eq)
+                        and isinstance(node.test.left, ast.Name)
+                        and node.test.left.id == "__name__"
+                        and len(node.test.comparators) > 0
+                        and isinstance(node.test.comparators[0], ast.Constant)
+                        and node.test.comparators[0].value == "__main__"
+                    ):
 
                         # Found the __main__ block, extract code before it
-                        lines = full_code.split('\n')
-                        production_lines = lines[:node.lineno-1]  # AST is 1-indexed
+                        lines = full_code.split("\n")
+                        production_lines = lines[: node.lineno - 1]  # AST is 1-indexed
 
                         # Remove any trailing empty lines
                         while production_lines and not production_lines[-1].strip():
                             production_lines.pop()
 
-                        return '\n'.join(production_lines)
+                        return "\n".join(production_lines)
 
             # No __main__ block found, return full code
             return full_code
@@ -70,7 +73,9 @@ class FlowExecutor:
             # If parsing fails, return full code as fallback
             return full_code
 
-    async def compile_flow(self, code: str, flow_name: Optional[str] = None) -> Dict[str, FlowMetadata]:
+    async def compile_flow(
+        self, code: str, flow_name: Optional[str] = None
+    ) -> Dict[str, FlowMetadata]:
         """
         Compile and discover flows from code.
 
@@ -96,15 +101,14 @@ class FlowExecutor:
         # If specific flow requested, validate it exists
         if flow_name and flow_name not in flows:
             available_flows = list(flows.keys())
-            raise ValueError(f"Flow '{flow_name}' not found. Available flows: {available_flows}")
+            raise ValueError(
+                f"Flow '{flow_name}' not found. Available flows: {available_flows}"
+            )
 
         return flows
 
     async def execute_flow(
-        self,
-        flow_name: str,
-        parameters: Dict[str, Any],
-        timeout: int = 300
+        self, flow_name: str, parameters: Dict[str, Any], timeout: int = 300
     ) -> ExecutionResult:
         """
         Execute a specific flow with provided parameters.
@@ -118,7 +122,9 @@ class FlowExecutor:
             ExecutionResult with the flow output
         """
         if flow_name not in self._compiled_flows:
-            raise ValueError(f"Flow '{flow_name}' not compiled. Available flows: {list(self._compiled_flows.keys())}")
+            raise ValueError(
+                f"Flow '{flow_name}' not compiled. Available flows: {list(self._compiled_flows.keys())}"
+            )
 
         # Get the flow code
         flow_code = self._compiled_flows[flow_name]
@@ -130,11 +136,11 @@ class FlowExecutor:
             start_time = asyncio.get_event_loop().time()
 
             # Create combined code with flow and execution script
-            combined_code = f'''
+            combined_code = f"""
 {flow_code}
 
 {execution_script}
-'''
+"""
 
             # Execute using the existing sandbox function
             result = await run_python_code(combined_code)
@@ -147,16 +153,13 @@ class FlowExecutor:
                 # Try to parse as JSON first
                 if isinstance(result, str):
                     result = result.strip()
-                    if result.startswith('{') and result.endswith('}'):
+                    if result.startswith("{") and result.endswith("}"):
                         output_data = json.loads(result)
                         return ExecutionResult(
                             success=True,
                             data=output_data,
                             execution_time=execution_time,
-                            metadata={
-                                "flow_name": flow_name,
-                                "parameters": parameters
-                            }
+                            metadata={"flow_name": flow_name, "parameters": parameters},
                         )
 
                 # If not JSON, return as string
@@ -164,10 +167,7 @@ class FlowExecutor:
                     success=True,
                     data=result,
                     execution_time=execution_time,
-                    metadata={
-                        "flow_name": flow_name,
-                        "parameters": parameters
-                    }
+                    metadata={"flow_name": flow_name, "parameters": parameters},
                 )
             except Exception as parse_error:
                 return ExecutionResult(
@@ -177,8 +177,10 @@ class FlowExecutor:
                     metadata={
                         "flow_name": flow_name,
                         "parameters": parameters,
-                        "raw_result": str(result)[:500]  # First 500 chars for debugging
-                    }
+                        "raw_result": str(result)[
+                            :500
+                        ],  # First 500 chars for debugging
+                    },
                 )
 
         except asyncio.TimeoutError:
@@ -188,8 +190,8 @@ class FlowExecutor:
                 metadata={
                     "flow_name": flow_name,
                     "parameters": parameters,
-                    "timeout": timeout
-                }
+                    "timeout": timeout,
+                },
             )
         except Exception as e:
             return ExecutionResult(
@@ -198,11 +200,13 @@ class FlowExecutor:
                 metadata={
                     "flow_name": flow_name,
                     "parameters": parameters,
-                    "error_type": type(e).__name__
-                }
+                    "error_type": type(e).__name__,
+                },
             )
 
-    def _create_execution_script(self, flow_name: str, parameters: Dict[str, Any]) -> str:
+    def _create_execution_script(
+        self, flow_name: str, parameters: Dict[str, Any]
+    ) -> str:
         """
         Create the execution script for running the flow in the sandbox.
 
@@ -260,7 +264,9 @@ await execute_flow()
 
         return imports + execution_function
 
-    async def validate_flow_execution(self, flow_name: str, parameters: Dict[str, Any]) -> ExecutionResult:
+    async def validate_flow_execution(
+        self, flow_name: str, parameters: Dict[str, Any]
+    ) -> ExecutionResult:
         """
         Validate parameters against flow signature without executing the flow.
 
@@ -273,16 +279,14 @@ await execute_flow()
         """
         if flow_name not in self._compiled_flows:
             return ExecutionResult(
-                success=False,
-                error=f"Flow '{flow_name}' not compiled"
+                success=False, error=f"Flow '{flow_name}' not compiled"
             )
 
         # Get flow metadata
         flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
         if flow_name not in flows:
             return ExecutionResult(
-                success=False,
-                error=f"Flow '{flow_name}' not found in compiled code"
+                success=False, error=f"Flow '{flow_name}' not found in compiled code"
             )
 
         flow_metadata = flows[flow_name]
@@ -308,7 +312,9 @@ await execute_flow()
         for param in flow_metadata.parameters:
             if param.name in parameters:
                 value = parameters[param.name]
-                type_error = self._validate_parameter_type(param.name, param.type, value)
+                type_error = self._validate_parameter_type(
+                    param.name, param.type, value
+                )
                 if type_error:
                     validation_errors.append(type_error)
 
@@ -318,20 +324,19 @@ await execute_flow()
                 error=f"Parameter validation failed: {'; '.join(validation_errors)}",
                 metadata={
                     "flow_name": flow_name,
-                    "validation_errors": validation_errors
-                }
+                    "validation_errors": validation_errors,
+                },
             )
 
         return ExecutionResult(
             success=True,
             data={"valid": True},
-            metadata={
-                "flow_name": flow_name,
-                "validated_parameters": parameters
-            }
+            metadata={"flow_name": flow_name, "validated_parameters": parameters},
         )
 
-    def _validate_parameter_type(self, param_name: str, expected_type: str, value: Any) -> Optional[str]:
+    def _validate_parameter_type(
+        self, param_name: str, expected_type: str, value: Any
+    ) -> Optional[str]:
         """
         Validate a single parameter type.
 
@@ -350,7 +355,7 @@ await execute_flow()
             "float": (int, float),
             "bool": bool,
             "list": list,
-            "dict": dict
+            "dict": dict,
         }
 
         # Handle generic types
@@ -373,13 +378,17 @@ await execute_flow()
             flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
             if flow_name in flows:
                 flow_metadata = flows[flow_name]
-                flows_list.append({
-                    "name": flow_name,
-                    "description": flow_metadata.description,
-                    "parameter_count": len(flow_metadata.parameters),
-                    "required_parameters": len([p for p in flow_metadata.parameters if p.required]),
-                    "return_type": flow_metadata.return_type
-                })
+                flows_list.append(
+                    {
+                        "name": flow_name,
+                        "description": flow_metadata.description,
+                        "parameter_count": len(flow_metadata.parameters),
+                        "required_parameters": len(
+                            [p for p in flow_metadata.parameters if p.required]
+                        ),
+                        "return_type": flow_metadata.return_type,
+                    }
+                )
 
         return flows_list
 

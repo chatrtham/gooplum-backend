@@ -23,7 +23,9 @@ class Settings:
         # Path Configuration
         self.resources_dir: str = "resources"
         self.gumcp_docs_dir: str = os.path.join(self.resources_dir, "gumcp_docs")
-        self.system_prompt_path: str = os.path.join(self.resources_dir, "system_prompt.md")
+        self.system_prompt_path: str = os.path.join(
+            self.resources_dir, "system_prompt.md"
+        )
 
     def validate(self) -> bool:
         """Validate that required settings are present."""

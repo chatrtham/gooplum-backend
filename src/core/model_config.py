@@ -15,7 +15,7 @@ def get_model():
         temperature=0.6,
         model="glm-4.6",
         openai_api_key=os.getenv("ZAI_API_KEY"),
-        openai_api_base="https://api.z.ai/api/coding/paas/v4/"
+        openai_api_base="https://api.z.ai/api/coding/paas/v4/",
     )
     return model
 

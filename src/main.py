@@ -12,8 +12,7 @@ from src.api.flows import router as flows_router
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -31,7 +30,7 @@ app = FastAPI(
     title="Flow Execution Service",
     description="API for executing async Python flows with parameter injection",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 # Add CORS middleware
@@ -46,6 +45,7 @@ app.add_middleware(
 # Include routers
 app.include_router(flows_router)
 
+
 # Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):
@@ -56,16 +56,12 @@ async def global_exception_handler(request, exc):
         content={
             "error": "Internal server error",
             "message": "An unexpected error occurred",
-            "type": type(exc).__name__
-        }
+            "type": type(exc).__name__,
+        },
     )
 
 
 if __name__ == "__main__":
     uvicorn.run(
-        "src.main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
+        "src.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info"
     )
