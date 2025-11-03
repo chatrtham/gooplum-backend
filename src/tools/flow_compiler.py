@@ -73,29 +73,9 @@ async def flow_compiler(
             }
             flow_details.append(details)
 
-        success_msg = f"""
-✅ Successfully compiled {flow_count} flow(s) from '{file_path}':
-
-Discovered flows:
-{chr(10).join([f"- {name}: {details['description']}" for name, details in zip(flow_names, flow_details)])}
-
-Flow details:
-"""
-
-        for i, (flow_name, details) in enumerate(zip(flow_names, flow_details)):
-            success_msg += f"""
-{i+1}. {flow_name}
-   Description: {details['description']}
-   Parameters: {len(details['parameters'])} total ({len([p for p in details['parameters'] if p['required']])} required)
-   Return type: {details['return_type']}
-"""
-
-        success_msg += f"""
-Next steps:
-- Use the flow execution API or tools to run these flows
-- Validate parameters before execution if needed
-- Flow names are now available: {flow_names}
-"""
+        success_msg = (
+            f"""✅ Successfully compiled {flow_count} flow(s) from '{file_path}'"""
+        )
 
         return Command(
             update={

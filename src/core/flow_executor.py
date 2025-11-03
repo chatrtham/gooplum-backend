@@ -129,8 +129,15 @@ class FlowExecutor:
         # Get the flow code
         flow_code = self._compiled_flows[flow_name]
 
+        # Convert parameter types before execution
+        converted_parameters = await self._convert_parameter_types(
+            flow_name, parameters
+        )
+
         # Create execution script
-        execution_script = self._create_execution_script(flow_name, parameters)
+        execution_script = self._create_execution_script(
+            flow_name, converted_parameters
+        )
 
         try:
             start_time = asyncio.get_event_loop().time()
@@ -150,25 +157,51 @@ class FlowExecutor:
 
             # Parse the result
             try:
-                # Try to parse as JSON first
-                if isinstance(result, str):
-                    result = result.strip()
-                    if result.startswith("{") and result.endswith("}"):
-                        output_data = json.loads(result)
-                        return ExecutionResult(
-                            success=True,
-                            data=output_data,
-                            execution_time=execution_time,
-                            metadata={"flow_name": flow_name, "parameters": parameters},
-                        )
+                # E2B returns Execution object with Results array containing our return value
+                if (
+                    hasattr(result, "results")
+                    and result.results
+                    and len(result.results) > 0
+                ):
+                    first_result = result.results[0]
 
-                # If not JSON, return as string
-                return ExecutionResult(
-                    success=True,
-                    data=result,
-                    execution_time=execution_time,
-                    metadata={"flow_name": flow_name, "parameters": parameters},
-                )
+                    # E2B Result objects store our JSON data in the 'json' field
+                    if hasattr(first_result, "__dict__"):
+                        result_dict = vars(first_result)
+                        if "json" in result_dict and result_dict["json"]:
+                            output_data = result_dict["json"]
+                        else:
+                            # Fallback: no JSON data found
+                            return ExecutionResult(
+                                success=False,
+                                error="No JSON data found in E2B result",
+                                execution_time=execution_time,
+                                metadata={"available_keys": list(result_dict.keys())},
+                            )
+                    else:
+                        output_data = first_result
+
+                    # Extract the actual flow result
+                    return ExecutionResult(
+                        success=output_data.get("success", False),
+                        data=output_data.get("data"),
+                        error=output_data.get("error"),
+                        execution_time=execution_time,
+                        metadata=output_data.get("metadata", {}),
+                    )
+                else:
+                    # No results returned
+                    return ExecutionResult(
+                        success=False,
+                        error="No results returned from flow execution",
+                        execution_time=execution_time,
+                        metadata={
+                            "flow_name": flow_name,
+                            "parameters": parameters,
+                            "raw_result": str(result)[:200],
+                        },
+                    )
+
             except Exception as parse_error:
                 return ExecutionResult(
                     success=False,
@@ -177,9 +210,8 @@ class FlowExecutor:
                     metadata={
                         "flow_name": flow_name,
                         "parameters": parameters,
-                        "raw_result": str(result)[
-                            :500
-                        ],  # First 500 chars for debugging
+                        "raw_result": str(result)[:200],
+                        "parse_error_type": type(parse_error).__name__,
                     },
                 )
 
@@ -220,45 +252,71 @@ class FlowExecutor:
         # Import standard libraries
         imports = """
 import json
-import asyncio
 import traceback
+import sys
 from datetime import datetime, timezone
 """
 
-        # Create async execution function
+        # Create async execution function with separated stdout capture
         execution_function = f"""
 async def execute_flow():
     # Parameters
     parameters = {json.dumps(parameters, indent=2)}
 
+    # Capture stdout separately from flow execution
+    import io
+    original_stdout = sys.stdout
+    captured_output = io.StringIO()
+
     try:
-        # Call the flow function
+        # Redirect stdout to capture print statements
+        sys.stdout = captured_output
+
+        # Call the flow function and get result
         result = await {flow_name}(**parameters)
 
-        # Prepare output
+        # Get captured logs
+        captured_logs = captured_output.getvalue()
+
+        # Prepare output with separated logs and result
         output = {{
             "success": True,
             "data": result,
+            "logs": {{
+                "stdout": captured_logs,
+                "stderr": ""
+            }},
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "flow_name": "{flow_name}",
             "parameters": parameters
         }}
 
     except Exception as e:
+        # Get captured logs even if error occurred
+        captured_logs = captured_output.getvalue()
+
         # Handle errors
         output = {{
             "success": False,
             "error": str(e),
             "traceback": traceback.format_exc(),
+            "logs": {{
+                "stdout": captured_logs,
+                "stderr": ""
+            }},
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "flow_name": "{flow_name}",
             "parameters": parameters
         }}
 
-    # Print result as JSON
-    print(json.dumps(output, indent=2))
+    finally:
+        # Restore original stdout
+        sys.stdout = original_stdout
 
-# Run the execution directly
+    # Return the result instead of printing
+    return output
+
+# Execute the function
 await execute_flow()
 """
 
@@ -369,6 +427,114 @@ await execute_flow()
             return f"Parameter '{param_name}' should be of type {expected_type}, got {type(value).__name__}"
 
         return None
+
+    async def _convert_parameter_types(
+        self, flow_name: str, parameters: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Convert parameters to their expected types based on flow schema.
+
+        Args:
+            flow_name: Name of the flow
+            parameters: Input parameters to convert
+
+        Returns:
+            Dictionary with converted parameters
+        """
+        try:
+            # Get flow metadata to understand expected types
+            flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
+            if flow_name not in flows:
+                return parameters  # Return original if schema not found
+
+            flow_metadata = flows[flow_name]
+            converted_params = parameters.copy()
+
+            # Convert each parameter based on its expected type
+            for param in flow_metadata.parameters:
+                if param.name in converted_params:
+                    converted_params[param.name] = self._convert_single_parameter_type(
+                        param.name, param.type, converted_params[param.name]
+                    )
+
+            return converted_params
+
+        except Exception:
+            # If conversion fails, return original parameters
+            return parameters
+
+    def _convert_single_parameter_type(
+        self, param_name: str, expected_type: str, value: Any
+    ) -> Any:
+        """
+        Convert a single parameter to its expected type.
+
+        Args:
+            param_name: Name of the parameter
+            expected_type: Expected type string (e.g., "int", "str", "bool")
+            value: Value to convert
+
+        Returns:
+            Converted value
+        """
+        # If value is already the correct type, return as-is
+        type_mapping = {
+            "str": str,
+            "int": int,
+            "float": (int, float),
+            "bool": bool,
+            "list": list,
+            "dict": dict,
+        }
+
+        # Handle generic types (e.g., "list[str]", "dict[str, int]")
+        if "[" in expected_type:
+            base_type = expected_type.split("[")[0]
+            expected_python_type = type_mapping.get(base_type)
+        else:
+            expected_python_type = type_mapping.get(expected_type)
+
+        # If no conversion needed or type unknown, return as-is
+        if not expected_python_type or isinstance(value, expected_python_type):
+            return value
+
+        # Try to convert the value
+        try:
+            if expected_type == "int":
+                return int(float(value)) if isinstance(value, str) else int(value)
+            elif expected_type == "float":
+                return float(value)
+            elif expected_type == "bool":
+                if isinstance(value, str):
+                    return value.lower() in ("true", "1", "yes", "on")
+                return bool(value)
+            elif expected_type == "str":
+                return str(value)
+            elif expected_type.startswith("list"):
+                if isinstance(value, str):
+                    # Try to parse as JSON list
+                    import json
+
+                    return json.loads(value)
+                elif isinstance(value, (list, tuple)):
+                    return list(value)
+                else:
+                    return [value]  # Wrap single value in list
+            elif expected_type.startswith("dict"):
+                if isinstance(value, str):
+                    # Try to parse as JSON dict
+                    import json
+
+                    return json.loads(value)
+                elif isinstance(value, dict):
+                    return value
+                else:
+                    raise ValueError(f"Cannot convert {value} to dict")
+            else:
+                return value
+        except (ValueError, TypeError, json.JSONDecodeError):
+            # If conversion fails, return original value
+            return value
 
     async def get_available_flows(self) -> List[Dict[str, Any]]:
         """Get list of all available compiled flows."""
