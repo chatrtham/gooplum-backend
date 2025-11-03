@@ -222,7 +222,7 @@ class FlowExecutor:
 import json
 import asyncio
 import traceback
-from datetime import datetime
+from datetime import datetime, timezone
 """
 
         # Create async execution function
@@ -239,7 +239,7 @@ async def execute_flow():
         output = {{
             "success": True,
             "data": result,
-            "timestamp": datetime.now(datetime.UTC).isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "flow_name": "{flow_name}",
             "parameters": parameters
         }}
@@ -250,7 +250,7 @@ async def execute_flow():
             "success": False,
             "error": str(e),
             "traceback": traceback.format_exc(),
-            "timestamp": datetime.now(datetime.UTC).isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "flow_name": "{flow_name}",
             "parameters": parameters
         }}

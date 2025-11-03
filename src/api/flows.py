@@ -5,9 +5,9 @@ from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 
-from src.core.flow_executor import FlowExecutor
 from src.core.flow_discovery import FlowDiscovery
 from src.core.flow_validator import FlowValidator
+from src.core.shared_flow_executor import get_shared_flow_executor
 
 
 # Pydantic models for API
@@ -64,7 +64,7 @@ class CompilationResponse(BaseModel):
 router = APIRouter(prefix="/flows", tags=["flows"])
 
 # Global instances (in production, these would be properly managed)
-flow_executor = FlowExecutor()
+flow_executor = get_shared_flow_executor()
 flow_discovery = FlowDiscovery()
 flow_validator = FlowValidator()
 
