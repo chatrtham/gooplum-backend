@@ -20,5 +20,5 @@ dependencies = [
 dev = [
     "black",
     "ruff",
-    "langgraph-cli[inmem]>=0.4.3",
+    "langgraph-cli[inmem]==0.4.7",
 ]

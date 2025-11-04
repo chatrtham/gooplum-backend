@@ -10,20 +10,20 @@ load_dotenv()
 
 def get_model():
     """Get the configured language model."""
-    # model = init_chat_model("anthropic:claude-sonnet-4-5-20250929")
-    model = ChatOpenAI(
-        temperature=0.6,
-        model="glm-4.6",
-        openai_api_key=os.getenv("ZAI_API_KEY"),
-        openai_api_base="https://api.z.ai/api/coding/paas/v4/",
-    )
+    model = init_chat_model("anthropic:claude-sonnet-4-5-20250929")
+    # model = ChatOpenAI(
+    #     temperature=0,
+    #     model="glm-4.6",
+    #     openai_api_key=os.getenv("ZAI_API_KEY"),
+    #     openai_api_base="https://api.z.ai/api/coding/paas/v4/",
+    # )
     return model
 
 
 def load_system_prompt() -> str:
     """Load system prompt from the markdown file."""
     try:
-        with open("resources/system_prompt_new.md", "r", encoding="utf-8") as f:
+        with open("resources/system_prompt.md", "r", encoding="utf-8") as f:
             content = f.read() + "\n\n"
         return content
     except Exception as e:

@@ -19,10 +19,6 @@ async def flow_compiler(
     """
     Compile a Python flow from a file path.
 
-    This tool compiles flow code from a specified file, discovering async functions
-    and caching them for execution. The compilation process extracts production code
-    (above __main__ blocks) and validates flow structure.
-
     Args:
         file_path (str): The path to the file containing flow code to compile.
     Returns:
