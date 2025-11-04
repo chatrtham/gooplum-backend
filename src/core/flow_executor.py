@@ -7,8 +7,19 @@ from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 import traceback
 
-from src.core.sandbox import run_python_code
+from src.core.sandbox import run_python_code, run_python_code_with_streaming
 from src.core.flow_discovery import FlowDiscovery, FlowMetadata
+
+
+@dataclass
+class StreamResult:
+    """Single streamed result from flow execution."""
+
+    input_data: Any
+    success: bool
+    data: Any = None
+    error: Optional[str] = None
+    completed_at: Optional[str] = None
 
 
 @dataclass
@@ -20,6 +31,7 @@ class ExecutionResult:
     error: Optional[str] = None
     execution_time: Optional[float] = None
     metadata: Optional[Dict[str, Any]] = None
+    streams: Optional[List[StreamResult]] = None
 
 
 class FlowExecutor:
@@ -236,6 +248,244 @@ class FlowExecutor:
                 },
             )
 
+    async def execute_flow_with_streaming(
+        self,
+        flow_name: str,
+        parameters: Dict[str, Any],
+        timeout: int = 300,
+        on_stream: Optional[callable] = None,
+    ) -> ExecutionResult:
+        """
+        Execute a flow with real-time streaming of intermediate results.
+
+        Args:
+            flow_name: Name of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+            on_stream: Callback function for each streamed result (receives StreamResult)
+
+        Returns:
+            ExecutionResult with final output and stream results
+        """
+        if flow_name not in self._compiled_flows:
+            raise ValueError(
+                f"Flow '{flow_name}' not compiled. Available flows: {list(self._compiled_flows.keys())}"
+            )
+
+        # Get the flow code
+        flow_code = self._compiled_flows[flow_name]
+
+        # Convert parameter types before execution
+        converted_parameters = await self._convert_parameter_types(
+            flow_name, parameters
+        )
+
+        # Create execution script (same as regular execution but without stdout capture)
+        execution_script = self._create_streaming_execution_script(
+            flow_name, converted_parameters
+        )
+
+        # Store streamed results
+        stream_results = []
+
+        def handle_stdout_line(line):
+            """Process each stdout line and extract STREAM_RESULT data."""
+            # Convert to string and strip whitespace
+            if hasattr(line, "strip"):
+                line = line.strip()
+            else:
+                line = str(line).strip()
+
+            # Check if this is a streamed result
+            if line.startswith("STREAM_RESULT:"):
+                try:
+                    # Extract JSON from the line
+                    json_str = line[len("STREAM_RESULT:") :].strip()
+                    stream_data = json.loads(json_str)
+
+                    # Create StreamResult object
+                    stream_result = StreamResult(
+                        input_data=stream_data.get("input"),
+                        success=stream_data.get("success", False),
+                        data=stream_data.get("data"),
+                        error=stream_data.get("error"),
+                        completed_at=stream_data.get("completed_at"),
+                    )
+
+                    stream_results.append(stream_result)
+
+                    # Call the stream callback if provided
+                    if on_stream:
+                        on_stream(stream_result)
+
+                except json.JSONDecodeError:
+                    # Ignore malformed stream results
+                    pass
+
+        try:
+            start_time = asyncio.get_event_loop().time()
+
+            # Create combined code with flow and execution script
+            combined_code = f"""
+{flow_code}
+
+{execution_script}
+"""
+
+            # Execute using the streaming sandbox function
+            result = await run_python_code_with_streaming(
+                combined_code, on_stdout=handle_stdout_line
+            )
+
+            end_time = asyncio.get_event_loop().time()
+            execution_time = end_time - start_time
+
+            # Parse the final result (same as regular execution)
+            try:
+                if (
+                    hasattr(result, "results")
+                    and result.results
+                    and len(result.results) > 0
+                ):
+                    first_result = result.results[0]
+
+                    if hasattr(first_result, "__dict__"):
+                        result_dict = vars(first_result)
+                        if "json" in result_dict and result_dict["json"]:
+                            output_data = result_dict["json"]
+                        else:
+                            return ExecutionResult(
+                                success=False,
+                                error="No JSON data found in E2B result",
+                                execution_time=execution_time,
+                                streams=stream_results,
+                                metadata={"available_keys": list(result_dict.keys())},
+                            )
+                    else:
+                        output_data = first_result
+
+                    # Return final result with stream data
+                    return ExecutionResult(
+                        success=output_data.get("success", False),
+                        data=output_data.get("data"),
+                        error=output_data.get("error"),
+                        execution_time=execution_time,
+                        streams=stream_results,
+                        metadata=output_data.get("metadata", {}),
+                    )
+                else:
+                    return ExecutionResult(
+                        success=False,
+                        error="No results returned from flow execution",
+                        execution_time=execution_time,
+                        streams=stream_results,
+                        metadata={
+                            "flow_name": flow_name,
+                            "parameters": parameters,
+                            "raw_result": str(result)[:200],
+                        },
+                    )
+
+            except Exception as parse_error:
+                return ExecutionResult(
+                    success=False,
+                    error=f"Failed to parse execution result: {str(parse_error)}",
+                    execution_time=execution_time,
+                    streams=stream_results,
+                    metadata={
+                        "flow_name": flow_name,
+                        "parameters": parameters,
+                        "raw_result": str(result)[:200],
+                        "parse_error_type": type(parse_error).__name__,
+                    },
+                )
+
+        except asyncio.TimeoutError:
+            return ExecutionResult(
+                success=False,
+                error=f"Flow execution timed out after {timeout} seconds",
+                streams=stream_results,
+                metadata={
+                    "flow_name": flow_name,
+                    "parameters": parameters,
+                    "timeout": timeout,
+                },
+            )
+        except Exception as e:
+            return ExecutionResult(
+                success=False,
+                error=f"Unexpected error during flow execution: {str(e)}",
+                streams=stream_results,
+                metadata={
+                    "flow_name": flow_name,
+                    "parameters": parameters,
+                    "error_type": type(e).__name__,
+                },
+            )
+
+    def _create_streaming_execution_script(
+        self, flow_name: str, parameters: Dict[str, Any]
+    ) -> str:
+        """
+        Create the execution script for streaming flow execution.
+
+        This script allows print statements to go directly to stdout
+        for real-time streaming, rather than being captured.
+
+        Args:
+            flow_name: Name of the flow to execute
+            parameters: Parameters to pass to the flow
+
+        Returns:
+            Python script as string
+        """
+        # Import standard libraries
+        imports = """
+import json
+import traceback
+import sys
+from datetime import datetime, timezone
+"""
+
+        # Create async execution function without stdout capture
+        execution_function = f"""
+async def execute_flow():
+    # Parameters
+    parameters = {json.dumps(parameters, indent=2)}
+
+    try:
+        # Call the flow function directly (don't capture stdout)
+        result = await {flow_name}(**parameters)
+
+        # Prepare output with result
+        output = {{
+            "success": True,
+            "data": result,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "flow_name": "{flow_name}",
+            "parameters": parameters
+        }}
+
+    except Exception as e:
+        # Handle errors
+        output = {{
+            "success": False,
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "flow_name": "{flow_name}",
+            "parameters": parameters
+        }}
+
+    # Return the result instead of printing
+    return output
+
+# Execute the function
+await execute_flow()
+"""
+
+        return imports + execution_function
+
     def _create_execution_script(
         self, flow_name: str, parameters: Dict[str, Any]
     ) -> str:
@@ -276,7 +526,7 @@ async def execute_flow():
         result = await {flow_name}(**parameters)
 
         # Get captured logs
-        captured_logs = captured_output.getvalue()
+        captured_logs = str(captured_output.getvalue())
 
         # Prepare output with separated logs and result
         output = {{
@@ -293,7 +543,7 @@ async def execute_flow():
 
     except Exception as e:
         # Get captured logs even if error occurred
-        captured_logs = captured_output.getvalue()
+        captured_logs = str(captured_output.getvalue())
 
         # Handle errors
         output = {{

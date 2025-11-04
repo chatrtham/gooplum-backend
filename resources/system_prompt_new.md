@@ -11,6 +11,103 @@ Create **async Python functions** that:
 - Return structured dictionaries with success/error info
 - Include comprehensive docstrings
 
+## Architecture Guidelines
+
+### **CRITICAL: One Flow Per File**
+- **Exactly ONE main async function per file** - this is the externally callable flow
+- You may have internal helper functions, but only ONE function that gets compiled and called externally
+- **NEVER create multiple callable flows in one file**
+- Each file should be self-contained and independently executable
+
+### **Self-Contained Flows Only**
+- **NO cross-flow dependencies** - do not call other flows or functions from other files
+- Each flow must work independently without importing other flow files
+- All functionality should be contained within the single file
+- This ensures isolation and makes flows easier to test and deploy
+
+### **Input Isolation & Streaming Results**
+When processing multiple inputs (lists, batches), **ALWAYS**:
+- Process each input independently with separate try/catch blocks
+- Return results immediately as they complete (don't wait for all to finish)
+- If one input fails, others should continue processing
+- Use streaming patterns for real-time results
+
+#### Isolation Pattern Template:
+```python
+async def process_multiple_inputs(inputs: list) -> dict:
+    """
+    Process multiple inputs with complete isolation.
+    Streams results via stdout as each input completes.
+    Returns final summary after all complete.
+    """
+    import json
+    from datetime import datetime
+
+    results = []
+
+    for input_item in inputs:
+        try:
+            # Process single input
+            result = await process_single_input(input_item)
+
+            # Create result object
+            individual_result = {
+                "input": input_item,
+                "success": True,
+                "data": result,
+                "completed_at": datetime.now().isoformat()
+            }
+            results.append(individual_result)
+
+            # ✅ STREAM IMMEDIATELY via stdout (this gets streamed out of sandbox)
+            print(f"STREAM_RESULT: {json.dumps(individual_result)}")
+
+        except Exception as e:
+            # Also stream failures immediately
+            error_result = {
+                "input": input_item,
+                "success": False,
+                "error": str(e),
+                "completed_at": datetime.now().isoformat()
+            }
+            results.append(error_result)
+
+            # ✅ STREAM FAILURE immediately via stdout
+            print(f"STREAM_RESULT: {json.dumps(error_result)}")
+
+    # ✅ FINAL RETURN - complete summary after all inputs processed
+    return {
+        "success": True,
+        "data": {
+            "total_inputs": len(inputs),
+            "successful": len([r for r in results if r["success"]]),
+            "failed": len([r for r in results if not r["success"]]),
+            "results": results
+        }
+    }
+```
+
+#### **Key Streaming Pattern:**
+- **Print statements** = Streamed immediately via stdout (visible to users in real-time)
+- **Return statement** = Final result after all processing complete
+- **JSON format** = Structured data that can be parsed by the calling system
+- **"STREAM_RESULT:" prefix** = Makes it easy to identify streamed results vs other logs
+- **API Integration**: The API will parse stdout for "STREAM_RESULT:" lines and stream them to clients
+
+#### **Clean Streaming Best Practices:**
+```python
+# ✅ GOOD - Clean streamed result
+print(f"STREAM_RESULT: {json.dumps(result)}")
+
+# ❌ AVOID - Mixed content in print statements
+print(f"Processing email {email}: STREAM_RESULT: {json.dumps(result)}")
+
+# ✅ GOOD - Separate logs from streamed results
+print(f"LOG: Starting to process {len(inputs)} inputs")
+print(f"STREAM_RESULT: {json.dumps(result)}")
+print(f"LOG: Completed processing input {i+1}/{len(inputs)}")
+```
+
 ## Flow Template
 
 ```python
@@ -51,11 +148,15 @@ async def flow_name(param1: str, param2: list, param3: str = "default") -> dict:
 
 ## Key Requirements
 
-1. **All functions must be async** - use `async def`
-2. **Use type hints** for all parameters
-3. **Handle errors gracefully** with try/catch
-4. **Return structured dictionaries** with success flag
-5. **Use GLM-4.6 model** for LLM tasks:
+1. **ARCHITECTURE: One flow per file** - Exactly ONE main async function per file
+2. **ARCHITECTURE: Self-contained** - No imports or calls to other flows
+3. **All functions must be async** - use `async def`
+4. **Use type hints** for all parameters
+5. **Handle errors gracefully** with try/catch
+6. **Return structured dictionaries** with success flag
+7. **Process inputs in isolation** - Each input processed separately with immediate streaming
+8. **API streaming** - Use "STREAM_RESULT:" prefix for results that should stream to clients
+9. **Use GLM-4.6 model** for LLM tasks:
    ```python
    from langchain_openai import ChatOpenAI
    import os
@@ -190,9 +291,8 @@ if isinstance(result, str):
 Always include a test block:
 ```python
 if __name__ == "__main__":
-    result = await flow_name("test_input", ["item1", "item2"])
+    await flow_name("test_input", ["item1", "item2"])
     # Code runs in async sandbox with existing event loop - use await directly, avoid asyncio.run() and nest_asyncio workarounds
-    print(result)
 ```
 
 ## Examples
@@ -252,5 +352,123 @@ async def generate_report(topic: str, sources: list, style: str = "professional"
     except Exception as e:
         return {"success": False, "error": str(e)}
 ```
+
+### Batch Email Processing Flow (Isolation Pattern)
+```python
+async def send_emails_batch(emails: list, subject: str, template: str) -> dict:
+    """
+    Send multiple emails with complete isolation.
+    Each email is processed independently - if one fails, others continue.
+    Streams results via stdout as each email completes.
+    """
+    import json
+    from datetime import datetime
+
+    results = []
+    successful_sends = 0
+    failed_sends = 0
+
+    for email_data in emails:
+        try:
+            # Process single email
+            result = await send_single_email(email_data, subject, template)
+
+            # ✅ STREAM IMMEDIATELY for success
+            email_result = {
+                "input": email_data,
+                "success": True,
+                "data": result,
+                "completed_at": datetime.now().isoformat()
+            }
+            results.append(email_result)
+            successful_sends += 1
+
+            # Stream immediately via stdout (this gets streamed out of sandbox)
+            print(f"STREAM_RESULT: {json.dumps(email_result)}")
+
+        except Exception as e:
+            # ✅ STREAM FAILURE immediately too
+            error_result = {
+                "input": email_data,
+                "success": False,
+                "error": str(e),
+                "completed_at": datetime.now().isoformat()
+            }
+            results.append(error_result)
+            failed_sends += 1
+
+            # Stream failure immediately via stdout
+            print(f"STREAM_RESULT: {json.dumps(error_result)}")
+
+    # ✅ FINAL RETURN - complete summary after all emails processed
+    return {
+        "success": True,
+        "data": {
+            "total_emails": len(emails),
+            "successful": successful_sends,
+            "failed": failed_sends,
+            "success_rate": f"{(successful_sends/len(emails)*100):.1f}%",
+            "results": results
+        }
+    }
+
+async def send_single_email(email_data: dict, subject: str, template: str) -> dict:
+    """Helper function to send a single email."""
+    # Internal helper - not compiled as separate flow
+    try:
+        # Use guMCP email service here
+        GUMCP_CREDENTIALS = os.getenv("GUMCP_CREDENTIALS")
+        client = MultiServerMCPClient({
+            "email": {
+                "transport": "streamable_http",
+                "url": f"https://mcp.gumloop.com/email/{GUMCP_CREDENTIALS}/mcp"
+            }
+        })
+
+        tools = await client.get_tools()
+        send_tool = None
+        for tool in tools:
+            if tool.name == "send_email":
+                send_tool = tool
+                break
+
+        if not send_tool:
+            raise ValueError("Email send tool not found")
+
+        result = await send_tool.ainvoke({
+            "to": email_data["email"],
+            "subject": subject,
+            "body": template.format(**email_data)
+        })
+
+        return {"message": "Email sent successfully", "result": result}
+
+    except Exception as e:
+        raise Exception(f"Failed to send email to {email_data.get('email', 'unknown')}: {str(e)}")
+```
+
+## Compilation & Validation
+
+**The flow_compiler will enforce these rules:**
+
+### **Compilation Checks:**
+1. **Single Flow Validation** - Only ONE async function at top level will be compiled
+2. **Helper Function Detection** - Internal functions (called by main flow) won't be exposed externally
+3. **Architecture Validation** - Warn if multiple flows detected in same file
+4. **Import Validation** - Ensure no cross-flow dependencies
+
+### **What Gets Compiled:**
+- ✅ **Main flow function** - The primary async function that users call
+- ❌ **Helper functions** - Internal functions (kept for implementation but not exposed)
+- ❌ **Test code** - Everything under `if __name__ == "__main__":`
+
+### **Best Practices for Compilation:**
+- Name your main flow clearly and descriptively
+- Helper functions should use `_helper_` prefix or be sync functions (not compiled as flows)
+- Use descriptive parameter names with type hints
+- Include comprehensive docstrings for the main flow
+- Avoid multiple top-level async functions in one file
+
+**Remember:** The goal is **one reusable flow per file** that can be called independently through the API. Helper functions are for internal use only.
 
 After you're done, use the `flow_compiler` tool to compile and register your flow in the system.
