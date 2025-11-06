@@ -12,10 +12,10 @@ def get_model():
     """Get the configured language model."""
     model = init_chat_model("anthropic:claude-sonnet-4-5-20250929")
     # model = ChatOpenAI(
-    #     temperature=0.6,
+    #     temperature=0,
     #     model="glm-4.6",
     #     openai_api_key=os.getenv("ZAI_API_KEY"),
-    #     openai_api_base="https://api.z.ai/api/coding/paas/v4/"
+    #     openai_api_base="https://api.z.ai/api/coding/paas/v4/",
     # )
     return model
 

@@ -5,6 +5,7 @@ from langgraph.graph import StateGraph, START, END
 from src.core.model_config import get_model, load_system_prompt
 from src.core.document_loader import add_gumcp_docs_to_state
 from src.tools.code_executor import python_code_executor
+from src.tools.flow_compiler import flow_compiler
 
 # Get configured model and instructions
 model = get_model()
@@ -13,7 +14,7 @@ instructions = load_system_prompt()
 
 # Create the deepagent subgraph
 deepagent_subgraph = async_create_deep_agent(
-    tools=[python_code_executor],
+    tools=[python_code_executor, flow_compiler],
     instructions=instructions,
     model=model,
 )
