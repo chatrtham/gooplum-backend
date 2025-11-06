@@ -298,12 +298,10 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
                 """Handle each streamed result from the flow - send to queue immediately."""
                 stream_data = {
                     "type": "stream",
-                    "input": stream_result.input_data,
-                    "success": stream_result.success,
-                    "data": stream_result.data,
-                    "error": stream_result.error,
-                    "completed_at": stream_result.completed_at,
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "input": stream_result.input,
+                    "status": stream_result.status,
+                    "message": stream_result.message,
+                    "timestamp": stream_result.timestamp,
                 }
                 # Put directly in queue for immediate streaming
                 asyncio.create_task(stream_queue.put(("stream", stream_data)))
@@ -463,19 +461,3 @@ async def get_flow_code(flow_name: str):
         raise HTTPException(
             status_code=500, detail=f"Error getting flow code: {str(e)}"
         )
-
-
-@router.get("/health")
-async def health_check():
-    """
-    Health check endpoint for the flow service.
-
-    Returns:
-        Service health status
-    """
-    return {
-        "status": "healthy",
-        "timestamp": datetime.utcnow().isoformat(),
-        "compiled_flows": len(flow_executor._compiled_flows),
-        "service": "flow-executor",
-    }

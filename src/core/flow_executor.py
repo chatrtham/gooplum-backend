@@ -6,6 +6,7 @@ import ast
 from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
 import traceback
+from datetime import datetime
 
 from src.core.sandbox import run_python_code, run_python_code_with_streaming
 from src.core.flow_discovery import FlowDiscovery, FlowMetadata
@@ -15,11 +16,10 @@ from src.core.flow_discovery import FlowDiscovery, FlowMetadata
 class StreamResult:
     """Single streamed result from flow execution."""
 
-    input_data: Any
-    success: bool
-    data: Any = None
-    error: Optional[str] = None
-    completed_at: Optional[str] = None
+    input: Any
+    status: str  # "success" or "failed"
+    message: str
+    timestamp: Optional[str] = None
 
 
 @dataclass
@@ -303,13 +303,12 @@ class FlowExecutor:
                     json_str = line[len("STREAM_RESULT:") :].strip()
                     stream_data = json.loads(json_str)
 
-                    # Create StreamResult object
+                    # Create StreamResult object with new minimal format
                     stream_result = StreamResult(
-                        input_data=stream_data.get("input"),
-                        success=stream_data.get("success", False),
-                        data=stream_data.get("data"),
-                        error=stream_data.get("error"),
-                        completed_at=stream_data.get("completed_at"),
+                        input=stream_data.get("input"),
+                        status=stream_data.get("status", "failed"),
+                        message=stream_data.get("message", "No message provided"),
+                        timestamp=datetime.now().isoformat(),
                     )
 
                     stream_results.append(stream_result)
