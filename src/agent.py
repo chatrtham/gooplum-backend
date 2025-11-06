@@ -1,9 +1,8 @@
-from deepagents import async_create_deep_agent, DeepAgentState
-from langgraph.graph import StateGraph, START, END
+from deepagents import create_deep_agent
 
 # Import extracted modules
 from src.core.model_config import get_model, load_system_prompt
-from src.core.document_loader import add_gumcp_docs_to_state
+from src.core.middleware import add_gumcp_docs
 from src.tools.code_executor import python_code_executor
 from src.tools.flow_compiler import flow_compiler
 
@@ -11,23 +10,10 @@ from src.tools.flow_compiler import flow_compiler
 model = get_model()
 instructions = load_system_prompt()
 
-
-# Create the deepagent subgraph
-deepagent_subgraph = async_create_deep_agent(
+# Create the deep agent with decorator-based middleware for gumcp docs
+agent = create_deep_agent(
     tools=[python_code_executor, flow_compiler],
-    instructions=instructions,
+    system_prompt=instructions,
     model=model,
+    middleware=[add_gumcp_docs],
 )
-
-# Create parent graph that automatically adds gumcp docs
-parent_builder = StateGraph(DeepAgentState)
-parent_builder.add_node("add_gumcp_docs", add_gumcp_docs_to_state)
-parent_builder.add_node("deepagent", deepagent_subgraph)
-
-# Wire up the flow: START -> add_gumcp_docs -> deepagent -> END
-parent_builder.add_edge(START, "add_gumcp_docs")
-parent_builder.add_edge("add_gumcp_docs", "deepagent")
-parent_builder.add_edge("deepagent", END)
-
-# Compile the parent graph
-agent = parent_builder.compile()

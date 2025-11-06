@@ -1,7 +1,6 @@
 """Code execution tool for running Python code in sandbox."""
 
 from src.core.sandbox import run_python_code
-from deepagents import DeepAgentState
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import InjectedToolCallId, tool
 from langgraph.prebuilt import InjectedState
@@ -11,19 +10,26 @@ from typing import Annotated
 
 @tool
 async def python_code_executor(
-    file_name: str,
-    state: Annotated[DeepAgentState, InjectedState],
+    file_path: str,
+    state: Annotated[dict, InjectedState],
     tool_call_id: Annotated[str, InjectedToolCallId],
 ):
     """
     Execute Python code in a secure sandbox environment.
 
     Args:
-        file_name (str): The name of the file containing the code to execute e.g., "flows.py".
+        file_path (str): The path of the file containing the code to execute e.g., "flows.py".
     Returns:
         result (str): The output from executing the code.
     """
-    code = state.get("files", {}).get(file_name)
+    # Ensure file_name starts with / for compatibility with deepagents filesystem
+    file_data = state.get("files", {}).get(file_path)
+
+    if not file_data or not file_data.get("content"):
+        return f"Error: File '{file_path}' not found or is empty. Available files: {list(state.get('files', {}).keys())}"
+
+    # Join lines back into code string
+    code = "\n".join(file_data["content"])
     try:
         result = await run_python_code(code)
         return Command(

@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "aiofiles>=25.1.0",
-    "deepagents>=0.0.5",
+    "deepagents==0.2.5",
     "e2b-code-interpreter>=2.2.0",
     "fastapi>=0.120.4",
     "langchain-mcp-adapters>=0.1.11",
