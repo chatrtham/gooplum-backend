@@ -1,7 +1,6 @@
 """Flow compiler tool for compiling Python flows from files."""
 
 from src.core.shared_flow_executor import get_shared_flow_executor
-from deepagents import DeepAgentState
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import InjectedToolCallId, tool
 from langgraph.prebuilt import InjectedState
@@ -13,7 +12,7 @@ import traceback
 @tool
 async def flow_compiler(
     file_path: str,
-    state: Annotated[DeepAgentState, InjectedState],
+    state: Annotated[dict, InjectedState],
     tool_call_id: Annotated[str, InjectedToolCallId],
 ):
     """
@@ -25,9 +24,9 @@ async def flow_compiler(
         result (str): Compilation status and discovered flow information.
     """
     # Get the code from the agent state files
-    code = state.get("files", {}).get(file_path)
+    file_data = state.get("files", {}).get(file_path)
 
-    if not code:
+    if not file_data or not file_data.get("content"):
         error_msg = f"File '{file_path}' not found or is empty. Available files: {list(state.get('files', {}).keys())}"
         return Command(
             update={
@@ -39,6 +38,9 @@ async def flow_compiler(
                 ]
             }
         )
+
+    # Join lines back into code string
+    code = "\n".join(file_data["content"])
 
     # Get the shared flow executor
     executor = get_shared_flow_executor()
