@@ -5,11 +5,11 @@ import asyncio
 import ast
 from typing import Dict, Any, Optional, List
 from dataclasses import dataclass
-import traceback
 from datetime import datetime
 
 from src.core.sandbox import run_python_code, run_python_code_with_streaming
 from src.core.flow_discovery import FlowDiscovery, FlowMetadata
+from src.core.flow_explainer import FlowExplainer
 
 
 @dataclass
@@ -39,7 +39,11 @@ class FlowExecutor:
 
     def __init__(self):
         self.discovery = FlowDiscovery()
+        self.explainer = FlowExplainer()
         self._compiled_flows: Dict[str, str] = {}  # Cache of compiled flow code
+        self._enriched_flows: Dict[str, FlowMetadata] = (
+            {}
+        )  # Cache of enriched flow metadata with explanations
 
     def _extract_production_code(self, full_code: str) -> str:
         """
@@ -116,6 +120,26 @@ class FlowExecutor:
             raise ValueError(
                 f"Flow '{flow_name}' not found. Available flows: {available_flows}"
             )
+
+        # Generate explanations and add timestamps for each flow
+        current_time = datetime.now()
+        for flow_name, flow_metadata in flows.items():
+            # Add created_at timestamp
+            flow_metadata.created_at = current_time
+
+            # Generate explanation
+            try:
+                explanation = await self.explainer.generate_explanation(flow_metadata)
+                flow_metadata.explanation = explanation
+            except Exception as e:
+                # Log error but don't fail compilation
+                print(
+                    f"Warning: Failed to generate explanation for flow '{flow_name}': {e}"
+                )
+                flow_metadata.explanation = None
+
+            # Store the enriched metadata
+            self._enriched_flows[flow_name] = flow_metadata
 
         return flows
 
@@ -819,11 +843,26 @@ await execute_flow()
 
         return self.discovery.get_flow_schema(flow_name)
 
-    def clear_compiled_flows(self):
-        """Clear all compiled flows."""
-        self._compiled_flows.clear()
-
     def remove_flow(self, flow_name: str):
         """Remove a specific compiled flow."""
         if flow_name in self._compiled_flows:
             del self._compiled_flows[flow_name]
+        if flow_name in self._enriched_flows:
+            del self._enriched_flows[flow_name]
+
+    def get_enriched_flow_metadata(self, flow_name: str) -> Optional[FlowMetadata]:
+        """
+        Get the enriched flow metadata with explanations.
+
+        Args:
+            flow_name: Name of the flow
+
+        Returns:
+            Enriched FlowMetadata with explanations, or None if not found
+        """
+        return self._enriched_flows.get(flow_name)
+
+    def clear_compiled_flows(self):
+        """Clear all compiled flows."""
+        self._compiled_flows.clear()
+        self._enriched_flows.clear()

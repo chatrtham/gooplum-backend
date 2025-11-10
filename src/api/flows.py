@@ -11,6 +11,7 @@ import asyncio
 from src.core.flow_discovery import FlowDiscovery
 from src.core.flow_validator import FlowValidator
 from src.core.shared_flow_executor import get_shared_flow_executor
+from src.core.flow_explainer import FlowExplainer
 
 
 # Pydantic models for API
@@ -63,6 +64,12 @@ class CompilationResponse(BaseModel):
     compiled_count: int = 0
 
 
+class ExplanationResponse(BaseModel):
+    flow_name: str
+    explanation: str
+    created_at: Optional[datetime] = None
+
+
 # Create router
 router = APIRouter(prefix="/flows", tags=["flows"])
 
@@ -70,6 +77,7 @@ router = APIRouter(prefix="/flows", tags=["flows"])
 flow_executor = get_shared_flow_executor()
 flow_discovery = FlowDiscovery()
 flow_validator = FlowValidator()
+flow_explainer = FlowExplainer()
 
 
 @router.post("/compile", response_model=CompilationResponse)
@@ -460,4 +468,87 @@ async def get_flow_code(flow_name: str):
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error getting flow code: {str(e)}"
+        )
+
+
+@router.get("/{flow_name}/explanation", response_model=ExplanationResponse)
+async def get_flow_explanation(flow_name: str):
+    """
+    Get the generated explanation for a specific flow.
+
+    Args:
+        flow_name: Name of the flow
+
+    Returns:
+        Flow explanation in markdown format
+    """
+    try:
+        # Get the enriched flow metadata with explanations
+        flow_metadata = flow_executor.get_enriched_flow_metadata(flow_name)
+
+        if not flow_metadata:
+            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+
+        if not flow_metadata.explanation:
+            raise HTTPException(
+                status_code=404,
+                detail=f"No explanation available for flow '{flow_name}'. The flow might have been compiled before explanation generation was implemented.",
+            )
+
+        return ExplanationResponse(
+            flow_name=flow_name,
+            explanation=flow_metadata.explanation,
+            created_at=flow_metadata.created_at,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting flow explanation: {str(e)}"
+        )
+
+
+@router.post("/{flow_name}/regenerate-explanation", response_model=ExplanationResponse)
+async def regenerate_flow_explanation(flow_name: str):
+    """
+    Regenerate the explanation for a specific flow.
+
+    Args:
+        flow_name: Name of the flow
+
+    Returns:
+        Newly generated flow explanation
+    """
+    try:
+        # Get the current enriched flow metadata
+        flow_metadata = flow_executor.get_enriched_flow_metadata(flow_name)
+
+        if not flow_metadata:
+            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+
+        # Generate new explanation
+        try:
+            new_explanation = await flow_explainer.generate_explanation(flow_metadata)
+
+            # Update the flow metadata with new explanation and timestamp
+            flow_metadata.explanation = new_explanation
+            flow_metadata.created_at = datetime.now()
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=500, detail=f"Failed to generate explanation: {str(e)}"
+            )
+
+        return ExplanationResponse(
+            flow_name=flow_name,
+            explanation=new_explanation,
+            created_at=flow_metadata.created_at,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error regenerating flow explanation: {str(e)}"
         )

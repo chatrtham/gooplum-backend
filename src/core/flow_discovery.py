@@ -4,6 +4,7 @@ import ast
 from typing import Dict, List, Any, Optional
 import re
 from dataclasses import dataclass
+from datetime import datetime
 
 
 @dataclass
@@ -27,6 +28,8 @@ class FlowMetadata:
     return_type: str
     docstring: Optional[str] = None
     source_code: Optional[str] = None
+    explanation: Optional[str] = None
+    created_at: Optional[datetime] = None
 
 
 class FlowDiscovery:
