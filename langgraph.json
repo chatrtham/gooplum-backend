@@ -4,6 +4,7 @@
     "goopie": "./src/agent.py:agent"
   },
   "env": ".env",
+  "python_version": "3.12",
   "http": {
     "app": "./src/main.py:app"
   }
