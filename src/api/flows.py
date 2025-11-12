@@ -28,18 +28,24 @@ class FlowExecutionRequest(BaseModel):
 
 
 class FlowInfo(BaseModel):
+    id: str
     name: str
     description: str
     parameter_count: int
     required_parameters: int
     return_type: str
+    created_at: Optional[str] = None
+    last_executed: Optional[str] = None
 
 
 class FlowSchema(BaseModel):
+    id: str
     name: str
     description: str
     parameters: Dict[str, Any]
     return_type: str
+    created_at: Optional[str] = None
+    last_executed: Optional[str] = None
 
 
 class ExecutionResponse(BaseModel):
@@ -100,6 +106,7 @@ async def compile_flows(request: FlowCodeRequest):
         for flow_name, flow_metadata in flows.items():
             flow_infos.append(
                 FlowInfo(
+                    id=flow_metadata.id,
                     name=flow_name,
                     description=flow_metadata.description,
                     parameter_count=len(flow_metadata.parameters),
@@ -107,6 +114,16 @@ async def compile_flows(request: FlowCodeRequest):
                         [p for p in flow_metadata.parameters if p.required]
                     ),
                     return_type=flow_metadata.return_type,
+                    created_at=(
+                        flow_metadata.created_at.isoformat()
+                        if flow_metadata.created_at
+                        else None
+                    ),
+                    last_executed=(
+                        flow_metadata.last_executed.isoformat()
+                        if flow_metadata.last_executed
+                        else None
+                    ),
                 )
             )
 
@@ -135,21 +152,23 @@ async def list_flows():
         raise HTTPException(status_code=500, detail=f"Error listing flows: {str(e)}")
 
 
-@router.get("/{flow_name}", response_model=FlowSchema)
-async def get_flow_schema(flow_name: str):
+@router.get("/{flow_id}", response_model=FlowSchema)
+async def get_flow_schema(flow_id: str):
     """
     Get detailed schema for a specific flow.
 
     Args:
-        flow_name: Name of the flow
+        flow_id: ID of the flow
 
     Returns:
         Flow schema with parameter details
     """
     try:
-        schema = await flow_executor.get_flow_schema(flow_name)
+        schema = await flow_executor.get_flow_schema_by_id(flow_id)
         if not schema:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
         return FlowSchema(**schema)
     except HTTPException:
@@ -160,23 +179,32 @@ async def get_flow_schema(flow_name: str):
         )
 
 
-@router.post("/{flow_name}/validate", response_model=ValidationResponse)
-async def validate_flow_parameters(flow_name: str, parameters: Dict[str, Any]):
+@router.post("/{flow_id}/validate", response_model=ValidationResponse)
+async def validate_flow_parameters(flow_id: str, parameters: Dict[str, Any]):
     """
     Validate parameters against flow schema without executing.
 
     Args:
-        flow_name: Name of the flow
+        flow_id: ID of the flow
         parameters: Parameters to validate
 
     Returns:
         Validation result
     """
     try:
+        # Get flow name from ID
+        flow_name = flow_executor._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
+
         # Get flow metadata
-        schema = await flow_executor.get_flow_schema(flow_name)
+        schema = await flow_executor.get_flow_schema_by_id(flow_id)
         if not schema:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
         # Recreate flow metadata for validation
         flows = flow_discovery.discover_flows(
@@ -205,13 +233,13 @@ async def validate_flow_parameters(flow_name: str, parameters: Dict[str, Any]):
         raise HTTPException(status_code=500, detail=f"Validation error: {str(e)}")
 
 
-@router.post("/{flow_name}/execute", response_model=ExecutionResponse)
-async def execute_flow(flow_name: str, request: FlowExecutionRequest):
+@router.post("/{flow_id}/execute", response_model=ExecutionResponse)
+async def execute_flow(flow_id: str, request: FlowExecutionRequest):
     """
     Execute a flow with provided parameters.
 
     Args:
-        flow_name: Name of the flow to execute
+        flow_id: ID of the flow to execute
         request: Execution request with parameters
 
     Returns:
@@ -219,9 +247,7 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
     """
     try:
         # Validate parameters first
-        validation_result = await validate_flow_parameters(
-            flow_name, request.parameters
-        )
+        validation_result = await validate_flow_parameters(flow_id, request.parameters)
         if not validation_result.is_valid:
             return ExecutionResponse(
                 success=False,
@@ -232,9 +258,9 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
         # Use validated/sanitized parameters if available
         parameters = validation_result.sanitized_parameters or request.parameters
 
-        # Execute the flow
-        result = await flow_executor.execute_flow(
-            flow_name=flow_name, parameters=parameters, timeout=request.timeout
+        # Execute the flow by ID
+        result = await flow_executor.execute_flow_by_id(
+            flow_id=flow_id, parameters=parameters, timeout=request.timeout
         )
 
         return ExecutionResponse(
@@ -251,8 +277,8 @@ async def execute_flow(flow_name: str, request: FlowExecutionRequest):
         raise HTTPException(status_code=500, detail=f"Execution error: {str(e)}")
 
 
-@router.post("/{flow_name}/execute-stream")
-async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
+@router.post("/{flow_id}/execute-stream")
+async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
     """
     Execute a flow with real-time streaming using Server-Sent Events.
 
@@ -261,7 +287,7 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
     so failures don't affect other inputs.
 
     Args:
-        flow_name: Name of the flow to execute
+        flow_id: ID of the flow to execute
         request: Execution request with parameters
 
     Returns:
@@ -273,7 +299,7 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
         try:
             # Validate parameters first
             validation_result = await validate_flow_parameters(
-                flow_name, request.parameters
+                flow_id, request.parameters
             )
             if not validation_result.is_valid:
                 error_data = {
@@ -287,9 +313,13 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
             # Use validated/sanitized parameters if available
             parameters = validation_result.sanitized_parameters or request.parameters
 
+            # Get flow name for logging
+            flow_name = flow_executor._get_flow_name_by_id(flow_id)
+
             # Send start event
             start_data = {
                 "type": "start",
+                "flow_id": flow_id,
                 "flow_name": flow_name,
                 "parameters": parameters,
                 "timestamp": datetime.utcnow().isoformat(),
@@ -318,8 +348,8 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
             async def execute_flow_background():
                 nonlocal final_result, execution_error
                 try:
-                    result = await flow_executor.execute_flow_with_streaming(
-                        flow_name=flow_name,
+                    result = await flow_executor.execute_flow_by_id_with_streaming(
+                        flow_id=flow_id,
                         parameters=parameters,
                         timeout=request.timeout,
                         on_stream=on_stream,
@@ -396,24 +426,30 @@ async def execute_flow_stream(flow_name: str, request: FlowExecutionRequest):
     )
 
 
-@router.delete("/{flow_name}")
-async def delete_flow(flow_name: str):
+@router.delete("/{flow_id}")
+async def delete_flow(flow_id: str):
     """
     Remove a compiled flow.
 
     Args:
-        flow_name: Name of the flow to remove
+        flow_id: ID of the flow to remove
 
     Returns:
         Deletion confirmation
     """
     try:
-        if flow_name not in flow_executor._compiled_flows:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+        flow_name = flow_executor._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
-        flow_executor.remove_flow(flow_name)
+        flow_executor.remove_flow_by_id(flow_id)
 
-        return {"success": True, "message": f"Flow '{flow_name}' removed successfully"}
+        return {
+            "success": True,
+            "message": f"Flow with ID '{flow_id}' removed successfully",
+        }
 
     except HTTPException:
         raise
@@ -439,29 +475,40 @@ async def clear_all_flows():
         raise HTTPException(status_code=500, detail=f"Error clearing flows: {str(e)}")
 
 
-@router.get("/{flow_name}/code")
-async def get_flow_code(flow_name: str):
+@router.get("/{flow_id}/code")
+async def get_flow_code(flow_id: str):
     """
     Get the source code for a specific flow.
 
     Args:
-        flow_name: Name of the flow
+        flow_id: ID of the flow
 
     Returns:
         Flow source code
     """
     try:
-        if flow_name not in flow_executor._compiled_flows:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+        flow_name = flow_executor._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
         # Get the flow code and extract specific function
         full_code = flow_executor._compiled_flows[flow_name]
         flows = flow_discovery.discover_flows(full_code)
 
         if flow_name in flows and flows[flow_name].source_code:
-            return {"flow_name": flow_name, "source_code": flows[flow_name].source_code}
+            return {
+                "flow_id": flow_id,
+                "flow_name": flow_name,
+                "source_code": flows[flow_name].source_code,
+            }
         else:
-            return {"flow_name": flow_name, "source_code": full_code}
+            return {
+                "flow_id": flow_id,
+                "flow_name": flow_name,
+                "source_code": full_code,
+            }
 
     except HTTPException:
         raise
@@ -471,32 +518,34 @@ async def get_flow_code(flow_name: str):
         )
 
 
-@router.get("/{flow_name}/explanation", response_model=ExplanationResponse)
-async def get_flow_explanation(flow_name: str):
+@router.get("/{flow_id}/explanation", response_model=ExplanationResponse)
+async def get_flow_explanation(flow_id: str):
     """
     Get the generated explanation for a specific flow.
 
     Args:
-        flow_name: Name of the flow
+        flow_id: ID of the flow
 
     Returns:
         Flow explanation in markdown format
     """
     try:
         # Get the enriched flow metadata with explanations
-        flow_metadata = flow_executor.get_enriched_flow_metadata(flow_name)
+        flow_metadata = flow_executor.get_enriched_flow_metadata_by_id(flow_id)
 
         if not flow_metadata:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
         if not flow_metadata.explanation:
             raise HTTPException(
                 status_code=404,
-                detail=f"No explanation available for flow '{flow_name}'. The flow might have been compiled before explanation generation was implemented.",
+                detail=f"No explanation available for flow with ID '{flow_id}'. The flow might have been compiled before explanation generation was implemented.",
             )
 
         return ExplanationResponse(
-            flow_name=flow_name,
+            flow_name=flow_metadata.name,
             explanation=flow_metadata.explanation,
             created_at=flow_metadata.created_at,
         )
@@ -509,23 +558,25 @@ async def get_flow_explanation(flow_name: str):
         )
 
 
-@router.post("/{flow_name}/regenerate-explanation", response_model=ExplanationResponse)
-async def regenerate_flow_explanation(flow_name: str):
+@router.post("/{flow_id}/regenerate-explanation", response_model=ExplanationResponse)
+async def regenerate_flow_explanation(flow_id: str):
     """
     Regenerate the explanation for a specific flow.
 
     Args:
-        flow_name: Name of the flow
+        flow_id: ID of the flow
 
     Returns:
         Newly generated flow explanation
     """
     try:
         # Get the current enriched flow metadata
-        flow_metadata = flow_executor.get_enriched_flow_metadata(flow_name)
+        flow_metadata = flow_executor.get_enriched_flow_metadata_by_id(flow_id)
 
         if not flow_metadata:
-            raise HTTPException(status_code=404, detail=f"Flow '{flow_name}' not found")
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
 
         # Generate new explanation
         try:
@@ -541,7 +592,7 @@ async def regenerate_flow_explanation(flow_name: str):
             )
 
         return ExplanationResponse(
-            flow_name=flow_name,
+            flow_name=flow_metadata.name,
             explanation=new_explanation,
             created_at=flow_metadata.created_at,
         )

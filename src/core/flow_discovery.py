@@ -5,6 +5,7 @@ from typing import Dict, List, Any, Optional
 import re
 from dataclasses import dataclass
 from datetime import datetime
+import uuid
 
 
 @dataclass
@@ -22,6 +23,7 @@ class FlowParameter:
 class FlowMetadata:
     """Metadata for a discovered flow."""
 
+    id: str
     name: str
     description: str
     parameters: List[FlowParameter]
@@ -30,6 +32,7 @@ class FlowMetadata:
     source_code: Optional[str] = None
     explanation: Optional[str] = None
     created_at: Optional[datetime] = None
+    last_executed: Optional[datetime] = None
 
 
 class FlowDiscovery:
@@ -98,6 +101,7 @@ class FlowDiscovery:
             source_code = self._extract_source_code(node, source_code)
 
             return FlowMetadata(
+                id=str(uuid.uuid4()),
                 name=name,
                 description=description,
                 parameters=parameters,

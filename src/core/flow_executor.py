@@ -40,10 +40,24 @@ class FlowExecutor:
     def __init__(self):
         self.discovery = FlowDiscovery()
         self.explainer = FlowExplainer()
-        self._compiled_flows: Dict[str, str] = {}  # Cache of compiled flow code
+        self._compiled_flows: Dict[str, str] = (
+            {}
+        )  # Cache of compiled flow code (by name)
         self._enriched_flows: Dict[str, FlowMetadata] = (
             {}
-        )  # Cache of enriched flow metadata with explanations
+        )  # Cache of enriched flow metadata with explanations (by name)
+        self._flow_id_to_name: Dict[str, str] = {}  # Mapping from flow ID to flow name
+
+    def _get_flow_name_by_id(self, flow_id: str) -> Optional[str]:
+        """Get flow name by ID."""
+        return self._flow_id_to_name.get(flow_id)
+
+    def _get_flow_metadata_by_id(self, flow_id: str) -> Optional[FlowMetadata]:
+        """Get flow metadata by ID."""
+        flow_name = self._get_flow_name_by_id(flow_id)
+        if flow_name:
+            return self._enriched_flows.get(flow_name)
+        return None
 
     def _extract_production_code(self, full_code: str) -> str:
         """
@@ -141,6 +155,9 @@ class FlowExecutor:
             # Store the enriched metadata
             self._enriched_flows[flow_name] = flow_metadata
 
+            # Store the ID to name mapping
+            self._flow_id_to_name[flow_metadata.id] = flow_name
+
         return flows
 
     async def execute_flow(
@@ -177,6 +194,10 @@ class FlowExecutor:
 
         try:
             start_time = asyncio.get_event_loop().time()
+
+            # Update last_executed timestamp
+            if flow_name in self._enriched_flows:
+                self._enriched_flows[flow_name].last_executed = datetime.now()
 
             # Create combined code with flow and execution script
             combined_code = f"""
@@ -348,6 +369,10 @@ class FlowExecutor:
         try:
             start_time = asyncio.get_event_loop().time()
 
+            # Update last_executed timestamp
+            if flow_name in self._enriched_flows:
+                self._enriched_flows[flow_name].last_executed = datetime.now()
+
             # Create combined code with flow and execution script
             combined_code = f"""
 {flow_code}
@@ -445,6 +470,68 @@ class FlowExecutor:
                     "error_type": type(e).__name__,
                 },
             )
+
+    async def execute_flow_by_id(
+        self, flow_id: str, parameters: Dict[str, Any], timeout: int = 300
+    ) -> ExecutionResult:
+        """
+        Execute a specific flow by ID with provided parameters.
+
+        Args:
+            flow_id: ID of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+
+        Returns:
+            ExecutionResult with the flow output
+        """
+        flow_name = self._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            return ExecutionResult(
+                success=False,
+                error=f"Flow with ID '{flow_id}' not found",
+                metadata={
+                    "flow_id": flow_id,
+                    "available_ids": list(self._flow_id_to_name.keys()),
+                },
+            )
+
+        return await self.execute_flow(flow_name, parameters, timeout)
+
+    async def execute_flow_by_id_with_streaming(
+        self,
+        flow_id: str,
+        parameters: Dict[str, Any],
+        timeout: int = 300,
+        on_stream: Optional[callable] = None,
+    ) -> ExecutionResult:
+        """
+        Execute a flow by ID with real-time streaming of intermediate results.
+
+        Args:
+            flow_id: ID of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+            on_stream: Callback function for each streamed result (receives StreamResult)
+
+        Returns:
+            ExecutionResult with final output and stream results
+        """
+        flow_name = self._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            return ExecutionResult(
+                success=False,
+                error=f"Flow with ID '{flow_id}' not found",
+                streams=[],
+                metadata={
+                    "flow_id": flow_id,
+                    "available_ids": list(self._flow_id_to_name.keys()),
+                },
+            )
+
+        return await self.execute_flow_with_streaming(
+            flow_name, parameters, timeout, on_stream
+        )
 
     def _create_streaming_execution_script(
         self, flow_name: str, parameters: Dict[str, Any]
@@ -814,20 +901,37 @@ await execute_flow()
         flows_list = []
 
         for flow_name in self._compiled_flows.keys():
-            flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
-            if flow_name in flows:
+            # Get enriched flow metadata if available, otherwise discover from code
+            if flow_name in self._enriched_flows:
+                flow_metadata = self._enriched_flows[flow_name]
+            else:
+                flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
+                if flow_name not in flows:
+                    continue
                 flow_metadata = flows[flow_name]
-                flows_list.append(
-                    {
-                        "name": flow_name,
-                        "description": flow_metadata.description,
-                        "parameter_count": len(flow_metadata.parameters),
-                        "required_parameters": len(
-                            [p for p in flow_metadata.parameters if p.required]
-                        ),
-                        "return_type": flow_metadata.return_type,
-                    }
-                )
+
+            flows_list.append(
+                {
+                    "id": flow_metadata.id,
+                    "name": flow_name,
+                    "description": flow_metadata.description,
+                    "parameter_count": len(flow_metadata.parameters),
+                    "required_parameters": len(
+                        [p for p in flow_metadata.parameters if p.required]
+                    ),
+                    "return_type": flow_metadata.return_type,
+                    "created_at": (
+                        flow_metadata.created_at.isoformat()
+                        if flow_metadata.created_at
+                        else None
+                    ),
+                    "last_executed": (
+                        flow_metadata.last_executed.isoformat()
+                        if flow_metadata.last_executed
+                        else None
+                    ),
+                }
+            )
 
         return flows_list
 
@@ -836,19 +940,113 @@ await execute_flow()
         if flow_name not in self._compiled_flows:
             return None
 
-        # Rediscover flows to get latest metadata
-        flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
-        if flow_name not in flows:
+        # Get enriched flow metadata if available, otherwise discover from code
+        if flow_name in self._enriched_flows:
+            flow_metadata = self._enriched_flows[flow_name]
+        else:
+            flows = self.discovery.discover_flows(self._compiled_flows[flow_name])
+            if flow_name not in flows:
+                return None
+            flow_metadata = flows[flow_name]
+
+        # Get the basic schema from discovery
+        schema = self.discovery.get_flow_schema(flow_name)
+        if not schema:
             return None
 
-        return self.discovery.get_flow_schema(flow_name)
+        # Add the new fields to the schema
+        schema["id"] = flow_metadata.id
+        schema["created_at"] = (
+            flow_metadata.created_at.isoformat() if flow_metadata.created_at else None
+        )
+        schema["last_executed"] = (
+            flow_metadata.last_executed.isoformat()
+            if flow_metadata.last_executed
+            else None
+        )
 
-    def remove_flow(self, flow_name: str):
-        """Remove a specific compiled flow."""
+        return schema
+
+    async def validate_flow_execution_by_id(
+        self, flow_id: str, parameters: Dict[str, Any]
+    ) -> ExecutionResult:
+        """
+        Validate parameters against flow signature without executing the flow (by ID).
+
+        Args:
+            flow_id: ID of the flow
+            parameters: Parameters to validate
+
+        Returns:
+            ExecutionResult indicating validation success/failure
+        """
+        flow_name = self._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            return ExecutionResult(
+                success=False,
+                error=f"Flow with ID '{flow_id}' not found",
+                metadata={
+                    "flow_id": flow_id,
+                    "available_ids": list(self._flow_id_to_name.keys()),
+                },
+            )
+
+        return await self.validate_flow_execution(flow_name, parameters)
+
+    async def get_flow_schema_by_id(self, flow_id: str) -> Optional[Dict[str, Any]]:
+        """Get JSON schema for a specific flow by ID."""
+        flow_metadata = self._get_flow_metadata_by_id(flow_id)
+        if not flow_metadata:
+            return None
+
+        flow_name = self._get_flow_name_by_id(flow_id)
+
+        # Get the basic schema from discovery
+        schema = self.discovery.get_flow_schema(flow_name)
+        if not schema:
+            return None
+
+        # Add the new fields to the schema
+        schema["id"] = flow_metadata.id
+        schema["created_at"] = (
+            flow_metadata.created_at.isoformat() if flow_metadata.created_at else None
+        )
+        schema["last_executed"] = (
+            flow_metadata.last_executed.isoformat()
+            if flow_metadata.last_executed
+            else None
+        )
+
+        return schema
+
+    def remove_flow_by_id(self, flow_id: str):
+        """Remove a specific compiled flow by ID."""
+        flow_name = self._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            raise ValueError(f"Flow with ID '{flow_id}' not found")
+
+        # Remove from all storage
         if flow_name in self._compiled_flows:
             del self._compiled_flows[flow_name]
         if flow_name in self._enriched_flows:
             del self._enriched_flows[flow_name]
+        if flow_id in self._flow_id_to_name:
+            del self._flow_id_to_name[flow_id]
+
+    def remove_flow(self, flow_name: str):
+        """Remove a specific compiled flow."""
+        # Get the flow ID before removing metadata
+        flow_id = None
+        if flow_name in self._enriched_flows:
+            flow_id = self._enriched_flows[flow_name].id
+
+        # Remove from all storage
+        if flow_name in self._compiled_flows:
+            del self._compiled_flows[flow_name]
+        if flow_name in self._enriched_flows:
+            del self._enriched_flows[flow_name]
+        if flow_id and flow_id in self._flow_id_to_name:
+            del self._flow_id_to_name[flow_id]
 
     def get_enriched_flow_metadata(self, flow_name: str) -> Optional[FlowMetadata]:
         """
@@ -862,7 +1060,20 @@ await execute_flow()
         """
         return self._enriched_flows.get(flow_name)
 
+    def get_enriched_flow_metadata_by_id(self, flow_id: str) -> Optional[FlowMetadata]:
+        """
+        Get the enriched flow metadata with explanations by ID.
+
+        Args:
+            flow_id: ID of the flow
+
+        Returns:
+            Enriched FlowMetadata with explanations, or None if not found
+        """
+        return self._get_flow_metadata_by_id(flow_id)
+
     def clear_compiled_flows(self):
         """Clear all compiled flows."""
         self._compiled_flows.clear()
         self._enriched_flows.clear()
+        self._flow_id_to_name.clear()
