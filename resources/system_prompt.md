@@ -84,15 +84,15 @@ async def flow_name(param1: str, param2: list, param3: str = "default") -> dict:
 
 ## Required Components
 
-### **LLM (GLM-4.6)**
+### **LLM (gemini-2.0-flash)**
 ```python
 from langchain_openai import ChatOpenAI
 import os
 
 model = ChatOpenAI(
-    model="glm-4.6",
-    openai_api_key=os.getenv("ZAI_API_KEY"),
-    openai_api_base="https://api.z.ai/api/coding/paas/v4/"
+    model="gemini-2.0-flash",
+    openai_api_key=os.getenv("GOOGLE_API_KEY"),
+    openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 ```
 
