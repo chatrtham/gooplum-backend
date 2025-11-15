@@ -1,6 +1,6 @@
 """Flow compiler tool for compiling Python flows from files."""
 
-from src.core.shared_flow_executor import get_shared_flow_executor
+from src.core.db_flow_executor import DBFlowExecutor
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import InjectedToolCallId, tool
 from langgraph.prebuilt import InjectedState
@@ -42,8 +42,8 @@ async def flow_compiler(
     # Join lines back into code string
     code = "\n".join(file_data["content"])
 
-    # Get the shared flow executor
-    executor = get_shared_flow_executor()
+    # Get the database flow executor
+    executor = DBFlowExecutor()
 
     try:
         # Compile the flow

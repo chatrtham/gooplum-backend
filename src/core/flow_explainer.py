@@ -17,11 +17,9 @@ class FlowExplainer:
         """Initialize the flow explainer with LLM."""
         self.model = ChatOpenAI(
             temperature=0,
-            model="gemini-2.5-flash-lite",
-            openai_api_key=os.getenv("GOOGLE_API_KEY"),
-            openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
-            reasoning_effort=None,
-            disable_streaming=True,
+            model="glm-4.6",
+            openai_api_key=os.getenv("ZAI_API_KEY"),
+            openai_api_base="https://api.z.ai/api/coding/paas/v4/",
         )
 
     async def generate_explanation(self, flow_metadata: FlowMetadata) -> str:

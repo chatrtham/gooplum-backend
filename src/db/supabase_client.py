@@ -1,0 +1,287 @@
+"""Supabase database client for flow persistence."""
+
+import os
+from datetime import datetime, timezone
+from typing import List, Optional, Dict, Any
+from uuid import UUID
+import json
+
+from dotenv import load_dotenv
+from supabase import create_client, Client
+from pydantic import BaseModel
+import httpx
+from asyncio import to_thread
+
+# Load environment variables
+load_dotenv()
+
+from src.core.flow_discovery import FlowMetadata, FlowParameter
+
+
+class FlowRecord(BaseModel):
+    """Database model for flow records."""
+
+    id: UUID
+    name: str
+    description: str
+    source_code: str
+    return_type: str
+    docstring: Optional[str] = None
+    explanation: Optional[str] = None
+    created_at: datetime
+    last_executed: Optional[datetime] = None
+    last_executed_status: Optional[str] = None
+
+
+class FlowParameterRecord(BaseModel):
+    """Database model for flow parameter records."""
+
+    id: UUID
+    flow_id: UUID
+    name: str
+    type: str
+    default_value: Optional[str] = None
+    required: bool = True
+    description: Optional[str] = None
+
+
+class FlowExecutionRecord(BaseModel):
+    """Database model for flow execution records."""
+
+    id: UUID
+    flow_id: UUID
+    parameters: Dict[str, Any]
+    success: bool
+    result: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
+    execution_time_ms: Optional[int] = None
+    metadata: Optional[Dict[str, Any]] = None
+    created_at: datetime
+    streams: Optional[List[Dict[str, Any]]] = None
+
+
+class SupabaseFlowDB:
+    """Supabase database operations for flow management."""
+
+    def __init__(self):
+        """Initialize Supabase client."""
+        self.supabase_url = os.getenv("SUPABASE_URL")
+        self.supabase_key = os.getenv("SUPABASE_ANON_KEY")
+
+        if not self.supabase_url or not self.supabase_key:
+            raise ValueError(
+                "SUPABASE_URL and SUPABASE_ANON_KEY environment variables must be set"
+            )
+
+        self.client: Client = create_client(self.supabase_url, self.supabase_key)
+
+    async def create_flow(
+        self, flow_metadata: FlowMetadata, source_code: str
+    ) -> FlowRecord:
+        """Create a new flow in the database."""
+        flow_data = {
+            "id": flow_metadata.id,
+            "name": flow_metadata.name,
+            "description": flow_metadata.description,
+            "source_code": source_code,
+            "return_type": flow_metadata.return_type,
+            "docstring": flow_metadata.docstring,
+            "explanation": flow_metadata.explanation,
+            "created_at": (
+                flow_metadata.created_at or datetime.now(timezone.utc)
+            ).isoformat(),
+            "last_executed": (
+                flow_metadata.last_executed.isoformat()
+                if flow_metadata.last_executed
+                else None
+            ),
+        }
+
+        # Insert flow
+        result = await to_thread(self.client.table("flows").insert(flow_data).execute)
+
+        if result.data:
+            flow_record = FlowRecord(**result.data[0])
+
+            # Insert parameters
+            for param in flow_metadata.parameters:
+                param_data = {
+                    "flow_id": flow_metadata.id,
+                    "name": param.name,
+                    "type": param.type,
+                    "default_value": param.default,
+                    "required": param.required,
+                    "description": param.description,
+                }
+                await to_thread(
+                    self.client.table("flow_parameters").insert(param_data).execute
+                )
+
+            return flow_record
+        else:
+            raise Exception(f"Failed to create flow: {result}")
+
+    async def get_flow(self, flow_id: UUID) -> Optional[FlowRecord]:
+        """Get a flow by ID."""
+        result = await to_thread(
+            self.client.table("flows").select("*").eq("id", str(flow_id)).execute
+        )
+
+        if result.data:
+            return FlowRecord(**result.data[0])
+        return None
+
+    async def get_flow_by_name(self, name: str) -> Optional[FlowRecord]:
+        """Get a flow by name."""
+        result = await to_thread(
+            self.client.table("flows").select("*").eq("name", name).execute
+        )
+
+        if result.data:
+            return FlowRecord(**result.data[0])
+        return None
+
+    async def list_flows(self) -> List[FlowRecord]:
+        """List all flows."""
+        result = await to_thread(
+            self.client.table("flows")
+            .select("*")
+            .order("created_at", desc=True)
+            .execute
+        )
+
+        return [FlowRecord(**flow) for flow in result.data]
+
+    async def update_flow(self, flow_id: UUID, updates: Dict[str, Any]) -> FlowRecord:
+        """Update a flow."""
+        result = await to_thread(
+            self.client.table("flows").update(updates).eq("id", str(flow_id)).execute
+        )
+
+        if result.data:
+            return FlowRecord(**result.data[0])
+        else:
+            raise Exception(f"Failed to update flow: {result}")
+
+    async def delete_flow(self, flow_id: UUID) -> bool:
+        """Delete a flow and its parameters."""
+        # Parameters will be deleted automatically due to CASCADE constraint
+        result = await to_thread(
+            self.client.table("flows").delete().eq("id", str(flow_id)).execute
+        )
+        return len(result.data) > 0
+
+    async def get_flow_parameters(self, flow_id: UUID) -> List[FlowParameterRecord]:
+        """Get all parameters for a flow."""
+        result = await to_thread(
+            self.client.table("flow_parameters")
+            .select("*")
+            .eq("flow_id", str(flow_id))
+            .execute
+        )
+
+        return [FlowParameterRecord(**param) for param in result.data]
+
+    async def update_last_execution(self, flow_id: UUID, success: bool):
+        """Update the last execution status and timestamp for a flow."""
+        updates = {
+            "last_executed": datetime.now(timezone.utc).isoformat(),
+            "last_executed_status": "success" if success else "error",
+        }
+        await self.update_flow(flow_id, updates)
+
+    async def create_execution_record(
+        self,
+        flow_id: UUID,
+        parameters: Dict[str, Any],
+        success: bool,
+        result: Optional[Any] = None,
+        error: Optional[str] = None,
+        execution_time_ms: Optional[int] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+        streams: Optional[List[Dict[str, Any]]] = None,
+    ) -> FlowExecutionRecord:
+        """Create a flow execution record."""
+        # Convert result to dict format for database storage
+        formatted_result = None
+        if result is not None:
+            if isinstance(result, dict):
+                formatted_result = result
+            else:
+                # Wrap non-dict results in a consistent format
+                formatted_result = {"value": result, "type": type(result).__name__}
+
+        execution_data = {
+            "flow_id": str(flow_id),
+            "parameters": parameters,
+            "success": success,
+            "result": formatted_result,
+            "error": error,
+            "execution_time_ms": execution_time_ms,
+            "metadata": metadata,
+            "streams": streams,
+        }
+
+        result = await to_thread(
+            self.client.table("flow_executions").insert(execution_data).execute
+        )
+
+        if result.data:
+            return FlowExecutionRecord(**result.data[0])
+        else:
+            raise Exception(f"Failed to create execution record: {result}")
+
+    async def get_flow_executions(
+        self, flow_id: UUID, limit: int = 10
+    ) -> List[FlowExecutionRecord]:
+        """Get recent executions for a flow."""
+        result = await to_thread(
+            self.client.table("flow_executions")
+            .select("*")
+            .eq("flow_id", str(flow_id))
+            .order("created_at", desc=True)
+            .limit(limit)
+            .execute
+        )
+
+        return [FlowExecutionRecord(**execution) for execution in result.data]
+
+    def flow_record_to_metadata(
+        self, flow_record: FlowRecord, parameters: List[FlowParameterRecord]
+    ) -> FlowMetadata:
+        """Convert FlowRecord and parameters to FlowMetadata."""
+        flow_params = [
+            FlowParameter(
+                name=param.name,
+                type=param.type,
+                default=param.default_value,
+                required=param.required,
+                description=param.description,
+            )
+            for param in parameters
+        ]
+
+        return FlowMetadata(
+            id=str(flow_record.id),
+            name=flow_record.name,
+            description=flow_record.description,
+            parameters=flow_params,
+            return_type=flow_record.return_type,
+            docstring=flow_record.docstring,
+            source_code=flow_record.source_code,
+            explanation=flow_record.explanation,
+            created_at=flow_record.created_at,
+            last_executed=flow_record.last_executed,
+        )
+
+
+# Global database instance
+_db_instance: Optional[SupabaseFlowDB] = None
+
+
+def get_flow_db() -> SupabaseFlowDB:
+    """Get the global flow database instance."""
+    global _db_instance
+    if _db_instance is None:
+        _db_instance = SupabaseFlowDB()
+    return _db_instance

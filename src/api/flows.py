@@ -10,8 +10,9 @@ import asyncio
 
 from src.core.flow_discovery import FlowDiscovery
 from src.core.flow_validator import FlowValidator
-from src.core.shared_flow_executor import get_shared_flow_executor
+from src.core.db_flow_executor import DBFlowExecutor
 from src.core.flow_explainer import FlowExplainer
+from src.db.supabase_client import get_flow_db
 
 
 # Pydantic models for API
@@ -80,10 +81,11 @@ class ExplanationResponse(BaseModel):
 router = APIRouter(prefix="/flows", tags=["flows"])
 
 # Global instances (in production, these would be properly managed)
-flow_executor = get_shared_flow_executor()
+flow_executor = DBFlowExecutor()
 flow_discovery = FlowDiscovery()
 flow_validator = FlowValidator()
 flow_explainer = FlowExplainer()
+flow_db = get_flow_db()
 
 
 @router.post("/compile", response_model=CompilationResponse)
@@ -192,43 +194,18 @@ async def validate_flow_parameters(flow_id: str, parameters: Dict[str, Any]):
         Validation result
     """
     try:
-        # Get flow name from ID
-        flow_name = flow_executor._get_flow_name_by_id(flow_id)
-        if not flow_name:
-            raise HTTPException(
-                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
-            )
-
-        # Get flow metadata
-        schema = await flow_executor.get_flow_schema_by_id(flow_id)
-        if not schema:
-            raise HTTPException(
-                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
-            )
-
-        # Recreate flow metadata for validation
-        flows = flow_discovery.discover_flows(
-            flow_executor._compiled_flows.get(flow_name, "")
-        )
-        if flow_name not in flows:
-            raise HTTPException(status_code=404, detail="Flow metadata not found")
-
-        flow_metadata = flows[flow_name]
-
-        # Validate parameters
-        validation_result = flow_validator.validate_parameters(
-            flow_metadata, parameters
+        # Use the executor's built-in validation
+        validation_result = await flow_executor.validate_flow_execution_by_id(
+            flow_id, parameters
         )
 
         return ValidationResponse(
-            is_valid=validation_result.is_valid,
-            errors=[error.message for error in validation_result.errors],
-            warnings=[warning.message for warning in validation_result.warnings],
-            sanitized_parameters=validation_result.sanitized_parameters,
+            is_valid=validation_result.success,
+            errors=[validation_result.error] if validation_result.error else [],
+            warnings=[],
+            sanitized_parameters=parameters if validation_result.success else None,
         )
 
-    except HTTPException:
-        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Validation error: {str(e)}")
 
@@ -438,13 +415,11 @@ async def delete_flow(flow_id: str):
         Deletion confirmation
     """
     try:
-        flow_name = flow_executor._get_flow_name_by_id(flow_id)
-        if not flow_name:
+        success = await flow_executor.remove_flow_by_id(flow_id)
+        if not success:
             raise HTTPException(
                 status_code=404, detail=f"Flow with ID '{flow_id}' not found"
             )
-
-        flow_executor.remove_flow_by_id(flow_id)
 
         return {
             "success": True,
@@ -466,8 +441,7 @@ async def clear_all_flows():
         Clear confirmation
     """
     try:
-        flow_count = len(flow_executor._compiled_flows)
-        flow_executor.clear_compiled_flows()
+        flow_count = await flow_executor.clear_all_flows()
 
         return {"success": True, "message": f"Cleared {flow_count} flows successfully"}
 
@@ -487,28 +461,24 @@ async def get_flow_code(flow_id: str):
         Flow source code
     """
     try:
-        flow_name = flow_executor._get_flow_name_by_id(flow_id)
-        if not flow_name:
+        # Get flow from database
+        from uuid import UUID
+
+        flow_record = await flow_db.get_flow(UUID(flow_id))
+        if not flow_record:
             raise HTTPException(
                 status_code=404, detail=f"Flow with ID '{flow_id}' not found"
             )
 
-        # Get the flow code and extract specific function
-        full_code = flow_executor._compiled_flows[flow_name]
-        flows = flow_discovery.discover_flows(full_code)
+        flow_name = flow_executor._get_flow_name_by_id(flow_id)
+        if not flow_name:
+            flow_name = flow_record.name
 
-        if flow_name in flows and flows[flow_name].source_code:
-            return {
-                "flow_id": flow_id,
-                "flow_name": flow_name,
-                "source_code": flows[flow_name].source_code,
-            }
-        else:
-            return {
-                "flow_id": flow_id,
-                "flow_name": flow_name,
-                "source_code": full_code,
-            }
+        return {
+            "flow_id": flow_id,
+            "flow_name": flow_name,
+            "source_code": flow_record.source_code,
+        }
 
     except HTTPException:
         raise
@@ -531,7 +501,7 @@ async def get_flow_explanation(flow_id: str):
     """
     try:
         # Get the enriched flow metadata with explanations
-        flow_metadata = flow_executor.get_enriched_flow_metadata_by_id(flow_id)
+        flow_metadata = await flow_executor.get_enriched_flow_metadata_by_id(flow_id)
 
         if not flow_metadata:
             raise HTTPException(
@@ -570,8 +540,8 @@ async def regenerate_flow_explanation(flow_id: str):
         Newly generated flow explanation
     """
     try:
-        # Get the current enriched flow metadata
-        flow_metadata = flow_executor.get_enriched_flow_metadata_by_id(flow_id)
+        # Get the current flow metadata
+        flow_metadata = await flow_executor.get_enriched_flow_metadata_by_id(flow_id)
 
         if not flow_metadata:
             raise HTTPException(
@@ -582,9 +552,10 @@ async def regenerate_flow_explanation(flow_id: str):
         try:
             new_explanation = await flow_explainer.generate_explanation(flow_metadata)
 
-            # Update the flow metadata with new explanation and timestamp
-            flow_metadata.explanation = new_explanation
-            flow_metadata.created_at = datetime.now()
+            # Update the flow in database with new explanation
+            from uuid import UUID
+
+            await flow_db.update_flow(UUID(flow_id), {"explanation": new_explanation})
 
         except Exception as e:
             raise HTTPException(
@@ -594,7 +565,7 @@ async def regenerate_flow_explanation(flow_id: str):
         return ExplanationResponse(
             flow_name=flow_metadata.name,
             explanation=new_explanation,
-            created_at=flow_metadata.created_at,
+            created_at=datetime.now(),
         )
 
     except HTTPException:
