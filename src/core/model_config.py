@@ -3,6 +3,7 @@
 import os
 from langchain.chat_models import init_chat_model
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,13 +11,22 @@ load_dotenv()
 
 def get_model():
     """Get the configured language model."""
-    # model = init_chat_model("anthropic:claude-sonnet-4-5-20250929", temperature=0)
-    model = ChatOpenAI(
-        temperature=0,
-        model="glm-4.6",
-        openai_api_key=os.getenv("ZAI_API_KEY"),
-        openai_api_base="https://api.z.ai/api/coding/paas/v4/",
-    )
+    model = init_chat_model("anthropic:claude-sonnet-4-5-20250929", temperature=0)
+
+    # model = ChatOpenAI(
+    #     temperature=0,
+    #     model="glm-4.6",
+    #     openai_api_key=os.getenv("ZAI_API_KEY"),
+    #     openai_api_base="https://api.z.ai/api/coding/paas/v4/",
+    # )
+
+    # model = ChatGoogleGenerativeAI(
+    #     temperature=0,
+    #     model="gemini-3-pro-preview",
+    #     thinking_budget=1024,
+    #     include_thoughts=True,
+    # )
+    
     return model
 
 

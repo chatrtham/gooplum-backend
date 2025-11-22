@@ -51,7 +51,7 @@ uv sync --dev
 
 ```bash
 # Development mode (recommended)
-uv run langgraph dev
+uv run langgraph dev --allow-blocking
 ```
 
 The server will start on `http://localhost:2024`
