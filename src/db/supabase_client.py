@@ -4,13 +4,10 @@ import os
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 from uuid import UUID
-import json
 
 from dotenv import load_dotenv
-from supabase import create_client, Client
+from supabase import acreate_client, AsyncClient
 from pydantic import BaseModel
-import httpx
-from asyncio import to_thread
 
 # Load environment variables
 load_dotenv()
@@ -64,7 +61,7 @@ class SupabaseFlowDB:
     """Supabase database operations for flow management."""
 
     def __init__(self):
-        """Initialize Supabase client."""
+        """Initialize Supabase client configuration."""
         self.supabase_url = os.getenv("SUPABASE_URL")
         self.supabase_key = os.getenv("SUPABASE_ANON_KEY")
 
@@ -73,12 +70,23 @@ class SupabaseFlowDB:
                 "SUPABASE_URL and SUPABASE_ANON_KEY environment variables must be set"
             )
 
-        self.client: Client = create_client(self.supabase_url, self.supabase_key)
+        self.client: AsyncClient = None
+
+    async def initialize(self):
+        """Initialize the async Supabase client."""
+        self.client = await acreate_client(self.supabase_url, self.supabase_key)
+
+    async def _ensure_client(self):
+        """Ensure the Supabase client is initialized."""
+        if self.client is None:
+            await self.initialize()
 
     async def create_flow(
         self, flow_metadata: FlowMetadata, source_code: str
     ) -> FlowRecord:
         """Create a new flow in the database."""
+        await self._ensure_client()
+
         flow_data = {
             "id": flow_metadata.id,
             "name": flow_metadata.name,
@@ -98,7 +106,7 @@ class SupabaseFlowDB:
         }
 
         # Insert flow
-        result = await to_thread(self.client.table("flows").insert(flow_data).execute)
+        result = await self.client.table("flows").insert(flow_data).execute()
 
         if result.data:
             flow_record = FlowRecord(**result.data[0])
@@ -113,9 +121,7 @@ class SupabaseFlowDB:
                     "required": param.required,
                     "description": param.description,
                 }
-                await to_thread(
-                    self.client.table("flow_parameters").insert(param_data).execute
-                )
+                await self.client.table("flow_parameters").insert(param_data).execute()
 
             return flow_record
         else:
@@ -123,8 +129,12 @@ class SupabaseFlowDB:
 
     async def get_flow(self, flow_id: UUID) -> Optional[FlowRecord]:
         """Get a flow by ID."""
-        result = await to_thread(
-            self.client.table("flows").select("*").eq("id", str(flow_id)).execute
+        await self._ensure_client()
+        result = (
+            await self.client.table("flows")
+            .select("*")
+            .eq("id", str(flow_id))
+            .execute()
         )
 
         if result.data:
@@ -133,9 +143,8 @@ class SupabaseFlowDB:
 
     async def get_flow_by_name(self, name: str) -> Optional[FlowRecord]:
         """Get a flow by name."""
-        result = await to_thread(
-            self.client.table("flows").select("*").eq("name", name).execute
-        )
+        await self._ensure_client()
+        result = await self.client.table("flows").select("*").eq("name", name).execute()
 
         if result.data:
             return FlowRecord(**result.data[0])
@@ -143,19 +152,24 @@ class SupabaseFlowDB:
 
     async def list_flows(self) -> List[FlowRecord]:
         """List all flows."""
-        result = await to_thread(
-            self.client.table("flows")
+        await self._ensure_client()
+        result = (
+            await self.client.table("flows")
             .select("*")
             .order("created_at", desc=True)
-            .execute
+            .execute()
         )
 
         return [FlowRecord(**flow) for flow in result.data]
 
     async def update_flow(self, flow_id: UUID, updates: Dict[str, Any]) -> FlowRecord:
         """Update a flow."""
-        result = await to_thread(
-            self.client.table("flows").update(updates).eq("id", str(flow_id)).execute
+        await self._ensure_client()
+        result = (
+            await self.client.table("flows")
+            .update(updates)
+            .eq("id", str(flow_id))
+            .execute()
         )
 
         if result.data:
@@ -165,19 +179,21 @@ class SupabaseFlowDB:
 
     async def delete_flow(self, flow_id: UUID) -> bool:
         """Delete a flow and its parameters."""
+        await self._ensure_client()
         # Parameters will be deleted automatically due to CASCADE constraint
-        result = await to_thread(
-            self.client.table("flows").delete().eq("id", str(flow_id)).execute
+        result = (
+            await self.client.table("flows").delete().eq("id", str(flow_id)).execute()
         )
         return len(result.data) > 0
 
     async def get_flow_parameters(self, flow_id: UUID) -> List[FlowParameterRecord]:
         """Get all parameters for a flow."""
-        result = await to_thread(
-            self.client.table("flow_parameters")
+        await self._ensure_client()
+        result = (
+            await self.client.table("flow_parameters")
             .select("*")
             .eq("flow_id", str(flow_id))
-            .execute
+            .execute()
         )
 
         return [FlowParameterRecord(**param) for param in result.data]
@@ -202,6 +218,8 @@ class SupabaseFlowDB:
         streams: Optional[List[Dict[str, Any]]] = None,
     ) -> FlowExecutionRecord:
         """Create a flow execution record."""
+        await self._ensure_client()
+
         # Convert result to dict format for database storage
         formatted_result = None
         if result is not None:
@@ -222,8 +240,8 @@ class SupabaseFlowDB:
             "streams": streams,
         }
 
-        result = await to_thread(
-            self.client.table("flow_executions").insert(execution_data).execute
+        result = (
+            await self.client.table("flow_executions").insert(execution_data).execute()
         )
 
         if result.data:
@@ -235,13 +253,14 @@ class SupabaseFlowDB:
         self, flow_id: UUID, limit: int = 10
     ) -> List[FlowExecutionRecord]:
         """Get recent executions for a flow."""
-        result = await to_thread(
-            self.client.table("flow_executions")
+        await self._ensure_client()
+        result = (
+            await self.client.table("flow_executions")
             .select("*")
             .eq("flow_id", str(flow_id))
             .order("created_at", desc=True)
             .limit(limit)
-            .execute
+            .execute()
         )
 
         return [FlowExecutionRecord(**execution) for execution in result.data]
@@ -285,3 +304,10 @@ def get_flow_db() -> SupabaseFlowDB:
     if _db_instance is None:
         _db_instance = SupabaseFlowDB()
     return _db_instance
+
+
+async def get_initialized_flow_db() -> SupabaseFlowDB:
+    """Get the global flow database instance and ensure it's initialized."""
+    db = get_flow_db()
+    await db.initialize()
+    return db
