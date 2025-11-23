@@ -26,8 +26,6 @@ class FlowRecord(BaseModel):
     docstring: Optional[str] = None
     explanation: Optional[str] = None
     created_at: datetime
-    last_executed: Optional[datetime] = None
-    last_executed_status: Optional[str] = None
 
 
 class FlowParameterRecord(BaseModel):
@@ -55,6 +53,10 @@ class FlowExecutionRecord(BaseModel):
     metadata: Optional[Dict[str, Any]] = None
     created_at: datetime
     streams: Optional[List[Dict[str, Any]]] = None
+    # New status tracking columns
+    status: str = "completed"
+    started_at: Optional[datetime] = None
+    completed_at: Optional[datetime] = None
 
 
 class SupabaseFlowDB:
@@ -98,11 +100,6 @@ class SupabaseFlowDB:
             "created_at": (
                 flow_metadata.created_at or datetime.now(timezone.utc)
             ).isoformat(),
-            "last_executed": (
-                flow_metadata.last_executed.isoformat()
-                if flow_metadata.last_executed
-                else None
-            ),
         }
 
         # Insert flow
@@ -198,14 +195,6 @@ class SupabaseFlowDB:
 
         return [FlowParameterRecord(**param) for param in result.data]
 
-    async def update_last_execution(self, flow_id: UUID, success: bool):
-        """Update the last execution status and timestamp for a flow."""
-        updates = {
-            "last_executed": datetime.now(timezone.utc).isoformat(),
-            "last_executed_status": "success" if success else "error",
-        }
-        await self.update_flow(flow_id, updates)
-
     async def create_execution_record(
         self,
         flow_id: UUID,
@@ -216,6 +205,9 @@ class SupabaseFlowDB:
         execution_time_ms: Optional[int] = None,
         metadata: Optional[Dict[str, Any]] = None,
         streams: Optional[List[Dict[str, Any]]] = None,
+        status: str = "pending",
+        started_at: Optional[datetime] = None,
+        completed_at: Optional[datetime] = None,
     ) -> FlowExecutionRecord:
         """Create a flow execution record."""
         await self._ensure_client()
@@ -238,6 +230,9 @@ class SupabaseFlowDB:
             "execution_time_ms": execution_time_ms,
             "metadata": metadata,
             "streams": streams,
+            "status": status,
+            "started_at": started_at.isoformat() if started_at else None,
+            "completed_at": completed_at.isoformat() if completed_at else None,
         }
 
         result = (
@@ -290,8 +285,57 @@ class SupabaseFlowDB:
             source_code=flow_record.source_code,
             explanation=flow_record.explanation,
             created_at=flow_record.created_at,
-            last_executed=flow_record.last_executed,
         )
+
+    async def update_execution_status(
+        self,
+        execution_id: UUID,
+        status: str,
+        started_at: Optional[datetime] = None,
+        completed_at: Optional[datetime] = None,
+    ):
+        """Update execution status and timestamps."""
+        await self._ensure_client()
+
+        updates = {"status": status}
+        if started_at:
+            updates["started_at"] = started_at.isoformat()
+        if completed_at:
+            updates["completed_at"] = completed_at.isoformat()
+
+        result = (
+            await self.client.table("flow_executions")
+            .update(updates)
+            .eq("id", str(execution_id))
+            .execute()
+        )
+
+        if not result.data:
+            raise Exception(f"Failed to update execution status: {result}")
+
+    async def update_execution_record(
+        self, execution_id: UUID, updates: Dict[str, Any]
+    ):
+        """Update execution record with final results."""
+        await self._ensure_client()
+
+        # Convert datetime objects to ISO format if present
+        formatted_updates = {}
+        for key, value in updates.items():
+            if isinstance(value, datetime):
+                formatted_updates[key] = value.isoformat()
+            else:
+                formatted_updates[key] = value
+
+        result = (
+            await self.client.table("flow_executions")
+            .update(formatted_updates)
+            .eq("id", str(execution_id))
+            .execute()
+        )
+
+        if not result.data:
+            raise Exception(f"Failed to update execution record: {result}")
 
 
 # Global database instance

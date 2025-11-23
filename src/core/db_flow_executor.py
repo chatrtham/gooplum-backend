@@ -159,8 +159,30 @@ class DBFlowExecutor:
             flow_name, converted_parameters
         )
 
+        # 1. Create initial execution record with pending status
+        from datetime import datetime
+
+        execution_record = None
+        try:
+            execution_record = await self.db.create_execution_record(
+                flow_id=flow_record.id,
+                parameters=parameters,
+                success=False,  # Will be updated later
+                status="pending",
+            )
+        except Exception as e:
+            # Continue execution even if record creation fails
+            print(f"Warning: Failed to create execution record: {e}")
+
         try:
             start_time = asyncio.get_event_loop().time()
+
+            # 2. Update status to running when execution begins
+            if execution_record:
+                await self.db.update_execution_status(
+                    execution_record.id, "running", started_at=datetime.now()
+                )
+
             combined_code = f"{flow_code}\n\n{execution_script}"
             result = await run_python_code(combined_code)
             end_time = asyncio.get_event_loop().time()
@@ -210,23 +232,47 @@ class DBFlowExecutor:
                     metadata={"flow_name": flow_name, "parameters": parameters},
                 )
 
-            # Record execution in database
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=execution_result.success,
-                result=execution_result.data if execution_result.success else None,
-                error=execution_result.error if not execution_result.success else None,
-                execution_time_ms=(
-                    int(execution_time * 1000) if execution_time else None
-                ),
-                metadata=execution_result.metadata,
-            )
-
-            # Update last execution timestamp
-            await self.db.update_last_execution(
-                flow_record.id, execution_result.success
-            )
+            # 3. Update execution record with final results
+            if execution_record:
+                final_status = "completed" if execution_result.success else "failed"
+                await self.db.update_execution_record(
+                    execution_record.id,
+                    {
+                        "status": final_status,
+                        "success": execution_result.success,
+                        "result": (
+                            execution_result.data if execution_result.success else None
+                        ),
+                        "error": (
+                            execution_result.error
+                            if not execution_result.success
+                            else None
+                        ),
+                        "completed_at": datetime.now(),
+                        "execution_time_ms": (
+                            int(execution_time * 1000) if execution_time else None
+                        ),
+                        "metadata": execution_result.metadata,
+                    },
+                )
+            else:
+                # Fallback: create execution record after completion
+                await self.db.create_execution_record(
+                    flow_id=flow_record.id,
+                    parameters=parameters,
+                    success=execution_result.success,
+                    result=execution_result.data if execution_result.success else None,
+                    error=(
+                        execution_result.error if not execution_result.success else None
+                    ),
+                    execution_time_ms=(
+                        int(execution_time * 1000) if execution_time else None
+                    ),
+                    metadata=execution_result.metadata,
+                    status="completed" if execution_result.success else "failed",
+                    started_at=datetime.now(),
+                    completed_at=datetime.now(),
+                )
 
             return execution_result
 
@@ -240,14 +286,32 @@ class DBFlowExecutor:
                     "timeout": timeout,
                 },
             )
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=False,
-                error=error_result.error,
-                execution_time_ms=timeout * 1000,
-                metadata=error_result.metadata,
-            )
+            # Update execution record with timeout status
+            if execution_record:
+                await self.db.update_execution_record(
+                    execution_record.id,
+                    {
+                        "status": "failed",
+                        "success": False,
+                        "error": error_result.error,
+                        "completed_at": datetime.now(),
+                        "execution_time_ms": timeout * 1000,
+                        "metadata": error_result.metadata,
+                    },
+                )
+            else:
+                # Fallback: create execution record after timeout
+                await self.db.create_execution_record(
+                    flow_id=flow_record.id,
+                    parameters=parameters,
+                    success=False,
+                    error=error_result.error,
+                    execution_time_ms=timeout * 1000,
+                    metadata=error_result.metadata,
+                    status="failed",
+                    started_at=datetime.now(),
+                    completed_at=datetime.now(),
+                )
             return error_result
 
         except Exception as e:
@@ -256,13 +320,30 @@ class DBFlowExecutor:
                 error=f"Unexpected error during flow execution: {str(e)}",
                 metadata={"flow_name": flow_name, "parameters": parameters},
             )
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=False,
-                error=error_result.error,
-                metadata=error_result.metadata,
-            )
+            # Update execution record with exception status
+            if execution_record:
+                await self.db.update_execution_record(
+                    execution_record.id,
+                    {
+                        "status": "failed",
+                        "success": False,
+                        "error": error_result.error,
+                        "completed_at": datetime.now(),
+                        "metadata": error_result.metadata,
+                    },
+                )
+            else:
+                # Fallback: create execution record after exception
+                await self.db.create_execution_record(
+                    flow_id=flow_record.id,
+                    parameters=parameters,
+                    success=False,
+                    error=error_result.error,
+                    metadata=error_result.metadata,
+                    status="failed",
+                    started_at=datetime.now(),
+                    completed_at=datetime.now(),
+                )
             return error_result
 
     async def execute_flow_by_id(
@@ -303,11 +384,6 @@ class DBFlowExecutor:
                         if flow_metadata.created_at
                         else None
                     ),
-                    "last_executed": (
-                        flow_record.last_executed.isoformat()
-                        if flow_record.last_executed
-                        else None
-                    ),
                 }
             )
 
@@ -342,11 +418,6 @@ class DBFlowExecutor:
         schema["id"] = flow_metadata.id
         schema["created_at"] = (
             flow_metadata.created_at.isoformat() if flow_metadata.created_at else None
-        )
-        schema["last_executed"] = (
-            flow_metadata.last_executed.isoformat()
-            if flow_metadata.last_executed
-            else None
         )
 
         return schema

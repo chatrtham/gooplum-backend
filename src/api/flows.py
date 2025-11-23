@@ -12,7 +12,8 @@ from src.core.flow_discovery import FlowDiscovery
 from src.core.flow_validator import FlowValidator
 from src.core.db_flow_executor import DBFlowExecutor
 from src.core.flow_explainer import FlowExplainer
-from src.db.supabase_client import get_flow_db
+from src.db.supabase_client import get_flow_db, get_initialized_flow_db
+from uuid import UUID
 
 
 # Pydantic models for API
@@ -36,7 +37,6 @@ class FlowInfo(BaseModel):
     required_parameters: int
     return_type: str
     created_at: Optional[str] = None
-    last_executed: Optional[str] = None
 
 
 class FlowSchema(BaseModel):
@@ -46,7 +46,6 @@ class FlowSchema(BaseModel):
     parameters: Dict[str, Any]
     return_type: str
     created_at: Optional[str] = None
-    last_executed: Optional[str] = None
 
 
 class ExecutionResponse(BaseModel):
@@ -75,6 +74,39 @@ class ExplanationResponse(BaseModel):
     flow_name: str
     explanation: str
     created_at: Optional[datetime] = None
+
+
+# New models for execution history
+class ExecutionInfo(BaseModel):
+    id: str
+    flow_id: str
+    flow_name: Optional[str] = None
+    status: str
+    parameters: Dict[str, Any]
+    success: bool
+    result: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
+    execution_time_ms: Optional[int] = None
+    metadata: Optional[Dict[str, Any]] = None
+    streams: Optional[List[Dict[str, Any]]] = None
+    created_at: Optional[str] = None
+    started_at: Optional[str] = None
+    completed_at: Optional[str] = None
+
+
+class ExecutionsListResponse(BaseModel):
+    executions: List[ExecutionInfo]
+    total_count: int
+    page: Optional[int] = None
+    page_size: Optional[int] = None
+
+
+class ExecutionStatusResponse(BaseModel):
+    id: str
+    status: str
+    started_at: Optional[str] = None
+    completed_at: Optional[str] = None
+    execution_time_ms: Optional[int] = None
 
 
 # Create router
@@ -121,11 +153,6 @@ async def compile_flows(request: FlowCodeRequest):
                         if flow_metadata.created_at
                         else None
                     ),
-                    last_executed=(
-                        flow_metadata.last_executed.isoformat()
-                        if flow_metadata.last_executed
-                        else None
-                    ),
                 )
             )
 
@@ -154,7 +181,7 @@ async def list_flows():
         raise HTTPException(status_code=500, detail=f"Error listing flows: {str(e)}")
 
 
-@router.get("/{flow_id}", response_model=FlowSchema)
+@router.get("/{flow_id}/schema", response_model=FlowSchema)
 async def get_flow_schema(flow_id: str):
     """
     Get detailed schema for a specific flow.
@@ -573,4 +600,278 @@ async def regenerate_flow_explanation(flow_id: str):
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error regenerating flow explanation: {str(e)}"
+        )
+
+
+# Execution History Endpoints
+
+
+@router.get("/{flow_id}/executions", response_model=ExecutionsListResponse)
+async def get_flow_executions(
+    flow_id: str, page: int = 1, page_size: int = 20, status: Optional[str] = None
+):
+    """
+    Get execution history for a specific flow with pagination and filtering.
+
+    Args:
+        flow_id: ID of the flow
+        page: Page number for pagination (default: 1)
+        page_size: Number of executions per page (default: 20)
+        status: Filter by execution status (optional)
+
+    Returns:
+        Paginated list of executions for the flow
+    """
+    try:
+        db = await get_initialized_flow_db()
+
+        # Validate flow exists
+        flow_record = await db.get_flow(UUID(flow_id))
+        if not flow_record:
+            raise HTTPException(
+                status_code=404, detail=f"Flow with ID '{flow_id}' not found"
+            )
+
+        # Build query with filters
+        query = db.client.table("flow_executions").select("*").eq("flow_id", flow_id)
+
+        if status:
+            query = query.eq("status", status)
+
+        # Apply pagination
+        offset = (page - 1) * page_size
+        result = (
+            await query.order("created_at", desc=True)
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+
+        # Get total count for pagination info
+        count_query = (
+            db.client.table("flow_executions")
+            .select("id", count="exact")
+            .eq("flow_id", flow_id)
+        )
+        if status:
+            count_query = count_query.eq("status", status)
+        count_result = await count_query.execute()
+        total_count = count_result.count or 0
+
+        # Convert to response format
+        executions = []
+        for execution_data in result.data:
+            execution_info = ExecutionInfo(
+                id=execution_data["id"],
+                flow_id=execution_data["flow_id"],
+                flow_name=flow_record.name,
+                status=execution_data.get("status", "completed"),
+                parameters=execution_data["parameters"],
+                success=execution_data["success"],
+                result=execution_data.get("result"),
+                error=execution_data.get("error"),
+                execution_time_ms=execution_data.get("execution_time_ms"),
+                metadata=execution_data.get("metadata"),
+                streams=execution_data.get("streams"),
+                created_at=execution_data["created_at"],
+                started_at=execution_data.get("started_at"),
+                completed_at=execution_data.get("completed_at"),
+            )
+            executions.append(execution_info)
+
+        return ExecutionsListResponse(
+            executions=executions,
+            total_count=total_count,
+            page=page,
+            page_size=page_size,
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting flow executions: {str(e)}"
+        )
+
+
+@router.get("/executions", response_model=ExecutionsListResponse)
+async def get_all_executions(
+    page: int = 1,
+    page_size: int = 20,
+    status: Optional[str] = None,
+    flow_id: Optional[str] = None,
+):
+    """
+    Get all executions with pagination and filtering options.
+
+    Args:
+        page: Page number for pagination (default: 1)
+        page_size: Number of executions per page (default: 20)
+        status: Filter by execution status (optional)
+        flow_id: Filter by specific flow ID (optional)
+
+    Returns:
+        Paginated list of all executions
+    """
+    try:
+        db = await get_initialized_flow_db()
+
+        # Build query with filters
+        query = db.client.table("flow_executions").select("*")
+
+        if status:
+            query = query.eq("status", status)
+        if flow_id:
+            query = query.eq("flow_id", flow_id)
+
+        # Apply pagination
+        offset = (page - 1) * page_size
+        result = (
+            await query.order("created_at", desc=True)
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+
+        # Get total count for pagination info
+        count_query = db.client.table("flow_executions").select("id", count="exact")
+        if status:
+            count_query = count_query.eq("status", status)
+        if flow_id:
+            count_query = count_query.eq("flow_id", flow_id)
+        count_result = await count_query.execute()
+        total_count = count_result.count or 0
+
+        # Convert to response format
+        executions = []
+        for execution_data in result.data:
+            # Get flow name for each execution
+            flow_record = await db.get_flow(UUID(execution_data["flow_id"]))
+
+            execution_info = ExecutionInfo(
+                id=execution_data["id"],
+                flow_id=execution_data["flow_id"],
+                flow_name=flow_record.name if flow_record else "Unknown",
+                status=execution_data.get("status", "completed"),
+                parameters=execution_data["parameters"],
+                success=execution_data["success"],
+                result=execution_data.get("result"),
+                error=execution_data.get("error"),
+                execution_time_ms=execution_data.get("execution_time_ms"),
+                metadata=execution_data.get("metadata"),
+                streams=execution_data.get("streams"),
+                created_at=execution_data["created_at"],
+                started_at=execution_data.get("started_at"),
+                completed_at=execution_data.get("completed_at"),
+            )
+            executions.append(execution_info)
+
+        return ExecutionsListResponse(
+            executions=executions,
+            total_count=total_count,
+            page=page,
+            page_size=page_size,
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting all executions: {str(e)}"
+        )
+
+
+@router.get("/executions/{execution_id}", response_model=ExecutionInfo)
+async def get_execution_details(execution_id: str):
+    """
+    Get detailed information about a specific execution.
+
+    Args:
+        execution_id: ID of the execution
+
+    Returns:
+        Detailed execution information including stream data
+    """
+    try:
+        db = await get_initialized_flow_db()
+
+        result = (
+            await db.client.table("flow_executions")
+            .select("*")
+            .eq("id", execution_id)
+            .execute()
+        )
+
+        if not result.data:
+            raise HTTPException(
+                status_code=404, detail=f"Execution with ID '{execution_id}' not found"
+            )
+
+        execution_data = result.data[0]
+
+        # Get flow name
+        flow_record = await db.get_flow(UUID(execution_data["flow_id"]))
+
+        return ExecutionInfo(
+            id=execution_data["id"],
+            flow_id=execution_data["flow_id"],
+            flow_name=flow_record.name if flow_record else "Unknown",
+            status=execution_data.get("status", "completed"),
+            parameters=execution_data["parameters"],
+            success=execution_data["success"],
+            result=execution_data.get("result"),
+            error=execution_data.get("error"),
+            execution_time_ms=execution_data.get("execution_time_ms"),
+            metadata=execution_data.get("metadata"),
+            streams=execution_data.get("streams"),
+            created_at=execution_data["created_at"],
+            started_at=execution_data.get("started_at"),
+            completed_at=execution_data.get("completed_at"),
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting execution details: {str(e)}"
+        )
+
+
+@router.get("/executions/{execution_id}/status", response_model=ExecutionStatusResponse)
+async def get_execution_status(execution_id: str):
+    """
+    Get the current status of an execution (simple polling endpoint).
+
+    Args:
+        execution_id: ID of the execution
+
+    Returns:
+        Current execution status and timing information
+    """
+    try:
+        db = await get_initialized_flow_db()
+
+        result = (
+            await db.client.table("flow_executions")
+            .select("id", "status", "started_at", "completed_at", "execution_time_ms")
+            .eq("id", execution_id)
+            .execute()
+        )
+
+        if not result.data:
+            raise HTTPException(
+                status_code=404, detail=f"Execution with ID '{execution_id}' not found"
+            )
+
+        execution_data = result.data[0]
+
+        return ExecutionStatusResponse(
+            id=execution_data["id"],
+            status=execution_data.get("status", "completed"),
+            started_at=execution_data.get("started_at"),
+            completed_at=execution_data.get("completed_at"),
+            execution_time_ms=execution_data.get("execution_time_ms"),
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting execution status: {str(e)}"
         )
