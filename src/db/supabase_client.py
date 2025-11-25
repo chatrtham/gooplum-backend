@@ -26,8 +26,6 @@ class FlowRecord(BaseModel):
     docstring: Optional[str] = None
     explanation: Optional[str] = None
     created_at: datetime
-    last_executed: Optional[datetime] = None
-    last_executed_status: Optional[str] = None
 
 
 class FlowParameterRecord(BaseModel):
@@ -49,7 +47,6 @@ class FlowRunRecord(BaseModel):
     flow_id: UUID
     parameters: Dict[str, Any]
     status: str
-    success: Optional[bool] = None
     result: Optional[Dict[str, Any]] = None
     error: Optional[str] = None
     execution_time_ms: Optional[int] = None
@@ -99,11 +96,6 @@ class SupabaseFlowDB:
             "created_at": (
                 flow_metadata.created_at or datetime.now(timezone.utc)
             ).isoformat(),
-            "last_executed": (
-                flow_metadata.last_executed.isoformat()
-                if flow_metadata.last_executed
-                else None
-            ),
         }
 
         # Insert flow
@@ -199,14 +191,6 @@ class SupabaseFlowDB:
 
         return [FlowParameterRecord(**param) for param in result.data]
 
-    async def update_last_execution(self, flow_id: UUID, success: bool):
-        """Update the last execution status and timestamp for a flow."""
-        updates = {
-            "last_executed": datetime.now(timezone.utc).isoformat(),
-            "last_executed_status": "success" if success else "error",
-        }
-        await self.update_flow(flow_id, updates)
-
     async def create_flow_run(
         self,
         flow_id: UUID,
@@ -234,7 +218,6 @@ class SupabaseFlowDB:
         self,
         run_id: UUID,
         status: str,
-        success: Optional[bool] = None,
         result: Optional[Any] = None,
         error: Optional[str] = None,
         execution_time_ms: Optional[int] = None,
@@ -252,7 +235,6 @@ class SupabaseFlowDB:
 
         updates = {
             "status": status,
-            "success": success,
             "result": formatted_result,
             "error": error,
             "execution_time_ms": execution_time_ms,
@@ -360,7 +342,6 @@ class SupabaseFlowDB:
             source_code=flow_record.source_code,
             explanation=flow_record.explanation,
             created_at=flow_record.created_at,
-            last_executed=flow_record.last_executed,
         )
 
 

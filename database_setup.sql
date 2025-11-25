@@ -13,9 +13,7 @@ CREATE TABLE IF NOT EXISTS flows (
     return_type VARCHAR(100) NOT NULL,
     docstring TEXT,
     explanation TEXT,
-    created_at TIMESTAMPTZ DEFAULT now(),
-    last_executed TIMESTAMPTZ,
-    last_executed_status VARCHAR(50)
+    created_at TIMESTAMPTZ DEFAULT now()
 );
 
 -- Flow parameters table
@@ -38,7 +36,6 @@ CREATE TABLE IF NOT EXISTS flow_runs (
     flow_id UUID NOT NULL REFERENCES flows(id) ON DELETE CASCADE,
     parameters JSONB NOT NULL,
     status VARCHAR(50) DEFAULT 'PENDING', -- 'PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED'
-    success BOOLEAN, -- Kept for backward compatibility, nullable initially
     result JSONB,
     error TEXT,
     execution_time_ms INTEGER,

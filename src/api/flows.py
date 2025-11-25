@@ -37,7 +37,6 @@ class FlowInfo(BaseModel):
     required_parameters: int
     return_type: str
     created_at: Optional[str] = None
-    last_executed: Optional[str] = None
 
 
 class FlowSchema(BaseModel):
@@ -47,7 +46,6 @@ class FlowSchema(BaseModel):
     parameters: Dict[str, Any]
     return_type: str
     created_at: Optional[str] = None
-    last_executed: Optional[str] = None
 
 
 class ExecutionResponse(BaseModel):
@@ -82,7 +80,6 @@ class FlowRunInfo(BaseModel):
     id: str
     flow_id: str
     status: str
-    success: Optional[bool] = None
     execution_time_ms: Optional[int] = None
     created_at: str
     completed_at: Optional[str] = None
@@ -610,7 +607,6 @@ async def list_flow_runs(flow_id: str, limit: int = 10):
                 id=str(run.id),
                 flow_id=str(run.flow_id),
                 status=run.status,
-                success=run.success,
                 execution_time_ms=run.execution_time_ms,
                 created_at=run.created_at.isoformat(),
                 completed_at=run.completed_at.isoformat() if run.completed_at else None,
@@ -648,7 +644,6 @@ async def get_flow_run_details(run_id: str):
             id=str(run.id),
             flow_id=str(run.flow_id),
             status=run.status,
-            success=run.success,
             execution_time_ms=run.execution_time_ms,
             created_at=run.created_at.isoformat(),
             completed_at=run.completed_at.isoformat() if run.completed_at else None,

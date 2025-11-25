@@ -220,17 +220,11 @@ class DBFlowExecutor:
             await self.db.update_flow_run(
                 run_id=flow_run.id,
                 status="COMPLETED" if execution_result.success else "FAILED",
-                success=execution_result.success,
                 result=execution_result.data if execution_result.success else None,
                 error=execution_result.error if not execution_result.success else None,
                 execution_time_ms=(
                     int(execution_time * 1000) if execution_time else None
                 ),
-            )
-
-            # Update last execution timestamp
-            await self.db.update_last_execution(
-                flow_record.id, execution_result.success
             )
 
             return execution_result
@@ -310,11 +304,6 @@ class DBFlowExecutor:
                         if flow_metadata.created_at
                         else None
                     ),
-                    "last_executed": (
-                        flow_record.last_executed.isoformat()
-                        if flow_record.last_executed
-                        else None
-                    ),
                 }
             )
 
@@ -349,11 +338,6 @@ class DBFlowExecutor:
         schema["id"] = flow_metadata.id
         schema["created_at"] = (
             flow_metadata.created_at.isoformat() if flow_metadata.created_at else None
-        )
-        schema["last_executed"] = (
-            flow_metadata.last_executed.isoformat()
-            if flow_metadata.last_executed
-            else None
         )
 
         return schema
@@ -565,17 +549,11 @@ class DBFlowExecutor:
             await self.db.update_flow_run(
                 run_id=flow_run.id,
                 status="COMPLETED" if execution_result.success else "FAILED",
-                success=execution_result.success,
                 result=execution_result.data if execution_result.success else None,
                 error=execution_result.error if not execution_result.success else None,
                 execution_time_ms=(
                     int(execution_time * 1000) if execution_time else None
                 ),
-            )
-
-            # Update last execution timestamp
-            await self.db.update_last_execution(
-                flow_record.id, execution_result.success
             )
 
             return execution_result
