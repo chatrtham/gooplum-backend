@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import asyncio
 from uuid import UUID
@@ -315,7 +315,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                 "flow_id": flow_id,
                 "flow_name": flow_name,
                 "parameters": parameters,
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             }
             yield f"data: {json.dumps(start_data)}\n\n"
 
@@ -376,7 +376,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                     "type": "complete",
                     "success": False,
                     "error": str(execution_error),
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                 }
             else:
                 final_data = {
@@ -392,7 +392,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                         if final_result and final_result.streams
                         else 0
                     ),
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                     "metadata": final_result.metadata if final_result else {},
                 }
             yield f"data: {json.dumps(final_data)}\n\n"
@@ -402,7 +402,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
             error_data = {
                 "type": "error",
                 "message": f"Execution error: {str(e)}",
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
             }
             yield f"data: {json.dumps(error_data)}\n\n"
 
@@ -576,7 +576,7 @@ async def regenerate_flow_explanation(flow_id: str):
         return ExplanationResponse(
             flow_name=flow_metadata.name,
             explanation=new_explanation,
-            created_at=datetime.now(),
+            created_at=datetime.now(timezone.utc),
         )
 
     except HTTPException:
