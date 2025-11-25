@@ -100,3 +100,6 @@ CLAUDE.md
 
 # Kilo Code specific
 .kilocodemodes
+
+# GitHub specific
+.github/

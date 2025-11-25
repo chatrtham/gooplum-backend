@@ -7,6 +7,7 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 import json
 import asyncio
+from uuid import UUID
 
 from src.core.flow_discovery import FlowDiscovery
 from src.core.flow_validator import FlowValidator
@@ -75,6 +76,24 @@ class ExplanationResponse(BaseModel):
     flow_name: str
     explanation: str
     created_at: Optional[datetime] = None
+
+
+class FlowRunInfo(BaseModel):
+    id: str
+    flow_id: str
+    status: str
+    success: Optional[bool] = None
+    execution_time_ms: Optional[int] = None
+    created_at: str
+    completed_at: Optional[str] = None
+
+
+class FlowRunDetail(FlowRunInfo):
+    parameters: Dict[str, Any]
+    result: Optional[Any] = None
+    error: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
+    stream_events: List[Dict[str, Any]] = []
 
 
 # Create router
@@ -154,7 +173,7 @@ async def list_flows():
         raise HTTPException(status_code=500, detail=f"Error listing flows: {str(e)}")
 
 
-@router.get("/{flow_id}", response_model=FlowSchema)
+@router.get("/{flow_id}/schema", response_model=FlowSchema)
 async def get_flow_schema(flow_id: str):
     """
     Get detailed schema for a specific flow.
@@ -313,7 +332,6 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                 """Handle each streamed result from the flow - send to queue immediately."""
                 stream_data = {
                     "type": "stream",
-                    "input": stream_result.input,
                     "status": stream_result.status,
                     "message": stream_result.message,
                     "timestamp": stream_result.timestamp,
@@ -462,8 +480,6 @@ async def get_flow_code(flow_id: str):
     """
     try:
         # Get flow from database
-        from uuid import UUID
-
         flow_record = await flow_db.get_flow(UUID(flow_id))
         if not flow_record:
             raise HTTPException(
@@ -553,8 +569,6 @@ async def regenerate_flow_explanation(flow_id: str):
             new_explanation = await flow_explainer.generate_explanation(flow_metadata)
 
             # Update the flow in database with new explanation
-            from uuid import UUID
-
             await flow_db.update_flow(UUID(flow_id), {"explanation": new_explanation})
 
         except Exception as e:
@@ -573,4 +587,80 @@ async def regenerate_flow_explanation(flow_id: str):
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error regenerating flow explanation: {str(e)}"
+        )
+
+
+@router.get("/{flow_id}/runs", response_model=List[FlowRunInfo])
+async def list_flow_runs(flow_id: str, limit: int = 10):
+    """
+    List recent runs for a specific flow.
+
+    Args:
+        flow_id: ID of the flow
+        limit: Maximum number of runs to return
+
+    Returns:
+        List of flow runs
+    """
+    try:
+        runs = await flow_db.get_flow_runs(UUID(flow_id), limit)
+
+        return [
+            FlowRunInfo(
+                id=str(run.id),
+                flow_id=str(run.flow_id),
+                status=run.status,
+                success=run.success,
+                execution_time_ms=run.execution_time_ms,
+                created_at=run.created_at.isoformat(),
+                completed_at=run.completed_at.isoformat() if run.completed_at else None,
+            )
+            for run in runs
+        ]
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error listing flow runs: {str(e)}"
+        )
+
+
+@router.get("/runs/{run_id}", response_model=FlowRunDetail)
+async def get_flow_run_details(run_id: str):
+    """
+    Get detailed information about a specific flow run, including stream events.
+
+    Args:
+        run_id: ID of the run
+
+    Returns:
+        Flow run details
+    """
+    try:
+        run = await flow_db.get_flow_run(UUID(run_id))
+        if not run:
+            raise HTTPException(
+                status_code=404, detail=f"Run with ID '{run_id}' not found"
+            )
+
+        # Get stream events
+        events = await flow_db.get_run_events(UUID(run_id))
+
+        return FlowRunDetail(
+            id=str(run.id),
+            flow_id=str(run.flow_id),
+            status=run.status,
+            success=run.success,
+            execution_time_ms=run.execution_time_ms,
+            created_at=run.created_at.isoformat(),
+            completed_at=run.completed_at.isoformat() if run.completed_at else None,
+            parameters=run.parameters,
+            result=run.result,
+            error=run.error,
+            metadata=run.metadata,
+            stream_events=events,
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Error getting run details: {str(e)}"
         )
