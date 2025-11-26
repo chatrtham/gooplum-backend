@@ -31,14 +31,14 @@ Keep output minimal. Only stream the status and a human-readable message.
 ```python
 # GENERIC EXAMPLE
 print(f"STREAM_RESULT: {json.dumps({
-    'status': 'success',         # 'success' | 'failed' | 'processing'
+    'status': 'success',         # 'success' | 'failed'
     'message': 'Sent email to bob@example.com (Campaign: Q3 Outreach)' # Context included here!
 })}")
 ```
 
 ### **Final Return Format**
 
-Since results are streamed, the final return value should be a **High-Level Summary** only.
+Since results are streamed, the final return value must be a **High-Level Summary** only.
 **DO NOT** return the full list of processed items.
 **DO NOT** return complex stats objects.
 
