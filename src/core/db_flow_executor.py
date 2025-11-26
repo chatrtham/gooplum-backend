@@ -18,7 +18,6 @@ from src.db.supabase_client import get_flow_db, FlowRecord
 class StreamResult:
     """Single streamed result from flow execution."""
 
-    input: Any
     status: str  # "success" or "failed"
     message: str
     timestamp: Optional[str] = None
@@ -160,6 +159,13 @@ class DBFlowExecutor:
         )
 
         try:
+            # Create execution record (RUNNING)
+            flow_run = await self.db.create_flow_run(
+                flow_id=flow_record.id,
+                parameters=parameters,
+                metadata={"flow_name": flow_name},
+            )
+
             start_time = asyncio.get_event_loop().time()
             combined_code = f"{flow_code}\n\n{execution_script}"
             result = await run_python_code(combined_code)
@@ -210,22 +216,15 @@ class DBFlowExecutor:
                     metadata={"flow_name": flow_name, "parameters": parameters},
                 )
 
-            # Record execution in database
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=execution_result.success,
+            # Update execution record (COMPLETED/FAILED)
+            await self.db.update_flow_run(
+                run_id=flow_run.id,
+                status="COMPLETED" if execution_result.success else "FAILED",
                 result=execution_result.data if execution_result.success else None,
                 error=execution_result.error if not execution_result.success else None,
                 execution_time_ms=(
                     int(execution_time * 1000) if execution_time else None
                 ),
-                metadata=execution_result.metadata,
-            )
-
-            # Update last execution timestamp
-            await self.db.update_last_execution(
-                flow_record.id, execution_result.success
             )
 
             return execution_result
@@ -240,14 +239,15 @@ class DBFlowExecutor:
                     "timeout": timeout,
                 },
             )
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=False,
-                error=error_result.error,
-                execution_time_ms=timeout * 1000,
-                metadata=error_result.metadata,
-            )
+            # Update execution record (FAILED)
+            if "flow_run" in locals():
+                await self.db.update_flow_run(
+                    run_id=flow_run.id,
+                    status="FAILED",
+                    success=False,
+                    error=error_result.error,
+                    execution_time_ms=timeout * 1000,
+                )
             return error_result
 
         except Exception as e:
@@ -256,13 +256,14 @@ class DBFlowExecutor:
                 error=f"Unexpected error during flow execution: {str(e)}",
                 metadata={"flow_name": flow_name, "parameters": parameters},
             )
-            await self.db.create_execution_record(
-                flow_id=flow_record.id,
-                parameters=parameters,
-                success=False,
-                error=error_result.error,
-                metadata=error_result.metadata,
-            )
+            # Update execution record (FAILED)
+            if "flow_run" in locals():
+                await self.db.update_flow_run(
+                    run_id=flow_run.id,
+                    status="FAILED",
+                    success=False,
+                    error=error_result.error,
+                )
             return error_result
 
     async def execute_flow_by_id(
@@ -303,11 +304,6 @@ class DBFlowExecutor:
                         if flow_metadata.created_at
                         else None
                     ),
-                    "last_executed": (
-                        flow_record.last_executed.isoformat()
-                        if flow_record.last_executed
-                        else None
-                    ),
                 }
             )
 
@@ -342,11 +338,6 @@ class DBFlowExecutor:
         schema["id"] = flow_metadata.id
         schema["created_at"] = (
             flow_metadata.created_at.isoformat() if flow_metadata.created_at else None
-        )
-        schema["last_executed"] = (
-            flow_metadata.last_executed.isoformat()
-            if flow_metadata.last_executed
-            else None
         )
 
         return schema
@@ -421,13 +412,188 @@ class DBFlowExecutor:
         self,
         flow_name: str,
         parameters: Dict[str, Any],
-        timeout: int = 300,
+        timeout: int = 1800,
         on_stream: Optional[callable] = None,
     ) -> ExecutionResult:
-        """Execute a flow with streaming (simplified version - just calls execute_flow)."""
-        # For now, just use regular execution
-        # TODO: Implement proper streaming if needed
-        return await self.execute_flow(flow_name, parameters, timeout)
+        """Execute a flow with streaming."""
+        # Get flow from database
+        flow_record = await self._get_flow_by_name(flow_name)
+        if not flow_record:
+            return ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_name}' not found in database",
+                metadata={},
+            )
+
+        flow_code = flow_record.source_code
+
+        # Create execution record (RUNNING)
+        flow_run = await self.db.create_flow_run(
+            flow_id=flow_record.id,
+            parameters=parameters,
+            metadata={"flow_name": flow_name},
+        )
+
+        # Convert parameter types
+        converted_parameters = await self._convert_parameter_types(
+            flow_name, parameters
+        )
+
+        # Create execution script
+        execution_script = self._create_execution_script(
+            flow_name, converted_parameters
+        )
+
+        collected_streams = []
+
+        async def handle_stream_output(output_line: Any):
+            """Handle streaming output from sandbox."""
+            # Convert OutputMessage to string if needed
+            if hasattr(output_line, "line"):
+                output_line = output_line.line
+
+            if not isinstance(output_line, str):
+                return
+
+            if output_line.startswith("STREAM_RESULT:"):
+                try:
+                    json_str = output_line.replace("STREAM_RESULT:", "", 1).strip()
+                    stream_data = json.loads(json_str)
+
+                    # Create stream result object
+                    stream_result = StreamResult(
+                        status=stream_data.get("status", "unknown"),
+                        message=stream_data.get("message", ""),
+                        timestamp=datetime.now(timezone.utc).isoformat(),
+                    )
+
+                    collected_streams.append(stream_result)
+
+                    # Call callback if provided
+                    if on_stream:
+                        if asyncio.iscoroutinefunction(on_stream):
+                            await on_stream(stream_result)
+                        else:
+                            on_stream(stream_result)
+
+                    # Add to database
+                    await self.db.add_stream_event(
+                        run_id=flow_run.id,
+                        event_type=stream_data.get("type", "item"),
+                        payload=stream_data,
+                    )
+
+                except Exception as e:
+                    print(f"Error parsing stream result: {e}")
+
+        try:
+            start_time = asyncio.get_event_loop().time()
+            combined_code = f"{flow_code}\n\n{execution_script}"
+
+            result = await run_python_code_with_streaming(
+                combined_code, on_stdout=handle_stream_output, timeout=timeout
+            )
+
+            end_time = asyncio.get_event_loop().time()
+            execution_time = end_time - start_time
+
+            # Parse result
+            try:
+                if (
+                    hasattr(result, "results")
+                    and result.results
+                    and len(result.results) > 0
+                ):
+                    first_result = result.results[0]
+                    if hasattr(first_result, "__dict__"):
+                        result_dict = vars(first_result)
+                        if "json" in result_dict and result_dict["json"]:
+                            output_data = result_dict["json"]
+                        else:
+                            execution_result = ExecutionResult(
+                                success=False,
+                                error="No JSON data found in E2B result",
+                                execution_time=execution_time,
+                                metadata={"available_keys": list(result_dict.keys())},
+                                streams=collected_streams,
+                            )
+                    else:
+                        output_data = first_result
+
+                    execution_result = ExecutionResult(
+                        success=output_data.get("success", False),
+                        data=output_data.get("data"),
+                        error=output_data.get("error"),
+                        execution_time=execution_time,
+                        metadata=output_data.get("metadata", {}),
+                        streams=collected_streams,
+                    )
+                else:
+                    execution_result = ExecutionResult(
+                        success=False,
+                        error="No results returned from flow execution",
+                        execution_time=execution_time,
+                        metadata={"flow_name": flow_name, "parameters": parameters},
+                        streams=collected_streams,
+                    )
+            except Exception as parse_error:
+                execution_result = ExecutionResult(
+                    success=False,
+                    error=f"Failed to parse execution result: {str(parse_error)}",
+                    execution_time=execution_time,
+                    metadata={"flow_name": flow_name, "parameters": parameters},
+                    streams=collected_streams,
+                )
+
+            # Update execution record (COMPLETED/FAILED)
+            await self.db.update_flow_run(
+                run_id=flow_run.id,
+                status="COMPLETED" if execution_result.success else "FAILED",
+                result=execution_result.data if execution_result.success else None,
+                error=execution_result.error if not execution_result.success else None,
+                execution_time_ms=(
+                    int(execution_time * 1000) if execution_time else None
+                ),
+            )
+
+            return execution_result
+
+        except asyncio.TimeoutError:
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Flow execution timed out after {timeout} seconds",
+                metadata={
+                    "flow_name": flow_name,
+                    "parameters": parameters,
+                    "timeout": timeout,
+                },
+                streams=collected_streams,
+            )
+            # Update execution record (FAILED)
+            await self.db.update_flow_run(
+                run_id=flow_run.id,
+                status="FAILED",
+                success=False,
+                error=error_result.error,
+                execution_time_ms=timeout * 1000,
+            )
+            return error_result
+
+        except Exception as e:
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Unexpected error during flow execution: {str(e)}",
+                metadata={"flow_name": flow_name, "parameters": parameters},
+                streams=collected_streams,
+            )
+            # Update execution record (FAILED)
+            await self.db.update_flow_run(
+                run_id=flow_run.id,
+                status="FAILED",
+                success=False,
+                error=error_result.error,
+            )
+            return error_result
 
     async def execute_flow_by_id_with_streaming(
         self,
@@ -526,15 +692,31 @@ import sys
 from datetime import datetime, timezone
 """
         execution_function = f"""
+class Tee:
+    def __init__(self, *files):
+        self.files = files
+    def write(self, obj):
+        for f in self.files:
+            f.write(obj)
+            if hasattr(f, 'flush'):
+                f.flush()
+    def flush(self):
+        for f in self.files:
+            if hasattr(f, 'flush'):
+                f.flush()
+
 async def execute_flow():
     parameters = {json.dumps(parameters, indent=2)}
 
     import io
     original_stdout = sys.stdout
     captured_output = io.StringIO()
+    
+    # Use Tee to write to both original stdout (for streaming) and capture buffer (for logs)
+    tee_stdout = Tee(original_stdout, captured_output)
 
     try:
-        sys.stdout = captured_output
+        sys.stdout = tee_stdout
         result = await {flow_name}(**parameters)
         captured_logs = str(captured_output.getvalue())
 

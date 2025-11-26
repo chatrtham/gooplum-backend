@@ -26,8 +26,6 @@ class FlowRecord(BaseModel):
     docstring: Optional[str] = None
     explanation: Optional[str] = None
     created_at: datetime
-    last_executed: Optional[datetime] = None
-    last_executed_status: Optional[str] = None
 
 
 class FlowParameterRecord(BaseModel):
@@ -42,19 +40,19 @@ class FlowParameterRecord(BaseModel):
     description: Optional[str] = None
 
 
-class FlowExecutionRecord(BaseModel):
-    """Database model for flow execution records."""
+class FlowRunRecord(BaseModel):
+    """Database model for flow run records."""
 
     id: UUID
     flow_id: UUID
     parameters: Dict[str, Any]
-    success: bool
+    status: str
     result: Optional[Dict[str, Any]] = None
     error: Optional[str] = None
     execution_time_ms: Optional[int] = None
     metadata: Optional[Dict[str, Any]] = None
     created_at: datetime
-    streams: Optional[List[Dict[str, Any]]] = None
+    completed_at: Optional[datetime] = None
 
 
 class SupabaseFlowDB:
@@ -98,11 +96,6 @@ class SupabaseFlowDB:
             "created_at": (
                 flow_metadata.created_at or datetime.now(timezone.utc)
             ).isoformat(),
-            "last_executed": (
-                flow_metadata.last_executed.isoformat()
-                if flow_metadata.last_executed
-                else None
-            ),
         }
 
         # Insert flow
@@ -198,26 +191,38 @@ class SupabaseFlowDB:
 
         return [FlowParameterRecord(**param) for param in result.data]
 
-    async def update_last_execution(self, flow_id: UUID, success: bool):
-        """Update the last execution status and timestamp for a flow."""
-        updates = {
-            "last_executed": datetime.now(timezone.utc).isoformat(),
-            "last_executed_status": "success" if success else "error",
-        }
-        await self.update_flow(flow_id, updates)
-
-    async def create_execution_record(
+    async def create_flow_run(
         self,
         flow_id: UUID,
         parameters: Dict[str, Any],
-        success: bool,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> FlowRunRecord:
+        """Create a new flow run record with RUNNING status."""
+        await self._ensure_client()
+
+        run_data = {
+            "flow_id": str(flow_id),
+            "parameters": parameters,
+            "status": "RUNNING",
+            "metadata": metadata,
+        }
+
+        result = await self.client.table("flow_runs").insert(run_data).execute()
+
+        if result.data:
+            return FlowRunRecord(**result.data[0])
+        else:
+            raise Exception(f"Failed to create flow run: {result}")
+
+    async def update_flow_run(
+        self,
+        run_id: UUID,
+        status: str,
         result: Optional[Any] = None,
         error: Optional[str] = None,
         execution_time_ms: Optional[int] = None,
-        metadata: Optional[Dict[str, Any]] = None,
-        streams: Optional[List[Dict[str, Any]]] = None,
-    ) -> FlowExecutionRecord:
-        """Create a flow execution record."""
+    ) -> FlowRunRecord:
+        """Update a flow run status and results."""
         await self._ensure_client()
 
         # Convert result to dict format for database storage
@@ -226,36 +231,57 @@ class SupabaseFlowDB:
             if isinstance(result, dict):
                 formatted_result = result
             else:
-                # Wrap non-dict results in a consistent format
                 formatted_result = {"value": result, "type": type(result).__name__}
 
-        execution_data = {
-            "flow_id": str(flow_id),
-            "parameters": parameters,
-            "success": success,
+        updates = {
+            "status": status,
             "result": formatted_result,
             "error": error,
             "execution_time_ms": execution_time_ms,
-            "metadata": metadata,
-            "streams": streams,
         }
 
-        result = (
-            await self.client.table("flow_executions").insert(execution_data).execute()
+        if status in ["COMPLETED", "FAILED", "CANCELLED"]:
+            updates["completed_at"] = datetime.now(timezone.utc).isoformat()
+
+        # Remove None values to avoid overwriting with null
+        updates = {k: v for k, v in updates.items() if v is not None}
+
+        result_data = (
+            await self.client.table("flow_runs")
+            .update(updates)
+            .eq("id", str(run_id))
+            .execute()
         )
 
-        if result.data:
-            return FlowExecutionRecord(**result.data[0])
+        if result_data.data:
+            return FlowRunRecord(**result_data.data[0])
         else:
-            raise Exception(f"Failed to create execution record: {result}")
+            raise Exception(f"Failed to update flow run: {result_data}")
 
-    async def get_flow_executions(
+    async def add_stream_event(
+        self,
+        run_id: UUID,
+        event_type: str,
+        payload: Dict[str, Any],
+    ):
+        """Add a stream event to the flow run."""
+        await self._ensure_client()
+
+        event_data = {
+            "run_id": str(run_id),
+            "event_type": event_type,
+            "payload": payload,
+        }
+
+        await self.client.table("flow_stream_events").insert(event_data).execute()
+
+    async def get_flow_runs(
         self, flow_id: UUID, limit: int = 10
-    ) -> List[FlowExecutionRecord]:
-        """Get recent executions for a flow."""
+    ) -> List[FlowRunRecord]:
+        """Get recent runs for a flow."""
         await self._ensure_client()
         result = (
-            await self.client.table("flow_executions")
+            await self.client.table("flow_runs")
             .select("*")
             .eq("flow_id", str(flow_id))
             .order("created_at", desc=True)
@@ -263,7 +289,33 @@ class SupabaseFlowDB:
             .execute()
         )
 
-        return [FlowExecutionRecord(**execution) for execution in result.data]
+        return [FlowRunRecord(**run) for run in result.data]
+
+    async def get_flow_run(self, run_id: UUID) -> Optional[FlowRunRecord]:
+        """Get a specific flow run."""
+        await self._ensure_client()
+        result = (
+            await self.client.table("flow_runs")
+            .select("*")
+            .eq("id", str(run_id))
+            .execute()
+        )
+
+        if result.data:
+            return FlowRunRecord(**result.data[0])
+        return None
+
+    async def get_run_events(self, run_id: UUID) -> List[Dict[str, Any]]:
+        """Get all stream events for a run."""
+        await self._ensure_client()
+        result = (
+            await self.client.table("flow_stream_events")
+            .select("*")
+            .eq("run_id", str(run_id))
+            .order("sequence_order", desc=False)
+            .execute()
+        )
+        return result.data
 
     def flow_record_to_metadata(
         self, flow_record: FlowRecord, parameters: List[FlowParameterRecord]
@@ -290,7 +342,6 @@ class SupabaseFlowDB:
             source_code=flow_record.source_code,
             explanation=flow_record.explanation,
             created_at=flow_record.created_at,
-            last_executed=flow_record.last_executed,
         )
 
 

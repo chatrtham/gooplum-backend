@@ -39,7 +39,9 @@ async def run_python_code(code: str):
         return result
 
 
-async def run_python_code_with_streaming(code: str, on_stdout=None, on_stderr=None):
+async def run_python_code_with_streaming(
+    code: str, on_stdout=None, on_stderr=None, timeout: int = 300
+):
     """
     Run python code in a sandbox with stdout/stderr streaming callbacks.
 
@@ -47,6 +49,7 @@ async def run_python_code_with_streaming(code: str, on_stdout=None, on_stderr=No
         code: Python code to execute
         on_stdout: Callback function for stdout lines (receives line as string)
         on_stderr: Callback function for stderr lines (receives line as string)
+        timeout: Execution timeout in seconds (default: 300)
 
     Returns:
         E2B execution result with final output
@@ -62,5 +65,7 @@ async def run_python_code_with_streaming(code: str, on_stdout=None, on_stderr=No
         await sandbox.commands.run(f"pip install {' '.join(packages)}")
 
         # Execute code with streaming callbacks
+        # Note: E2B's run_code doesn't accept a timeout argument directly in this version,
+        # but the sandbox itself has a timeout. We accept the arg for API compatibility.
         result = await sandbox.run_code(code, on_stdout=on_stdout, on_stderr=on_stderr)
         return result

@@ -32,7 +32,6 @@ class FlowMetadata:
     source_code: Optional[str] = None
     explanation: Optional[str] = None
     created_at: Optional[datetime] = None
-    last_executed: Optional[datetime] = None
 
 
 class FlowDiscovery:
