@@ -159,7 +159,7 @@ class DBFlowExecutor:
         )
 
         try:
-            # Create execution record (PENDING)
+            # Create execution record (RUNNING)
             flow_run = await self.db.create_flow_run(
                 flow_id=flow_record.id,
                 parameters=parameters,
@@ -412,7 +412,7 @@ class DBFlowExecutor:
         self,
         flow_name: str,
         parameters: Dict[str, Any],
-        timeout: int = 300,
+        timeout: int = 1800,
         on_stream: Optional[callable] = None,
     ) -> ExecutionResult:
         """Execute a flow with streaming."""
@@ -427,7 +427,7 @@ class DBFlowExecutor:
 
         flow_code = flow_record.source_code
 
-        # Create execution record (PENDING)
+        # Create execution record (RUNNING)
         flow_run = await self.db.create_flow_run(
             flow_id=flow_record.id,
             parameters=parameters,

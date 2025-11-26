@@ -197,13 +197,13 @@ class SupabaseFlowDB:
         parameters: Dict[str, Any],
         metadata: Optional[Dict[str, Any]] = None,
     ) -> FlowRunRecord:
-        """Create a new flow run record with PENDING status."""
+        """Create a new flow run record with RUNNING status."""
         await self._ensure_client()
 
         run_data = {
             "flow_id": str(flow_id),
             "parameters": parameters,
-            "status": "PENDING",
+            "status": "RUNNING",
             "metadata": metadata,
         }
 

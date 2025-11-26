@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS flow_runs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     flow_id UUID NOT NULL REFERENCES flows(id) ON DELETE CASCADE,
     parameters JSONB NOT NULL,
-    status VARCHAR(50) DEFAULT 'PENDING', -- 'PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED'
+    status VARCHAR(50) DEFAULT 'RUNNING', -- 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED'
     result JSONB,
     error TEXT,
     execution_time_ms INTEGER,
