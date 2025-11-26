@@ -83,6 +83,8 @@ class FlowRunInfo(BaseModel):
     execution_time_ms: Optional[int] = None
     created_at: str
     completed_at: Optional[str] = None
+    result: Optional[Any] = None
+    error: Optional[str] = None
 
 
 class FlowRunDetail(FlowRunInfo):
@@ -610,6 +612,8 @@ async def list_flow_runs(flow_id: str, limit: int = 10):
                 execution_time_ms=run.execution_time_ms,
                 created_at=run.created_at.isoformat(),
                 completed_at=run.completed_at.isoformat() if run.completed_at else None,
+                result=run.result,
+                error=run.error,
             )
             for run in runs
         ]
