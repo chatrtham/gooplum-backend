@@ -54,6 +54,7 @@ return {
     "status": "success",
     "summary": "Successfully analyzed the report and updated the database."
 }
+```
 
 ### **Error Handling & Resilience**
 
@@ -61,14 +62,21 @@ return {
 1.  **Never crash the loop:** If one item fails, catch the exception, stream a 'failed' status, and continue to the next item.
 2.  **Try/Except Blocks:** Wrap all external API calls and risky logic.
 3.  **Helpful Error Messages:** In the `message` field, explain *why* it failed (e.g., "Missing email address", "API timeout").
+4.  **String Operations:** Break complex string operations into separate variables to avoid quote escaping nightmares.
 
 ```python
 for item in items:
     try:
         # ... process item ...
-        print(f"STREAM_RESULT: {json.dumps({'status': 'success', 'message': f'Processed {item.name}'})}")
+        # Break complex string operations into separate variables
+        success_message = f'Processed {item.name}'
+        stream_data = {'status': 'success', 'message': success_message}
+        print(f"STREAM_RESULT: {json.dumps(stream_data)}")
     except Exception as e:
-        print(f"STREAM_RESULT: {json.dumps({'status': 'failed', 'message': f'Failed to process {item.name}: {str(e)}'})}")
+        # Break complex string operations into separate variables
+        error_message = f'Failed to process {item.name}: {str(e)}'
+        error_data = {'status': 'failed', 'message': error_message}
+        print(f"STREAM_RESULT: {json.dumps(error_data)}")
 ```
 
 ### **Decision Logic for Flows**
