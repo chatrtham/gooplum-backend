@@ -2,7 +2,7 @@
 
 import os
 from datetime import datetime, timezone
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 from uuid import UUID
 
 from dotenv import load_dotenv
@@ -276,20 +276,20 @@ class SupabaseFlowDB:
         await self.client.table("flow_stream_events").insert(event_data).execute()
 
     async def get_flow_runs(
-        self, flow_id: UUID, limit: int = 10
-    ) -> List[FlowRunRecord]:
+        self, flow_id: UUID, limit: int = 10, offset: int = 0
+    ) -> Tuple[List[FlowRunRecord], int]:
         """Get recent runs for a flow."""
         await self._ensure_client()
         result = (
             await self.client.table("flow_runs")
-            .select("*")
+            .select("*", count="exact")
             .eq("flow_id", str(flow_id))
             .order("created_at", desc=True)
-            .limit(limit)
+            .range(offset, offset + limit - 1)
             .execute()
         )
 
-        return [FlowRunRecord(**run) for run in result.data]
+        return [FlowRunRecord(**run) for run in result.data], result.count
 
     async def get_flow_run(self, run_id: UUID) -> Optional[FlowRunRecord]:
         """Get a specific flow run."""

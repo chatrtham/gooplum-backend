@@ -95,6 +95,13 @@ class FlowRunDetail(FlowRunInfo):
     stream_events: List[Dict[str, Any]] = []
 
 
+class PaginatedFlowRuns(BaseModel):
+    runs: List[FlowRunInfo]
+    total: int
+    page: int
+    limit: int
+
+
 # Create router
 router = APIRouter(prefix="/flows", tags=["flows"])
 
@@ -589,22 +596,24 @@ async def regenerate_flow_explanation(flow_id: str):
         )
 
 
-@router.get("/{flow_id}/runs", response_model=List[FlowRunInfo])
-async def list_flow_runs(flow_id: str, limit: int = 10):
+@router.get("/{flow_id}/runs", response_model=PaginatedFlowRuns)
+async def list_flow_runs(flow_id: str, page: int = 1, limit: int = 10):
     """
     List recent runs for a specific flow.
 
     Args:
         flow_id: ID of the flow
+        page: Page number (1-based)
         limit: Maximum number of runs to return
 
     Returns:
-        List of flow runs
+        Paginated list of flow runs
     """
     try:
-        runs = await flow_db.get_flow_runs(UUID(flow_id), limit)
+        offset = (page - 1) * limit
+        runs, total = await flow_db.get_flow_runs(UUID(flow_id), limit, offset)
 
-        return [
+        run_infos = [
             FlowRunInfo(
                 id=str(run.id),
                 flow_id=str(run.flow_id),
@@ -617,6 +626,8 @@ async def list_flow_runs(flow_id: str, limit: int = 10):
             )
             for run in runs
         ]
+
+        return PaginatedFlowRuns(runs=run_infos, total=total, page=page, limit=limit)
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error listing flow runs: {str(e)}"
