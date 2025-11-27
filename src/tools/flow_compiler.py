@@ -101,6 +101,21 @@ async def flow_compiler(
             }
         )
 
+    except SyntaxError as se:
+        # Handle syntax errors in the flow code
+        error_msg = f"❌ Syntax Error in flow code:\n{se.msg}\nLine {se.lineno}, Column {se.offset}\n\n{se.text}"
+
+        return Command(
+            update={
+                "messages": [
+                    ToolMessage(
+                        error_msg,
+                        tool_call_id=tool_call_id,
+                    )
+                ]
+            }
+        )
+
     except Exception as e:
         # Handle unexpected errors
         error_msg = f"❌ Unexpected error during compilation: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
