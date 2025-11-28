@@ -210,7 +210,7 @@ The `flow_compiler` will:
 - Helper functions use `_helper_` prefix
 - Comprehensive parameter documentation
 - Avoid multiple top-level async functions
-- Avoid escaped newlines (\\n) and backslashes (\\)
+- Avoid escaped newlines (\\n), backslashes (\\) and quotes (\")
 
 ## **Development Workflow**
 
