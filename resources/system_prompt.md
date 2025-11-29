@@ -61,7 +61,7 @@ return {
 1.  **Never crash the loop:** If one item fails, catch the exception, stream a 'failed' status, and continue to the next item.
 2.  **Try/Except Blocks:** Wrap all external API calls and risky logic.
 3.  **Helpful Error Messages:** In the `message` field, explain *why* it failed (e.g., "Missing email address", "API timeout").
-4.  **String Operations:** Break complex string operations into separate variables to avoid quote escaping nightmares.
+4.  **String Operations:** Break complex string operations into separate variables to avoid quote escaping nightmares. Avoid escaped newlines (\\n), backslashes (\\) and quotes (\") in string operations.
 
 ```python
 for item in items:
@@ -176,20 +176,7 @@ if isinstance(result, str):
 
 - Use `python_code_executor` tool to run the code
 - **Execution Environment**: Code runs in async sandbox with existing event loop - use await directly, avoid asyncio.run() and nest_asyncio workarounds
-- DO NOT call this `python_code_executor` tool at the same as creating/editing file. Create/edit a file first and then run it.
-
-## Compilation
-
-The `flow_compiler` will:
-- Compile only ONE main async function per file
-- Validate no cross-flow dependencies
-- Expose only the main flow through the API
-
-**Patterns to follow:**
-- Clear, descriptive function names
-- Comprehensive parameter documentation
-- Avoid multiple top-level async functions
-- Avoid escaped newlines (\\n), backslashes (\\) and quotes (\")
+- Create/Edit files BEFORE running them, NOT in parallel
 
 ## **Development Workflow**
 
