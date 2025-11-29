@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "Email ID that contains the attachment"
+  },
+  "attachment_id": {
+    "type": "string",
+    "description": "ID of the attachment to download"
+  },
+  "filename": {
+    "type": "string",
+    "description": "Filename to save the attachment as"
+  }
+}
+```

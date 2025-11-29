@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "spreadsheet_url": {
+    "type": "string",
+    "description": "The URL of the Google Sheets document"
+  },
+  "ranges": {
+    "type": "array",
+    "description": "The ranges to retrieve from the spreadsheet (e.g. 'Sheet1!A1:C10')",
+    "items": {
+      "type": "string"
+    }
+  },
+  "major_dimension": {
+    "type": "string",
+    "description": "The major dimension of the values (optional, default: 'ROWS')",
+    "enum": [
+      "ROWS",
+      "COLUMNS"
+    ]
+  },
+  "value_render_option": {
+    "type": "string",
+    "description": "How values should be rendered in the output (optional)",
+    "enum": [
+      "FORMATTED_VALUE",
+      "UNFORMATTED_VALUE",
+      "FORMULA"
+    ]
+  },
+  "date_time_render_option": {
+    "type": "string",
+    "description": "How dates, times, and durations should be represented (optional)",
+    "enum": [
+      "SERIAL_NUMBER",
+      "FORMATTED_STRING"
+    ]
+  }
+}
+```

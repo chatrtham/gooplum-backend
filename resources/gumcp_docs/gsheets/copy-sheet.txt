@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "source_spreadsheet_id": {
+    "type": "string",
+    "description": "The ID of the spreadsheet containing the sheet to copy"
+  },
+  "source_sheet_id": {
+    "type": "integer",
+    "description": "The ID of the sheet to copy"
+  },
+  "destination_spreadsheet_id": {
+    "type": "string",
+    "description": "The ID of the spreadsheet to copy the sheet to"
+  },
+  "new_sheet_name": {
+    "type": "string",
+    "description": "Optional name for the copied sheet"
+  },
+  "insert_sheet_index": {
+    "type": "integer",
+    "description": "The zero-based index where the new sheet should be inserted (optional)"
+  }
+}
+```

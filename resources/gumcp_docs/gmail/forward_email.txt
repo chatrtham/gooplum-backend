@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "Email ID to forward"
+  },
+  "to": {
+    "type": "string",
+    "description": "Recipient email address(es), comma separated"
+  },
+  "additional_text": {
+    "type": "string",
+    "description": "Additional text to include with the forwarded email"
+  }
+}
+```

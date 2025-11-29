@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "to": {
+    "type": "string",
+    "description": "Recipient email address"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Email subject"
+  },
+  "body": {
+    "type": "string",
+    "description": "Email body (plain text)"
+  },
+  "cc": {
+    "type": "string",
+    "description": "CC recipients (comma separated)"
+  },
+  "bcc": {
+    "type": "string",
+    "description": "BCC recipients (comma separated)"
+  },
+  "thread_id": {
+    "type": "string",
+    "description": "Optional thread ID to create a draft reply in an existing thread"
+  }
+}
+```

@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "spreadsheet_url": {
+    "type": "string",
+    "description": "The URL of the Google Sheets document"
+  },
+  "range": {
+    "type": "string",
+    "description": "The range to clear (e.g. 'Sheet1!A1:C10')"
+  }
+}
+```

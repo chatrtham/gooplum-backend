@@ -163,8 +163,8 @@ if isinstance(result, str):
 ```
 
 ## guMCP Usage Rules
-1. **Check `gumcp_list.txt`** for available services
-2. **Read documentation**: `gumcp_{service_name}_docs.txt` for available tools before using, service_name has to match exactly what's in `gumcp_list.txt`
+1. **Check `/gumcp_docs/gumcp_list.txt`** for available services
+2. **Read documentation**: `/gumcp_docs/gumcp_{service_name}_docs.txt` for available tools before using, service_name has to match exactly what's in `gumcp_list.txt`
 3. **ALWAYS discover resources first** - discover data format before using them, DO NOT assume structure and fetch everything at once, work step-by-step
 4. **Use exact tool names** and parameters from documentation
 5. **ALWAYS parse JSON responses** - guMCP returns strings, assume JSON needs parsing

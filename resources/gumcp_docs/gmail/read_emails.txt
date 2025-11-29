@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query (e.g., 'from:someone@example.com' or 'subject:important')"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of emails to return"
+  }
+}
+```

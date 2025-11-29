@@ -1,0 +1,34 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "The title of the new spreadsheet"
+  },
+  "sheets": {
+    "type": "array",
+    "description": "The sheets that should be created with the spreadsheet (optional)",
+    "items": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the sheet"
+        }
+      }
+    }
+  },
+  "locale": {
+    "type": "string",
+    "description": "The locale of the new spreadsheet (e.g., 'en_US') (optional)"
+  },
+  "timeZone": {
+    "type": "string",
+    "description": "The time zone of the new spreadsheet (e.g., 'America/New_York') (optional)"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties for the spreadsheet (optional)"
+  }
+}
+```

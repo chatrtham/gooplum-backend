@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "Email ID to move to trash"
+  }
+}
+```

@@ -1,0 +1,71 @@
+Parameters Schema:
+```json
+{
+  "spreadsheet_url": {
+    "type": "string",
+    "description": "The URL of the Google Sheets document"
+  },
+  "data": {
+    "type": "array",
+    "description": "The data to update in the spreadsheet",
+    "items": {
+      "type": "object",
+      "properties": {
+        "range": {
+          "type": "string",
+          "description": "The range to update (e.g. 'Sheet1!A1:C10')"
+        },
+        "values": {
+          "type": "array",
+          "description": "The values to update",
+          "items": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "majorDimension": {
+          "type": "string",
+          "description": "The major dimension of the values (optional, default: 'ROWS')",
+          "enum": [
+            "ROWS",
+            "COLUMNS"
+          ]
+        }
+      },
+      "required": [
+        "range",
+        "values"
+      ]
+    }
+  },
+  "value_input_option": {
+    "type": "string",
+    "description": "How the input data should be interpreted (optional, default: 'RAW')",
+    "enum": [
+      "RAW",
+      "USER_ENTERED"
+    ]
+  },
+  "include_values_in_response": {
+    "type": "boolean",
+    "description": "Whether to include values in the response (optional)"
+  },
+  "response_value_render_option": {
+    "type": "string",
+    "description": "How values should be rendered in the response (optional)",
+    "enum": [
+      "FORMATTED_VALUE",
+      "UNFORMATTED_VALUE",
+      "FORMULA"
+    ]
+  },
+  "response_date_time_render_option": {
+    "type": "string",
+    "description": "How dates, times, and durations should be represented in the response (optional)",
+    "enum": [
+      "SERIAL_NUMBER",
+      "FORMATTED_STRING"
+    ]
+  }
+}
+```
