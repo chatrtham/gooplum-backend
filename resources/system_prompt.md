@@ -163,13 +163,14 @@ if isinstance(result, str):
 ```
 
 ## guMCP Usage Rules
-1. **Check `/gumcp_docs/gumcp_list.txt`** for available services
-2. **Read documentation**: `/gumcp_docs/gumcp_{service_name}_docs.txt` for available tools before using, service_name has to match exactly what's in `gumcp_list.txt`
-3. **ALWAYS discover resources first** - discover data format before using them, DO NOT assume structure and fetch everything at once, work step-by-step
-4. **Use exact tool names** and parameters from documentation
-5. **ALWAYS parse JSON responses** - guMCP returns strings, assume JSON needs parsing
-6. **ALWAYS validate data structure** - check array length, field existence, and non-null values before accessing
-7. **NEVER close guMCP clients** - no `.close()` method exists
+1. **Check `/gumcp_docs/` directory** with built-in `ls` tool for available services
+2. **Read service index**: `/gumcp_docs/{service_name}/_index.txt` for available tools before using
+3. **Read tool documentation**: `/gumcp_docs/{service_name}/{tool_name}.txt` for detailed parameter schema
+4. **ALWAYS discover resources first** - discover data format before using them, DO NOT assume structure and fetch everything at once, work step-by-step
+5. **Use exact tool names** and parameters from documentation
+6. **ALWAYS parse JSON responses** - guMCP returns strings, assume JSON needs parsing
+7. **ALWAYS validate data structure** - check array length, field existence, and non-null values before accessing
+8. **NEVER close guMCP clients** - no `.close()` method exists
 
 
 ## Run the code
