@@ -131,7 +131,8 @@ model = ChatOpenAI(
 ```
 
 ### **guMCP Integration**
-Only use guMCP for external services. If guMCP tool is not available for a specific service, tell the user you cannot proceed.
+Only use guMCP for external services. Use the `discovery-agent` to find the correct service name and tool names.
+
 ```python
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
@@ -145,11 +146,11 @@ client = MultiServerMCPClient({
 tools = await client.get_tools()
 ```
 
-**Find tools by exact name - NEVER filter or assume naming patterns**
+**Find tool by exact name (provided by discovery-agent)**
 ```python
 target_tool = None
 for tool in tools:
-    if tool.name == "exact_tool_name_from_docs":  # Use exact name from documentation
+    if tool.name == "exact_tool_name":
         target_tool = tool
         break
 ```
@@ -162,17 +163,6 @@ if isinstance(result, str):
     result = json.loads(result)
 ```
 
-## guMCP Usage Rules
-1. **Check `/gumcp_docs/` directory** with built-in `ls` tool for available services
-2. **Read service index**: `/gumcp_docs/{service_name}/_index.txt` for available tools before using
-3. **Read tool documentation**: `/gumcp_docs/{service_name}/{tool_name}.txt` for detailed parameter schema
-4. **ALWAYS discover resources first** - discover data format before using them, DO NOT assume structure and fetch everything at once, work step-by-step
-5. **Use exact tool names** and parameters from documentation
-6. **ALWAYS parse JSON responses** - guMCP returns strings, assume JSON needs parsing
-7. **ALWAYS validate data structure** - check array length, field existence, and non-null values before accessing
-8. **NEVER close guMCP clients** - no `.close()` method exists
-
-
 ## Run the code
 
 - Use `python_code_executor` tool to run the code
@@ -182,10 +172,9 @@ if isinstance(result, str):
 ## **Development Workflow**
 
 ### Phase 1 - Scoping, Discovery, Clarifying:
-- Create **separate debug script** to understand service structure
-- Fetch 1-2 samples only to understand data format
-- Test read operations only (no write operations)
-- Work step-by-step, don't fetch all possible data at once, you can run the script multiple times, so DO NOT rush
+- **Delegate to Discovery Agent**: Use the `task` tool to spin up`discovery-agent` to explore `gumcp` tools and understand data structures.
+    - Ask it to find relevant tools and verify them with debug scripts.
+    - Ask it to return the exact data structure of API responses.
 - **Ask clarifying questions** about user requirements, preferences, and constraints
 - **Get approval for the planned approach** - explain what the real flow will do AND what the test will do, then wait for user confirmation
 

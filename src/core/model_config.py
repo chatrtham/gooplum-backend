@@ -26,7 +26,7 @@ def get_model():
     #     thinking_budget=1024,
     #     include_thoughts=True,
     # )
-    
+
     return model
 
 
@@ -39,3 +39,14 @@ def load_system_prompt() -> str:
     except Exception as e:
         print(f"Warning: Could not read resources/system_prompt.md: {e}")
         return ""  # Return empty string if file can't be read
+
+
+def load_discovery_prompt() -> str:
+    """Load discovery agent prompt from the markdown file."""
+    try:
+        with open("resources/discovery_prompt.md", "r", encoding="utf-8") as f:
+            content = f.read()
+        return content
+    except Exception as e:
+        print(f"Warning: Could not read resources/discovery_prompt.md: {e}")
+        return ""
