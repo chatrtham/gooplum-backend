@@ -1,5 +1,4 @@
 from langchain.agents import create_agent
-from langchain.agents.middleware import TodoListMiddleware
 from langchain.agents.middleware.summarization import SummarizationMiddleware
 from deepagents import CompiledSubAgent
 from deepagents.middleware.filesystem import FilesystemMiddleware
