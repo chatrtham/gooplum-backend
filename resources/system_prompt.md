@@ -131,7 +131,7 @@ model = ChatOpenAI(
 ```
 
 ### **guMCP Integration**
-Only use guMCP for external services. Use the `discovery-agent` to find the correct service name and tool names.
+Only use guMCP for external services. If guMCP tool is not available for a specific service, tell the user you cannot proceed.
 
 ```python
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -146,7 +146,7 @@ client = MultiServerMCPClient({
 tools = await client.get_tools()
 ```
 
-**Find tool by exact name (provided by discovery-agent)**
+**Find tools by exact name - NEVER filter or assume naming patterns**
 ```python
 target_tool = None
 for tool in tools:
@@ -163,20 +163,58 @@ if isinstance(result, str):
     result = json.loads(result)
 ```
 
+## guMCP Usage Rules
+1. **Use exact tool names** and parameters from the subagent's discovery results
+2. **ALWAYS parse JSON responses** - guMCP returns strings, assume JSON needs parsing
+3. **ALWAYS validate data structure** - check array length, field existence, and non-null values before accessing
+4. **NEVER close guMCP clients** - no `.close()` method exists
+
 ## Run the code
 
 - Use `python_code_executor` tool to run the code
 - **Execution Environment**: Code runs in async sandbox with existing event loop - use await directly, avoid asyncio.run() and nest_asyncio workarounds
 - Create/Edit files BEFORE running them, NOT in parallel
 
+## Discovery Subagent Usage
+### When to Use
+- Understanding external service data structures
+- Testing guMCP tool functionality before implementation
+- Discovering what tool to use and how to use it
+
+### How to Use
+- **For read operations:** the objective is to discover and understand the data structure of a specific guMCP service.
+```
+task({
+    "subagent_type": "gumcp-discovery-agent",
+    "description": f"""
+    Service Name: {exact_service_name}
+    Objective: I want to read ... from {exact_service_name} ...
+    """
+})
+```
+
+- **For write operations:** the objective is to identify required parameters without executing any changes.
+```
+task({
+    "subagent_type": "gumcp-discovery-agent",
+    "description": f"""
+    Service Name: {exact_service_name}
+    Objective: Identify required parameters to create ... in {exact_service_name} ... **without executing any code**
+    """
+})
+```
+
+**Key Guidelines:**
+- Provide ONE clear objective to the discovery agent in the description
+- One service per subagent
+
 ## **Development Workflow**
 
 ### Phase 1 - Scoping, Discovery, Clarifying:
-- **Delegate to Discovery Agent**: Use the `task` tool to spin up`discovery-agent` to explore `gumcp` tools and understand data structures.
-    - Ask it to find relevant tools and verify them with debug scripts.
-    - Ask it to return the exact data structure of API responses.
+- **Feasibility Check:** ensure guMCP supports necessary services using `ls` tool in `/gumcp_docs/` to discover available services
 - **Ask clarifying questions** about user requirements, preferences, and constraints
-- **Get approval for the planned approach** - explain what the real flow will do AND what the test will do, then wait for user confirmation
+- **Use discovery subagents** to understand external service structures
+- **Get approval for the planned approach:** explain what the real flow will do AND what the test will do, then wait for user confirmation
 
 ### Phase 2 - Build and Test:
 - Build the actual flow with **single data point**
@@ -189,10 +227,4 @@ if isinstance(result, str):
 - Create complete flow ready for full dataset
 - DO NOT include any test code and any `[TESTING]` prefixes in production code
 - Compile the flow to allow user to execute it themselves
-- **NEVER execute on full dataset yourself** (even when compilation fails) - only compile the flow
-
-**Critical Rules:**
-- **Use separate debug scripts** for Phase 1 exploration
-- **Single data point testing** before full implementation
-- **Ask permission** before testing write operations
-- **User executes production flow** - NEVER run production flow on full datasets yourself
+- **NEVER execute on full dataset yourself** (even when compilation fails) - only compile the flow, user run production flow themselves
