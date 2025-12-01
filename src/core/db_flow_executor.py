@@ -70,28 +70,25 @@ class DBFlowExecutor:
 
     def _extract_production_code(self, full_code: str) -> str:
         """Extract only the production code (above `if __name__ == "__main__":` block)."""
-        try:
-            tree = ast.parse(full_code)
-            for node in ast.walk(tree):
-                if isinstance(node, ast.If):
-                    if (
-                        isinstance(node.test, ast.Compare)
-                        and len(node.test.ops) == 1
-                        and isinstance(node.test.ops[0], ast.Eq)
-                        and isinstance(node.test.left, ast.Name)
-                        and node.test.left.id == "__name__"
-                        and len(node.test.comparators) > 0
-                        and isinstance(node.test.comparators[0], ast.Constant)
-                        and node.test.comparators[0].value == "__main__"
-                    ):
-                        lines = full_code.split("\n")
-                        production_lines = lines[: node.lineno - 1]
-                        while production_lines and not production_lines[-1].strip():
-                            production_lines.pop()
-                        return "\n".join(production_lines)
-            return full_code
-        except SyntaxError:
-            return full_code
+        tree = ast.parse(full_code)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.If):
+                if (
+                    isinstance(node.test, ast.Compare)
+                    and len(node.test.ops) == 1
+                    and isinstance(node.test.ops[0], ast.Eq)
+                    and isinstance(node.test.left, ast.Name)
+                    and node.test.left.id == "__name__"
+                    and len(node.test.comparators) > 0
+                    and isinstance(node.test.comparators[0], ast.Constant)
+                    and node.test.comparators[0].value == "__main__"
+                ):
+                    lines = full_code.split("\n")
+                    production_lines = lines[: node.lineno - 1]
+                    while production_lines and not production_lines[-1].strip():
+                        production_lines.pop()
+                    return "\n".join(production_lines)
+        return full_code
 
     async def compile_flow(
         self, code: str, flow_name: Optional[str] = None

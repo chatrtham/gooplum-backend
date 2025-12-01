@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name for the new label"
+  },
+  "background_color": {
+    "type": "string",
+    "description": "Optional background color (hex code)"
+  },
+  "text_color": {
+    "type": "string",
+    "description": "Optional text color (hex code)"
+  }
+}
+```

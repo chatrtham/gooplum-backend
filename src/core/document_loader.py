@@ -2,7 +2,7 @@
 
 import asyncio
 import aiofiles
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import TypedDict
 
@@ -45,7 +45,8 @@ async def load_gumcp_files_async() -> dict:
         return gumcp_files
 
     # Use asyncio.to_thread for the glob operation (blocking)
-    file_paths = await asyncio.to_thread(list, gumcp_docs_dir.glob("gumcp*.txt"))
+    # Load both index files and individual tool files from hybrid structure
+    file_paths = await asyncio.to_thread(list, gumcp_docs_dir.rglob("*.txt"))
 
     # Process files asynchronously
     for file_path in file_paths:
@@ -58,12 +59,17 @@ async def load_gumcp_files_async() -> dict:
 
                 # Get file stats for timestamps
                 stat = await asyncio.to_thread(file_path.stat)
-                timestamp = datetime.fromtimestamp(stat.st_mtime).isoformat()
+                timestamp = datetime.fromtimestamp(
+                    stat.st_mtime, tz=timezone.utc
+                ).isoformat()
 
                 # Split content into lines and create FileData object
                 lines = content.splitlines()
-                # Store with absolute path prefix for ls tool compatibility
-                file_path = f"/{filename}"
+                # Store with relative path preserving directory structure for ls tool compatibility
+                relative_path = file_path.relative_to(gumcp_docs_dir)
+                # Convert to forward slashes for Linux environment
+                relative_path_str = str(relative_path).replace("\\", "/")
+                file_path = f"/gumcp_docs/{relative_path_str}"
                 gumcp_files[file_path] = FileData(
                     content=lines, created_at=timestamp, modified_at=timestamp
                 )

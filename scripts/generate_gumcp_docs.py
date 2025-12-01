@@ -18,52 +18,52 @@ if not GUMCP_CREDENTIALS:
     exit(1)
 
 
-def read_integrations_list():
-    """Read available integrations from gumcp_list.txt"""
+def get_integrations_list():
+    """Read available integrations from gumcp_integrations.txt"""
     try:
-        with open("resources/gumcp_docs/gumcp_list.txt", "r", encoding="utf-8") as f:
+        with open("scripts/gumcp_integrations.txt", "r", encoding="utf-8") as f:
             lines = f.readlines()
 
         integrations = []
         for line in lines:
-            # Remove comments and empty lines, strip whitespace and '- '
             line = line.strip()
-            if line and not line.startswith("#"):
-                if line.startswith("- "):
-                    line = line[2:]  # Remove '- ' prefix
+            if line and not line.startswith("#"):  # Skip comments and empty lines
                 integrations.append(line)
 
         return integrations
     except FileNotFoundError:
-        print(
-            "ERROR: gumcp_list.txt not found. Please create it with available integrations."
-        )
+        print("ERROR: gumcp_integrations.txt not found in scripts directory.")
         return []
     except Exception as e:
-        print(f"Error reading gumcp_list.txt: {e}")
+        print(f"Error reading gumcp_integrations.txt: {e}")
         return []
 
 
-def generate_documentation(tools: list, integration_name: str) -> str:
-    """Generate formatted documentation for discovered tools"""
-    current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    doc = f"# {integration_name.title()} guMCP Tools Documentation\n\n"
+def generate_tool_index(tools: list, integration_name: str) -> str:
+    """Generate index file with tool descriptions only"""
+    current_date = datetime.now().strftime("%Y-%m-%d")
+    doc = f"# {integration_name.title()} Tools Index\n\n"
     doc += f"*Generated on: {current_date}*\n\n"
     doc += f"## Available Tools ({len(tools)} total)\n\n"
 
     for i, tool in enumerate(tools, 1):
-        doc += f"### {i}. {tool.name}\n"
-        doc += f"- **Description**: {tool.description}\n"
-        doc += f"- **Parameters Schema**:\n"
-        doc += f"```json\n"
-        doc += f"{json.dumps(tool.args, indent=2)}\n"
-        doc += f"```\n\n"
+        doc += f"{i}. **{tool.name}** - {tool.description}\n"
+
+    return doc
+
+
+def generate_individual_tool_file(tool) -> str:
+    """Generate documentation for a single tool with full schema"""
+    doc = f"Parameters Schema:\n"
+    doc += f"```json\n"
+    doc += f"{json.dumps(tool.args, indent=2)}\n"
+    doc += f"```\n"
 
     return doc
 
 
 async def discover_and_document_tools(integration_name: str, user_id: str):
-    """Discover tools and generate documentation file"""
+    """Discover tools and generate hybrid documentation structure"""
     try:
         print(f"Discovering {integration_name} guMCP tools for user: {user_id}")
 
@@ -82,21 +82,39 @@ async def discover_and_document_tools(integration_name: str, user_id: str):
 
         print(f"\n=== Found {len(tools)} {integration_name} guMCP Tools ===\n")
 
+        # Create directory for this integration
+        integration_dir = f"resources/gumcp_docs/{integration_name}"
+        os.makedirs(integration_dir, exist_ok=True)
+
+        # Generate index file
+        index_doc = generate_tool_index(tools, integration_name)
+        index_file = f"{integration_dir}/_index.txt"
+        with open(index_file, "w", encoding="utf-8") as f:
+            f.write(index_doc)
+
+        print(f"Generated index file: {index_file}")
+
+        # Generate individual tool files
+        for tool in tools:
+            tool_doc = generate_individual_tool_file(tool)
+            tool_file = f"{integration_dir}/{tool.name}.txt"
+            with open(tool_file, "w", encoding="utf-8") as f:
+                f.write(tool_doc)
+
+            print(f"Generated tool file: {tool_file}")
+
+        print(
+            f"\n=== Hybrid documentation structure created for {integration_name} ==="
+        )
+        print(f"Index: {index_file}")
+        print(f"Individual tools: {len(tools)} files")
+
+        # Also display tool info in console
         for i, tool in enumerate(tools, 1):
             print(f"{i}. Tool Name: {tool.name}")
             print(f"   Description: {tool.description}")
-            print(f"   Args Schema: {json.dumps(tool.args, indent=2)}")
             print("-" * 80)
 
-        # Generate documentation
-        documentation = generate_documentation(tools, integration_name)
-
-        # Write to file
-        output_file = f"resources/gumcp_docs/gumcp_{integration_name}_docs.txt"
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(documentation)
-
-        print(f"\nDocumentation generated: {output_file}")
         return tools
 
     except Exception as e:
@@ -105,11 +123,11 @@ async def discover_and_document_tools(integration_name: str, user_id: str):
 
 
 async def main():
-    """Main function to discover all integrations from gumcp_list.txt"""
-    integrations = read_integrations_list()
+    """Main function to discover all available integrations"""
+    integrations = get_integrations_list()
 
     if not integrations:
-        print("No integrations found in gumcp_list.txt")
+        print("No integrations found in gumcp_integrations.txt")
         return
 
     print(

@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "to": {
+    "type": "string",
+    "description": "Recipient email address(es), comma separated"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Email subject"
+  },
+  "body": {
+    "type": "string",
+    "description": "Email body (plain text)"
+  },
+  "cc": {
+    "type": "string",
+    "description": "CC recipients (comma separated)"
+  },
+  "bcc": {
+    "type": "string",
+    "description": "BCC recipients (comma separated)"
+  },
+  "thread_id": {
+    "type": "string",
+    "description": "Optional: Thread ID to reply to (creates reply in thread)"
+  },
+  "in_reply_to": {
+    "type": "string",
+    "description": "Optional: Message ID to reply to (for threaded conversations)"
+  }
+}
+```

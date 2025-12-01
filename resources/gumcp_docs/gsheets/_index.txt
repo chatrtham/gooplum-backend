@@ -1,0 +1,16 @@
+# Gsheets Tools Index
+
+*Generated on: 2025-11-29*
+
+## Available Tools (10 total)
+
+1. **create-sheet** - Create a new Google Sheets
+2. **get-spreadsheet-info** - Get spreadsheet metadata
+3. **get-sheet-names** - List sheet names in spreadsheet
+4. **batch-get** - Get values from multiple ranges
+5. **batch-update** - Update values in multiple ranges
+6. **append-values** - Append values to a sheet
+7. **lookup-row** - Find a row by value in a column
+8. **clear-values** - Clear a sheet range
+9. **copy-sheet** - Copy a sheet from one spreadsheet to another
+10. **add-sheet** - Add a new sheet to an existing spreadsheet

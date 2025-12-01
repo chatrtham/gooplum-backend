@@ -13,7 +13,7 @@ async def get_sandbox():
         sandbox = await AsyncSandbox.create(
             envs={
                 "GUMCP_CREDENTIALS": os.getenv("GUMCP_CREDENTIALS", ""),
-                "ZAI_API_KEY": os.getenv("ZAI_API_KEY", ""),
+                "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY", ""),
             },
             timeout=3600,
         )  # 1 hour timeout

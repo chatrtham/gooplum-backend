@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "Email ID to modify"
+  },
+  "add_labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Labels to add (e.g., 'INBOX', 'STARRED', 'IMPORTANT')"
+  },
+  "remove_labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Labels to remove (e.g., 'UNREAD')"
+  }
+}
+```

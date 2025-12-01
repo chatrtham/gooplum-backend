@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "spreadsheet_url": {
+    "type": "string",
+    "description": "URL of the target spreadsheet"
+  },
+  "new_sheet": {
+    "type": "object",
+    "description": "The `properties` object for an AddSheetRequest \u2014 at minimum give a `title`, but you can include any sheet-level fields the API accepts.",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Tab name"
+      },
+      "index": {
+        "type": "integer",
+        "description": "0-based position (optional)"
+      },
+      "hidden": {
+        "type": "boolean",
+        "description": "Start hidden? (optional)"
+      },
+      "gridProperties": {
+        "type": "object",
+        "description": "Row/column counts etc. (optional)"
+      },
+      "tabColor": {
+        "type": "object",
+        "description": "RGB 0\u20131 for tab colour (optional)"
+      }
+    }
+  }
+}
+```

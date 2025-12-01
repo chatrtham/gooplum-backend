@@ -52,21 +52,15 @@ class FlowDiscovery:
         """
         self.flows = {}
 
-        try:
-            # Parse the AST
-            tree = ast.parse(code)
+        # Parse the AST
+        tree = ast.parse(code)
 
-            # Find all async function definitions
-            for node in ast.walk(tree):
-                if isinstance(node, ast.AsyncFunctionDef):
-                    flow_metadata = self._extract_flow_metadata(node, code)
-                    if flow_metadata:
-                        self.flows[flow_metadata.name] = flow_metadata
-
-        except SyntaxError as e:
-            print(f"Syntax error in code: {e}")
-        except Exception as e:
-            print(f"Error parsing code: {e}")
+        # Find all async function definitions
+        for node in ast.walk(tree):
+            if isinstance(node, ast.AsyncFunctionDef):
+                flow_metadata = self._extract_flow_metadata(node, code)
+                if flow_metadata:
+                    self.flows[flow_metadata.name] = flow_metadata
 
         return self.flows
 

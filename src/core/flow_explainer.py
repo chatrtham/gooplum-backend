@@ -16,7 +16,7 @@ class FlowExplainer:
     def __init__(self):
         """Initialize the flow explainer with LLM."""
         self.model = ChatOpenAI(
-            temperature=0,
+            temperature=1,
             model="gemini-2.5-flash-lite",
             openai_api_key=os.getenv("GOOGLE_API_KEY"),
             openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
