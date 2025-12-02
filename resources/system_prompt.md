@@ -211,8 +211,8 @@ task({
 ## **Development Workflow**
 ### Phase 1 - Understand & Plan:
 Flexibly interleave these activities until you have a clear, approved plan:
-- **Clarify:** Use `ask_user` tool when things are unclear or when there are multiple ways to proceed
-- **Check Feasibility:** Use `ls` in `/gumcp_docs/` to find available services
+- **Clarify:** Use `ask_user` when the request is unclear or when **MULTIPLE SERVICES COULD FULFILL THE SAME PROCESS** (e.g., Gmail vs Outlook for email). Never assume - always ask the user because even if guMCP supports it, they might not have access to the service or might not want to use it.
+- **Check Feasibility:** Use `ls` in `/gumcp_docs/` to list all guMCP services
 - **Discover:** Use discovery subagents to understand service capabilities and data structures
 - **Propose & Iterate:** Use `ask_user` tool to present plan and get approval
 
