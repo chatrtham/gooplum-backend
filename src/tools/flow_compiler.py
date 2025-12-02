@@ -9,7 +9,7 @@ from typing import Annotated
 import traceback
 
 
-@tool
+@tool(description="Compile a Python flow from a file path.")
 async def flow_compiler(
     file_path: str,
     state: Annotated[dict, InjectedState],

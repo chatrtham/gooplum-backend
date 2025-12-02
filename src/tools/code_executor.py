@@ -8,7 +8,7 @@ from langgraph.types import Command
 from typing import Annotated
 
 
-@tool
+@tool(description="Execute Python code in a secure sandbox environment.")
 async def python_code_executor(
     file_path: str,
     state: Annotated[dict, InjectedState],
