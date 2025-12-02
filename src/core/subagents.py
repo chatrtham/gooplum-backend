@@ -1,5 +1,6 @@
 from langchain.agents import create_agent
 from langchain.agents.middleware.summarization import SummarizationMiddleware
+from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
 from deepagents import CompiledSubAgent
 from deepagents.middleware.filesystem import FilesystemMiddleware
 from deepagents.middleware.patch_tool_calls import PatchToolCallsMiddleware
@@ -25,13 +26,13 @@ def create_discovery_subagent():
             system_prompt=discovery_instructions,
             middleware=[
                 FilesystemMiddleware(),
-                # TodoListMiddleware(),
                 SummarizationMiddleware(
                     model=get_discovery_model(),
                     trigger=("tokens", 17000),
                     keep=("messages", 6),
                     trim_tokens_to_summarize=None,
                 ),
+                AnthropicPromptCachingMiddleware(),
                 PatchToolCallsMiddleware(),
             ],
         ),
