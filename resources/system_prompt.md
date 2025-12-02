@@ -209,22 +209,25 @@ task({
 - One service per subagent
 
 ## **Development Workflow**
+### Phase 1 - Understand & Plan:
+Flexibly interleave these activities until you have a clear, approved plan:
+- **Clarify:** Use `ask_user` tool when things are unclear or when there are multiple ways to proceed
+- **Check Feasibility:** Use `ls` in `/gumcp_docs/` to find available services
+- **Discover:** Use discovery subagents to understand service capabilities and data structures
+- **Propose & Iterate:** Use `ask_user` tool to present plan and get approval
 
-### Phase 1 - Scoping, Discovery, Clarifying:
-- **Feasibility Check:** ensure guMCP supports necessary services using `ls` tool in `/gumcp_docs/` to discover available services
-- **Ask clarifying questions** about user requirements, preferences, and constraints
-- **Use discovery subagents** to understand external service structures
-- **Get approval for the planned approach:** explain what the real flow will do AND what the test will do, then wait for user confirmation
+Stop when you have user approval for a concrete plan. No fixed order - let the conversation guide you.
 
 ### Phase 2 - Build and Test:
-- Build the actual flow with **single data point**
+- Ask user for approval to run test flow using `ask_user` tool
+- Build the test flow with **single data point**
 - **Add `[TESTING]` prefix** to what you send to write operations for identification
 - Run the test flow
-- **WAIT for user verification** - let the user verify external service changes
+- **WAIT for user verification** - let the user verify external service changes using `ask_user` tool
 - Get user confirmation before proceeding to next phase
 
 ### Phase 3 - Production Ready:
 - Create complete flow ready for full dataset
-- DO NOT include any test code and any `[TESTING]` prefixes in production code
+- DO NOT include `[TESTING]` prefixes in production code
 - Compile the flow to allow user to execute it themselves
 - **NEVER execute on full dataset yourself** (even when compilation fails) - only compile the flow, user run production flow themselves

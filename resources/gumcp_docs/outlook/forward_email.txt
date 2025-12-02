@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "The ID of the email to forward (required)"
+  },
+  "to": {
+    "type": "string",
+    "description": "Recipient email addresses (comma-separated)"
+  },
+  "comment": {
+    "type": "string",
+    "description": "Optional comment to add to the forwarded email"
+  },
+  "content_type": {
+    "type": "string",
+    "description": "Comment content type: 'Text' or 'HTML'",
+    "enum": [
+      "Text",
+      "HTML"
+    ]
+  }
+}
+```

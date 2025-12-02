@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "folder": {
+    "type": "string",
+    "description": "Folder to search in. Default is 'inbox'"
+  },
+  "folder_id": {
+    "type": "string",
+    "description": "Folder ID to search in (optional, takes precedence over folder name)"
+  },
+  "count": {
+    "type": "integer",
+    "description": "Number of emails to retrieve",
+    "default": 10
+  },
+  "filter": {
+    "type": "string",
+    "description": "OData filter query (supports all Outlook filters). Examples: 'isRead eq false', 'from/emailAddress/address eq \"user@domain.com\"', 'hasAttachments eq true', 'flag/flagStatus eq \"flagged\"', 'importance eq \"high\"'"
+  },
+  "search": {
+    "type": "string",
+    "description": "Content search query for email body and subject"
+  }
+}
+```

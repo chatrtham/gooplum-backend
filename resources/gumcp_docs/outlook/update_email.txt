@@ -1,0 +1,34 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "The ID of the email to update (required)"
+  },
+  "is_read": {
+    "type": "boolean",
+    "description": "Mark email as read (true) or unread (false)"
+  },
+  "is_flagged": {
+    "type": "boolean",
+    "description": "Mark email as flagged (true) or unflagged (false)"
+  },
+  "importance": {
+    "type": "string",
+    "description": "Set email importance level: 'low', 'normal', 'high'",
+    "enum": [
+      "low",
+      "normal",
+      "high"
+    ]
+  },
+  "target_folder": {
+    "type": "string",
+    "description": "Name of the folder to move the email to (e.g., 'inbox', 'sent', 'drafts')"
+  },
+  "target_folder_id": {
+    "type": "string",
+    "description": "ID of the folder to move the email to (takes precedence over target_folder)"
+  }
+}
+```

@@ -1,0 +1,50 @@
+Parameters Schema:
+```json
+{
+  "to": {
+    "type": "string",
+    "description": "Recipient email addresses (comma-separated, optional for drafts)"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Email subject"
+  },
+  "body": {
+    "type": "string",
+    "description": "Email body content"
+  },
+  "cc": {
+    "type": "string",
+    "description": "CC email addresses (comma-separated)"
+  },
+  "bcc": {
+    "type": "string",
+    "description": "BCC email addresses (comma-separated)"
+  },
+  "content_type": {
+    "type": "string",
+    "description": "Email content type: 'Text' or 'HTML'",
+    "enum": [
+      "Text",
+      "HTML"
+    ]
+  },
+  "importance": {
+    "type": "string",
+    "description": "Email importance level: 'low', 'normal', 'high'",
+    "enum": [
+      "low",
+      "normal",
+      "high"
+    ]
+  },
+  "delivery_receipt": {
+    "type": "boolean",
+    "description": "Request delivery receipt"
+  },
+  "read_receipt": {
+    "type": "boolean",
+    "description": "Request read receipt"
+  }
+}
+```

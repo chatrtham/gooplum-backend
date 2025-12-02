@@ -1,0 +1,13 @@
+# Outlook Tools Index
+
+*Generated on: 2025-12-02*
+
+## Available Tools (7 total)
+
+1. **read_emails** - Read emails from Outlook. Supports Microsoft Graph OData filters and content search.
+2. **send_email** - Send an email using Outlook
+3. **update_email** - Update email properties like read/unread status, flagged status, or move to folder
+4. **create_draft** - Create a new email draft in Outlook
+5. **forward_email** - Forward an email to specified recipients
+6. **archive_email** - Archive an email by moving it to the Archive folder
+7. **trash_email** - Move an email to the Trash/Deleted Items folder
