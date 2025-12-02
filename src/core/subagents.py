@@ -32,7 +32,7 @@ def create_discovery_subagent():
                     keep=("messages", 6),
                     trim_tokens_to_summarize=None,
                 ),
-                AnthropicPromptCachingMiddleware(),
+                AnthropicPromptCachingMiddleware(unsupported_model_behavior="ignore"),
                 PatchToolCallsMiddleware(),
             ],
         ),

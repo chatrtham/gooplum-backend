@@ -9,7 +9,7 @@ from typing import List, Optional
 class QuestionItem(BaseModel):
     """A single question with optional suggested answers."""
 
-    question: str = Field(description="The question to ask the user")
+    question: str = Field(description="A single question to ask the user.")
     suggested_answers: Optional[List[str]] = Field(
         default=None,
         description="Suggested answers (users can always type freely). Only include concrete, actionable options - no vague placeholders like 'Other', 'I'll specify', etc.",
@@ -20,7 +20,7 @@ class AskUserInput(BaseModel):
     """Input for asking user questions."""
 
     questions: List[QuestionItem] = Field(
-        description="List of question objects, each with a question and optional suggested answers"
+        description="List of questions, each with a question and optional suggested answers"
     )
 
 
