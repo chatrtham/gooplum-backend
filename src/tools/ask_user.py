@@ -30,7 +30,7 @@ class AskUserInput(BaseModel):
 )
 async def ask_user(
     questions: List[QuestionItem],
-):
+) -> str:
     """
     Ask one or more questions to the user, optionally with suggested answers.
 
@@ -43,6 +43,10 @@ async def ask_user(
         Command: Updates the state with the questions asked.
     """
     answers_str = interrupt({"questions": questions})
+
+    if not answers_str:
+        return "No answers provided."
+
     return answers_str
 
 
