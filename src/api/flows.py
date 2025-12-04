@@ -164,10 +164,33 @@ async def compile_flows(request: FlowCodeRequest):
         raise HTTPException(status_code=500, detail=f"Compilation error: {str(e)}")
 
 
+@router.post("/{flow_id}/activate")
+async def activate_flow(flow_id: str):
+    """
+    Activate a draft flow, making it callable and visible in the flow list.
+
+    Args:
+        flow_id: ID of the flow to activate
+
+    Returns:
+        Activated flow info
+    """
+    try:
+        flow_record = await flow_db.activate_flow(UUID(flow_id))
+        return {
+            "success": True,
+            "flow_id": str(flow_record.id),
+            "name": flow_record.name,
+            "status": flow_record.status,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error activating flow: {str(e)}")
+
+
 @router.get("/", response_model=List[FlowInfo])
 async def list_flows():
     """
-    List all available compiled flows.
+    List all available ready flows.
 
     Returns:
         List of available flows

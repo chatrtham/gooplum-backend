@@ -49,46 +49,32 @@ async def flow_compiler(
         # Compile the flow
         flows = await executor.compile_flow(code)
 
-        # Prepare compilation result
-        flow_count = len(flows)
-        flow_names = list(flows.keys())
-        flow_details = []
+        # Get the single flow
+        flow_name = list(flows.keys())[0]
+        flow_metadata = flows[flow_name]
 
-        for flow_name, flow_metadata in flows.items():
-            details = {
-                "name": flow_name,
-                "description": flow_metadata.description,
-                "parameters": [
-                    {
-                        "name": param.name,
-                        "type": param.type,
-                        "required": param.required,
-                        "description": param.description,
-                    }
-                    for param in flow_metadata.parameters
-                ],
-                "return_type": flow_metadata.return_type,
-            }
-            flow_details.append(details)
-
-        success_msg = (
-            f"""✅ Successfully compiled {flow_count} flow(s) from '{file_path}'"""
-        )
+        success_msg = f"Successfully compiled flow '{flow_name}' from '{file_path}'"
 
         return Command(
             update={
                 "messages": [
                     ToolMessage(
-                        success_msg,
+                        content=success_msg,
                         tool_call_id=tool_call_id,
+                        artifact={
+                            "flow_id": flow_metadata.id,
+                            "flow_name": flow_name,
+                            "flow_description": flow_metadata.description,
+                            "flow_explanation": flow_metadata.explanation,
+                        },
                     )
                 ]
-            }
+            },
         )
 
     except ValueError as ve:
         # Handle flow discovery/validation errors
-        error_msg = f"❌ Flow compilation failed: {str(ve)}"
+        error_msg = f"Flow compilation failed: {str(ve)}"
 
         return Command(
             update={
@@ -103,7 +89,7 @@ async def flow_compiler(
 
     except SyntaxError as se:
         # Handle syntax errors in the flow code
-        error_msg = f"❌ Syntax Error in flow code:\n{se.msg}\nLine {se.lineno}, Column {se.offset}\n\n{se.text}"
+        error_msg = f"Syntax Error in flow code:\n{se.msg}\nLine {se.lineno}, Column {se.offset}\n\n{se.text}"
 
         return Command(
             update={
@@ -118,7 +104,7 @@ async def flow_compiler(
 
     except Exception as e:
         # Handle unexpected errors
-        error_msg = f"❌ Unexpected error during compilation: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
+        error_msg = f"Unexpected error during compilation: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
 
         return Command(
             update={

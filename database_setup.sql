@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS flows (
     return_type VARCHAR(100) NOT NULL,
     docstring TEXT,
     explanation TEXT,
+    status VARCHAR(50) DEFAULT 'draft', -- 'draft' or 'ready'
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS flow_stream_events (
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_flows_name ON flows(name);
 CREATE INDEX IF NOT EXISTS idx_flows_created_at ON flows(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_flows_status ON flows(status);
 CREATE INDEX IF NOT EXISTS idx_flow_parameters_flow_id ON flow_parameters(flow_id);
 CREATE INDEX IF NOT EXISTS idx_flow_runs_flow_id ON flow_runs(flow_id);
 CREATE INDEX IF NOT EXISTS idx_flow_runs_created_at ON flow_runs(created_at DESC);

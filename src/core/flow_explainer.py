@@ -21,6 +21,8 @@ class FlowExplainer:
             openai_api_key=os.getenv("GOOGLE_API_KEY"),
             openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
             reasoning_effort=None,
+            name="flow-explainer-llm",
+            tags=["flow-explainer"],
         )
 
     async def generate_explanation(self, flow_metadata: FlowMetadata) -> str:
@@ -37,12 +39,26 @@ class FlowExplainer:
             Exception: If explanation generation fails
         """
         try:
-            # Prepare the flow information for the LLM
-            flow_info = self._prepare_flow_info(flow_metadata)
+            # Get only the source code from the flow metadata
+            if not flow_metadata.source_code:
+                raise Exception("No source code available in flow metadata")
 
-            # Simple one-line prompt as requested
-            prompt = f"Generate a comprehensive explanation of what this Python flow does, including its parameters, return values, and usage examples in markdown format.\n\n{flow_info}"
-
+            prompt = f"""
+            Generate a super concise explanation of what this function does \
+            step-by-step to non-technical users. 
+            
+            **Important**:
+            - RETURN MARKDOWN ONLY. DO NOT INCLUDE ANY OTHER TEXT AND THE ```mardown ``` tags.
+            - Use examples or tables if helpful.
+            - DO NOT lose details on important steps. By important steps, I mean steps that you want to know when you are using the flow.
+            - DO NOT call it "function." Call it "flow."
+            - DO NOT include any code.
+            - DO NOT talk about reporting like streaming and final return values in the code because they won't see it when they run the flow.
+            
+            ```python
+            {flow_metadata.source_code}
+            ```
+            """
             # Generate explanation using the model
             messages = [HumanMessage(content=prompt)]
 
@@ -56,50 +72,3 @@ class FlowExplainer:
             print(f"Error in FlowExplainer: {error_msg}")
             print(f"Traceback: {traceback.format_exc()}")
             raise Exception(error_msg)
-
-    def _prepare_flow_info(self, flow_metadata: FlowMetadata) -> str:
-        """
-        Prepare flow information as a formatted string for the LLM.
-
-        Args:
-            flow_metadata (FlowMetadata): The flow metadata
-
-        Returns:
-            str: Formatted flow information
-        """
-        info_parts = []
-
-        # Basic flow information
-        info_parts.append(f"Flow Name: {flow_metadata.name}")
-
-        if flow_metadata.description:
-            info_parts.append(f"Description: {flow_metadata.description}")
-
-        # Parameters information
-        if flow_metadata.parameters:
-            info_parts.append("\nParameters:")
-            for param in flow_metadata.parameters:
-                param_info = f"- {param.name} ({param.type})"
-                if param.required:
-                    param_info += " (required)"
-                if param.description:
-                    param_info += f": {param.description}"
-                if param.default is not None:
-                    param_info += f" (default: {param.default})"
-                info_parts.append(param_info)
-
-        # Return type information
-        if flow_metadata.return_type:
-            info_parts.append(f"\nReturn Type: {flow_metadata.return_type}")
-
-        # Source code
-        if flow_metadata.source_code:
-            info_parts.append(
-                f"\nSource Code:\n```python\n{flow_metadata.source_code}\n```"
-            )
-
-        # Docstring if available
-        if flow_metadata.docstring:
-            info_parts.append(f"\nDocstring:\n{flow_metadata.docstring}")
-
-        return "\n".join(info_parts)

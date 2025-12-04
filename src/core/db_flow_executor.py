@@ -100,6 +100,11 @@ class DBFlowExecutor:
         if not flows:
             raise ValueError("No async flow functions found in the provided code")
 
+        if len(flows) > 1:
+            raise ValueError(
+                f"Multiple flows found: {list(flows.keys())}. Only one flow per file is allowed."
+            )
+
         if flow_name and flow_name not in flows:
             available_flows = list(flows.keys())
             raise ValueError(
@@ -140,6 +145,14 @@ class DBFlowExecutor:
             return ExecutionResult(
                 success=False,
                 error=f"Flow '{flow_name}' not found in database",
+                metadata={},
+            )
+
+        # Check if flow is ready
+        if flow_record.status != "ready":
+            return ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_name}' is not activated. Current status: {flow_record.status}",
                 metadata={},
             )
 
@@ -272,6 +285,14 @@ class DBFlowExecutor:
             return ExecutionResult(
                 success=False,
                 error=f"Flow with ID '{flow_id}' not found",
+                metadata={},
+            )
+
+        # Check if flow is ready
+        if flow_record.status != "ready":
+            return ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_record.name}' is not activated. Current status: {flow_record.status}",
                 metadata={},
             )
 
@@ -605,6 +626,15 @@ class DBFlowExecutor:
             return ExecutionResult(
                 success=False,
                 error=f"Flow with ID '{flow_id}' not found",
+                streams=[],
+                metadata={},
+            )
+
+        # Check if flow is ready
+        if flow_record.status != "ready":
+            return ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_record.name}' is not activated. Current status: {flow_record.status}",
                 streams=[],
                 metadata={},
             )

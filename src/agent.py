@@ -8,7 +8,7 @@ from deepagents.middleware.subagents import SubAgentMiddleware
 from dotenv import load_dotenv
 
 from src.core.model_config import get_model, load_system_prompt
-from src.core.middleware import add_gumcp_docs
+from src.core.middleware import add_gumcp_docs, jump_to_end
 from src.core.subagents import get_subagents
 from src.tools.ask_user import ask_user
 from src.tools.code_executor import python_code_executor
@@ -39,6 +39,7 @@ agent = create_agent(
             subagents=subagents,
             general_purpose_agent=False,
         ),
+        jump_to_end,
         SummarizationMiddleware(
             model=model,
             trigger=("tokens", 17000),

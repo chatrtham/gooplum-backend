@@ -25,6 +25,7 @@ class FlowRecord(BaseModel):
     return_type: str
     docstring: Optional[str] = None
     explanation: Optional[str] = None
+    status: str = "draft"  # "draft" or "ready"
     created_at: datetime
 
 
@@ -93,6 +94,7 @@ class SupabaseFlowDB:
             "return_type": flow_metadata.return_type,
             "docstring": flow_metadata.docstring,
             "explanation": flow_metadata.explanation,
+            "status": "draft",
             "created_at": (
                 flow_metadata.created_at or datetime.now(timezone.utc)
             ).isoformat(),
@@ -143,17 +145,32 @@ class SupabaseFlowDB:
             return FlowRecord(**result.data[0])
         return None
 
-    async def list_flows(self) -> List[FlowRecord]:
-        """List all flows."""
+    async def list_flows(self, include_drafts: bool = False) -> List[FlowRecord]:
+        """List flows. By default only returns ready flows."""
+        await self._ensure_client()
+        query = self.client.table("flows").select("*")
+
+        if not include_drafts:
+            query = query.eq("status", "ready")
+
+        result = await query.order("created_at", desc=True).execute()
+
+        return [FlowRecord(**flow) for flow in result.data]
+
+    async def activate_flow(self, flow_id: UUID) -> FlowRecord:
+        """Activate a flow by setting its status to ready."""
         await self._ensure_client()
         result = (
             await self.client.table("flows")
-            .select("*")
-            .order("created_at", desc=True)
+            .update({"status": "ready"})
+            .eq("id", str(flow_id))
             .execute()
         )
 
-        return [FlowRecord(**flow) for flow in result.data]
+        if result.data:
+            return FlowRecord(**result.data[0])
+        else:
+            raise Exception(f"Failed to activate flow: {result}")
 
     async def update_flow(self, flow_id: UUID, updates: Dict[str, Any]) -> FlowRecord:
         """Update a flow."""
