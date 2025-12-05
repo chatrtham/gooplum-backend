@@ -9,11 +9,11 @@ import json
 import asyncio
 from uuid import UUID
 
-from src.core.flow_discovery import FlowDiscovery
-from src.core.flow_validator import FlowValidator
-from src.core.db_flow_executor import DBFlowExecutor
-from src.core.flow_explainer import FlowExplainer
-from src.db.supabase_client import get_flow_db
+from src.flows.core.flow_discovery import FlowDiscovery
+from src.flows.core.flow_validator import FlowValidator
+from src.flows.core.db_flow_executor import DBFlowExecutor
+from src.flows.core.flow_explainer import FlowExplainer
+from src.flows.core.supabase_client import get_flow_db
 
 
 # Pydantic models for API
@@ -144,11 +144,6 @@ async def compile_flows(request: FlowCodeRequest):
                     created_at=(
                         flow_metadata.created_at.isoformat()
                         if flow_metadata.created_at
-                        else None
-                    ),
-                    last_executed=(
-                        flow_metadata.last_executed.isoformat()
-                        if flow_metadata.last_executed
                         else None
                     ),
                 )

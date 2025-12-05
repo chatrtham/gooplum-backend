@@ -1,6 +1,6 @@
 """Flow compiler tool for compiling Python flows from files."""
 
-from src.core.db_flow_executor import DBFlowExecutor
+from src.flows.core.db_flow_executor import DBFlowExecutor
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import InjectedToolCallId, tool
 from langgraph.prebuilt import InjectedState
@@ -118,5 +118,4 @@ async def flow_compiler(
         )
 
 
-# Export the tool function
 __all__ = ["flow_compiler"]

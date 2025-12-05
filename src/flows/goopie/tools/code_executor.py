@@ -1,6 +1,6 @@
 """Code execution tool for running Python code in sandbox."""
 
-from src.core.sandbox import run_python_code
+from src.flows.core.sandbox import run_python_code
 from langchain_core.messages import ToolMessage
 from langchain_core.tools import InjectedToolCallId, tool
 from langgraph.prebuilt import InjectedState
@@ -46,5 +46,4 @@ async def python_code_executor(
         return f"Error executing code: {e}"
 
 
-# Export the tool function
 __all__ = ["python_code_executor"]

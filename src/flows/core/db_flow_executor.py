@@ -8,10 +8,10 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from uuid import UUID
 
-from src.core.sandbox import run_python_code, run_python_code_with_streaming
-from src.core.flow_discovery import FlowDiscovery, FlowMetadata
-from src.core.flow_explainer import FlowExplainer
-from src.db.supabase_client import get_flow_db, FlowRecord
+from .sandbox import run_python_code, run_python_code_with_streaming
+from .flow_discovery import FlowDiscovery, FlowMetadata
+from .flow_explainer import FlowExplainer
+from .supabase_client import get_flow_db, FlowRecord
 
 
 @dataclass

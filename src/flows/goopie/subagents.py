@@ -1,3 +1,5 @@
+"""Subagents for the Goopie agent."""
+
 from langchain.agents import create_agent
 from langchain.agents.middleware.summarization import SummarizationMiddleware
 from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
@@ -7,8 +9,8 @@ from deepagents.middleware.patch_tool_calls import PatchToolCallsMiddleware
 
 from dotenv import load_dotenv
 
-from src.core.model_config import load_discovery_prompt, get_discovery_model
-from src.tools.code_executor import python_code_executor
+from src.flows.goopie.model_config import load_discovery_prompt, get_discovery_model
+from src.flows.goopie.tools.code_executor import python_code_executor
 
 load_dotenv()
 

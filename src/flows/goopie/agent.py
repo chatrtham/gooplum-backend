@@ -1,3 +1,5 @@
+"""Goopie - the flow generator agent."""
+
 from langchain.agents import create_agent
 from langchain.agents.middleware.summarization import SummarizationMiddleware
 from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
@@ -7,12 +9,10 @@ from deepagents.middleware.subagents import SubAgentMiddleware
 
 from dotenv import load_dotenv
 
-from src.core.model_config import get_model, load_system_prompt
-from src.core.middleware import add_gumcp_docs, jump_to_end
-from src.core.subagents import get_subagents
-from src.tools.ask_user import ask_user
-from src.tools.code_executor import python_code_executor
-from src.tools.flow_compiler import flow_compiler
+from src.flows.goopie.model_config import get_model, load_system_prompt
+from src.flows.goopie.middlewares import add_gumcp_docs, jump_to_end
+from src.flows.goopie.subagents import get_subagents
+from src.flows.goopie.tools import ask_user, python_code_executor, flow_compiler
 
 load_dotenv()
 
@@ -51,3 +51,6 @@ agent = create_agent(
         add_gumcp_docs,
     ],
 )
+
+# Export the graph for langgraph.json
+graph = agent

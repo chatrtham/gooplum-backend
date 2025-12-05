@@ -12,7 +12,7 @@ from pydantic import BaseModel
 # Load environment variables
 load_dotenv()
 
-from src.core.flow_discovery import FlowMetadata, FlowParameter
+from .flow_discovery import FlowMetadata, FlowParameter
 
 
 class FlowRecord(BaseModel):

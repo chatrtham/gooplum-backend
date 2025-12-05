@@ -1,7 +1,7 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "goopie": "./src/agent.py:agent"
+    "goopie": "./src/flows/goopie/agent.py:agent"
   },
   "env": ".env",
   "python_version": "3.12",

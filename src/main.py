@@ -3,11 +3,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import uvicorn
 from contextlib import asynccontextmanager
 import logging
 
-from src.api.flows import router as flows_router
+from src.flows.routes import router as flows_router
 
 
 # Configure logging
@@ -58,10 +57,4 @@ async def global_exception_handler(request, exc):
             "message": "An unexpected error occurred",
             "type": type(exc).__name__,
         },
-    )
-
-
-if __name__ == "__main__":
-    uvicorn.run(
-        "src.main:app", host="0.0.0.0", port=8000, reload=True, log_level="info"
     )

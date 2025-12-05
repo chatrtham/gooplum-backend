@@ -4,7 +4,7 @@ from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-from src.core.flow_discovery import FlowMetadata, FlowParameter
+from .flow_discovery import FlowMetadata, FlowParameter
 
 
 class ValidationSeverity(Enum):

@@ -1,10 +1,16 @@
-"""Document loading utilities for guMCP documentation."""
+"""Middleware and utilities for loading guMCP documentation."""
 
 import asyncio
 import aiofiles
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import TypedDict
+
+from langchain.agents.middleware import (
+    before_agent,
+    AgentState,
+)
+from langgraph.runtime import Runtime
 
 
 class FileData(TypedDict):
@@ -18,19 +24,6 @@ class FileData(TypedDict):
 
     modified_at: str
     """ISO 8601 timestamp of last modification."""
-
-
-async def add_gumcp_docs_to_state(state) -> dict:
-    """Automatically add gumcp documentation files to the state if they don't already exist."""
-    existing_files = state.get("files", {})
-
-    # Only add gumcp docs if no files exist
-    if not existing_files:
-        gumcp_files = await load_gumcp_files_async()
-        return {"files": gumcp_files}
-
-    # Files already exist, don't modify
-    return {}
 
 
 async def load_gumcp_files_async() -> dict:
@@ -69,8 +62,8 @@ async def load_gumcp_files_async() -> dict:
                 relative_path = file_path.relative_to(gumcp_docs_dir)
                 # Convert to forward slashes for Linux environment
                 relative_path_str = str(relative_path).replace("\\", "/")
-                file_path = f"/gumcp_docs/{relative_path_str}"
-                gumcp_files[file_path] = FileData(
+                gumcp_path = f"/gumcp_docs/{relative_path_str}"
+                gumcp_files[gumcp_path] = FileData(
                     content=lines, created_at=timestamp, modified_at=timestamp
                 )
             except Exception as e:
@@ -80,3 +73,26 @@ async def load_gumcp_files_async() -> dict:
         f"Loaded {len(gumcp_files)} guMCP documentation files: {list(gumcp_files.keys())}"
     )
     return gumcp_files
+
+
+@before_agent
+async def add_gumcp_docs(state: AgentState, runtime: Runtime) -> dict:
+    """Add gumcp documentation to the state before agent execution.
+
+    This decorator-based middleware loads gumcp documentation files and adds them
+    to the state before the agent starts execution, similar to the previous
+    add_gumcp_docs node. The documentation is only loaded if no files already
+    exist in the state.
+
+    Args:
+        state: The current agent state
+
+    Returns:
+        Dict with files update if gumcp docs need to be loaded, empty dict otherwise
+    """
+    # Only add gumcp docs if no files exist
+    if not state.get("files", {}):
+        gumcp_files = await load_gumcp_files_async()
+        return {"files": gumcp_files}
+
+    return {}

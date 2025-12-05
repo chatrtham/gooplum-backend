@@ -50,5 +50,4 @@ async def ask_user(
     return answers_str
 
 
-# Export the tool function
 __all__ = ["ask_user"]
