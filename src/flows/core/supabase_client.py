@@ -1,17 +1,13 @@
-"""Supabase database client for flow persistence."""
+"""Flow-specific database operations using shared Supabase client."""
 
-import os
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any, Tuple
 from uuid import UUID
 
-from dotenv import load_dotenv
-from supabase import acreate_client, AsyncClient
+from supabase import AsyncClient
 from pydantic import BaseModel
 
-# Load environment variables
-load_dotenv()
-
+from src.db import get_supabase_client
 from .flow_discovery import FlowMetadata, FlowParameter
 
 
@@ -60,25 +56,13 @@ class SupabaseFlowDB:
     """Supabase database operations for flow management."""
 
     def __init__(self):
-        """Initialize Supabase client configuration."""
-        self.supabase_url = os.getenv("SUPABASE_URL")
-        self.supabase_key = os.getenv("SUPABASE_ANON_KEY")
-
-        if not self.supabase_url or not self.supabase_key:
-            raise ValueError(
-                "SUPABASE_URL and SUPABASE_ANON_KEY environment variables must be set"
-            )
-
+        """Initialize flow database."""
         self.client: AsyncClient = None
-
-    async def initialize(self):
-        """Initialize the async Supabase client."""
-        self.client = await acreate_client(self.supabase_url, self.supabase_key)
 
     async def _ensure_client(self):
         """Ensure the Supabase client is initialized."""
         if self.client is None:
-            await self.initialize()
+            self.client = await get_supabase_client()
 
     async def create_flow(
         self, flow_metadata: FlowMetadata, source_code: str
@@ -372,10 +356,3 @@ def get_flow_db() -> SupabaseFlowDB:
     if _db_instance is None:
         _db_instance = SupabaseFlowDB()
     return _db_instance
-
-
-async def get_initialized_flow_db() -> SupabaseFlowDB:
-    """Get the global flow database instance and ensure it's initialized."""
-    db = get_flow_db()
-    await db.initialize()
-    return db

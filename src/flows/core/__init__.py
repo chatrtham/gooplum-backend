@@ -12,7 +12,6 @@ from .db_flow_executor import DBFlowExecutor, ExecutionResult, StreamResult
 from .sandbox import run_python_code, run_python_code_with_streaming, get_sandbox
 from .supabase_client import (
     get_flow_db,
-    get_initialized_flow_db,
     SupabaseFlowDB,
     FlowRecord,
     FlowParameterRecord,
@@ -41,7 +40,6 @@ __all__ = [
     "get_sandbox",
     # Database
     "get_flow_db",
-    "get_initialized_flow_db",
     "SupabaseFlowDB",
     "FlowRecord",
     "FlowParameterRecord",
