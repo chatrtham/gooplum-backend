@@ -279,16 +279,21 @@ async def execute_flow(flow_id: str, request: FlowExecutionRequest):
         parameters = validation_result.sanitized_parameters or request.parameters
 
         # Execute the flow by ID
-        result = await flow_executor.execute_flow_by_id(
+        result, run_id = await flow_executor.execute_flow_by_id(
             flow_id=flow_id, parameters=parameters, timeout=request.timeout
         )
+
+        # Include run_id in metadata
+        metadata = result.metadata or {}
+        if run_id:
+            metadata["run_id"] = str(run_id)
 
         return ExecutionResponse(
             success=result.success,
             data=result.data,
             error=result.error,
             execution_time=result.execution_time,
-            metadata=result.metadata,
+            metadata=metadata,
         )
 
     except HTTPException:
