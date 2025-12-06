@@ -7,7 +7,7 @@ from langchain_core.runnables import RunnableConfig
 
 from src.agents.core.supabase_client import get_agent, AgentRecord
 from src.agents.core.model_config import get_model_from_preset
-from src.agents.core.flow_tool_adapter import create_flow_tools
+from src.agents.core.flow_tool_adapter import create_flow_tools, create_flow_status_tool
 from src.agents.core.gumcp_tool_loader import load_gumcp_tools
 
 
@@ -31,6 +31,11 @@ async def build_agent_from_record(agent_record: AgentRecord):
 
     # 4. Combine all tools
     all_tools = flow_tools + gumcp_tools
+
+    # 5. If there are flow tools, add the status checker tool
+    #    This allows the agent to poll for long-running flow results
+    if flow_tools:
+        all_tools.append(create_flow_status_tool())
 
     # 5. Create the agent
     agent = create_agent(

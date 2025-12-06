@@ -136,24 +136,44 @@ class DBFlowExecutor:
         return created_flows
 
     async def execute_flow(
-        self, flow_name: str, parameters: Dict[str, Any], timeout: int = 300
-    ) -> ExecutionResult:
-        """Execute a specific flow with provided parameters."""
+        self,
+        flow_name: str,
+        parameters: Dict[str, Any],
+        timeout: int = 300,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> tuple[ExecutionResult, UUID]:
+        """Execute a specific flow with provided parameters.
+
+        Args:
+            flow_name: Name of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+            metadata: Optional metadata to store with the run record
+
+        Returns:
+            Tuple of (ExecutionResult, run_id)
+        """
         # Get flow from database
         flow_record = await self._get_flow_by_name(flow_name)
         if not flow_record:
-            return ExecutionResult(
-                success=False,
-                error=f"Flow '{flow_name}' not found in database",
-                metadata={},
+            return (
+                ExecutionResult(
+                    success=False,
+                    error=f"Flow '{flow_name}' not found in database",
+                    metadata={},
+                ),
+                None,
             )
 
         # Check if flow is ready
         if flow_record.status != "ready":
-            return ExecutionResult(
-                success=False,
-                error=f"Flow '{flow_name}' is not activated. Current status: {flow_record.status}",
-                metadata={},
+            return (
+                ExecutionResult(
+                    success=False,
+                    error=f"Flow '{flow_name}' is not activated. Current status: {flow_record.status}",
+                    metadata={},
+                ),
+                None,
             )
 
         flow_code = flow_record.source_code
@@ -168,13 +188,19 @@ class DBFlowExecutor:
             flow_name, converted_parameters
         )
 
+        # Merge default metadata with provided metadata
+        run_metadata = {"flow_name": flow_name}
+        if metadata:
+            run_metadata.update(metadata)
+
         try:
-            # Create execution record (RUNNING)
+            # Create run record
             flow_run = await self.db.create_flow_run(
                 flow_id=flow_record.id,
                 parameters=parameters,
-                metadata={"flow_name": flow_name},
+                metadata=run_metadata,
             )
+            flow_run_id = flow_run.id
 
             start_time = asyncio.get_event_loop().time()
             combined_code = f"{flow_code}\n\n{execution_script}"
@@ -228,7 +254,221 @@ class DBFlowExecutor:
 
             # Update execution record (COMPLETED/FAILED)
             await self.db.update_flow_run(
-                run_id=flow_run.id,
+                run_id=flow_run_id,
+                status="COMPLETED" if execution_result.success else "FAILED",
+                result=execution_result.data if execution_result.success else None,
+                error=execution_result.error if not execution_result.success else None,
+                execution_time_ms=(
+                    int(execution_time * 1000) if execution_time else None
+                ),
+            )
+
+            return execution_result, flow_run_id
+
+        except asyncio.TimeoutError:
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Flow execution timed out after {timeout} seconds",
+                metadata={
+                    "flow_name": flow_name,
+                    "parameters": parameters,
+                    "timeout": timeout,
+                },
+            )
+            # Update execution record (FAILED)
+            if "flow_run_id" in locals():
+                await self.db.update_flow_run(
+                    run_id=flow_run_id,
+                    status="FAILED",
+                    error=error_result.error,
+                    execution_time_ms=timeout * 1000,
+                )
+            return error_result, flow_run_id if "flow_run_id" in locals() else None
+
+        except Exception as e:
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Unexpected error during flow execution: {str(e)}",
+                metadata={"flow_name": flow_name, "parameters": parameters},
+            )
+            # Update execution record (FAILED)
+            if "flow_run_id" in locals():
+                await self.db.update_flow_run(
+                    run_id=flow_run_id,
+                    status="FAILED",
+                    error=error_result.error,
+                )
+            return error_result, flow_run_id if "flow_run_id" in locals() else None
+
+    async def execute_flow_by_id(
+        self, flow_id: str, parameters: Dict[str, Any], timeout: int = 300
+    ) -> tuple[ExecutionResult, UUID]:
+        """Execute a flow by ID.
+
+        Returns:
+            Tuple of (ExecutionResult, run_id)
+        """
+        flow_record = await self._get_flow_by_id(flow_id)
+        if not flow_record:
+            return (
+                ExecutionResult(
+                    success=False,
+                    error=f"Flow with ID '{flow_id}' not found",
+                    metadata={},
+                ),
+                None,
+            )
+
+        # Check if flow is ready
+        if flow_record.status != "ready":
+            return (
+                ExecutionResult(
+                    success=False,
+                    error=f"Flow '{flow_record.name}' is not activated. Current status: {flow_record.status}",
+                    metadata={},
+                ),
+                None,
+            )
+
+        return await self.execute_flow(flow_record.name, parameters, timeout)
+
+    async def create_flow_run_record(
+        self,
+        flow_name: str,
+        parameters: Dict[str, Any],
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> Optional[UUID]:
+        """Create a flow run record without executing.
+
+        Use this for async/background execution where you need the run_id upfront.
+
+        Returns:
+            run_id if successful, None if flow not found
+        """
+        flow_record = await self._get_flow_by_name(flow_name)
+        if not flow_record:
+            return None
+
+        if flow_record.status != "ready":
+            return None
+
+        run_metadata = {"flow_name": flow_name}
+        if metadata:
+            run_metadata.update(metadata)
+
+        flow_run = await self.db.create_flow_run(
+            flow_id=flow_record.id,
+            parameters=parameters,
+            metadata=run_metadata,
+        )
+        return flow_run.id
+
+    async def execute_flow_with_run_id(
+        self,
+        flow_name: str,
+        parameters: Dict[str, Any],
+        run_id: UUID,
+        timeout: int = 300,
+    ) -> ExecutionResult:
+        """Execute a flow with an existing run record.
+
+        Use this for background execution where run was already created.
+        Updates the existing run record instead of creating a new one.
+
+        Args:
+            flow_name: Name of the flow to execute
+            parameters: Parameters to pass to the flow
+            run_id: Existing run record ID to update
+            timeout: Execution timeout in seconds
+
+        Returns:
+            ExecutionResult
+        """
+        flow_record = await self._get_flow_by_name(flow_name)
+        if not flow_record:
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_name}' not found in database",
+                metadata={},
+            )
+            await self.db.update_flow_run(
+                run_id=run_id, status="FAILED", error=error_result.error
+            )
+            return error_result
+
+        if flow_record.status != "ready":
+            error_result = ExecutionResult(
+                success=False,
+                error=f"Flow '{flow_name}' is not activated. Current status: {flow_record.status}",
+                metadata={},
+            )
+            await self.db.update_flow_run(
+                run_id=run_id, status="FAILED", error=error_result.error
+            )
+            return error_result
+
+        flow_code = flow_record.source_code
+        converted_parameters = await self._convert_parameter_types(
+            flow_name, parameters
+        )
+        execution_script = self._create_execution_script(
+            flow_name, converted_parameters
+        )
+
+        try:
+            start_time = asyncio.get_event_loop().time()
+            combined_code = f"{flow_code}\n\n{execution_script}"
+            result = await run_python_code(combined_code)
+            end_time = asyncio.get_event_loop().time()
+            execution_time = end_time - start_time
+
+            # Parse result
+            try:
+                if (
+                    hasattr(result, "results")
+                    and result.results
+                    and len(result.results) > 0
+                ):
+                    first_result = result.results[0]
+                    if hasattr(first_result, "__dict__"):
+                        result_dict = vars(first_result)
+                        if "json" in result_dict and result_dict["json"]:
+                            output_data = result_dict["json"]
+                        else:
+                            execution_result = ExecutionResult(
+                                success=False,
+                                error="No JSON data found in E2B result",
+                                execution_time=execution_time,
+                                metadata={"available_keys": list(result_dict.keys())},
+                            )
+                    else:
+                        output_data = first_result
+
+                    execution_result = ExecutionResult(
+                        success=output_data.get("success", False),
+                        data=output_data.get("data"),
+                        error=output_data.get("error"),
+                        execution_time=execution_time,
+                        metadata=output_data.get("metadata", {}),
+                    )
+                else:
+                    execution_result = ExecutionResult(
+                        success=False,
+                        error="No results returned from flow execution",
+                        execution_time=execution_time,
+                        metadata={"flow_name": flow_name, "parameters": parameters},
+                    )
+            except Exception as parse_error:
+                execution_result = ExecutionResult(
+                    success=False,
+                    error=f"Failed to parse execution result: {str(parse_error)}",
+                    execution_time=execution_time,
+                    metadata={"flow_name": flow_name, "parameters": parameters},
+                )
+
+            # Update existing run record
+            await self.db.update_flow_run(
+                run_id=run_id,
                 status="COMPLETED" if execution_result.success else "FAILED",
                 result=execution_result.data if execution_result.success else None,
                 error=execution_result.error if not execution_result.success else None,
@@ -243,21 +483,14 @@ class DBFlowExecutor:
             error_result = ExecutionResult(
                 success=False,
                 error=f"Flow execution timed out after {timeout} seconds",
-                metadata={
-                    "flow_name": flow_name,
-                    "parameters": parameters,
-                    "timeout": timeout,
-                },
+                metadata={"flow_name": flow_name, "timeout": timeout},
             )
-            # Update execution record (FAILED)
-            if "flow_run" in locals():
-                await self.db.update_flow_run(
-                    run_id=flow_run.id,
-                    status="FAILED",
-                    success=False,
-                    error=error_result.error,
-                    execution_time_ms=timeout * 1000,
-                )
+            await self.db.update_flow_run(
+                run_id=run_id,
+                status="FAILED",
+                error=error_result.error,
+                execution_time_ms=timeout * 1000,
+            )
             return error_result
 
         except Exception as e:
@@ -266,37 +499,30 @@ class DBFlowExecutor:
                 error=f"Unexpected error during flow execution: {str(e)}",
                 metadata={"flow_name": flow_name, "parameters": parameters},
             )
-            # Update execution record (FAILED)
-            if "flow_run" in locals():
-                await self.db.update_flow_run(
-                    run_id=flow_run.id,
-                    status="FAILED",
-                    success=False,
-                    error=error_result.error,
-                )
+            await self.db.update_flow_run(
+                run_id=run_id, status="FAILED", error=error_result.error
+            )
             return error_result
 
-    async def execute_flow_by_id(
-        self, flow_id: str, parameters: Dict[str, Any], timeout: int = 300
-    ) -> ExecutionResult:
-        """Execute a flow by ID."""
-        flow_record = await self._get_flow_by_id(flow_id)
-        if not flow_record:
-            return ExecutionResult(
-                success=False,
-                error=f"Flow with ID '{flow_id}' not found",
-                metadata={},
-            )
+    async def get_flow_run_status(self, run_id: UUID) -> Optional[Dict[str, Any]]:
+        """Get the status and result of a flow run.
 
-        # Check if flow is ready
-        if flow_record.status != "ready":
-            return ExecutionResult(
-                success=False,
-                error=f"Flow '{flow_record.name}' is not activated. Current status: {flow_record.status}",
-                metadata={},
-            )
+        Returns:
+            Dict with run status, result, error, etc. or None if not found
+        """
+        run = await self.db.get_flow_run(run_id)
+        if not run:
+            return None
 
-        return await self.execute_flow(flow_record.name, parameters, timeout)
+        return {
+            "run_id": str(run.id),
+            "status": run.status,
+            "result": run.result,
+            "error": run.error,
+            "execution_time_ms": run.execution_time_ms,
+            "created_at": run.created_at.isoformat() if run.created_at else None,
+            "completed_at": run.completed_at.isoformat() if run.completed_at else None,
+        }
 
     async def get_available_flows(self) -> List[Dict[str, Any]]:
         """Get list of all available flows from database."""
