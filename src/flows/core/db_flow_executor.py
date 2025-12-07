@@ -3,7 +3,7 @@
 import json
 import asyncio
 import ast
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Tuple
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from uuid import UUID
@@ -524,34 +524,33 @@ class DBFlowExecutor:
             "completed_at": run.completed_at.isoformat() if run.completed_at else None,
         }
 
-    async def get_available_flows(self) -> List[Dict[str, Any]]:
-        """Get list of all available flows from database."""
-        flows = await self.db.list_flows()
-        flows_list = []
+    async def get_available_flows(
+        self, limit: int = 12, offset: int = 0
+    ) -> Tuple[List[Dict[str, Any]], int]:
+        """Get paginated list of available flows from database.
 
-        for flow_record in flows:
-            parameters = await self.db.get_flow_parameters(flow_record.id)
-            flow_metadata = self.db.flow_record_to_metadata(flow_record, parameters)
+        Args:
+            limit: Maximum number of flows to return
+            offset: Number of flows to skip
 
-            flows_list.append(
-                {
-                    "id": flow_metadata.id,
-                    "name": flow_record.name,
-                    "description": flow_metadata.description,
-                    "parameter_count": len(flow_metadata.parameters),
-                    "required_parameters": len(
-                        [p for p in flow_metadata.parameters if p.required]
-                    ),
-                    "return_type": flow_metadata.return_type,
-                    "created_at": (
-                        flow_metadata.created_at.isoformat()
-                        if flow_metadata.created_at
-                        else None
-                    ),
-                }
-            )
-
-        return flows_list
+        Returns:
+            Tuple of (flows_list, total_count)
+        """
+        flows, total = await self.db.list_flows(limit=limit, offset=offset)
+        flows_list = [
+            {
+                "id": str(flow_record.id),
+                "name": flow_record.name,
+                "description": flow_record.description or "",
+                "created_at": (
+                    flow_record.created_at.isoformat()
+                    if flow_record.created_at
+                    else None
+                ),
+            }
+            for flow_record in flows
+        ]
+        return flows_list, total
 
     async def get_flow_schema(self, flow_id: str) -> Optional[Dict[str, Any]]:
         """Get JSON schema for a specific flow by ID."""
@@ -658,8 +657,17 @@ class DBFlowExecutor:
         parameters: Dict[str, Any],
         timeout: int = 1800,
         on_stream: Optional[callable] = None,
+        run_id: Optional[str] = None,
     ) -> ExecutionResult:
-        """Execute a flow with streaming."""
+        """Execute a flow with streaming.
+
+        Args:
+            flow_name: Name of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+            on_stream: Callback for stream events
+            run_id: Optional pre-generated run ID to use instead of creating new one
+        """
         # Get flow from database
         flow_record = await self._get_flow_by_name(flow_name)
         if not flow_record:
@@ -671,12 +679,22 @@ class DBFlowExecutor:
 
         flow_code = flow_record.source_code
 
-        # Create execution record (RUNNING)
-        flow_run = await self.db.create_flow_run(
-            flow_id=flow_record.id,
-            parameters=parameters,
-            metadata={"flow_name": flow_name},
-        )
+        # Create execution record or use provided run_id
+        if run_id:
+            # Use provided run_id - create record with that ID
+            flow_run = await self.db.create_flow_run(
+                flow_id=flow_record.id,
+                parameters=parameters,
+                metadata={"flow_name": flow_name},
+                run_id=UUID(run_id),
+            )
+        else:
+            # Generate new run_id
+            flow_run = await self.db.create_flow_run(
+                flow_id=flow_record.id,
+                parameters=parameters,
+                metadata={"flow_name": flow_name},
+            )
 
         # Convert parameter types
         converted_parameters = await self._convert_parameter_types(
@@ -845,8 +863,17 @@ class DBFlowExecutor:
         parameters: Dict[str, Any],
         timeout: int = 300,
         on_stream: Optional[callable] = None,
+        run_id: Optional[str] = None,
     ) -> ExecutionResult:
-        """Execute a flow by ID with streaming (simplified version)."""
+        """Execute a flow by ID with streaming (simplified version).
+
+        Args:
+            flow_id: ID of the flow to execute
+            parameters: Parameters to pass to the flow
+            timeout: Execution timeout in seconds
+            on_stream: Callback for stream events
+            run_id: Optional pre-generated run ID to use instead of creating new one
+        """
         flow_record = await self._get_flow_by_id(flow_id)
         if not flow_record:
             return ExecutionResult(
@@ -866,7 +893,7 @@ class DBFlowExecutor:
             )
 
         return await self.execute_flow_with_streaming(
-            flow_record.name, parameters, timeout, on_stream
+            flow_record.name, parameters, timeout, on_stream, run_id
         )
 
     def _get_flow_name_by_id(self, flow_id: str) -> Optional[str]:

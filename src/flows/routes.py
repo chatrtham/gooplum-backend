@@ -27,6 +27,10 @@ class FlowExecutionRequest(BaseModel):
         ..., description="Parameters to pass to the flow"
     )
     timeout: Optional[int] = Field(300, description="Execution timeout in seconds")
+    run_id: Optional[str] = Field(
+        None,
+        description="Optional run ID to use. If provided, execution will use this ID instead of generating a new one. Useful when agent pre-generates run_id for tracking.",
+    )
 
 
 class FlowInfo(BaseModel):
@@ -97,6 +101,24 @@ class FlowRunDetail(FlowRunInfo):
 
 class PaginatedFlowRuns(BaseModel):
     runs: List[FlowRunInfo]
+    total: int
+    page: int
+    limit: int
+
+
+class FlowListInfo(BaseModel):
+    """Lightweight flow info for list view (no parameters or return_type)."""
+
+    id: str
+    name: str
+    description: str
+    created_at: Optional[str] = None
+
+
+class PaginatedFlows(BaseModel):
+    """Paginated response for flows listing."""
+
+    flows: List[FlowListInfo]
     total: int
     page: int
     limit: int
@@ -182,17 +204,29 @@ async def activate_flow(flow_id: str):
         raise HTTPException(status_code=500, detail=f"Error activating flow: {str(e)}")
 
 
-@router.get("/", response_model=List[FlowInfo])
-async def list_flows():
+@router.get("/", response_model=PaginatedFlows)
+async def list_flows(page: int = 1, limit: int = 12):
     """
-    List all available ready flows.
+    List all available ready flows with pagination.
+
+    Args:
+        page: Page number (1-indexed)
+        limit: Number of flows per page
 
     Returns:
-        List of available flows
+        Paginated list of flows
     """
     try:
-        flows = await flow_executor.get_available_flows()
-        return [FlowInfo(**flow) for flow in flows]
+        offset = (page - 1) * limit
+        flows, total = await flow_executor.get_available_flows(
+            limit=limit, offset=offset
+        )
+        return PaginatedFlows(
+            flows=[FlowListInfo(**flow) for flow in flows],
+            total=total,
+            page=page,
+            limit=limit,
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error listing flows: {str(e)}")
 
@@ -377,6 +411,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                         parameters=parameters,
                         timeout=request.timeout,
                         on_stream=on_stream,
+                        run_id=request.run_id,  # Pass optional run_id
                     )
                     final_result = result
                 except Exception as e:
