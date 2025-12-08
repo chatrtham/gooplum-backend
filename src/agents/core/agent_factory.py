@@ -1,14 +1,5 @@
-"""Agent factory for dynamically building agents from LangGraph Assistant configuration.
-
-This module builds agents using configuration from LangGraph Assistants.
-The assistant's context (model_preset, system_prompt, flow_tool_ids, gumcp_services)
-is passed via config.configurable when invoking the agent.
-
-Frontend uses the LangGraph Assistants API directly:
-- POST /assistants - Create assistant with context
-- GET /assistants - List assistants
-- PATCH /assistants/{id} - Update assistant
-- DELETE /assistants/{id} - Delete assistant
+"""
+Agent factory for dynamically building agents from LangGraph Assistant configuration.
 """
 
 from typing import Optional
@@ -16,6 +7,7 @@ from uuid import UUID
 
 from langchain.agents import create_agent
 from langchain.agents.middleware import SummarizationMiddleware
+from langchain_anthropic.middleware import AnthropicPromptCachingMiddleware
 from langchain_core.runnables import RunnableConfig
 
 from src.agents.core.llms import get_model_from_preset
@@ -68,6 +60,9 @@ async def build_agent_from_context(
                 trigger=("tokens", 17000),
                 keep=("messages", 6),
                 trim_tokens_to_summarize=None,
+            ),
+            AnthropicPromptCachingMiddleware(
+                unsupported_model_behavior="ignore"
             ),
         ],
     )
