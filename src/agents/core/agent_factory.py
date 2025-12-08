@@ -25,7 +25,7 @@ from src.agents.core.gumcp_tool_loader import load_gumcp_tools
 
 async def build_agent_from_context(
     model_preset: str,
-    system_prompt: str,
+    system_prompt: Optional[str] = "",
     flow_tool_ids: Optional[list[str]] = None,
     gumcp_services: Optional[list[str]] = None,
 ):
@@ -127,7 +127,6 @@ async def make_agent(config: RunnableConfig):
 
     # Required fields
     model_preset = configurable.get("model_preset")
-    system_prompt = configurable.get("system_prompt")
 
     if not model_preset:
         raise ValueError(
@@ -135,13 +134,8 @@ async def make_agent(config: RunnableConfig):
             "Create an assistant with config.configurable.model_preset"
         )
 
-    if not system_prompt:
-        raise ValueError(
-            "system_prompt must be provided in assistant context. "
-            "Create an assistant with config.configurable.system_prompt"
-        )
-
     # Optional fields
+    system_prompt = configurable.get("system_prompt", "")
     flow_tool_ids = configurable.get("flow_tool_ids", [])
     gumcp_services = configurable.get("gumcp_services", [])
 
