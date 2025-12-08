@@ -120,7 +120,7 @@ class PaginatedFlows(BaseModel):
 
     flows: List[FlowListInfo]
     total: int
-    page: int
+    offset: int
     limit: int
 
 
@@ -205,26 +205,25 @@ async def activate_flow(flow_id: str):
 
 
 @router.get("/", response_model=PaginatedFlows)
-async def list_flows(page: int = 1, limit: int = 12):
+async def list_flows(offset: int = 0, limit: int = 12):
     """
     List all available ready flows with pagination.
 
     Args:
-        page: Page number (1-indexed)
+        offset: Offset for pagination
         limit: Number of flows per page
 
     Returns:
         Paginated list of flows
     """
     try:
-        offset = (page - 1) * limit
         flows, total = await flow_executor.get_available_flows(
             limit=limit, offset=offset
         )
         return PaginatedFlows(
             flows=[FlowListInfo(**flow) for flow in flows],
             total=total,
-            page=page,
+            offset=offset,
             limit=limit,
         )
     except Exception as e:
@@ -372,8 +371,9 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
             # Use validated/sanitized parameters if available
             parameters = validation_result.sanitized_parameters or request.parameters
 
-            # Get flow name for logging
-            flow_name = flow_executor._get_flow_name_by_id(flow_id)
+            # Get flow record for logging
+            flow_record = await flow_db.get_flow(UUID(flow_id))
+            flow_name = flow_record.name if flow_record else None
 
             # Send start event
             start_data = {
@@ -550,13 +550,9 @@ async def get_flow_code(flow_id: str):
                 status_code=404, detail=f"Flow with ID '{flow_id}' not found"
             )
 
-        flow_name = flow_executor._get_flow_name_by_id(flow_id)
-        if not flow_name:
-            flow_name = flow_record.name
-
         return {
             "flow_id": flow_id,
-            "flow_name": flow_name,
+            "flow_name": flow_record.name,
             "source_code": flow_record.source_code,
         }
 
