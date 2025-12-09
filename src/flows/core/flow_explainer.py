@@ -49,6 +49,7 @@ class FlowExplainer:
             
             **Important**:
             - RETURN MARKDOWN ONLY. DO NOT INCLUDE ANY OTHER TEXT AND THE ```mardown ``` tags.
+            - Use emojis where appropriate to make it easier to read.
             - Use examples or tables if helpful.
             - DO NOT lose details on important steps. By important steps, I mean steps that you want to know when you are using the flow.
             - DO NOT call it "function." Call it "flow."
