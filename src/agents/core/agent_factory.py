@@ -14,6 +14,7 @@ from langchain_core.runnables import RunnableConfig
 from src.agents.core.llms import get_model_from_preset
 from src.agents.core.flow_tool_adapter import create_flow_tools, create_flow_status_tool
 from src.agents.core.gumcp_tool_loader import load_gumcp_tools
+from src.agents.core.self_improvement_middleware import SelfImprovementMiddleware
 
 
 def build_system_prompt(
@@ -107,6 +108,8 @@ async def build_agent_from_context(
     instructions: Optional[str] = "",
     flow_tool_ids: Optional[list[str]] = None,
     gumcp_services: Optional[list[str]] = None,
+    can_suggest_improvements: bool = False,
+    assistant_id: Optional[str] = None,
 ):
     """Build a LangGraph agent from context values.
 
@@ -115,6 +118,8 @@ async def build_agent_from_context(
         instructions: Custom instructions for the agent's behavior
         flow_tool_ids: List of flow UUIDs to use as tools
         gumcp_services: List of guMCP service names
+        can_suggest_improvements: Whether to enable self-improvement from conversations
+        assistant_id: The assistant ID (required if can_suggest_improvements is True)
 
     Returns:
         A compiled LangGraph agent
@@ -143,20 +148,32 @@ async def build_agent_from_context(
         has_gumcp_tools=len(gumcp_tools) > 0,
     )
 
-    # 7. Create the agent
+    # 7. Build middleware list
+    middleware_list = [
+        SummarizationMiddleware(
+            model=model,
+            trigger=("tokens", 17000),
+            keep=("messages", 6),
+            trim_tokens_to_summarize=None,
+        ),
+        AnthropicPromptCachingMiddleware(unsupported_model_behavior="ignore"),
+    ]
+
+    # 8. Add self-improvement middleware if enabled
+    if can_suggest_improvements and assistant_id:
+        middleware_list.append(
+            SelfImprovementMiddleware(
+                assistant_id=assistant_id,
+                current_instructions=instructions or "",
+            )
+        )
+
+    # 9. Create the agent
     agent = create_agent(
         model=model,
         system_prompt=system_prompt,
         tools=all_tools,
-        middleware=[
-            SummarizationMiddleware(
-                model=model,
-                trigger=("tokens", 17000),
-                keep=("messages", 6),
-                trim_tokens_to_summarize=None,
-            ),
-            AnthropicPromptCachingMiddleware(unsupported_model_behavior="ignore"),
-        ],
+        middleware=middleware_list,
     )
 
     return agent
@@ -232,10 +249,14 @@ async def make_agent(config: RunnableConfig):
     instructions = configurable.get("instructions", "")
     flow_tool_ids = configurable.get("flow_tool_ids", [])
     gumcp_services = configurable.get("gumcp_services", [])
+    can_suggest_improvements = configurable.get("can_suggest_improvements", False)
+    assistant_id = configurable.get("assistant_id")  # Set by LangGraph automatically
 
     return await build_agent_from_context(
         model_preset=model_preset,
         instructions=instructions,
         flow_tool_ids=flow_tool_ids,
         gumcp_services=gumcp_services,
+        can_suggest_improvements=can_suggest_improvements,
+        assistant_id=assistant_id,
     )
