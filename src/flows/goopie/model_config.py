@@ -10,7 +10,7 @@ load_dotenv()
 
 def get_model():
     """Get the configured language model."""
-    model = init_chat_model("anthropic:claude-sonnet-4-5", temperature=0)
+    model = init_chat_model("anthropic:claude-opus-4-5", temperature=0)
 
     # model = ChatOpenAI(
     #     temperature=0,

@@ -26,7 +26,7 @@ class AskUserInput(BaseModel):
 
 @tool(
     args_schema=AskUserInput,
-    description="Ask one or more questions to the user, optionally with suggested answers.",
+    description="Ask one or more questions to the user, optionally with suggested answers. DO NOT call this in parallel with other tools.",
 )
 async def ask_user(
     questions: List[QuestionItem],

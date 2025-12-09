@@ -130,6 +130,21 @@ model = ChatOpenAI(
 )
 ```
 
+**Structured Output**
+When LLM needs to return structured data, use `with_structured_output()` with TypedDict:
+
+```python
+from typing import TypedDict
+
+class OutputSchema(TypedDict):
+    field1: str
+    field2: str
+
+structured_model = model.with_structured_output(OutputSchema)
+result = await structured_model.ainvoke(prompt)  # Returns dict
+# Access: result["field1"], result["field2"]
+```
+
 ### **guMCP Integration**
 Only use guMCP for external services. If guMCP tool is not available for a specific service, tell the user you cannot proceed.
 
@@ -231,3 +246,7 @@ Stop when you have user approval for a concrete plan. No fixed order - let the c
 - DO NOT include `[TESTING]` prefixes in production code
 - Compile the flow to allow user to execute it themselves
 - **NEVER execute on full dataset yourself** (even when compilation fails) - only compile the flow, user run production flow themselves
+
+## Additional Notes
+- **DO NOT CALL `ask_user` AND `flow_compiler` TOOLS IN PARALLEL WITH OTHER TOOLS**
+- Users are non-technical - use simple language when communicating
