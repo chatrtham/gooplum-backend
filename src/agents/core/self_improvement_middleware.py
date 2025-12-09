@@ -6,7 +6,7 @@ user feedback and automatically update the agent's instructions.
 """
 
 import os
-from typing import Any, Optional
+from typing import Any
 
 from dotenv import load_dotenv
 from langchain.agents.middleware import AgentMiddleware, AgentState
@@ -24,7 +24,7 @@ class LearningAnalysis(BaseModel):
     should_update: bool = Field(
         description="Whether the instructions should be updated based on this conversation"
     )
-    updated_instructions: Optional[str] = Field(
+    updated_instructions: str = Field(
         default="",
         description="The full rewritten instructions with the learning applied. Empty if should_update is false.",
     )
