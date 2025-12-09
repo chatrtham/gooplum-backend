@@ -13,53 +13,47 @@ load_dotenv()
 # Predefined model presets
 MODEL_PRESETS = {
     # Anthropic models
-    "claude-sonnet": {
+    "Claude Sonnet 4.5": {
         "provider": "anthropic",
         "model": "claude-sonnet-4-5",
-        "description": "Claude Sonnet 4.5 - Best balance of speed and capability",
+        "description": "Best balance of speed and capability",
     },
-    "claude-haiku": {
+    "Claude Haiku 4.5": {
         "provider": "anthropic",
-        "model": "claude-haiku-4-5-20251001",
-        "description": "Claude Haiku 4.5 - Fast and cost-effective",
+        "model": "claude-haiku-4-5",
+        "description": "Fast and cost-effective",
     },
-    "claude-opus": {
+    "Claude Opus 4.5": {
         "provider": "anthropic",
-        "model": "claude-opus-4",
-        "description": "Claude Opus 4 - Most capable",
+        "model": "claude-opus-4-5",
+        "description": "Most capable",
     },
     # OpenAI models
-    "gpt-5": {
+    "GPT-5": {
         "provider": "openai",
         "model": "gpt-5",
-        "description": "GPT-5 - OpenAI's flagship model",
+        "description": "OpenAI's flagship model",
     },
-    "gpt-5-mini": {
+    "GPT-5 Mini": {
         "provider": "openai",
         "model": "gpt-5-mini",
-        "description": "GPT-5 Mini - Fast and affordable next-gen model",
+        "description": "Fast and affordable next-gen model",
     },
     # Google models
-    "gemini-2-flash": {
-        "provider": "google",
-        "model": "gemini-2.0-flash",
-        "description": "Gemini 2.0 Flash - Fast and capable",
-    },
-    "gemini-2.5-flash": {
-        "provider": "google",
-        "model": "gemini-2.5-flash",
-        "description": "Gemini 2.5 Flash - Fast and capable Google model",
-    },
-    "gemini-2-pro": {
+    "Gemini 2.5 Pro": {
         "provider": "google",
         "model": "gemini-2.5-pro",
-        "description": "Gemini 2.5 Pro - Most capable Google model",
+        "description": "Most capable Google model",
     },
-    # ZAI (custom OpenAI-compatible endpoint)
-    "zai-glm": {
-        "provider": "zai",
-        "model": "glm-4.6",
-        "description": "ZAI GLM 4.6 - Custom endpoint model",
+    "Gemini 2.5 Flash": {
+        "provider": "google",
+        "model": "gemini-2.5-flash",
+        "description": "Fast and capable Google model",
+    },
+    "Gemini 2.0 Flash": {
+        "provider": "google",
+        "model": "gemini-2.0-flash",
+        "description": "Fast and capable",
     },
 }
 
@@ -108,14 +102,6 @@ def get_model_from_preset(preset_name: str) -> BaseChatModel:
             temperature=0,
             openai_api_key=os.getenv("GOOGLE_API_KEY"),
             openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
-        )
-
-    elif provider == "zai":
-        return ChatOpenAI(
-            model=model_name,
-            temperature=0,
-            openai_api_key=os.getenv("ZAI_API_KEY"),
-            openai_api_base="https://api.z.ai/api/coding/paas/v4/",
         )
 
     else:
