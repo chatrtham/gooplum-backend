@@ -1,0 +1,122 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of call data records to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of call data records to fetch"
+  },
+  "has_call": {
+    "type": "boolean",
+    "description": "Return only call data records which have or do not have a call logged"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns records created after this ISO 8601 timestamp"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns records created on or after this ISO 8601 timestamp"
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns records created before this ISO 8601 timestamp"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns records created on or before this ISO 8601 timestamp"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns records updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns records updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns records updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns records updated on or before this ISO 8601 timestamp"
+  },
+  "user_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by USER GUIDs - these are internal organization/team member GUIDs (NOT person_id from external contacts). Use this when filtering by which team member made the calls"
+  },
+  "person_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters calls by person_id."
+  },
+  "direction": {
+    "type": "string",
+    "description": "Filter by call direction",
+    "enum": [
+      "inbound",
+      "outbound"
+    ]
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter by call status",
+    "enum": [
+      "queued",
+      "initiated",
+      "ringing",
+      "in-progress",
+      "completed",
+      "busy",
+      "no-answer",
+      "canceled",
+      "failed"
+    ]
+  },
+  "sentiment": {
+    "type": "string",
+    "description": "Filter by call sentiment"
+  },
+  "disposition": {
+    "type": "string",
+    "description": "Filter by call disposition"
+  },
+  "recordings_only": {
+    "type": "boolean",
+    "description": "Filter to only include records with recordings"
+  },
+  "group_id": {
+    "type": "integer",
+    "description": "Filter by group ID"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

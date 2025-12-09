@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the knowledge for display purposes"
+  },
+  "body": {
+    "type": "string",
+    "description": "The content Devin will read when the knowledge is triggered"
+  },
+  "trigger_description": {
+    "type": "string",
+    "description": "Description of when this knowledge should be used"
+  },
+  "parent_folder_id": {
+    "type": "string",
+    "description": "ID of the folder to place this knowledge in"
+  },
+  "pinned_repo": {
+    "type": "string",
+    "description": "Pin to specific repo ('all' for all repos, 'owner/repo' for specific)"
+  }
+}
+```

@@ -1,0 +1,80 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats",
+        "custom_fields",
+        "referrals"
+      ]
+    }
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter results by status"
+  },
+  "tier": {
+    "type": "string",
+    "description": "Filter results by tier",
+    "enum": [
+      "free",
+      "premium",
+      "all"
+    ]
+  },
+  "premium_tiers": {
+    "type": "array",
+    "description": "Filter results by premium tiers",
+    "items": {
+      "type": "string"
+    }
+  },
+  "premium_tier_ids": {
+    "type": "array",
+    "description": "Filter results by premium tier IDs",
+    "items": {
+      "type": "string"
+    }
+  },
+  "limit": {
+    "type": "integer",
+    "description": "A limit on the number of objects to be returned (1-100)"
+  },
+  "page": {
+    "type": "integer",
+    "description": "Page number for paginated results"
+  },
+  "email": {
+    "type": "string",
+    "description": "Filter results by exact email match (case insensitive)"
+  },
+  "order_by": {
+    "type": "string",
+    "description": "The field to sort by",
+    "enum": [
+      "created",
+      "email"
+    ]
+  },
+  "direction": {
+    "type": "string",
+    "description": "The direction to sort results",
+    "enum": [
+      "asc",
+      "desc"
+    ]
+  },
+  "creation_date": {
+    "type": "string",
+    "description": "Filter results by creation date (YYYY/MM/DD format)"
+  }
+}
+```

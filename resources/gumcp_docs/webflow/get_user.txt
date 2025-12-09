@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "site_id": {
+    "type": "string",
+    "description": "Unique identifier for a Site"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "Unique identifier for a User"
+  }
+}
+```

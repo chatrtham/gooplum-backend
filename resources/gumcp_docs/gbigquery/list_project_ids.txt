@@ -1,0 +1,10 @@
+Parameters Schema:
+```json
+{
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of projects to return (default: 100)",
+    "default": 100
+  }
+}
+```

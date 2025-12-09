@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "post_id": {
+    "type": "string",
+    "description": "The prefixed ID of the post (e.g., post_00000000-0000-0000-0000-000000000000)"
+  }
+}
+```

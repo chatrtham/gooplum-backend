@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "subject": {
+    "type": "string",
+    "description": "Ticket subject (required)"
+  },
+  "content": {
+    "type": "string",
+    "description": "Ticket content/description"
+  },
+  "hs_pipeline": {
+    "type": "string",
+    "description": "Ticket pipeline ID"
+  },
+  "hs_pipeline_stage": {
+    "type": "string",
+    "description": "Ticket pipeline stage"
+  },
+  "hs_ticket_priority": {
+    "type": "string",
+    "description": "Ticket priority (LOW, MEDIUM, HIGH)"
+  },
+  "hs_ticket_category": {
+    "type": "string",
+    "description": "Ticket category"
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "Associated contact ID"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "Associated company ID"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the ticket"
+  }
+}
+```

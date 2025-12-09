@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., customer, invoice, salesOrder, account, vendor, item, purchaseOrder, estimate, opportunity, contact, vendorBill, journalEntry, itemFulfillment, payment, creditMemo, subscription, returnAuthorization)"
+  },
+  "q": {
+    "type": "string",
+    "description": "Search query to filter results"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum records to return (automatically handles pagination)",
+    "default": 100
+  }
+}
+```

@@ -1,0 +1,46 @@
+Parameters Schema:
+```json
+{
+  "processor_id": {
+    "type": "string",
+    "description": "Filter results by specific processor ID. Example: 'dp_BMdfq_yWM3sT-ZzvCnA3f'"
+  },
+  "processor_type": {
+    "type": "string",
+    "enum": [
+      "EXTRACT",
+      "CLASSIFY",
+      "SPLITTER"
+    ],
+    "description": "Filter by processor type: EXTRACT (data extraction), CLASSIFY (document classification), or SPLITTER (document splitting)."
+  },
+  "source_id": {
+    "type": "string",
+    "description": "Filter by the source ID that created the processor run (e.g., workflow_run_123)."
+  },
+  "file_name_contains": {
+    "type": "string",
+    "description": "Filter by file name - returns runs where the file name contains this string (case-sensitive substring match)."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "updatedAt",
+      "createdAt"
+    ],
+    "description": "Field to sort results by: 'updatedAt' (last modified) or 'createdAt' (creation time)."
+  },
+  "sort_dir": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort direction: 'asc' (oldest first) or 'desc' (newest first)."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return across all pages. API fetches in batches of 100."
+  }
+}
+```

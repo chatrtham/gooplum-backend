@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "userId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the Ashby user to retrieve information for."
+  },
+  "userEmail": {
+    "type": "string",
+    "description": "(Preferred) Email address of the user to get information for. Will be automatically resolved to userId."
+  }
+}
+```

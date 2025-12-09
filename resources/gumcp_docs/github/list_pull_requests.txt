@@ -1,0 +1,60 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pull requests to return. Default: all PRs."
+  },
+  "state": {
+    "type": "string",
+    "enum": [
+      "open",
+      "closed",
+      "all"
+    ],
+    "description": "Filter PRs by state. Default: open"
+  },
+  "head": {
+    "type": "string",
+    "description": "Filter pulls by head branch name or user:branch format."
+  },
+  "base": {
+    "type": "string",
+    "description": "Filter pulls by base branch name."
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "created",
+      "updated",
+      "popularity",
+      "long-running"
+    ],
+    "description": "Sort PRs by. Default: created"
+  },
+  "direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Direction of sort. Default: desc"
+  },
+  "draft": {
+    "type": "boolean",
+    "description": "Filter for draft or non-draft PRs"
+  },
+  "since": {
+    "type": "string",
+    "description": "Only PRs updated at or after this time (ISO 8601 format)"
+  }
+}
+```

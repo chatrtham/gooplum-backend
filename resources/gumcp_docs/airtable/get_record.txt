@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Airtable table ID"
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Record ID to retrieve"
+  }
+}
+```

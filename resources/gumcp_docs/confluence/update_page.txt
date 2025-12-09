@@ -1,0 +1,54 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "string",
+    "description": "ID of the page to update"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "current",
+      "draft"
+    ],
+    "description": "The updated status of the page"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the page"
+  },
+  "space_id": {
+    "type": "string",
+    "description": "ID of the containing space (moving to different space not currently supported)"
+  },
+  "parent_id": {
+    "type": "string",
+    "description": "ID of the parent content (moves page under different parent in same space)"
+  },
+  "owner_id": {
+    "type": "string",
+    "description": "Account ID of the page owner (transfers page ownership)"
+  },
+  "body_representation": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "wiki"
+    ],
+    "description": "Type of content representation used for the body value"
+  },
+  "body_value": {
+    "type": "string",
+    "description": "Body content of the page in the format specified by body_representation"
+  },
+  "version_number": {
+    "type": "integer",
+    "description": "The new version number (current version + 1, or 1 for draft status)"
+  },
+  "version_message": {
+    "type": "string",
+    "description": "Optional message to be stored with the version"
+  }
+}
+```

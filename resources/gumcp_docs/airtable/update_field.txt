@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Table ID containing the field"
+  },
+  "field_id": {
+    "type": "string",
+    "description": "Field ID to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "New name for the field (optional)"
+  },
+  "description": {
+    "type": "string",
+    "description": "New description for the field (optional)"
+  },
+  "options": {
+    "type": "object",
+    "description": "Updated options for the field (optional)"
+  }
+}
+```

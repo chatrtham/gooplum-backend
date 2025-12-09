@@ -1,0 +1,130 @@
+Parameters Schema:
+```json
+{
+  "account_id": {
+    "type": "integer",
+    "description": "Account ID to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "Account full name"
+  },
+  "domain": {
+    "type": "string",
+    "description": "Website domain (must be unique). Note this is not the same as the account domain. If user mentions domain use this, or if they mention account link or website link use website field."
+  },
+  "conversational_name": {
+    "type": "string",
+    "description": "Conversational name of the account"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Phone number without formatting"
+  },
+  "website": {
+    "type": "string",
+    "description": "Website"
+  },
+  "linkedin_url": {
+    "type": "string",
+    "description": "Full LinkedIn url"
+  },
+  "twitter_handle": {
+    "type": "string",
+    "description": "Twitter handle, with @"
+  },
+  "street": {
+    "type": "string",
+    "description": "Street name and number"
+  },
+  "city": {
+    "type": "string",
+    "description": "City"
+  },
+  "state": {
+    "type": "string",
+    "description": "State"
+  },
+  "postal_code": {
+    "type": "string",
+    "description": "Postal code"
+  },
+  "country": {
+    "type": "string",
+    "description": "Country"
+  },
+  "locale": {
+    "type": "string",
+    "description": "Time locale"
+  },
+  "industry": {
+    "type": "string",
+    "description": "Industry"
+  },
+  "company_type": {
+    "type": "string",
+    "description": "Type of the Account's company"
+  },
+  "founded": {
+    "type": "string",
+    "description": "Date or year of founding"
+  },
+  "revenue_range": {
+    "type": "string",
+    "description": "Estimated revenue range"
+  },
+  "size": {
+    "type": "string",
+    "description": "Estimated number of people in employment"
+  },
+  "do_not_contact": {
+    "type": "boolean",
+    "description": "Whether this company can not be contacted. Values are either true or false. Setting this to true will remove all associated people from all active communications"
+  },
+  "custom_fields": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "description": "Custom fields are defined by the user's team. Only fields with values are presented in the API."
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "All tags applied to this Account"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "ID of the User that owns this Account"
+  },
+  "company_stage_id": {
+    "type": "integer",
+    "description": "ID of the CompanyStage assigned to this Account"
+  },
+  "account_tier_id": {
+    "type": "integer",
+    "description": "ID of the Account Tier for this Account"
+  },
+  "crm_id_type": {
+    "type": "string",
+    "description": "The CRM that the provided crm_id is for. Must be one of: salesforce",
+    "enum": [
+      "salesforce"
+    ]
+  },
+  "crm_id": {
+    "type": "string",
+    "description": "Requires Salesforce. ID of the person in your external CRM. You must provide a crm_id_type if this is included. Validations will be applied to the crm_id depending on the crm_id_type. A \"salesforce\" ID must be exactly 18 characters. A \"salesforce\" ID must be either an Account (001) object. The type will be validated using the 18 character ID. This field can only be used if your application or API key has the \"crm_id_account:write\" scope (\"account:set_crm_id\" also works but is deprecated)."
+  },
+  "archived": {
+    "type": "boolean",
+    "description": "Whether this Account should be archived or not. Setting this to true sets archived_at to the current time if it's not already set. Setting this to false will set archived_at to null"
+  }
+}
+```

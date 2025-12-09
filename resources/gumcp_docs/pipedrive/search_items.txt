@@ -1,0 +1,36 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "The search term to look for. Minimum 2 characters (or 1 if using exact_match). URL encoded."
+  },
+  "item_types": {
+    "type": "string",
+    "description": "A comma-separated string array. The type of items to perform the search from. Values: deal, person, organization, product, lead, file, mail_attachment, project. Defaults to all."
+  },
+  "fields": {
+    "type": "string",
+    "description": "A comma-separated string array. The fields to perform the search from. Values: address, code, custom_fields, email, name, notes, organization_name, person_name, phone, title, description. Defaults to all relevant fields for each item type."
+  },
+  "search_for_related_items": {
+    "type": "boolean",
+    "description": "When enabled, the response will include up to 100 newest related leads and 100 newest related deals for each found person and organization and up to 100 newest related persons for each found organization.",
+    "default": false
+  },
+  "exact_match": {
+    "type": "boolean",
+    "description": "When enabled, only full exact matches against the given term are returned. It is not case sensitive.",
+    "default": false
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "A comma-separated string array. Supports including optional fields in the results. Values: deal.cc_email, person.picture, product.price"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of items to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

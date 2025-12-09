@@ -1,0 +1,16 @@
+# Extend Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (10 total)
+
+1. **list_workflow_runs** - List workflow runs with details about execution status, timing, and usage. Supports filtering and automatic pagination.
+2. **get_workflow_run** - Get complete details of a specific workflow run including status, outputs, step runs, and usage information.
+3. **run_workflow** - Run a workflow with files. Creates workflow runs for each file processed.
+4. **run_processor** - Run a processor on a document for extraction, classification, or splitting.
+5. **list_processor_runs** - List processor runs with filtering and pagination.
+6. **get_processor_run** - Get details of a specific processor run including status, outputs, and any edits made during review.
+7. **cancel_processor_run** - Cancel a running processor run. Only runs with PROCESSING status can be cancelled.
+8. **delete_processor_run** - Permanently delete a processor run and all associated data. This operation cannot be undone.
+9. **parse_file** - Parse files to get cleaned, chunked content for RAG pipelines, embeddings, or custom processing.
+10. **get_parser_run** - Retrieve status and results of a parser run. Use this to poll async parser runs or get completed results.

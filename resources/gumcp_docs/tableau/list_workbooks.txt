@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "filter": {
+    "type": "string",
+    "description": "Filter expression (e.g., 'name:eq:Superstore', 'projectName:eq:Finance'). Supports fields: name, contentUrl, createdAt, updatedAt, ownerName, projectName, tags. Operators: eq, in, gt, gte, lt, lte."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of workbooks to return across all pages"
+  }
+}
+```

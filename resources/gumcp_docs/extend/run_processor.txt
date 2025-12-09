@@ -1,0 +1,53 @@
+Parameters Schema:
+```json
+{
+  "processor_id": {
+    "type": "string",
+    "description": "The unique identifier of the processor to run. Example: 'dp_BMdfq_yWM3sT-ZzvCnA3f'"
+  },
+  "version": {
+    "type": "string",
+    "description": "Specific version of the processor to use. If not provided, uses the latest version."
+  },
+  "file": {
+    "type": "object",
+    "properties": {
+      "file_name": {
+        "type": "string",
+        "description": "Name of the file to process."
+      },
+      "file_url": {
+        "type": "string",
+        "description": "Publicly accessible URL of the file to process."
+      },
+      "file_id": {
+        "type": "string",
+        "description": "Extend file ID if the file has already been uploaded."
+      }
+    },
+    "description": "File input for the processor. Provide either file_url, file_id, or file_name."
+  },
+  "raw_text": {
+    "type": "string",
+    "description": "Raw text string to process instead of a file. Use this for text-only processing."
+  },
+  "sync": {
+    "type": "boolean",
+    "description": "If true, waits for processing to complete and returns final results (5-minute timeout). If false (default), returns immediately with PROCESSING status."
+  },
+  "priority": {
+    "type": "integer",
+    "description": "Priority level for execution queue. Higher values = higher priority."
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Custom metadata object to attach to the processor run for tracking purposes.",
+    "additionalProperties": true
+  },
+  "config": {
+    "type": "object",
+    "description": "Custom processor configuration (ClassificationConfig, ExtractionConfig, or SplitterConfig). Overrides the processor's default configuration.",
+    "additionalProperties": true
+  }
+}
+```

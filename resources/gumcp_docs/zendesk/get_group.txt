@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "group_id": {
+    "type": "string",
+    "description": "Zendesk group ID to retrieve (required)"
+  }
+}
+```

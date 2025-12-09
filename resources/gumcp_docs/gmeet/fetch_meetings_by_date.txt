@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "date": {
+    "type": "string",
+    "description": "Date in UTC ISO format (YYYY-MM-DD)"
+  }
+}
+```

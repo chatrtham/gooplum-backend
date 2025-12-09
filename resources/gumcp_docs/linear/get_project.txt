@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The ID or name of the project to retrieve"
+  }
+}
+```

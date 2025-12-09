@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "report_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the report"
+  }
+}
+```

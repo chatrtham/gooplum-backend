@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "post_url": {
+    "type": "string",
+    "description": "Full Instagram post URL (e.g., 'https://www.instagram.com/p/ABC123/')"
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of comments to retrieve per post",
+    "default": 10
+  }
+}
+```

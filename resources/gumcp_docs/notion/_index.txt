@@ -1,0 +1,18 @@
+# Notion Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (12 total)
+
+1. **list_all_users** - List all users in the workspace (excludes guests)
+2. **list_all_pages** - List all pages across all databases in the workspace
+3. **list_all_blocks** - List all blocks from a specific page
+4. **get_user** - Retrieve a specific user by their ID
+5. **get_current_user** - Retrieve information about the current bot user
+6. **search_pages** - Search pages by text
+7. **list_databases** - List all databases
+8. **get_database** - Retrieve a specific database by ID to get its schema/structure. Useful for understanding properties and types before using other database tools.
+9. **query_database** - Query a Notion database with filtering, sorting, and pagination support
+10. **get_page** - Retrieve a page by ID with its properties (not content). Note: Limited to 25 references per property - use get_page_property for properties with more references.
+11. **get_block_children** - List content blocks of a page or block with pagination support. Returns only first level children.
+12. **get_block** - Retrieve a single block by ID. Use get_block_children if the block has children.

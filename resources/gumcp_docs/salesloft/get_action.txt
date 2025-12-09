@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "action_id": {
+    "type": "integer",
+    "description": "Action ID to fetch"
+  }
+}
+```

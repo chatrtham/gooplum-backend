@@ -1,0 +1,109 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Target to investigate (e.g., example.com, tools.example.com, example.com/blog/)"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Type of target to analyze",
+    "enum": [
+      "domain",
+      "subdomain",
+      "subfolder"
+    ]
+  },
+  "database": {
+    "type": "string",
+    "description": "Regional database for the report",
+    "enum": [
+      "us",
+      "uk",
+      "ca",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "br",
+      "au",
+      "ar",
+      "be",
+      "ch",
+      "cl",
+      "co",
+      "cz",
+      "dk",
+      "fi",
+      "gr",
+      "hk",
+      "hu",
+      "id",
+      "ie",
+      "il",
+      "in",
+      "jp",
+      "mx",
+      "my",
+      "nl",
+      "no",
+      "nz",
+      "pe",
+      "ph",
+      "pl",
+      "pt",
+      "ro",
+      "se",
+      "sg",
+      "th",
+      "tr",
+      "tw",
+      "ua",
+      "vn"
+    ]
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return (default: 10000, max: 100000)",
+    "minimum": 1,
+    "maximum": 100000
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip before sending report",
+    "minimum": 0
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date for the report in UTC ISO format (e.g., '2023-12-15T00:00:00Z')"
+  },
+  "display_sort": {
+    "type": "string",
+    "description": "Column to sort results by (e.g., pc_asc, tr_desc)"
+  },
+  "display_filter": {
+    "type": "string",
+    "description": "Filters for columns"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Ur - URL",
+        "Pc - Number of Keywords",
+        "Tg - Traffic",
+        "Tr - Traffic (%)",
+        "Ipu - Important Pages Unique",
+        "Ip0 - Important Pages 0",
+        "Ip1 - Important Pages 1",
+        "Ip2 - Important Pages 2",
+        "Ip3 - Important Pages 3",
+        "Ip4 - Important Pages 4"
+      ]
+    },
+    "description": "Specific columns to include in the report. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

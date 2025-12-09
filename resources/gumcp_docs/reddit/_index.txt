@@ -1,0 +1,18 @@
+# Reddit Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (12 total)
+
+1. **retrieve_reddit_post** - Fetch top posts in a subreddit with optional size limit.
+2. **get_reddit_post_details** - Get detailed content about a specific Reddit post
+3. **create_reddit_post** - Create a new Reddit post
+4. **fetch_post_comments** - Fetch comments for a specific Reddit post
+5. **edit_reddit_post** - Edit a specific Reddit post
+6. **create_reddit_comment** - Create a new comment on a Reddit post or reply to an existing comment
+7. **edit_reddit_comment** - Edit a specific Reddit comment
+8. **delete_reddit_post** - Delete a specific Reddit post
+9. **delete_reddit_comment** - Delete a specific Reddit comment
+10. **search_subreddits** - Search for subreddits by name or description. Can search for exact matches or partial matches beginning with query string.
+11. **search_posts** - Search for posts/links within a specific subreddit or across all of Reddit.
+12. **search_users** - Search for user profiles by title and description.

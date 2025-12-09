@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "bookingUid": {
+    "type": "string",
+    "description": "The unique ID of the booking to decline."
+  },
+  "reason": {
+    "type": "string",
+    "description": "Reason for declining the booking (optional)"
+  }
+}
+```

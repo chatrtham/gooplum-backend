@@ -1,0 +1,102 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of cadences to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of cadences to fetch"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns cadences updated after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns cadences updated on or after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns cadences updated before this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns cadences updated on or before this timestamp (ISO 8601 format)"
+  },
+  "team_cadence": {
+    "type": "boolean",
+    "description": "Filter by whether cadences are team cadences or not"
+  },
+  "shared": {
+    "type": "boolean",
+    "description": "Filter by whether cadences are shared"
+  },
+  "owned_by_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter cadences by owner GUIDs"
+  },
+  "people_addable": {
+    "type": "boolean",
+    "description": "Filter by whether cadences can have people added to them"
+  },
+  "name": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter cadences by name"
+  },
+  "group_ids": {
+    "type": "string",
+    "description": "Filter by group IDs (JSON array string or comma-separated)"
+  },
+  "tag_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by tag IDs"
+  },
+  "archived": {
+    "type": "boolean",
+    "description": "Filter by whether cadences are archived"
+  },
+  "override_contact_restrictions": {
+    "type": "boolean",
+    "description": "Filter by whether cadences are operational (can override contact restrictions)"
+  },
+  "pending_actions_assigned_to": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by cadences with pending actions assigned to specific user GUIDs"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at",
+      "name"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

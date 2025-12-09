@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name for the new document (will add .docx extension if not included)"
+  },
+  "content": {
+    "type": "string",
+    "description": "Content to write to the document (optional, default is empty)"
+  },
+  "folder_path": {
+    "type": "string",
+    "description": "Path to folder in OneDrive (optional, defaults to root)"
+  }
+}
+```

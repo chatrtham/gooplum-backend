@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "block_id": {
+    "type": "string",
+    "description": "Identifier for a block or page to get children from"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of child blocks to return. Optional - defaults to 10 if not specified"
+  }
+}
+```

@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., customer, invoice, salesOrder, account)"
+  },
+  "id": {
+    "type": "string",
+    "description": "Internal identifier"
+  },
+  "expandSubResources": {
+    "type": "boolean",
+    "description": "Expand all sublists, sublist lines, and subrecords"
+  },
+  "simpleEnumFormat": {
+    "type": "boolean",
+    "description": "Return enumeration values as internal ID only"
+  },
+  "fields": {
+    "type": "string",
+    "description": "Comma-separated field names to return"
+  }
+}
+```

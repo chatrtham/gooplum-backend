@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "GID of the task to remove from project (required)"
+  },
+  "project": {
+    "type": "string",
+    "description": "GID of the project to remove the task from (required)"
+  }
+}
+```

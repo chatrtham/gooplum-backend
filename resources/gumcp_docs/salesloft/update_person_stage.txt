@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "stage_id": {
+    "type": "integer",
+    "description": "Person stage ID to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the person stage"
+  }
+}
+```

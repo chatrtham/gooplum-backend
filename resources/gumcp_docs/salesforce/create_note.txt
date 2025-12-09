@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "parent_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the parent record"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the note"
+  },
+  "body": {
+    "type": "string",
+    "description": "Content of the note in plain text format (legacy Note object doesn't support HTML formatting)"
+  },
+  "private": {
+    "type": "boolean",
+    "description": "Whether the note is private",
+    "default": false
+  }
+}
+```

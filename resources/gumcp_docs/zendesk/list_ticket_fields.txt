@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "creator_id": {
+    "type": "string",
+    "description": "Filter fields by the user ID of the creator"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "text",
+      "textarea",
+      "checkbox",
+      "date",
+      "integer",
+      "decimal",
+      "regexp",
+      "dropdown",
+      "tagger",
+      "lookup"
+    ],
+    "description": "Filter fields by field type"
+  },
+  "active": {
+    "type": "boolean",
+    "description": "Filter by active status: true for active fields, false for inactive fields"
+  }
+}
+```

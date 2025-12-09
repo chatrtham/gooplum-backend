@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "categories": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Categories to search for (e.g., ['restaurant', 'hotel', 'gas station'])"
+  },
+  "location": {
+    "type": "string",
+    "description": "Location to search in. Use simple formats like 'New York, NY'"
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of places to return per category",
+    "default": 20
+  },
+  "language": {
+    "type": "string",
+    "description": "Language for results (default: 'en')",
+    "default": "en"
+  },
+  "min_rating": {
+    "type": "string",
+    "description": "Minimum star rating filter",
+    "enum": [
+      "",
+      "two",
+      "twoAndHalf",
+      "three",
+      "threeAndHalf",
+      "four",
+      "fourAndHalf"
+    ],
+    "default": "four"
+  },
+  "website_filter": {
+    "type": "string",
+    "description": "Filter places by website presence",
+    "enum": [
+      "allPlaces",
+      "withWebsite",
+      "withoutWebsite"
+    ],
+    "default": "allPlaces"
+  },
+  "skip_closed_places": {
+    "type": "boolean",
+    "description": "Skip places that are temporarily or permanently closed",
+    "default": false
+  }
+}
+```

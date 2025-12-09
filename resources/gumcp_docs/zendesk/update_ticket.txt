@@ -1,0 +1,156 @@
+Parameters Schema:
+```json
+{
+  "ticket_id": {
+    "type": "string",
+    "description": "Zendesk ticket ID to update (required)"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Updated ticket subject"
+  },
+  "comment_body": {
+    "type": "string",
+    "description": "Add a new comment to the ticket"
+  },
+  "comment_html_body": {
+    "type": "string",
+    "description": "Add a new HTML comment to the ticket"
+  },
+  "comment_public": {
+    "type": "boolean",
+    "description": "Whether the new comment is public (default: true)",
+    "default": true
+  },
+  "assignee_id": {
+    "type": "string",
+    "description": "User ID to assign the ticket to"
+  },
+  "assignee_email": {
+    "type": "string",
+    "description": "Email address to assign the ticket to (alternative to assignee_id)"
+  },
+  "group_id": {
+    "type": "string",
+    "description": "Group ID to assign the ticket to"
+  },
+  "requester_id": {
+    "type": "string",
+    "description": "User ID of the new ticket requester"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "new",
+      "open",
+      "pending",
+      "hold",
+      "solved",
+      "closed"
+    ],
+    "description": "Update ticket status"
+  },
+  "priority": {
+    "type": "string",
+    "enum": [
+      "urgent",
+      "high",
+      "normal",
+      "low"
+    ],
+    "description": "Update ticket priority"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "problem",
+      "incident",
+      "question",
+      "task"
+    ],
+    "description": "Update ticket type"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Replace all existing tags with these tags"
+  },
+  "additional_tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Add these tags to existing tags"
+  },
+  "remove_tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Remove these tags from existing tags"
+  },
+  "due_at": {
+    "type": "string",
+    "description": "Due date for task tickets (ISO 8601 format, e.g., '2023-12-31T23:59:59Z')"
+  },
+  "custom_fields": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "value"
+      ]
+    },
+    "description": "Array of custom field objects to update"
+  },
+  "collaborator_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Replace all collaborators with these user IDs"
+  },
+  "follower_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Replace all followers with these agent user IDs"
+  },
+  "email_cc_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Replace all email CCs with these user IDs"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "Update external ID"
+  },
+  "problem_id": {
+    "type": "string",
+    "description": "Link to problem ticket ID (for incident tickets)"
+  },
+  "safe_update": {
+    "type": "boolean",
+    "description": "Enable safe update to prevent conflicts (default: false)",
+    "default": false
+  },
+  "updated_stamp": {
+    "type": "string",
+    "description": "Timestamp for safe update conflict detection (ISO 8601 format)"
+  }
+}
+```

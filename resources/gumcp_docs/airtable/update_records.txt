@@ -1,0 +1,34 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Airtable table ID"
+  },
+  "records": {
+    "type": "array",
+    "description": "Array of records to update",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Record ID"
+        },
+        "fields": {
+          "type": "object",
+          "description": "Updated record fields"
+        }
+      },
+      "required": [
+        "id",
+        "fields"
+      ]
+    }
+  }
+}
+```

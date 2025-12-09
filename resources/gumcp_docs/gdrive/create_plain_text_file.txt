@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the file to create"
+  },
+  "content": {
+    "type": "string",
+    "description": "Text content of the file"
+  },
+  "mime_type": {
+    "type": "string",
+    "description": "MIME type (default: text/plain)"
+  },
+  "folder_id": {
+    "type": "string",
+    "description": "Parent folder ID (optional)"
+  },
+  "folder_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the parent folder (optional)"
+  }
+}
+```

@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "callIds": {
+    "type": "array",
+    "description": "Array of Gong's unique numeric call IDs",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

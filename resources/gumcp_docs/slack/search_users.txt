@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "User's email address for exact email lookup"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "Slack user ID (starts with U) for exact user lookup"
+  },
+  "name": {
+    "type": "string",
+    "description": "Search by username, real name, display name, first name, or last name (partial matches allowed)"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

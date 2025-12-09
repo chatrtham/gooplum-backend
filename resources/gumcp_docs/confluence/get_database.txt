@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "database_id": {
+    "type": "integer",
+    "description": "The database ID"
+  },
+  "include_collaborators": {
+    "type": "boolean",
+    "description": "Include collaborators on the database",
+    "default": false
+  },
+  "include_direct_children": {
+    "type": "boolean",
+    "description": "Include direct children of the database",
+    "default": false
+  },
+  "include_operations": {
+    "type": "boolean",
+    "description": "Include operations associated with this database",
+    "default": false
+  },
+  "include_properties": {
+    "type": "boolean",
+    "description": "Include content properties associated with this database",
+    "default": false
+  }
+}
+```

@@ -1,0 +1,65 @@
+Parameters Schema:
+```json
+{
+  "operation": {
+    "type": "string",
+    "description": "Type of operation to perform",
+    "enum": [
+      "update",
+      "archive",
+      "unarchive",
+      "block",
+      "add_tag",
+      "remove_tag"
+    ]
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "The ID of the contact to update"
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "Tag ID (required for add_tag and remove_tag operations)"
+  },
+  "email": {
+    "type": "string",
+    "description": "Update the contact's email address (for update operation)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Update the contact's name (for update operation)"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Update the contact's phone number (for update operation)"
+  },
+  "role": {
+    "type": "string",
+    "description": "Update the contact's role in Intercom (for update operation)",
+    "enum": [
+      "user",
+      "lead"
+    ]
+  },
+  "external_id": {
+    "type": "string",
+    "description": "Update the contact's external ID (for update operation)"
+  },
+  "avatar": {
+    "type": "string",
+    "description": "Update the contact's avatar image URL (for update operation)"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "Update the assigned owner ID (for update operation)"
+  },
+  "unsubscribed_from_emails": {
+    "type": "boolean",
+    "description": "Update email subscription status (for update operation)"
+  },
+  "custom_attributes": {
+    "type": "object",
+    "description": "Update custom attributes (for update operation)"
+  }
+}
+```

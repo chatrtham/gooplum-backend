@@ -1,0 +1,34 @@
+Parameters Schema:
+```json
+{
+  "pipeline_id": {
+    "type": "integer",
+    "description": "The ID of the pipeline to fetch stages for. If omitted, stages for all pipelines will be fetched."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time",
+      "add_time",
+      "order_nr"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of stages to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

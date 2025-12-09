@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "objective": {
+    "type": "string",
+    "description": "Natural-language description of what the web search is trying to find"
+  },
+  "search_queries": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Traditional keyword search queries"
+  },
+  "mode": {
+    "type": "string",
+    "enum": [
+      "one-shot",
+      "agentic"
+    ],
+    "description": "Presets for different use cases (one-shot or agentic)",
+    "default": "one-shot"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Upper bound on number of results",
+    "default": 10
+  },
+  "include_domains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Domains to restrict results to (e.g., wikipedia.org, .edu)"
+  },
+  "exclude_domains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Domains to exclude from results (e.g., reddit.com, .ai)"
+  },
+  "max_age_seconds": {
+    "type": "integer",
+    "description": "Maximum age of cached content in seconds (minimum 600)"
+  },
+  "timeout_seconds": {
+    "type": "number",
+    "description": "Timeout for fetching live content"
+  }
+}
+```

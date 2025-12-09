@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "article_id": {
+    "type": "string",
+    "description": "Zendesk article ID to retrieve (required)"
+  },
+  "locale": {
+    "type": "string",
+    "description": "The locale to display the article in (e.g., 'en-us', 'fr'). Optional for admins/agents, required for end users"
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "users",
+        "sections",
+        "categories",
+        "translations"
+      ]
+    },
+    "description": "Additional data to include: users (author), sections, categories, translations"
+  }
+}
+```

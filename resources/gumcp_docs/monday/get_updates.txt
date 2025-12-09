@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "item_id": {
+    "type": "integer",
+    "description": "The unique identifier of the item to get updates for. If not provided along with board_id, returns all updates across account."
+  },
+  "board_id": {
+    "type": "integer",
+    "description": "The unique identifier of the board to get updates for. If not provided along with item_id, returns all updates across account."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of updates to return (default 25, handles pagination internally)."
+  },
+  "from_date": {
+    "type": "string",
+    "description": "Filter updates created on or after this date. Use ISO 8601 format (YYYY-MM-DD or YYYY-MM-DDTHH:mm). Only works when getting all updates (no item_id or board_id)."
+  },
+  "to_date": {
+    "type": "string",
+    "description": "Filter updates created on or before this date. Use ISO 8601 format (YYYY-MM-DD or YYYY-MM-DDTHH:mm). Only works when getting all updates (no item_id or board_id)."
+  }
+}
+```

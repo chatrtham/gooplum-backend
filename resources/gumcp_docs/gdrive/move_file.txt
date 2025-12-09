@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the file to move"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file to move"
+  },
+  "folder_id": {
+    "type": "string",
+    "description": "ID of the destination folder"
+  },
+  "folder_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the destination folder"
+  },
+  "remove_parents": {
+    "type": "boolean",
+    "description": "Whether to remove the file from its current parent folders (optional)"
+  }
+}
+```

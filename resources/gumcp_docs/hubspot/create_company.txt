@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Company name (required)"
+  },
+  "domain": {
+    "type": "string",
+    "description": "Company website domain"
+  },
+  "description": {
+    "type": "string",
+    "description": "Company description"
+  },
+  "industry": {
+    "type": "string",
+    "description": "Company industry"
+  },
+  "city": {
+    "type": "string",
+    "description": "City"
+  },
+  "state": {
+    "type": "string",
+    "description": "State/province/region"
+  },
+  "country": {
+    "type": "string",
+    "description": "Country"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Phone number"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the company"
+  }
+}
+```

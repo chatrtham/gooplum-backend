@@ -1,0 +1,58 @@
+# Github Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (52 total)
+
+1. **create_repository** - Create a new repository
+2. **search_repositories** - Search for GitHub repositories (code repositories, not project boards)
+3. **list_repositories** - List GitHub repositories (code repositories, not project boards) for a user or organization
+4. **get_contents** - Get the contents of a file or directory in a repository
+5. **list_commits** - List all commits for a repository by branch
+6. **get_commit** - Get detailed information about a specific commit
+7. **list_stargazers** - List all stargazers for a repository
+8. **get_stargazers_count** - Get the number of stargazers for a repository
+9. **list_issues** - List all issues for a repository
+10. **search_issues** - Search for issues across all accessible repositories using GitHub's search syntax
+11. **get_issue** - Get a specific issue for a repository including project board field values (Status, Priority, etc.)
+12. **create_issue** - Create a new issue for a repository
+13. **update_issue** - Update a specific issue with title, body, state, labels, assignees, milestone, and more
+14. **add_comment_to_issue** - Add a comment to a specific issue for a repository
+15. **list_comments** - List all comments on a specific issue or pull request
+16. **get_comment** - Get a specific comment by its ID
+17. **list_branches** - List all branches for a repository
+18. **create_branch** - Create a new branch from existing branch for a repository
+19. **list_pull_requests** - List all pull requests for a repository
+20. **get_pull_request** - Get a specific pull request for a repository
+21. **create_pull_request** - Create a new pull request for a repository
+22. **get_user_id** - Get the internal GitHub ID for a user by username
+23. **get_organization_id** - Get the internal GitHub ID for an organization by name
+24. **get_repository_id** - Get the internal GitHub ID for a repository by owner and name
+25. **list_projects** - List GitHub Projects (project boards) for a repository or organization - these are separate from repositories and contain issues/pull requests
+26. **get_project** - Get detailed information about a specific GitHub Project (project board) - not a repository. REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+27. **list_project_fields** - List all columns/fields in a GitHub Project board (like Status, Priority, etc.). REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+28. **create_project_field** - Create a new column/field in a GitHub Project board (like adding a Status or Priority column). REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+29. **update_project_field** - Update an existing column/field in a GitHub Project board (rename or modify column settings)
+30. **delete_project_field** - Delete a column/field from a GitHub Project board
+31. **list_project_items** - List all project items (issues and pull requests) that have been added to a GitHub Project board. REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+32. **add_project_item** - Add an existing issue or pull request as a project item to a GitHub Project board. REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+33. **update_project_item** - Update the position/order of a project item (issue or pull request) within a GitHub Project board. REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+34. **delete_project_item** - Remove a project item (issue or pull request) from a GitHub Project board (does not delete the issue/PR itself). REQUIRED: Must provide one of these parameter combinations to identify the project: 1) project_url, OR 2) project_id, OR 3) project_number + owner (+ repo_name for repository projects)
+35. **list_tags** - List git tags in a repository
+36. **get_tag** - Get details about a specific git tag
+37. **list_releases** - List all releases for a repository
+38. **get_release** - Get detailed information about a specific release
+39. **list_collaborators** - List users with access to a repository
+40. **list_labels** - List all labels in a repository
+41. **get_label** - Get information about a single label
+42. **create_label** - Create a new label in a repository
+43. **list_milestones** - List all milestones in a repository
+44. **get_milestone** - Get details about a specific milestone
+45. **get_rate_limit** - Retrieve current API rate limit status
+46. **add_collaborator** - Invite a user to collaborate on a repository
+47. **remove_collaborator** - Remove a collaborator from a repository
+48. **list_teams** - List teams in an organization
+49. **list_deployments** - List all deployments for a repository
+50. **list_workflows** - List all GitHub Actions workflows in a repository
+51. **search_code** - Search for code snippets across one or more repositories
+52. **search_pull_requests** - Search for pull requests across all accessible repositories using GitHub's search syntax with pull request specific filters

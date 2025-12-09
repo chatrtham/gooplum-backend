@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "project_id": {
+    "type": "string",
+    "description": "The Google Cloud project ID to list datasets from"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of datasets to return (default: 100)",
+    "default": 100
+  }
+}
+```

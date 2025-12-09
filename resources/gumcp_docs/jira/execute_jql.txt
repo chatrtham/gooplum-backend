@@ -1,0 +1,32 @@
+Parameters Schema:
+```json
+{
+  "jql": {
+    "type": "string",
+    "description": "Raw JQL query string to execute (e.g., 'project = PROJ AND status = \"In Progress\"')"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of fields to include in the response (e.g., summary, description, assignee)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of results to return (default: 50, max: 100)"
+  },
+  "start_at": {
+    "type": "integer",
+    "description": "Index of the first issue to return (0-based, used for pagination)"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

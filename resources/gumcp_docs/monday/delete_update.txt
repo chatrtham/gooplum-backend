@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "update_id": {
+    "type": "integer",
+    "description": "The unique identifier of the update to delete"
+  }
+}
+```

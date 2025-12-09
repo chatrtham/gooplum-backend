@@ -1,0 +1,49 @@
+Parameters Schema:
+```json
+{
+  "workspace": {
+    "type": "string",
+    "description": "Workspace GID to filter goals on"
+  },
+  "team": {
+    "type": "string",
+    "description": "Team GID to filter goals on"
+  },
+  "project": {
+    "type": "string",
+    "description": "Project GID to filter goals on"
+  },
+  "portfolio": {
+    "type": "string",
+    "description": "Portfolio GID to filter goals on"
+  },
+  "task": {
+    "type": "string",
+    "description": "Task GID to filter goals on"
+  },
+  "is_workspace_level": {
+    "type": "boolean",
+    "description": "Filter to goals with is_workspace_level set to query value. Must be used with workspace parameter."
+  },
+  "time_periods": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of time period GIDs to filter goals on"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of goals to return across all pages",
+    "default": 100,
+    "maximum": 1000
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

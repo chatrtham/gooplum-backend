@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "field_id": {
+    "type": "integer",
+    "description": "The unique identifier of the field (column) to set the value for"
+  },
+  "entity_id": {
+    "type": "integer",
+    "description": "The unique identifier of the entity (person, organization, or opportunity)"
+  },
+  "value": {
+    "description": "The value to set. Type depends on field value_type: string for text/dropdown, integer for number/person/organization, object for location, ISO date string for date fields"
+  },
+  "list_entry_id": {
+    "type": "integer",
+    "description": "Optional: Required only if the field is list-specific"
+  }
+}
+```

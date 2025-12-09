@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "advertiser_id": {
+    "type": "string",
+    "description": "Required. The ID of the advertiser the line items belong to (int64 format as string)"
+  },
+  "line_item_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Required. The IDs of the line items whose targeting is being updated"
+  },
+  "delete_requests": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "description": "The assigned targeting options to delete"
+  },
+  "create_requests": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "description": "The assigned targeting options to create"
+  }
+}
+```

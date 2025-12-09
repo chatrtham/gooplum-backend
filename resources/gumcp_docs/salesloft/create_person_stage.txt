@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the new person stage (required)"
+  }
+}
+```

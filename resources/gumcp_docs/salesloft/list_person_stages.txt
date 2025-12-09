@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of person stages to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of person stages to fetch"
+  },
+  "active": {
+    "type": "boolean",
+    "description": "Filter by whether the person stage is active"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

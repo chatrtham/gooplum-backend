@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "issueId": {
+    "type": "string",
+    "description": "The issue ID"
+  },
+  "body": {
+    "type": "string",
+    "description": "The content of the comment as Markdown"
+  },
+  "parentId": {
+    "type": "string",
+    "description": "A parent comment ID to reply to"
+  }
+}
+```

@@ -1,0 +1,39 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Domain to investigate"
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date in UTC ISO format (e.g., '2024-05-15T00:00:00Z'). Defaults to previous month if not specified"
+  },
+  "device_type": {
+    "type": "string",
+    "description": "Device type (currently only desktop is supported)",
+    "enum": [
+      "desktop"
+    ],
+    "default": "desktop"
+  },
+  "country": {
+    "type": "string",
+    "description": "Country code (ISO 3166-1 Alpha-2). Defaults to global if not specified"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "target",
+        "display_date",
+        "country",
+        "device_type",
+        "conversion"
+      ]
+    },
+    "description": "Specific columns to include in the report"
+  }
+}
+```

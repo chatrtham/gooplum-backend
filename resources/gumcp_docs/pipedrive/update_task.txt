@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "task_id": {
+    "type": "integer",
+    "description": "The ID of the task to update"
+  },
+  "title": {
+    "type": "string",
+    "description": "The title of the task"
+  },
+  "project_id": {
+    "type": "number",
+    "description": "The ID of the project this task is associated with"
+  },
+  "description": {
+    "type": "string",
+    "description": "The description of the task"
+  },
+  "parent_task_id": {
+    "type": "number",
+    "description": "The ID of a parent task. Cannot be ID of a task which is already a subtask."
+  },
+  "assignee_id": {
+    "type": "number",
+    "description": "The ID of the user who will be the assignee of the task"
+  },
+  "done": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether the task is done or not. 0 = Not done, 1 = Done."
+  },
+  "due_date": {
+    "type": "string",
+    "description": "The due date of the task. YYYY-MM-DD format"
+  }
+}
+```

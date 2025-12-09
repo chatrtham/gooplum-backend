@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of jobs to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "title": {
+    "type": "string",
+    "description": "Search for jobs by title."
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Open",
+        "Closed",
+        "Archived"
+      ]
+    },
+    "description": "Filter jobs by status. When supplied, only jobs with the provided status(es) will be returned. Include 'Draft' to see draft jobs."
+  },
+  "openedAfter": {
+    "type": "string",
+    "description": "Return jobs opened after this date. Use ISO 8601 format"
+  },
+  "openedBefore": {
+    "type": "string",
+    "description": "Return jobs opened before this date. Use ISO 8601 format"
+  },
+  "closedAfter": {
+    "type": "string",
+    "description": "Return jobs closed after this date. Use ISO 8601 format"
+  },
+  "closedBefore": {
+    "type": "string",
+    "description": "Return jobs closed before this date. Use ISO 8601 format"
+  },
+  "includeUnpublishedJobPostingsIds": {
+    "type": "boolean",
+    "description": "Include unpublished job posting IDs in the response. Default is false.",
+    "default": false
+  },
+  "expand": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Choose to expand the result and include additional data for related objects."
+  }
+}
+```

@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "task_id": {
+    "type": "integer",
+    "description": "The task ID to update"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "complete",
+      "incomplete"
+    ],
+    "description": "Status of the task"
+  },
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format"
+    ],
+    "description": "The content format to return in the body field"
+  }
+}
+```

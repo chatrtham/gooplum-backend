@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "filter_id": {
+    "type": "integer",
+    "description": "The ID of the filter to use"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "open",
+      "completed",
+      "canceled",
+      "deleted"
+    ],
+    "description": "If supplied, includes only projects with the specified statuses. By default deleted projects are not returned."
+  },
+  "phase_id": {
+    "type": "integer",
+    "description": "If supplied, only projects in specified phase are returned"
+  },
+  "include_archived": {
+    "type": "boolean",
+    "description": "If true then archived projects are also included in the response. By default only not archived projects are returned.",
+    "default": false
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of projects to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

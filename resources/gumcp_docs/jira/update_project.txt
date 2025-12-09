@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "project_key": {
+    "type": "string",
+    "description": "Project key (e.g., PRJ)"
+  },
+  "name": {
+    "type": "string",
+    "description": "New project name"
+  },
+  "description": {
+    "type": "string",
+    "description": "New project description"
+  },
+  "lead_account_id": {
+    "type": "string",
+    "description": "Account ID of the new project lead"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

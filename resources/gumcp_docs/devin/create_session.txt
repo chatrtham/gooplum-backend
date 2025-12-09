@@ -1,0 +1,50 @@
+Parameters Schema:
+```json
+{
+  "prompt": {
+    "type": "string",
+    "description": "The task description for Devin to work on"
+  },
+  "snapshot_id": {
+    "type": "string",
+    "description": "ID of a machine snapshot to use"
+  },
+  "unlisted": {
+    "type": "boolean",
+    "description": "Whether the session should be unlisted"
+  },
+  "idempotent": {
+    "type": "boolean",
+    "description": "Enable idempotent session creation to avoid duplicates"
+  },
+  "max_acu_limit": {
+    "type": "integer",
+    "description": "Maximum ACU limit for the session"
+  },
+  "secret_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of secret IDs to use. Empty list uses no secrets."
+  },
+  "knowledge_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of knowledge IDs to use. Empty list uses no knowledge."
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of tags to add to the session"
+  },
+  "title": {
+    "type": "string",
+    "description": "Custom title for the session. Auto-generated if not provided."
+  }
+}
+```

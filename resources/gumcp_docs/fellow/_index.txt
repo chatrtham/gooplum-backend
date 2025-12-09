@@ -1,0 +1,11 @@
+# Fellow Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **get_me** - Get information about the authenticated user and their workspace
+2. **list_recordings** - List recordings from your Fellow workspace with optional filtering and pagination. Supports including expensive fields like transcripts.
+3. **get_recording** - Retrieve a specific recording by its ID, with optional transcript inclusion
+4. **list_notes** - List notes from your Fellow workspace with optional filtering and pagination. Supports including expensive fields like content and attendees.
+5. **get_note** - Retrieve a specific note by its ID, with optional content and attendees inclusion

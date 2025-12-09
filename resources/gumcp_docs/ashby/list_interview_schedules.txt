@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of interview schedules to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "applicationId": {
+    "type": "string",
+    "description": "Filter schedules by application ID. Only schedules for this specific application will be returned."
+  },
+  "interviewStageId": {
+    "type": "string",
+    "description": "Filter schedules by interview stage ID. Only schedules for this specific stage will be returned."
+  },
+  "createdAfter": {
+    "type": "string",
+    "description": "Return schedules created after this date. Use ISO 8601 format"
+  }
+}
+```

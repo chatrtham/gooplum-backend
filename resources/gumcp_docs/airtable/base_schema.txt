@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "include": {
+    "type": "array",
+    "description": "Additional fields to include in the response (optional)",
+    "items": {
+      "type": "string",
+      "enum": [
+        "visibleFieldIds"
+      ]
+    }
+  }
+}
+```

@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "integer",
+    "description": "The unique identifier of the list containing the entry"
+  },
+  "list_entry_id": {
+    "type": "integer",
+    "description": "The unique identifier of the list entry to retrieve"
+  }
+}
+```

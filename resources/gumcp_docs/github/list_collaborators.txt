@@ -1,0 +1,38 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of collaborators to return across all pages"
+  },
+  "affiliation": {
+    "type": "string",
+    "enum": [
+      "OUTSIDE",
+      "DIRECT",
+      "ALL"
+    ],
+    "description": "Collaborators affiliation level with a repository"
+  },
+  "login": {
+    "type": "string",
+    "description": "The login of one specific collaborator"
+  },
+  "query": {
+    "type": "string",
+    "description": "Filters users with query on user name and login"
+  }
+}
+```

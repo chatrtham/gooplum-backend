@@ -1,0 +1,42 @@
+Parameters Schema:
+```json
+{
+  "key": {
+    "type": "string",
+    "description": "Project key (e.g., PRJ)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Project name"
+  },
+  "description": {
+    "type": "string",
+    "description": "Project description"
+  },
+  "project_type_key": {
+    "type": "string",
+    "description": "Type of project (required)",
+    "enum": [
+      "software",
+      "service_desk",
+      "business"
+    ]
+  },
+  "lead_account_id": {
+    "type": "string",
+    "description": "Account ID of the project lead"
+  },
+  "template_key": {
+    "type": "string",
+    "description": "Template key for project creation"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

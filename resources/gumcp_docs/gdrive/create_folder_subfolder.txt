@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the folder to create"
+  },
+  "parent_folder_id": {
+    "type": "string",
+    "description": "Parent folder ID (optional). If not provided, creates in root."
+  },
+  "parent_folder_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the parent folder (optional)"
+  }
+}
+```

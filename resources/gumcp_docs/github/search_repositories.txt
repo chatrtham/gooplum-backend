@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query string"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return. Default: all results."
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "stars",
+      "forks",
+      "updated"
+    ],
+    "description": "Sort repositories by"
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Order of sorting"
+  }
+}
+```

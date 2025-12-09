@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The email address of the recipient (required)"
+  },
+  "transactionalId": {
+    "type": "string",
+    "description": "The ID of the transactional email to send (required)"
+  },
+  "addToAudience": {
+    "type": "boolean",
+    "description": "If true, creates contact in audience if it doesn't exist",
+    "default": false
+  },
+  "dataVariables": {
+    "type": "object",
+    "description": "Data variables for the email template (string or number values)"
+  },
+  "attachments": {
+    "type": "array",
+    "description": "File attachments (contact support to enable)",
+    "items": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+```

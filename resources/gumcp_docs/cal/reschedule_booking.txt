@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "bookingUid": {
+    "type": "string",
+    "description": "The unique ID of the booking to reschedule."
+  },
+  "start": {
+    "type": "string",
+    "description": "Start time in ISO 8601 format for the new booking (e.g., '2024-08-13T10:00:00Z')"
+  },
+  "rescheduledBy": {
+    "type": "string",
+    "description": "Email of the person who is rescheduling the booking (optional)"
+  },
+  "reschedulingReason": {
+    "type": "string",
+    "description": "Reason for rescheduling the booking (optional)"
+  }
+}
+```

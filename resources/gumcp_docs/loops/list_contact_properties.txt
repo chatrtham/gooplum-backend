@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "list": {
+    "type": "string",
+    "enum": [
+      "custom"
+    ],
+    "description": "Use 'custom' to only list your team's custom properties"
+  }
+}
+```

@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "location": {
+    "type": "string",
+    "description": "Location to search in (e.g., 'Manhattan, NY', 'Downtown San Francisco')"
+  },
+  "zoom_level": {
+    "type": "integer",
+    "description": "Map zoom level (1-21). Higher zoom = more detailed area, more places found but slower",
+    "default": 15,
+    "minimum": 1,
+    "maximum": 21
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of places to return",
+    "default": 50
+  },
+  "language": {
+    "type": "string",
+    "description": "Language for results (default: 'en')",
+    "default": "en"
+  },
+  "min_rating": {
+    "type": "string",
+    "description": "Minimum star rating filter",
+    "enum": [
+      "",
+      "two",
+      "twoAndHalf",
+      "three",
+      "threeAndHalf",
+      "four",
+      "fourAndHalf"
+    ],
+    "default": "four"
+  },
+  "website_filter": {
+    "type": "string",
+    "description": "Filter places by website presence",
+    "enum": [
+      "allPlaces",
+      "withWebsite",
+      "withoutWebsite"
+    ],
+    "default": "allPlaces"
+  },
+  "skip_closed_places": {
+    "type": "boolean",
+    "description": "Skip places that are temporarily or permanently closed",
+    "default": false
+  }
+}
+```

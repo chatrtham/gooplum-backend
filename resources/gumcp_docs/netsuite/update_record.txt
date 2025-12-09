@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., customer, invoice, salesOrder)"
+  },
+  "id": {
+    "type": "string",
+    "description": "Internal identifier"
+  },
+  "record_data": {
+    "type": "object",
+    "description": "Fields to update"
+  },
+  "replace": {
+    "type": "string",
+    "description": "Comma-separated sublist names to replace"
+  },
+  "replaceSelectedFields": {
+    "type": "boolean",
+    "description": "If true, deleted fields must be in replace parameter"
+  }
+}
+```

@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the opportunity"
+  },
+  "list_id": {
+    "type": "integer",
+    "description": "The ID of the opportunity list this opportunity will belong to"
+  },
+  "person_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Optional: Array of person IDs associated with this opportunity"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Optional: Array of organization IDs associated with this opportunity"
+  }
+}
+```

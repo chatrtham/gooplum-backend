@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name/title of the incident (e.g., 'Database connectivity issues')"
+  },
+  "visibility": {
+    "type": "string",
+    "enum": [
+      "public",
+      "private"
+    ],
+    "description": "Whether the incident should be public (open to all workspace members) or private (invite-only)"
+  },
+  "summary": {
+    "type": "string",
+    "description": "Detailed description of the incident"
+  },
+  "idempotency_key": {
+    "type": "string",
+    "description": "Unique string to prevent duplicate incident creation. If not provided, will be auto-generated"
+  },
+  "incident_type_id": {
+    "type": "string",
+    "description": "ID of the incident type to create this incident as"
+  },
+  "severity_id": {
+    "type": "string",
+    "description": "ID of the severity to assign to this incident"
+  },
+  "incident_status_id": {
+    "type": "string",
+    "description": "ID of the status to assign to this incident"
+  },
+  "mode": {
+    "type": "string",
+    "enum": [
+      "standard",
+      "retrospective",
+      "test",
+      "tutorial"
+    ],
+    "description": "Type of incident - standard (real), retrospective (imported), test, or tutorial"
+  },
+  "slack_team_id": {
+    "type": "string",
+    "description": "ID of the Slack team to create the incident in"
+  },
+  "slack_channel_name_override": {
+    "type": "string",
+    "description": "Override the default Slack channel name for this incident"
+  }
+}
+```

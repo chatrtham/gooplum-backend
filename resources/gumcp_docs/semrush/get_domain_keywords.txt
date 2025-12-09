@@ -1,0 +1,159 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Target to investigate (e.g., example.com, tools.example.com, example.com/blog/, https://example.com/page)"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Type of target to analyze",
+    "enum": [
+      "domain",
+      "subdomain",
+      "subfolder",
+      "url"
+    ]
+  },
+  "database": {
+    "type": "string",
+    "description": "Regional database for the report",
+    "enum": [
+      "us",
+      "uk",
+      "ca",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "br",
+      "au",
+      "ar",
+      "be",
+      "ch",
+      "cl",
+      "co",
+      "cz",
+      "dk",
+      "fi",
+      "gr",
+      "hk",
+      "hu",
+      "id",
+      "ie",
+      "il",
+      "in",
+      "jp",
+      "mx",
+      "my",
+      "nl",
+      "no",
+      "nz",
+      "pe",
+      "ph",
+      "pl",
+      "pt",
+      "ro",
+      "se",
+      "sg",
+      "th",
+      "tr",
+      "tw",
+      "ua",
+      "vn"
+    ]
+  },
+  "search_type": {
+    "type": "string",
+    "description": "Type of search keywords to retrieve",
+    "enum": [
+      "organic",
+      "paid"
+    ],
+    "default": "organic"
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return (default: 10000, max: 100000 for organic, 1000000 for paid)",
+    "minimum": 1,
+    "maximum": 1000000
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip before sending report",
+    "minimum": 0
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date for the report in UTC ISO format (e.g., '2023-12-15T00:00:00Z'). Converted to YYYYMMDD for daily changes or YYYYMM15 for monthly data"
+  },
+  "display_daily": {
+    "type": "integer",
+    "description": "Set to 1 to get daily updates on position changes in the last 31 days (organic only)",
+    "enum": [
+      1
+    ]
+  },
+  "display_positions": {
+    "type": "string",
+    "description": "Filter by position changes",
+    "enum": [
+      "new",
+      "lost",
+      "rise",
+      "fall"
+    ]
+  },
+  "display_positions_type": {
+    "type": "string",
+    "description": "Type of positions to include (organic only)",
+    "enum": [
+      "organic",
+      "all",
+      "serp_features"
+    ],
+    "default": "organic"
+  },
+  "display_sort": {
+    "type": "string",
+    "description": "Column to sort results by (e.g., po_asc, po_desc, tr_desc)"
+  },
+  "display_filter": {
+    "type": "string",
+    "description": "Filters for columns (e.g., +|Ph|Co|seo)"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Ph - Keyword",
+        "Po - Position",
+        "Pp - Previous Position",
+        "Pd - Position Difference",
+        "Nq - Search Volume",
+        "Cp - CPC",
+        "Ur - URL",
+        "Vu - Visible URL",
+        "Tr - Traffic (%)",
+        "Tc - Traffic Cost",
+        "Co - Competition",
+        "Nr - Number of Results",
+        "Td - Trends",
+        "Ab - Adwords Block",
+        "Ds - Description",
+        "Tt - Title",
+        "Tg - Traffic Share",
+        "Ts - Timestamp",
+        "In - Intent",
+        "Kd - Keyword Difficulty",
+        "Fk - Keywords SERP Features",
+        "Fp - SERP Features",
+        "Pt - Position Type"
+      ]
+    },
+    "description": "Specific columns to include in the report. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "interviewerPoolId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the interviewer pool to retrieve information for."
+  }
+}
+```

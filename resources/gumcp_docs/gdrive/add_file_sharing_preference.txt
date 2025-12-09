@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the file to share"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file to share"
+  },
+  "role": {
+    "type": "string",
+    "description": "Role to grant (reader, commenter, writer, fileOrganizer, organizer, owner)",
+    "enum": [
+      "reader",
+      "commenter",
+      "writer",
+      "fileOrganizer",
+      "organizer",
+      "owner"
+    ]
+  },
+  "type": {
+    "type": "string",
+    "description": "Type of sharing (user, group, domain, anyone)",
+    "enum": [
+      "user",
+      "group",
+      "domain",
+      "anyone"
+    ]
+  },
+  "email_address": {
+    "type": "string",
+    "description": "Email address for user or group sharing (required for user/group types)"
+  },
+  "domain": {
+    "type": "string",
+    "description": "Domain for domain sharing (required for domain type)"
+  }
+}
+```

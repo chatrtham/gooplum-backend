@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of endpoints to return"
+  }
+}
+```

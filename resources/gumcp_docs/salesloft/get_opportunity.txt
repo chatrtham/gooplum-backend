@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "opportunity_id": {
+    "type": "integer",
+    "description": "Opportunity ID to fetch"
+  }
+}
+```

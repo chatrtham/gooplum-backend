@@ -1,0 +1,73 @@
+Parameters Schema:
+```json
+{
+  "interviewScheduleId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the interview schedule to update. Only schedules created with the same API key can be updated."
+  },
+  "interviewEvent": {
+    "type": "object",
+    "description": "An event on the interview schedule to create or update. Include interviewEventId to update an existing event.",
+    "properties": {
+      "startTime": {
+        "type": "string",
+        "description": "The start time of this event in ISO 8601 format (e.g., '2025-02-24T10:00:00Z')."
+      },
+      "endTime": {
+        "type": "string",
+        "description": "The end time of this event in ISO 8601 format (e.g., '2025-02-24T11:00:00Z')."
+      },
+      "interviewers": {
+        "type": "array",
+        "description": "The interviewers for this event.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "The email address of the user in Ashby."
+            },
+            "feedbackRequired": {
+              "type": "boolean",
+              "description": "Whether this interviewer is required to provide feedback. Default is false.",
+              "default": false
+            }
+          },
+          "required": [
+            "email"
+          ]
+        }
+      },
+      "interviewId": {
+        "type": "string",
+        "description": "The unique identifier (UUID) of the interview template to use. If not provided, organization's default interview will be used."
+      },
+      "interviewEventId": {
+        "type": "string",
+        "description": "The unique identifier (UUID) of an existing interview event to update. Omit to create a new event."
+      },
+      "extraData": {
+        "type": "object",
+        "description": "Key-value pairs for custom data storage (max 1kb total, keys max 100 chars, values max 512 chars)."
+      }
+    },
+    "required": [
+      "startTime",
+      "endTime",
+      "interviewers"
+    ]
+  },
+  "interviewEventIdToCancel": {
+    "type": "array",
+    "description": "Array of interview event IDs to cancel.",
+    "items": {
+      "type": "string"
+    }
+  },
+  "allowFeedbackDeletion": {
+    "type": "boolean",
+    "description": "Allow canceling events with submitted feedback (this will delete the feedback). Default is false.",
+    "default": false
+  }
+}
+```

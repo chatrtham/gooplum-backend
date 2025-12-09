@@ -1,0 +1,56 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the goal (required)"
+  },
+  "workspace": {
+    "type": "string",
+    "description": "Workspace GID where the goal will be created. Required if team is not specified."
+  },
+  "team": {
+    "type": "string",
+    "description": "Team GID where the goal will be created. Required if workspace is not specified."
+  },
+  "is_workspace_level": {
+    "type": "boolean",
+    "description": "Whether the goal belongs to the workspace (true) or is a team-level goal (false).",
+    "default": true
+  },
+  "notes": {
+    "type": "string",
+    "description": "Free-form textual information associated with the goal"
+  },
+  "due_on": {
+    "type": "string",
+    "description": "Due date in YYYY-MM-DD format"
+  },
+  "start_on": {
+    "type": "string",
+    "description": "Start date in YYYY-MM-DD format. Cannot be set unless there is an accompanying due date."
+  },
+  "owner": {
+    "type": "string",
+    "description": "User GID or email to set as the goal owner"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user GIDs or emails to follow the goal"
+  },
+  "time_period": {
+    "type": "string",
+    "description": "Time period GID for the goal"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

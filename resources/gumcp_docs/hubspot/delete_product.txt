@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "product_id": {
+    "type": "string",
+    "description": "HubSpot product ID (required)"
+  }
+}
+```

@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "file": {
+    "type": "object",
+    "properties": {
+      "file_name": {
+        "type": "string",
+        "description": "Name of the file to parse."
+      },
+      "file_url": {
+        "type": "string",
+        "description": "Publicly accessible URL of the file to parse."
+      },
+      "file_id": {
+        "type": "string",
+        "description": "Extend file ID if the file has already been uploaded."
+      }
+    },
+    "description": "File to parse. Provide either file_url, file_id, or file_name."
+  },
+  "config": {
+    "type": "object",
+    "description": "Parse configuration: target format (markdown/spatial), chunking strategy (page/document/section), block options (tables, figures, text), and advanced options (page rotation, OCR, page ranges).",
+    "additionalProperties": true
+  },
+  "response_type": {
+    "type": "string",
+    "enum": [
+      "json",
+      "url"
+    ],
+    "description": "Response format: 'json' returns chunks with inline content, 'url' returns presigned URLs to content instead of inline data."
+  },
+  "async": {
+    "type": "boolean",
+    "description": "If true, parses asynchronously and returns parser run ID for polling with get_parser_run. If false (default), waits for completion and returns full results. Use async for large files to avoid timeouts."
+  }
+}
+```

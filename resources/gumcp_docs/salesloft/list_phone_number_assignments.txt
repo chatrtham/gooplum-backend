@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of phone number assignments to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of phone number assignments to fetch"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

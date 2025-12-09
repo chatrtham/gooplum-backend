@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "feed_item_id": {
+    "type": "string",
+    "description": "The ID of the feed item to get comments for"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of comments to return",
+    "default": 25
+  }
+}
+```

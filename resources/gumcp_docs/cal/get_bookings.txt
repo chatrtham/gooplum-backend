@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "upcoming",
+        "recurring",
+        "past",
+        "cancelled",
+        "unconfirmed"
+      ]
+    },
+    "description": "Filter bookings by status"
+  },
+  "attendeeEmail": {
+    "type": "string",
+    "description": "Filter bookings by the attendee's email address"
+  },
+  "attendeeName": {
+    "type": "string",
+    "description": "Filter bookings by the attendee's name"
+  },
+  "eventTypeIds": {
+    "type": "string",
+    "description": "Filter bookings by event type ids (comma-separated)"
+  },
+  "eventTypeId": {
+    "type": "string",
+    "description": "Filter bookings by event type id"
+  },
+  "take": {
+    "type": "number",
+    "description": "The number of items to return"
+  },
+  "skip": {
+    "type": "number",
+    "description": "The number of items to skip"
+  }
+}
+```

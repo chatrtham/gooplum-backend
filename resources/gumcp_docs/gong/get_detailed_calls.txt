@@ -1,0 +1,180 @@
+Parameters Schema:
+```json
+{
+  "fromDateTime": {
+    "type": "string",
+    "description": "Date and time (in ISO-8601 format) from which to list recorded calls. (Legacy parameter - use filter.fromDateTime instead)"
+  },
+  "toDateTime": {
+    "type": "string",
+    "description": "Date and time (in ISO-8601 format) until which to list recorded calls. (Legacy parameter - use filter.toDateTime instead)"
+  },
+  "callIds": {
+    "type": "array",
+    "description": "List of call IDs to retrieve. (Legacy parameter - use filter.callIds instead)",
+    "items": {
+      "type": "string"
+    }
+  },
+  "include_content": {
+    "type": "boolean",
+    "description": "Whether to include call content like trackers and topics. (Legacy parameter - use contentSelector instead)"
+  },
+  "include_media_urls": {
+    "type": "boolean",
+    "description": "Whether to include media URLs for the calls. (Legacy parameter - use contentSelector instead)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of records to return. If provided, the API will automatically paginate through results until this limit is reached. Preferred over cursor for ease of use."
+  },
+  "cursor": {
+    "type": "string",
+    "description": "When paging is needed, provide the value supplied by the previous API call to bring the following page of records."
+  },
+  "filter": {
+    "type": "object",
+    "properties": {
+      "fromDateTime": {
+        "type": "string",
+        "description": "Date and time (in ISO-8601 format) from which to list recorded calls. Returns calls that started on or after the specified date and time. If not provided, list starts with earliest call. The date applies to call start time."
+      },
+      "toDateTime": {
+        "type": "string",
+        "description": "Date and time (in ISO-8601 format) until which to list recorded calls. Returns calls that started up to but excluding specified date and time. If not provided, list ends with most recent call. The date applies to call start time."
+      },
+      "workspaceId": {
+        "type": "string",
+        "description": "Optional Workspace identifier, if supplied the API will return only the calls belonging to this workspace."
+      },
+      "callIds": {
+        "type": "array",
+        "description": "List of calls Ids to be filtered. If not supplied, returns all calls between fromDateTime and toDateTime.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "primaryUserIds": {
+        "type": "array",
+        "description": "An optional list of user identifiers, if supplied the API will return only the calls hosted by the specified users. The identifiers in this field match the primaryUserId field of the calls.",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "contentSelector": {
+    "type": "object",
+    "properties": {
+      "context": {
+        "type": "string",
+        "description": "If 'Basic', add links to external systems (context objects) such as CRM, Telephony System, Case Management. If 'Extended' include also data (context fields) for these links. Default value 'None'",
+        "enum": [
+          "None",
+          "Basic",
+          "Extended"
+        ]
+      },
+      "contextTiming": {
+        "type": "array",
+        "description": "Timing for the context data. The field is optional and can contain either 'Now' or 'TimeOfCall' or both. The default value is ['Now']. Can be provided only when the context field is set to 'Extended'",
+        "items": {
+          "type": "string",
+          "enum": [
+            "Now",
+            "TimeOfCall"
+          ]
+        }
+      },
+      "exposedFields": {
+        "type": "object",
+        "properties": {
+          "parties": {
+            "type": "boolean",
+            "description": "If true, add information about the parties of the call"
+          },
+          "content": {
+            "type": "object",
+            "properties": {
+              "structure": {
+                "type": "boolean",
+                "description": "If true, add call agenda, if available"
+              },
+              "topics": {
+                "type": "boolean",
+                "description": "If true, add duration of call topics"
+              },
+              "trackers": {
+                "type": "boolean",
+                "description": "If true, returns smart tracker and keyword tracker information for the call."
+              },
+              "trackerOccurrences": {
+                "type": "boolean",
+                "description": "If true, the API will return the timing and speaker ID of each occurrence of a tracker (in addition to other tracker data). This functionality must be used in combination with the 'trackers' field. The occurrence data is available only for the calls recorded since Jan 1, 2023."
+              },
+              "pointsOfInterest": {
+                "type": "boolean",
+                "description": "deprecated."
+              },
+              "brief": {
+                "type": "boolean",
+                "description": "When true, returns the spotlight call brief."
+              },
+              "outline": {
+                "type": "boolean",
+                "description": "When true, returns the call outline."
+              },
+              "highlights": {
+                "type": "boolean",
+                "description": "When true, returns the call highlights."
+              },
+              "callOutcome": {
+                "type": "boolean",
+                "description": "When true, returns the outcome of the call."
+              },
+              "keyPoints": {
+                "type": "boolean",
+                "description": "When true, returns the key points of the call."
+              }
+            }
+          },
+          "interaction": {
+            "type": "object",
+            "properties": {
+              "speakers": {
+                "type": "boolean",
+                "description": "If true, add the time each participant spoke."
+              },
+              "video": {
+                "type": "boolean",
+                "description": "If true, add video statistics"
+              },
+              "personInteractionStats": {
+                "type": "boolean",
+                "description": "If true, add statistics for the host of the call."
+              },
+              "questions": {
+                "type": "boolean",
+                "description": "If true, add question counts"
+              }
+            }
+          },
+          "collaboration": {
+            "type": "object",
+            "properties": {
+              "publicComments": {
+                "type": "boolean",
+                "description": "If true, add public comments made for this call"
+              }
+            }
+          },
+          "media": {
+            "type": "boolean",
+            "description": "If true and exist, add audio url and video url of the call. The urls will be available for 8 hours."
+          }
+        }
+      }
+    }
+  }
+}
+```

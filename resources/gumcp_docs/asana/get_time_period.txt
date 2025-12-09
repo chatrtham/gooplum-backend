@@ -1,0 +1,16 @@
+Parameters Schema:
+```json
+{
+  "time_period_gid": {
+    "type": "string",
+    "description": "Time period GID (required)"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response (e.g., parent, parent.period)"
+  }
+}
+```

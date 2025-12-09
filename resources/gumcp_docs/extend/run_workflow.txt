@@ -1,0 +1,71 @@
+Parameters Schema:
+```json
+{
+  "workflow_id": {
+    "type": "string",
+    "description": "The unique identifier of the workflow to execute. Example: 'workflow_BMdfq_yWM3sT-ZzvCnA3f'"
+  },
+  "files": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "file_name": {
+          "type": "string",
+          "description": "Name of the file being processed."
+        },
+        "file_url": {
+          "type": "string",
+          "description": "Publicly accessible URL of the file to process."
+        },
+        "file_id": {
+          "type": "string",
+          "description": "Extend file ID if the file has already been uploaded to Extend."
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "processor_id": {
+                "type": "string",
+                "description": "The processor ID for which output is pre-computed."
+              },
+              "output": {
+                "type": "object",
+                "description": "The pre-computed processor output data to use instead of running the processor."
+              }
+            },
+            "required": [
+              "processor_id",
+              "output"
+            ]
+          },
+          "description": "Optional pre-computed processor outputs to skip processor execution and use provided outputs directly."
+        }
+      }
+    },
+    "description": "Array of files to process through the workflow. Each file can have optional pre-computed outputs."
+  },
+  "raw_texts": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of raw text strings to process instead of files."
+  },
+  "version": {
+    "type": "string",
+    "description": "Specific version of the workflow to use. If not provided, uses the latest version."
+  },
+  "priority": {
+    "type": "integer",
+    "description": "Priority level for execution queue (higher values = higher priority)."
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Custom metadata object to attach to the workflow run for tracking purposes.",
+    "additionalProperties": true
+  }
+}
+```

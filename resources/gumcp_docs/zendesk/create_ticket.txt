@@ -1,0 +1,155 @@
+Parameters Schema:
+```json
+{
+  "subject": {
+    "type": "string",
+    "description": "Ticket subject line"
+  },
+  "comment_body": {
+    "type": "string",
+    "description": "Initial comment body text (required for ticket creation)"
+  },
+  "comment_html_body": {
+    "type": "string",
+    "description": "Initial comment body as HTML (alternative to comment_body)"
+  },
+  "requester_id": {
+    "type": "string",
+    "description": "User ID of the ticket requester"
+  },
+  "requester_email": {
+    "type": "string",
+    "description": "Email address of the requester (alternative to requester_id)"
+  },
+  "submitter_id": {
+    "type": "string",
+    "description": "User ID of the ticket submitter (defaults to authenticated user)"
+  },
+  "assignee_id": {
+    "type": "string",
+    "description": "User ID to assign the ticket to"
+  },
+  "assignee_email": {
+    "type": "string",
+    "description": "Email address to assign the ticket to (alternative to assignee_id)"
+  },
+  "group_id": {
+    "type": "string",
+    "description": "Group ID to assign the ticket to"
+  },
+  "organization_id": {
+    "type": "string",
+    "description": "Organization ID to associate with the ticket"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "new",
+      "open",
+      "pending",
+      "hold",
+      "solved",
+      "closed"
+    ],
+    "description": "Ticket status (default: new)",
+    "default": "new"
+  },
+  "priority": {
+    "type": "string",
+    "enum": [
+      "urgent",
+      "high",
+      "normal",
+      "low"
+    ],
+    "description": "Ticket priority (default: normal)",
+    "default": "normal"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "problem",
+      "incident",
+      "question",
+      "task"
+    ],
+    "description": "Ticket type (default: question)",
+    "default": "question"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of tags to add to the ticket"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "External ID to link with external systems"
+  },
+  "due_at": {
+    "type": "string",
+    "description": "Due date for task tickets (ISO 8601 format, e.g., '2023-12-31T23:59:59Z')"
+  },
+  "custom_fields": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "value"
+      ]
+    },
+    "description": "Array of custom field objects with id and value"
+  },
+  "collaborator_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user IDs to add as collaborators"
+  },
+  "collaborator_emails": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of email addresses to add as collaborators"
+  },
+  "follower_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of agent user IDs to add as followers"
+  },
+  "email_cc_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user IDs to add as email CCs"
+  },
+  "comment_public": {
+    "type": "boolean",
+    "description": "Whether the initial comment is public (default: true)",
+    "default": true
+  },
+  "problem_id": {
+    "type": "string",
+    "description": "Problem ticket ID (for incident tickets)"
+  },
+  "via_followup_source_id": {
+    "type": "string",
+    "description": "Source ticket ID when creating a follow-up ticket"
+  }
+}
+```

@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "site_id": {
+    "type": "string",
+    "description": "Unique identifier for a Site"
+  },
+  "displayName": {
+    "type": "string",
+    "description": "Name of the collection. Each collection name must be distinct."
+  },
+  "singularName": {
+    "type": "string",
+    "description": "Singular name of each item."
+  },
+  "slug": {
+    "type": "string",
+    "description": "Part of a URL that identifies the collection"
+  },
+  "fields": {
+    "type": "array",
+    "description": "An array of custom fields to add to the collection",
+    "items": {
+      "type": "object"
+    }
+  }
+}
+```

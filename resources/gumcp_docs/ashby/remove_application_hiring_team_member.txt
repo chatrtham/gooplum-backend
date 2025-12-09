@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "applicationId": {
+    "type": "string",
+    "description": "The application (UUID) to unassign the user a role from."
+  },
+  "teamMemberId": {
+    "type": "string",
+    "description": "The user (UUID) to unassign the role from."
+  },
+  "teamMemberEmail": {
+    "type": "string",
+    "description": "(Preferred) Email address of the user to unassign the role from. Will be automatically resolved to teamMemberId."
+  },
+  "roleId": {
+    "type": "string",
+    "description": "The hiring team role (UUID) to unassign."
+  }
+}
+```

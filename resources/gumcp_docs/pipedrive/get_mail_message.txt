@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "message_id": {
+    "type": "integer",
+    "description": "The ID of the mail message to fetch"
+  },
+  "include_body": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether to include the full message body. 0 = Don't include, 1 = Include. Default: 0",
+    "default": 0
+  }
+}
+```

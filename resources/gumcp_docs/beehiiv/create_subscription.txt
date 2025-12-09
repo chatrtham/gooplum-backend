@@ -1,0 +1,99 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "email": {
+    "type": "string",
+    "description": "The email address of the subscription"
+  },
+  "reactivate_existing": {
+    "type": "boolean",
+    "description": "Whether or not to reactivate the subscription if they have already unsubscribed"
+  },
+  "send_welcome_email": {
+    "type": "boolean",
+    "description": "Whether to send a welcome email"
+  },
+  "utm_source": {
+    "type": "string",
+    "description": "The source of the subscription"
+  },
+  "utm_medium": {
+    "type": "string",
+    "description": "The medium of the subscription"
+  },
+  "utm_campaign": {
+    "type": "string",
+    "description": "The acquisition campaign of the subscription"
+  },
+  "referring_site": {
+    "type": "string",
+    "description": "The website that the subscriber was referred from"
+  },
+  "referral_code": {
+    "type": "string",
+    "description": "A subscriber's referral code to give referral credit for the new subscription"
+  },
+  "custom_fields": {
+    "type": "array",
+    "description": "Custom fields to set for the subscription",
+    "items": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom field"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the custom field"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    }
+  },
+  "double_opt_override": {
+    "type": "string",
+    "description": "Override publication double-opt settings for this subscription"
+  },
+  "tier": {
+    "type": "string",
+    "description": "The tier for this subscription",
+    "enum": [
+      "free",
+      "premium"
+    ]
+  },
+  "premium_tiers": {
+    "type": "array",
+    "description": "The names of the premium tiers this subscription is associated with",
+    "items": {
+      "type": "string"
+    }
+  },
+  "premium_tier_ids": {
+    "type": "array",
+    "description": "The ids of the premium tiers this subscription is associated with",
+    "items": {
+      "type": "string"
+    }
+  },
+  "stripe_customer_id": {
+    "type": "string",
+    "description": "The Stripe customer ID for this subscription"
+  },
+  "automation_ids": {
+    "type": "array",
+    "description": "Enroll the subscriber into automations after their subscription has been created",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

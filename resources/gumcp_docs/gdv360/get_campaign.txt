@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "advertiser_id": {
+    "type": "string",
+    "description": "Required. The ID of the advertiser this campaign belongs to (int64 format as string)"
+  },
+  "campaign_id": {
+    "type": "string",
+    "description": "Required. The ID of the campaign to fetch (int64 format as string)"
+  }
+}
+```

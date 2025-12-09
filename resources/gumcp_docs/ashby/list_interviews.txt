@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of interviews to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "includeArchived": {
+    "type": "boolean",
+    "description": "Include archived interviews in the response. Default is false.",
+    "default": false
+  },
+  "includeNonSharedInterviews": {
+    "type": "boolean",
+    "description": "Include job-specific interviews in addition to shared interviews. Default is false.",
+    "default": false
+  }
+}
+```

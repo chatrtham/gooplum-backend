@@ -1,0 +1,74 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the tier"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the tier"
+  },
+  "prices_attributes": {
+    "type": "array",
+    "description": "Price attributes for the tier",
+    "items": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "Currency for the price",
+          "enum": [
+            "usd",
+            "gbp",
+            "eur",
+            "aud",
+            "cad",
+            "nzd"
+          ]
+        },
+        "amount_cents": {
+          "type": "integer",
+          "description": "Amount in cents"
+        },
+        "interval": {
+          "type": "string",
+          "description": "Billing interval",
+          "enum": [
+            "month",
+            "year"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this price is enabled"
+        },
+        "interval_display": {
+          "type": "string",
+          "description": "Display text for the interval (e.g., 'Monthly')"
+        },
+        "cta": {
+          "type": "string",
+          "description": "Call to action text"
+        },
+        "features": {
+          "type": "array",
+          "description": "Features included with this price",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "currency",
+        "amount_cents",
+        "interval"
+      ]
+    }
+  }
+}
+```

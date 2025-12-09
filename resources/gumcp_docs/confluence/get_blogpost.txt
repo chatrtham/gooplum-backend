@@ -1,0 +1,90 @@
+Parameters Schema:
+```json
+{
+  "blogpost_id": {
+    "type": "integer",
+    "description": "The blog post ID"
+  },
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "view",
+      "export_view",
+      "anonymous_export_view",
+      "styled_view",
+      "editor"
+    ],
+    "description": "Content format to return in body"
+  },
+  "get_draft": {
+    "type": "boolean",
+    "description": "Retrieve the draft version",
+    "default": false
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "current",
+        "trashed",
+        "deleted",
+        "historical",
+        "draft"
+      ]
+    },
+    "description": "Filter by status"
+  },
+  "version": {
+    "type": "integer",
+    "description": "Retrieve a previously published version"
+  },
+  "include_labels": {
+    "type": "boolean",
+    "description": "Include labels",
+    "default": false
+  },
+  "include_properties": {
+    "type": "boolean",
+    "description": "Include content properties",
+    "default": false
+  },
+  "include_operations": {
+    "type": "boolean",
+    "description": "Include operations",
+    "default": false
+  },
+  "include_likes": {
+    "type": "boolean",
+    "description": "Include likes",
+    "default": false
+  },
+  "include_versions": {
+    "type": "boolean",
+    "description": "Include versions",
+    "default": false
+  },
+  "include_version": {
+    "type": "boolean",
+    "description": "Include current version",
+    "default": true
+  },
+  "include_favorited_by_current_user_status": {
+    "type": "boolean",
+    "description": "Include favorited status",
+    "default": false
+  },
+  "include_webresources": {
+    "type": "boolean",
+    "description": "Include web resources",
+    "default": false
+  },
+  "include_collaborators": {
+    "type": "boolean",
+    "description": "Include collaborators",
+    "default": false
+  }
+}
+```

@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "interviewerPoolId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the interviewer pool to add the user to."
+  },
+  "userId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the Ashby user to add to the pool."
+  },
+  "userEmail": {
+    "type": "string",
+    "description": "(Preferred) Email address of the user to add to the pool. Will be automatically resolved to userId."
+  },
+  "trainingStageId": {
+    "type": "string",
+    "description": "Optional training path stage (UUID) to assign the user to. If not provided, user is added as fully qualified."
+  }
+}
+```

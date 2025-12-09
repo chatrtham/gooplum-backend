@@ -1,0 +1,18 @@
+# Airtable Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (12 total)
+
+1. **list_records** - List records in an Airtable table
+2. **create_records** - Create new records in an Airtable table
+3. **update_records** - Update existing records in an Airtable table
+4. **list_bases** - List all accessible Airtable bases with their ID, name, and permission level
+5. **list_tables** - List all tables in a given Airtable base
+6. **base_schema** - Get complete schema for all tables in a base
+7. **get_record** - Get a single record by its ID from a table
+8. **delete_records** - Delete one or more records from a table
+9. **update_table** - Update an existing table's name or description
+10. **create_field** - Add a new field (column) to an existing table
+11. **update_field** - Update a field's metadata in a table
+12. **list_comments** - List all comments for a specific record from newest to oldest

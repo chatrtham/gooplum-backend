@@ -1,0 +1,47 @@
+Parameters Schema:
+```json
+{
+  "access": {
+    "type": "string",
+    "enum": [
+      "personal",
+      "shared",
+      "account"
+    ],
+    "description": "Filter views by access level"
+  },
+  "active": {
+    "type": "boolean",
+    "description": "Filter by active status: true for active views, false for inactive views"
+  },
+  "group_id": {
+    "type": "string",
+    "description": "Filter views belonging to a specific group"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "alphabetical",
+      "created_at",
+      "updated_at",
+      "position"
+    ],
+    "description": "Sort views by field (default: position)",
+    "default": "position"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending (default: asc for alphabetical/position, desc for others)"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of views to return (default: 100)",
+    "default": 100
+  }
+}
+```

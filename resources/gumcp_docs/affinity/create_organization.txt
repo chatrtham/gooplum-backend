@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the organization"
+  },
+  "domain": {
+    "type": "string",
+    "description": "Optional: The domain name of the organization (e.g., 'company.com')"
+  },
+  "person_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Optional: Array of person IDs to associate with this organization"
+  }
+}
+```

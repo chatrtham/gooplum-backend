@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return",
+    "default": 20
+  }
+}
+```

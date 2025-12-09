@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of recordings to return across all pages (automatically handles pagination)",
+    "default": 100
+  },
+  "include_transcript": {
+    "type": "boolean",
+    "description": "Whether to include transcript data (expensive field)",
+    "default": false
+  },
+  "event_guid": {
+    "type": "string",
+    "description": "Filter recordings by specific event GUID"
+  },
+  "title": {
+    "type": "string",
+    "description": "Filter recordings by title (partial match)"
+  },
+  "channel_id": {
+    "type": "string",
+    "description": "Filter recordings by channel ID"
+  },
+  "created_at_start": {
+    "type": "string",
+    "description": "Filter recordings created after this date (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "created_at_end": {
+    "type": "string",
+    "description": "Filter recordings created before this date (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "updated_at_start": {
+    "type": "string",
+    "description": "Filter recordings updated after this date (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "updated_at_end": {
+    "type": "string",
+    "description": "Filter recordings updated before this date (ISO 8601 format: YYYY-MM-DD)"
+  }
+}
+```

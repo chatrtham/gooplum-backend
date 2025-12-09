@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "ID of the board for which phases are requested"
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "A limit on the number of objects to be returned (1-100)"
+  },
+  "page": {
+    "type": "integer",
+    "description": "Page number for paginated results"
+  }
+}
+```

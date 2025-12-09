@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "issue_key": {
+    "type": "string",
+    "description": "Issue key (e.g., PRJ-123)"
+  },
+  "body": {
+    "type": "string",
+    "description": "Comment text (supports mentions like {acc_id:account_id} or {email_id:email})"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

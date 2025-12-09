@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "jobId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the job to change status for."
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "Draft",
+      "Open",
+      "Closed",
+      "Archived"
+    ],
+    "description": "The new status to apply to the job."
+  }
+}
+```

@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Table ID to add the field to"
+  },
+  "field_name": {
+    "type": "string",
+    "description": "Name for the new field"
+  },
+  "field_type": {
+    "type": "string",
+    "description": "Type of field (singleLineText, multipleAttachment, etc.)"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description for the field (optional)"
+  },
+  "options": {
+    "type": "object",
+    "description": "Options specific to the field type (optional)"
+  }
+}
+```

@@ -1,0 +1,73 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the task (required)"
+  },
+  "notes": {
+    "type": "string",
+    "description": "Free-form textual information associated with the task (description)"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "User GID or email to assign the task to"
+  },
+  "projects": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of project GIDs to add the task to"
+  },
+  "workspace": {
+    "type": "string",
+    "description": "Workspace GID where the task will be created. Required if no projects specified."
+  },
+  "parent": {
+    "type": "string",
+    "description": "Parent task GID to create this as a subtask"
+  },
+  "due_on": {
+    "type": "string",
+    "description": "Due date in YYYY-MM-DD format"
+  },
+  "due_at": {
+    "type": "string",
+    "description": "Due date and time in ISO 8601 format. Cannot be used with due_on."
+  },
+  "start_on": {
+    "type": "string",
+    "description": "Start date in YYYY-MM-DD format"
+  },
+  "start_at": {
+    "type": "string",
+    "description": "Start date and time in ISO 8601 format. Cannot be used with start_on."
+  },
+  "completed": {
+    "type": "boolean",
+    "description": "Whether the task is completed"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of tag GIDs to add to the task"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user GIDs or emails to follow the task"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

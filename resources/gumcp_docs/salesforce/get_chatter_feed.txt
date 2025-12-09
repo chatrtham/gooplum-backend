@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "record_id": {
+    "type": "string",
+    "description": "Optional record ID to get feed for specific record. If not provided, gets user's news feed"
+  },
+  "feed_type": {
+    "type": "string",
+    "description": "Type of feed to retrieve: 'record' (default), 'news', 'user'",
+    "default": "record"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of feed items to return",
+    "default": 25
+  }
+}
+```

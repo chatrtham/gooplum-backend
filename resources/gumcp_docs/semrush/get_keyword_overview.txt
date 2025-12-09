@@ -1,0 +1,82 @@
+Parameters Schema:
+```json
+{
+  "phrase": {
+    "type": "string",
+    "description": "Keyword or keyword expression to investigate"
+  },
+  "database": {
+    "type": "string",
+    "description": "Regional database",
+    "enum": [
+      "us",
+      "uk",
+      "ca",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "br",
+      "au",
+      "ar",
+      "be",
+      "ch",
+      "cl",
+      "co",
+      "cz",
+      "dk",
+      "fi",
+      "gr",
+      "hk",
+      "hu",
+      "id",
+      "ie",
+      "il",
+      "in",
+      "jp",
+      "mx",
+      "my",
+      "nl",
+      "no",
+      "nz",
+      "pe",
+      "ph",
+      "pl",
+      "pt",
+      "ro",
+      "se",
+      "sg",
+      "th",
+      "tr",
+      "tw",
+      "ua",
+      "vn"
+    ]
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date for the report in UTC ISO format (e.g., '2023-12-15T00:00:00Z')"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Dt - Date",
+        "Db - Database",
+        "Ph - Keyword",
+        "Nq - Search Volume",
+        "Cp - CPC",
+        "Co - Competition",
+        "Nr - Number of Results",
+        "In - Intent",
+        "Kd - Keyword Difficulty",
+        "Td - Trends",
+        "Fk - Keywords SERP Features"
+      ]
+    },
+    "description": "Specific columns to include in the report. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

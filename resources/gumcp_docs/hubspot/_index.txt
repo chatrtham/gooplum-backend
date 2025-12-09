@@ -1,0 +1,46 @@
+# Hubspot Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (40 total)
+
+1. **list_contacts** - List HubSpot contacts with optional filtering
+2. **create_contact** - Create a new HubSpot contact
+3. **update_contact** - Update an existing HubSpot contact
+4. **search_contacts** - Search for HubSpot contacts using advanced filters
+5. **search_companies** - Search for HubSpot companies using advanced filters and sorting options
+6. **list_companies** - List HubSpot companies with optional filtering
+7. **create_company** - Create a new HubSpot company
+8. **update_company** - Update an existing HubSpot company
+9. **list_deals** - List or search HubSpot deals with optional filtering
+10. **create_deal** - Create a new HubSpot deal
+11. **update_deal** - Update an existing HubSpot deal
+12. **get_deal** - Retrieve a specific HubSpot deal by ID with detailed information
+13. **get_engagements** - Get engagement data (calls, emails, meetings, etc.) for a contact
+14. **send_email** - Send an email to a HubSpot contact
+15. **list_tickets** - List HubSpot tickets with optional filtering
+16. **get_ticket** - Get a specific HubSpot ticket by ID
+17. **create_ticket** - Create a new HubSpot ticket
+18. **update_ticket** - Update an existing HubSpot ticket
+19. **delete_ticket** - Archive/delete a HubSpot ticket
+20. **merge_tickets** - Merge two HubSpot tickets into one
+21. **list_products** - List HubSpot products with optional filtering
+22. **get_product** - Get a specific HubSpot product by ID
+23. **create_product** - Create a new HubSpot product
+24. **update_product** - Update an existing HubSpot product
+25. **delete_product** - Archive/delete a HubSpot product
+26. **get_engagement** - Get a specific HubSpot engagement by ID
+27. **list_engagements** - List HubSpot engagements with optional filtering
+28. **get_recent_engagements** - Get recently created or updated HubSpot engagements
+29. **get_call_dispositions** - Get all possible dispositions for sales calls in HubSpot
+30. **create_engagement** - Create a new HubSpot engagement (email, call, meeting, task, or note)
+31. **update_engagement** - Update an existing HubSpot engagement
+32. **delete_engagement** - Delete a HubSpot engagement
+33. **merge_contacts** - Merge two HubSpot contacts into one
+34. **gdpr_delete_contact** - Permanently delete a contact and all associated content to follow GDPR
+35. **get_associations** - Get all associations for a specific object (contact, company, deal, ticket)
+36. **create_association** - Create an association between two objects (link contact to company, deal to contact, etc.)
+37. **delete_association** - Remove an association between two objects (unlink them)
+38. **get_association_types** - Get all available association types and labels between two object types
+39. **get_contact** - Retrieve a specific HubSpot contact by ID with detailed information
+40. **get_company** - Retrieve a specific HubSpot company by ID with detailed information

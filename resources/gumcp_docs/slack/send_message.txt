@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "channel": {
+    "type": "string",
+    "description": "Slack channel ID"
+  },
+  "text": {
+    "type": "string",
+    "description": "Message text to send. Required if blocks not provided. When both text and blocks are provided, text is used as fallback for notifications."
+  },
+  "blocks": {
+    "type": "array",
+    "description": "Array of Block Kit block objects for rich UI elements. Required if text not provided. Passed directly to Slack API - must be in proper Block Kit format.",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "thread_ts": {
+    "type": "string",
+    "description": "Optional thread timestamp to reply to a thread"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

@@ -1,0 +1,45 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the serving endpoint"
+  },
+  "inputs": {
+    "type": "object",
+    "description": "Tensor-based input in columnar format",
+    "additionalProperties": true
+  },
+  "dataframe_records": {
+    "type": "array",
+    "description": "Pandas Dataframe input in the records orientation",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "prompt": {
+    "type": [
+      "string",
+      "array"
+    ],
+    "description": "Prompt string or array for completions endpoints"
+  },
+  "messages": {
+    "type": "array",
+    "description": "Messages array for chat endpoints",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "max_tokens": {
+    "type": "integer",
+    "description": "Maximum tokens for completions/chat endpoints"
+  },
+  "temperature": {
+    "type": "number",
+    "description": "Temperature (0.0-2.0) for completions/chat endpoints"
+  }
+}
+```

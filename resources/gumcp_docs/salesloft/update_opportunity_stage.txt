@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "stage_id": {
+    "type": "integer",
+    "description": "Opportunity stage ID to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The name of the opportunity stage"
+  },
+  "order": {
+    "type": "integer",
+    "description": "The order of the opportunity stage"
+  }
+}
+```

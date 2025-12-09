@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "integer",
+    "description": "The unique identifier of the list to add the entity to"
+  },
+  "entity_id": {
+    "type": "integer",
+    "description": "The unique identifier of the person or organization to add to the list"
+  },
+  "creator_id": {
+    "type": "integer",
+    "description": "Optional: ID of the person who should be recorded as adding the entry (defaults to API key owner)"
+  }
+}
+```

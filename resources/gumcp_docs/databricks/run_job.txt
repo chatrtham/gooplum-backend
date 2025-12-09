@@ -1,0 +1,24 @@
+Parameters Schema:
+```json
+{
+  "job_id": {
+    "type": "integer",
+    "description": "The ID of the job to be executed"
+  },
+  "idempotency_token": {
+    "type": "string",
+    "description": "Optional token (max 64 chars) to guarantee idempotency. If a run with this token exists, returns existing run_id"
+  },
+  "job_parameters": {
+    "type": "object",
+    "description": "Job-level parameters used in the run (e.g., {'param': 'overriding_val'})"
+  },
+  "only": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of task keys to run. If not provided, all tasks in the job will run"
+  }
+}
+```

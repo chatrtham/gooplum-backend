@@ -1,0 +1,40 @@
+# Affinity Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (34 total)
+
+1. **get_all_lists** - Retrieve all lists that you have access to in Affinity. Lists are the primary data structure containing people, organizations, or opportunities.
+2. **get_list** - Get detailed information about a specific list including its fields and configuration. List IDs available in list resources.
+3. **get_list_entries** - Retrieve all entries from a specific list. List IDs available in list resources.
+4. **get_list_entry** - Get detailed information about a specific list entry. List and entry IDs available in resources.
+5. **create_list_entry** - Add a new entity (person or organization) to a list. List IDs available in list resources, entity IDs from search results.
+6. **delete_list_entry** - Remove an entity from a list by deleting the list entry. List and entry IDs available in resources.
+7. **get_fields** - Retrieve fields (columns) available in Affinity. Can filter by list, value type, or entity type.
+8. **get_field_values** - Retrieve field values (cell data) for a specific entity. Provide exactly one of: person_id, organization_id, opportunity_id, or list_entry_id.
+9. **create_field_value** - Create or update a field value (cell data) for an entity. Sets the value in a specific field for a person, organization, or opportunity. Field IDs available in list field resources.
+10. **update_field_value** - Update an existing field value by its field_value_id. Field value IDs available from get_field_values results.
+11. **delete_field_value** - Delete a field value by its field_value_id. Field value IDs available from get_field_values results.
+12. **search_persons** - Search for persons in your team's contact database. Can filter by name, email, interaction dates, and include detailed interaction data.
+13. **get_person** - Get detailed information about a specific person including their organizations, opportunities, and list entries.
+14. **create_person** - Create a new person in your contact database. Email addresses must be unique across all persons.
+15. **update_person** - Update an existing person's information. Only provide fields that need to be changed.
+16. **delete_person** - Delete a person from your database. This also deletes all associated field values.
+17. **get_person_fields** - Get all global fields that exist on people. These are fields that appear across all person lists.
+18. **search_organizations** - Search for organizations in your database. Can filter by name, domain, interaction dates.
+19. **get_organization** - Get detailed information about a specific organization including associated people and opportunities.
+20. **create_organization** - Create a new organization in your database. Domain helps with automatic person association.
+21. **update_organization** - Update an existing organization's information. Only provide fields that need to be changed.
+22. **delete_organization** - Delete an organization from your database. Cannot delete global organizations. Also deletes associated field values.
+23. **get_organization_fields** - Get all global fields that exist on organizations. These are fields that appear across all organization lists.
+24. **search_opportunities** - Search for opportunities in your database. Can filter by opportunity name.
+25. **get_opportunity** - Get detailed information about a specific opportunity including associated people and organizations.
+26. **create_opportunity** - Create a new opportunity. List IDs available in list resources, entity IDs from search results.
+27. **update_opportunity** - Update an existing opportunity's information. Only provide fields that need to be changed.
+28. **delete_opportunity** - Delete an opportunity from your database. This also deletes associated field values.
+29. **get_notes** - Get all notes, optionally filtered by person, organization, opportunity, or creator. Automatically handles pagination.
+30. **get_note** - Get detailed information about a specific note including all associations and content.
+31. **create_note** - Create a new note associated with people, organizations, and/or opportunities. Supports both plain text and HTML formatting.
+32. **update_note** - Update the content of an existing note. Cannot update notes with mentions or email-associated notes.
+33. **delete_note** - Delete a note. You can only delete notes you created.
+34. **get_interactions** - Retrieve interactions (emails, calls, meetings) that meet specified criteria. Must specify one of person_id, organization_id, or opportunity_id.

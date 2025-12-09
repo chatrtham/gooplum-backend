@@ -1,0 +1,10 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of sites to return",
+    "default": 100
+  }
+}
+```

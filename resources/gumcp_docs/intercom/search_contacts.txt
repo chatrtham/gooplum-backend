@@ -1,0 +1,68 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "General search query that will search across email and name fields. Use specific parameters (email, name, etc.) when available for more precise control. This performs a 'contains' search on both email and name fields."
+  },
+  "email": {
+    "type": "string",
+    "description": "Search by email address. Can be exact email (e.g., 'user@example.com') or partial email for contains search (e.g., 'user' to find all emails containing 'user')"
+  },
+  "email_exact": {
+    "type": "boolean",
+    "description": "If true, searches for exact email match. If false or not provided, searches for emails containing the email parameter",
+    "default": false
+  },
+  "name": {
+    "type": "string",
+    "description": "Search by contact name. This will find contacts whose names contain the provided text (case-insensitive partial match)"
+  },
+  "role": {
+    "type": "string",
+    "description": "Filter contacts by their role in Intercom",
+    "enum": [
+      "user",
+      "lead"
+    ]
+  },
+  "phone": {
+    "type": "string",
+    "description": "Search by phone number. Can be partial or complete phone number"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "Search by external ID (your system's unique identifier for the contact)"
+  },
+  "created_after": {
+    "type": "string",
+    "description": "Find contacts created after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "created_before": {
+    "type": "string",
+    "description": "Find contacts created before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "Filter contacts by tag ID. Only contacts with this specific tag will be returned"
+  },
+  "email_domain": {
+    "type": "string",
+    "description": "Search by email domain (e.g., 'example.com' to find all contacts with @example.com emails)"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "Filter contacts by their assigned owner (teammate) ID in Intercom"
+  },
+  "unsubscribed_from_emails": {
+    "type": "boolean",
+    "description": "Filter contacts by email subscription status. True for unsubscribed, false for subscribed contacts"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of contacts to return (default: 10)",
+    "default": 10,
+    "minimum": 1
+  }
+}
+```

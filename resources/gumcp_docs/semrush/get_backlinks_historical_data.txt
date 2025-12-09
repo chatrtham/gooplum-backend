@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Root domain to investigate"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Must be root_domain",
+    "enum": [
+      "root_domain"
+    ]
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "date",
+        "backlinks_num",
+        "backlinks_lost_num",
+        "backlinks_new_num",
+        "domains_num",
+        "domains_new_num",
+        "domains_lost_num",
+        "score"
+      ]
+    },
+    "description": "Specific columns to include in the response. Use only the ID part (before ' - ') from the available options"
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return",
+    "minimum": 1
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip",
+    "minimum": 0
+  }
+}
+```

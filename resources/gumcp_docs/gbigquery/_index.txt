@@ -1,0 +1,12 @@
+# Gbigquery Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (6 total)
+
+1. **list_project_ids** - List all Google Cloud project IDs accessible by the authenticated user. Returns project IDs that can be used with BigQuery operations.
+2. **list_dataset_ids** - List all dataset IDs in a BigQuery project. Returns a list of dataset identifiers that can be used to query tables and data.
+3. **list_table_ids** - List all table IDs in a BigQuery dataset. Returns a list of table identifiers that can be queried.
+4. **get_dataset_info** - Get metadata information about a BigQuery dataset including description, location, creation time, and other properties.
+5. **get_table_info** - Get metadata information about a BigQuery table including schema, row count, size, partitioning, and other properties.
+6. **execute_sql** - Execute a SQL query on BigQuery and return the results. Supports standard SQL syntax.

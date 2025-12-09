@@ -1,0 +1,50 @@
+Parameters Schema:
+```json
+{
+  "statement": {
+    "type": "string",
+    "description": "The SQL statement to execute (max 16 MiB)"
+  },
+  "warehouse_id": {
+    "type": "string",
+    "description": "Warehouse upon which to execute the statement"
+  },
+  "catalog": {
+    "type": "string",
+    "description": "Default catalog for statement execution"
+  },
+  "schema": {
+    "type": "string",
+    "description": "Default schema for statement execution"
+  },
+  "wait_timeout": {
+    "type": "string",
+    "description": "Time to wait for results (0s for async, 5s-50s for sync, default: 10s)"
+  },
+  "disposition": {
+    "type": "string",
+    "enum": [
+      "INLINE",
+      "EXTERNAL_LINKS"
+    ],
+    "description": "Result fetch mode (default: INLINE)"
+  },
+  "format": {
+    "type": "string",
+    "enum": [
+      "JSON_ARRAY",
+      "ARROW_STREAM",
+      "CSV"
+    ],
+    "description": "Result format (default: JSON_ARRAY)"
+  },
+  "row_limit": {
+    "type": "integer",
+    "description": "Row limit for result set"
+  },
+  "byte_limit": {
+    "type": "integer",
+    "description": "Byte limit for result size"
+  }
+}
+```

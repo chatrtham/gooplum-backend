@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "count": {
+    "type": "integer",
+    "description": "Maximum number of engagements to return (max 100)"
+  },
+  "offset": {
+    "type": "string",
+    "description": "Paging offset for retrieving the next page"
+  },
+  "since": {
+    "type": "integer",
+    "description": "Unix timestamp in milliseconds to filter engagements modified after"
+  }
+}
+```

@@ -1,0 +1,11 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of lists to return",
+    "default": 10,
+    "maximum": 500
+  }
+}
+```

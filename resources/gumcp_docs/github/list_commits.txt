@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "branch": {
+    "type": "string",
+    "description": "Branch name to list commits from"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of commits to return. Default: all commits."
+  },
+  "path": {
+    "type": "string",
+    "description": "Only commits containing this file path will be returned."
+  },
+  "author": {
+    "type": "string",
+    "description": "GitHub login or email address by which to filter by commit author."
+  }
+}
+```

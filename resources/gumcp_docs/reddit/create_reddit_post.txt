@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "subreddit": {
+    "type": "string"
+  },
+  "title": {
+    "type": "string"
+  },
+  "content": {
+    "type": "string"
+  }
+}
+```

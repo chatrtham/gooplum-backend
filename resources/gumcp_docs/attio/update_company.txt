@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "company_id": {
+    "type": "string",
+    "description": "Company ID (Only way to match a company), Can be found in resource list"
+  },
+  "name": {
+    "type": "string",
+    "description": "Update company name"
+  },
+  "description": {
+    "type": "string",
+    "description": "Update company description"
+  },
+  "domains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Update company domains (e.g., ['example.com', 'example.org'])"
+  },
+  "categories": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Update company categories"
+  },
+  "primary_location": {
+    "type": "string",
+    "description": "Update company primary location"
+  },
+  "linkedin": {
+    "type": "string",
+    "description": "Update LinkedIn URL"
+  },
+  "twitter": {
+    "type": "string",
+    "description": "Update Twitter handle"
+  },
+  "facebook": {
+    "type": "string",
+    "description": "Update Facebook URL"
+  },
+  "instagram": {
+    "type": "string",
+    "description": "Update Instagram URL"
+  },
+  "angellist": {
+    "type": "string",
+    "description": "Update AngelList URL"
+  }
+}
+```

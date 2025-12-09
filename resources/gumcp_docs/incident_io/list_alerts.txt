@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of alerts to return across all pages (automatically handles pagination)"
+  },
+  "deduplication_key_is": {
+    "type": "string",
+    "description": "Filter alerts with specific deduplication key"
+  },
+  "status_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter alerts with status in this list (e.g. ['firing', 'resolved'])"
+  },
+  "status_not_in": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter alerts with status NOT in this list"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Filter alerts created after this date (ISO 8601 format)"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Filter alerts created before this date (ISO 8601 format)"
+  },
+  "created_at_from": {
+    "type": "string",
+    "description": "Start date for created_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "created_at_to": {
+    "type": "string",
+    "description": "End date for created_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  }
+}
+```

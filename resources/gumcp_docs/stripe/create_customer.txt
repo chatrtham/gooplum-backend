@@ -1,0 +1,162 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "Customer's email address. It's displayed alongside the customer in your dashboard and can be useful for searching and tracking. This may be up to 512 characters."
+  },
+  "name": {
+    "type": "string",
+    "description": "The customer's full name or business name."
+  },
+  "phone": {
+    "type": "string",
+    "description": "The customer's phone number."
+  },
+  "description": {
+    "type": "string",
+    "description": "An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard."
+  },
+  "address": {
+    "type": "object",
+    "properties": {
+      "city": {
+        "type": "string",
+        "description": "City, district, suburb, town, or village"
+      },
+      "country": {
+        "type": "string",
+        "description": "Two-letter country code (ISO 3166-1 alpha-2)"
+      },
+      "line1": {
+        "type": "string",
+        "description": "Address line 1 (e.g., street, PO Box, or company name)"
+      },
+      "line2": {
+        "type": "string",
+        "description": "Address line 2 (e.g., apartment, suite, unit, or building)"
+      },
+      "postal_code": {
+        "type": "string",
+        "description": "ZIP or postal code"
+      },
+      "state": {
+        "type": "string",
+        "description": "State, county, province, or region"
+      }
+    },
+    "description": "The customer's address."
+  },
+  "shipping": {
+    "type": "object",
+    "properties": {
+      "address": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string",
+            "description": "City, district, suburb, town, or village"
+          },
+          "country": {
+            "type": "string",
+            "description": "Two-letter country code (ISO 3166-1 alpha-2)"
+          },
+          "line1": {
+            "type": "string",
+            "description": "Address line 1 (e.g., street, PO Box, or company name)"
+          },
+          "line2": {
+            "type": "string",
+            "description": "Address line 2 (e.g., apartment, suite, unit, or building)"
+          },
+          "postal_code": {
+            "type": "string",
+            "description": "ZIP or postal code"
+          },
+          "state": {
+            "type": "string",
+            "description": "State, county, province, or region"
+          }
+        },
+        "required": [
+          "line1",
+          "city",
+          "country"
+        ],
+        "description": "Customer shipping address"
+      },
+      "name": {
+        "type": "string",
+        "description": "Customer name"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer phone (including extension)"
+      }
+    },
+    "required": [
+      "name",
+      "address"
+    ],
+    "description": "The customer's shipping information. Appears on invoices emailed to this customer."
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format."
+  },
+  "payment_method": {
+    "type": "string",
+    "description": "The ID of the PaymentMethod to attach to the customer."
+  },
+  "source": {
+    "type": "string",
+    "description": "When using payment sources created via the Token or Sources APIs, passing source will create a new source object, make it the new customer default source, and delete the old customer default if one exists. Use 'tok_visa' for testing."
+  },
+  "balance": {
+    "type": "integer",
+    "description": "An integer amount in cents that represents the customer's current balance. A negative amount represents a credit that decreases the amount due on an invoice; a positive amount increases the amount due on an invoice."
+  },
+  "coupon": {
+    "type": "string",
+    "description": "If you provide a coupon code, the customer will have a discount applied on all recurring charges."
+  },
+  "invoice_prefix": {
+    "type": "string",
+    "description": "The prefix for the customer used to generate unique invoice numbers. Must be 3\u201312 uppercase letters or numbers."
+  },
+  "invoice_settings": {
+    "type": "object",
+    "properties": {
+      "default_payment_method": {
+        "type": "string",
+        "description": "ID of a payment method that's attached to the customer, to be used as the customer's default payment method for subscriptions and invoices"
+      },
+      "footer": {
+        "type": "string",
+        "description": "Default footer to be displayed on invoices for this customer"
+      }
+    },
+    "description": "Default invoice settings for this customer"
+  },
+  "preferred_locales": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Customer's preferred languages, ordered by preference"
+  },
+  "promotion_code": {
+    "type": "string",
+    "description": "The ID of a promotion code to apply to the customer. The customer will have a discount applied on all recurring payments."
+  },
+  "tax_exempt": {
+    "type": "string",
+    "enum": [
+      "none",
+      "exempt",
+      "reverse"
+    ],
+    "description": "The customer's tax exemption. One of none, exempt, or reverse."
+  }
+}
+```

@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "string",
+    "description": "HubSpot deal ID (required)"
+  },
+  "dealname": {
+    "type": "string",
+    "description": "Deal name"
+  },
+  "amount": {
+    "type": "number",
+    "description": "Deal amount"
+  },
+  "dealstage": {
+    "type": "string",
+    "description": "Deal stage (e.g., 'appointmentscheduled')"
+  },
+  "pipeline": {
+    "type": "string",
+    "description": "Pipeline ID"
+  },
+  "closedate": {
+    "type": "string",
+    "description": "Expected close date (yyyy-MM-dd)"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the deal"
+  }
+}
+```

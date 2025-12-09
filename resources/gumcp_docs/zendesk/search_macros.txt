@@ -1,0 +1,95 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query to find macros with matching titles (required)"
+  },
+  "access": {
+    "type": "string",
+    "enum": [
+      "personal",
+      "agents",
+      "shared",
+      "account"
+    ],
+    "description": "Filter macros by access level: personal (user's own), agents (all personal macros for agents - admin only), shared (shared macros), or account (all macros)"
+  },
+  "active": {
+    "type": "boolean",
+    "description": "Filter by active macros if true or inactive macros if false"
+  },
+  "category": {
+    "type": "integer",
+    "description": "Filter macros by category ID"
+  },
+  "group_id": {
+    "type": "integer",
+    "description": "Filter macros by group ID"
+  },
+  "only_viewable": {
+    "type": "boolean",
+    "description": "If true, returns only macros that can be applied to tickets. If false, returns all macros the current user can manage (default: false)",
+    "default": false
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "alphabetical",
+      "created_at",
+      "updated_at",
+      "position"
+    ],
+    "description": "Sort macros by field: alphabetical, created_at, updated_at, or position. If unspecified, results are sorted by relevance."
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending (default: asc for alphabetical/position, desc for others)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of macros to return across all pages (default: 100). Pagination is handled internally.",
+    "default": 100
+  },
+  "include_app_installation": {
+    "type": "boolean",
+    "description": "Include app installation information that requires each macro (default: false)",
+    "default": false
+  },
+  "include_categories": {
+    "type": "boolean",
+    "description": "Include macro categories information (default: false)",
+    "default": false
+  },
+  "include_permissions": {
+    "type": "boolean",
+    "description": "Include permissions information for each macro (default: false)",
+    "default": false
+  },
+  "include_usage_1h": {
+    "type": "boolean",
+    "description": "Include usage count for the past hour (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_24h": {
+    "type": "boolean",
+    "description": "Include usage count for the past 24 hours (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_7d": {
+    "type": "boolean",
+    "description": "Include usage count for the past 7 days (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_30d": {
+    "type": "boolean",
+    "description": "Include usage count for the past 30 days (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  }
+}
+```

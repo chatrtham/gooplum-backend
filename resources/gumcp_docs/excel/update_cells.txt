@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet to update"
+  },
+  "range": {
+    "type": "string",
+    "description": "Cell range to update (e.g., 'A1:B2')"
+  },
+  "values": {
+    "type": "array",
+    "items": {
+      "type": "array",
+      "items": {}
+    },
+    "description": "2D array of values to update in the range (rows and columns)"
+  }
+}
+```

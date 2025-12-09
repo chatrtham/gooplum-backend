@@ -1,0 +1,45 @@
+Parameters Schema:
+```json
+{
+  "first_name": {
+    "type": "string",
+    "description": "The first name of the person. Typically used with last_name parameter. Example: 'tim'"
+  },
+  "last_name": {
+    "type": "string",
+    "description": "The last name of the person. Typically used with first_name parameter. Example: 'zheng'"
+  },
+  "name": {
+    "type": "string",
+    "description": "The full name of the person (first and last name separated by space). If used, first_name and last_name are not needed. Example: 'tim zheng'"
+  },
+  "email": {
+    "type": "string",
+    "description": "The email address of the person. Example: 'example@email.com'"
+  },
+  "hashed_email": {
+    "type": "string",
+    "description": "The hashed email in MD5 or SHA-256 format. Example: '8d935115b9ff4489f2d1f9249503cadf' (MD5)"
+  },
+  "organization_name": {
+    "type": "string",
+    "description": "The name of the person's current or previous employer. Example: 'apollo'"
+  },
+  "domain": {
+    "type": "string",
+    "description": "The domain name for the person's current or previous employer. Do not include www., @ symbol, or similar. Examples: 'apollo.io', 'microsoft.com'"
+  },
+  "id": {
+    "type": "string",
+    "description": "The Apollo ID for the person. Find IDs using People Search endpoint. Example: '587cf802f65125cad923a266'"
+  },
+  "linkedin_url": {
+    "type": "string",
+    "description": "The URL for the person's LinkedIn profile. Example: 'http://www.linkedin.com/in/tim-zheng-677ba010'"
+  },
+  "reveal_personal_emails": {
+    "type": "boolean",
+    "description": "Set to true to enrich with personal emails (potentially consumes credits). Default is false. GDPR regions excluded"
+  }
+}
+```

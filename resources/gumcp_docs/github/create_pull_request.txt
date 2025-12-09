@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Owner username of the repository"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Name of the repository"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the pull request"
+  },
+  "body": {
+    "type": "string",
+    "description": "Description of the pull request"
+  },
+  "base": {
+    "type": "string",
+    "description": "The name of the branch you want your changes pulled into"
+  },
+  "head": {
+    "type": "string",
+    "description": "The name of the branch where your changes are implemented"
+  },
+  "draft": {
+    "type": "boolean",
+    "description": "Create PR as draft"
+  },
+  "maintainer_can_modify": {
+    "type": "boolean",
+    "description": "Allow modifications by maintainers"
+  },
+  "issue": {
+    "type": "integer",
+    "description": "Issue number to convert to a pull request"
+  }
+}
+```

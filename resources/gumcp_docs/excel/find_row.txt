@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet"
+  },
+  "column": {
+    "type": "string",
+    "description": "Column name or letter to search in"
+  },
+  "value": {
+    "description": "Value to search for"
+  }
+}
+```

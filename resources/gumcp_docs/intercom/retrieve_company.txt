@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "company_id": {
+    "type": "string",
+    "description": "The unique Intercom identifier for the company"
+  }
+}
+```

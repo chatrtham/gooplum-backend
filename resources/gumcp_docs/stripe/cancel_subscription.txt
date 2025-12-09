@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "subscription_id": {
+    "type": "string",
+    "description": "The ID of the subscription to cancel (required)"
+  },
+  "invoice_now": {
+    "type": "boolean",
+    "description": "Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending proration invoice items"
+  },
+  "prorate": {
+    "type": "boolean",
+    "description": "Will generate a proration invoice item that credits remaining unused time. Only valid when used with invoice_now=true"
+  },
+  "cancellation_details": {
+    "type": "object",
+    "properties": {
+      "comment": {
+        "type": "string",
+        "description": "Additional information about why this subscription was cancelled"
+      },
+      "feedback": {
+        "type": "string",
+        "enum": [
+          "too_expensive",
+          "missing_features",
+          "switched_service",
+          "unused",
+          "customer_service",
+          "too_complex",
+          "low_quality",
+          "other"
+        ],
+        "description": "The customer's reason for cancelling their subscription"
+      }
+    },
+    "description": "Details about why this subscription was cancelled"
+  }
+}
+```

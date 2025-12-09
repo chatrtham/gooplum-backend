@@ -1,0 +1,14 @@
+# Instagram Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (8 total)
+
+1. **get_profile_posts** - Get posts from an Instagram profile. Returns individual posts with details like captions, likes, comments count, images, and metadata.
+2. **get_post_comments** - Get comments from a specific Instagram post. Returns individual comments with text, author info, timestamps, and like counts.
+3. **get_hashtag_posts** - Get posts by hashtag on Instagram. Returns posts that include the specified hashtag with full post details.
+4. **find_users** - Find Instagram users/profiles by name or username. Returns profile information including follower counts, bio, and profile details.
+5. **get_profile_details** - Get detailed metadata about an Instagram profile including follower count, bio, verification status, and basic profile information.
+6. **get_profile_stories** - Get stories from an Instagram profile. Returns currently active stories with media URLs, timestamps, and view counts.
+7. **get_profile_reels** - Get reels from an Instagram profile. Returns reel videos with captions, play counts, music info, and engagement metrics.
+8. **get_tagged_posts** - Get posts where a specific user is tagged. Returns posts where the user appears in tags with full post details.

@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the tag (required)"
+  },
+  "workspace_gid": {
+    "type": "string",
+    "description": "GID of the workspace to create the tag in (required)"
+  },
+  "color": {
+    "type": "string",
+    "description": "Color of the tag (optional). Options: dark-pink, dark-green, dark-blue, dark-red, dark-teal, dark-brown, dark-orange, dark-purple, dark-warm-gray, light-pink, light-green, light-blue, light-red, light-teal, light-brown, light-orange, light-purple, light-warm-gray"
+  },
+  "notes": {
+    "type": "string",
+    "description": "Free-form textual description of the tag"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user GIDs, emails, or 'me' to follow the tag"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

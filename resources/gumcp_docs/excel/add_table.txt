@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name for the new table"
+  },
+  "range": {
+    "type": "string",
+    "description": "Cell range for the table (e.g., 'A1:D10')"
+  },
+  "has_headers": {
+    "type": "boolean",
+    "description": "Whether the first row contains headers",
+    "default": true
+  }
+}
+```

@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return across all pages. API fetches in batches of 100.",
+    "default": 100
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "PENDING",
+      "PROCESSING",
+      "NEEDS_REVIEW",
+      "REJECTED",
+      "PROCESSED",
+      "FAILED",
+      "CANCELLED",
+      "CANCELLING"
+    ],
+    "description": "Filter by workflow execution status: PENDING (not started), PROCESSING (in progress), NEEDS_REVIEW (requires human review), REJECTED (review rejected), PROCESSED (completed successfully), FAILED (encountered error), CANCELLED (was cancelled), or CANCELLING (cancellation in progress)."
+  },
+  "workflow_id": {
+    "type": "string",
+    "description": "Filter results by specific workflow ID. Example: 'workflow_BMdfq_yWM3sT-ZzvCnA3f'"
+  },
+  "batch_id": {
+    "type": "string",
+    "description": "Filter by batch ID to get all runs from a specific batch execution. Example: 'batch_7Ws31-F5'"
+  },
+  "file_name_contains": {
+    "type": "string",
+    "description": "Filter by file name - returns runs where any processed file name contains this string (case-sensitive substring match)."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "updatedAt",
+      "createdAt"
+    ],
+    "description": "Field to sort results by: 'updatedAt' (last modified time) or 'createdAt' (creation time)."
+  },
+  "sort_dir": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort direction: 'asc' (ascending, oldest first) or 'desc' (descending, newest first)."
+  }
+}
+```

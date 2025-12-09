@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "dealname": {
+    "type": "string",
+    "description": "Deal name (required)"
+  },
+  "amount": {
+    "type": "number",
+    "description": "Deal amount"
+  },
+  "dealstage": {
+    "type": "string",
+    "description": "Deal stage (e.g., 'appointmentscheduled')"
+  },
+  "pipeline": {
+    "type": "string",
+    "description": "Pipeline ID"
+  },
+  "closedate": {
+    "type": "string",
+    "description": "Expected close date (yyyy-MM-dd)"
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "Associated contact ID"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "Associated company ID"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the deal"
+  }
+}
+```

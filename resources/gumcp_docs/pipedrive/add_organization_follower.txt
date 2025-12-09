@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "organization_id": {
+    "type": "integer",
+    "description": "The ID of the organization"
+  },
+  "user_id": {
+    "type": "integer",
+    "description": "The ID of the user to add as a follower"
+  }
+}
+```

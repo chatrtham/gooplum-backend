@@ -1,0 +1,11 @@
+# Gmaps Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **search_places** - Search for places on Google Maps by location and search terms. Returns comprehensive place data including contact info, ratings, hours, and more.
+2. **get_place_details** - Get detailed information for specific places using Google Maps URLs or place IDs. Returns comprehensive place data including all available details with optional review and image extraction.
+3. **search_by_category** - Search for places by category on Google Maps. Useful for finding all places of a specific type in an area.
+4. **get_place_reviews** - Get reviews for specific places using Google Maps URLs or place IDs. Returns detailed review data with text, ratings, dates, and reviewer information.
+5. **find_places_in_area** - Find all places visible on the map in a specific area without using search terms. Useful for discovering all businesses in a location.

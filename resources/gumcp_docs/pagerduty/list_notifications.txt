@@ -1,0 +1,42 @@
+Parameters Schema:
+```json
+{
+  "since": {
+    "type": "string",
+    "description": "The start of the date range over which to search."
+  },
+  "until": {
+    "type": "string",
+    "description": "The end of the date range over which to search."
+  },
+  "filter": {
+    "type": "string",
+    "enum": [
+      "sms_notification",
+      "email_notification",
+      "phone_notification",
+      "push_notification"
+    ],
+    "description": "Return notification of this type only."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "users"
+      ]
+    },
+    "description": "Array of additional details to include."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination). If not provided, uses single page with limit parameter.",
+    "default": 10
+  }
+}
+```

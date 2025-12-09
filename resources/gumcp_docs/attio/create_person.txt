@@ -1,0 +1,70 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "object",
+    "properties": {
+      "first_name": {
+        "type": "string"
+      },
+      "last_name": {
+        "type": "string"
+      },
+      "full_name": {
+        "type": "string"
+      }
+    },
+    "description": "Person name fields"
+  },
+  "email_addresses": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Email addresses (e.g., ['john@example.com', 'john@company.com'])"
+  },
+  "job_title": {
+    "type": "string",
+    "description": "Job title"
+  },
+  "description": {
+    "type": "string",
+    "description": "Person description"
+  },
+  "phone_numbers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Phone numbers in international format with country code and proper formatting (e.g., ['+1-202-555-0123', '+44-20-7123-4567'])"
+  },
+  "primary_location": {
+    "type": "string",
+    "description": "Primary location"
+  },
+  "linkedin": {
+    "type": "string",
+    "description": "LinkedIn URL"
+  },
+  "twitter": {
+    "type": "string",
+    "description": "Twitter handle"
+  },
+  "facebook": {
+    "type": "string",
+    "description": "Facebook URL"
+  },
+  "instagram": {
+    "type": "string",
+    "description": "Instagram URL"
+  },
+  "angellist": {
+    "type": "string",
+    "description": "AngelList URL"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "Company ID to associate with"
+  }
+}
+```

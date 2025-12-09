@@ -1,0 +1,8 @@
+Parameters Schema:
+```json
+{
+  "subscription_id": {
+    "type": "string"
+  }
+}
+```

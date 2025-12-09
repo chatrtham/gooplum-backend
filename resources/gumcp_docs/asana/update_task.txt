@@ -1,0 +1,56 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the task (required)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the task"
+  },
+  "notes": {
+    "type": "string",
+    "description": "Free-form textual information associated with the task (description)"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "User GID or email to assign the task to. Use 'null' to unassign."
+  },
+  "completed": {
+    "type": "boolean",
+    "description": "Whether the task is completed"
+  },
+  "due_on": {
+    "type": "string",
+    "description": "Due date in YYYY-MM-DD format. Use 'null' to remove due date."
+  },
+  "due_at": {
+    "type": "string",
+    "description": "Due date and time in ISO 8601 format. Cannot be used with due_on. Use 'null' to remove."
+  },
+  "start_on": {
+    "type": "string",
+    "description": "Start date in YYYY-MM-DD format. Use 'null' to remove start date."
+  },
+  "start_at": {
+    "type": "string",
+    "description": "Start date and time in ISO 8601 format. Cannot be used with start_on. Use 'null' to remove."
+  },
+  "approval_status": {
+    "type": "string",
+    "description": "Approval status: 'pending', 'approved', 'rejected', 'changes_requested'"
+  },
+  "assignee_status": {
+    "type": "string",
+    "description": "Assignee status: 'today', 'upcoming', 'later', 'new', 'inbox'"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

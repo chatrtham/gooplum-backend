@@ -1,0 +1,55 @@
+Parameters Schema:
+```json
+{
+  "parent_task_gid": {
+    "type": "string",
+    "description": "GID of the parent task (required)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the subtask (required)"
+  },
+  "notes": {
+    "type": "string",
+    "description": "Free-form textual information associated with the subtask (description)"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "User GID or email to assign the subtask to"
+  },
+  "due_on": {
+    "type": "string",
+    "description": "Due date in YYYY-MM-DD format"
+  },
+  "due_at": {
+    "type": "string",
+    "description": "Due date and time in ISO 8601 format. Cannot be used with due_on."
+  },
+  "start_on": {
+    "type": "string",
+    "description": "Start date in YYYY-MM-DD format"
+  },
+  "start_at": {
+    "type": "string",
+    "description": "Start date and time in ISO 8601 format. Cannot be used with start_on."
+  },
+  "completed": {
+    "type": "boolean",
+    "description": "Whether the subtask is completed"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user GIDs or emails to follow the subtask"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

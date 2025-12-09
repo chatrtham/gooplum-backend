@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "campaign_id": {
+    "type": "string",
+    "description": "Campaign ID to update (required)"
+  },
+  "name": {
+    "type": "string",
+    "description": "New campaign name"
+  },
+  "status": {
+    "type": "string",
+    "description": "New campaign status (ENABLED, PAUSED, REMOVED)"
+  },
+  "target_search_network": {
+    "type": "boolean",
+    "description": "Whether to target Google search network"
+  },
+  "target_content_network": {
+    "type": "boolean",
+    "description": "Whether to target Google Display Network"
+  },
+  "target_partner_search_network": {
+    "type": "boolean",
+    "description": "Whether to target search partner network"
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Campaign start date (YYYY-MM-DD)"
+  },
+  "end_date": {
+    "type": "string",
+    "description": "Campaign end date (YYYY-MM-DD)"
+  }
+}
+```

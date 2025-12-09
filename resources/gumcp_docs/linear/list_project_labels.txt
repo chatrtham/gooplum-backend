@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of labels to return across all pages",
+    "default": 100
+  },
+  "orderBy": {
+    "type": "string",
+    "enum": [
+      "createdAt",
+      "updatedAt"
+    ],
+    "description": "Order by field",
+    "default": "updatedAt"
+  },
+  "name": {
+    "type": "string",
+    "description": "Filter by label name"
+  }
+}
+```

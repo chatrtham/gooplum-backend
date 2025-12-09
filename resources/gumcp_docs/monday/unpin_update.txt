@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "update_id": {
+    "type": "integer",
+    "description": "The unique identifier of the update to unpin"
+  },
+  "item_id": {
+    "type": "integer",
+    "description": "The unique identifier of the item containing the update"
+  }
+}
+```

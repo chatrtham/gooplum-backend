@@ -1,0 +1,12 @@
+# Exa Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (6 total)
+
+1. **search** - Intelligently search the web using Exa's neural and keyword search. Returns relevant results with optional content extraction including text, highlights, and summaries.
+2. **get_contents** - Get full page contents, summaries, and metadata for a list of URLs. Returns instant results from cache with automatic live crawling as fallback.
+3. **find_similar** - Find similar links to a provided URL using Exa's neural similarity search. Useful for discovering related content and research.
+4. **answer** - Get an LLM-generated answer to a question informed by Exa search results. Returns either a direct answer for specific queries or a detailed summary with citations for open-ended queries.
+5. **create_research_task** - Create an asynchronous research task that explores the web, gathers sources, synthesizes findings, and returns results with citations. Returns immediately with a researchId for polling completion status.
+6. **get_research_task** - Retrieve the status and results of a previously created research task. Poll this endpoint until status is 'completed', 'failed', or 'canceled'.

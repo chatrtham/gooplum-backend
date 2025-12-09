@@ -1,0 +1,54 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of milestones to return across all pages"
+  },
+  "states": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "CLOSED"
+      ]
+    },
+    "description": "Filter milestones by state"
+  },
+  "orderBy_field": {
+    "type": "string",
+    "enum": [
+      "DUE_DATE",
+      "CREATED_AT",
+      "UPDATED_AT",
+      "NUMBER"
+    ],
+    "description": "The field to order milestones by"
+  },
+  "orderBy_direction": {
+    "type": "string",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "description": "The ordering direction"
+  },
+  "query": {
+    "type": "string",
+    "description": "Filters milestones with query on milestone title"
+  }
+}
+```

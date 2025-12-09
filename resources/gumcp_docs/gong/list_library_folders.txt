@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "workspaceId": {
+    "type": "string",
+    "description": "Optional workspace ID to filter folders"
+  }
+}
+```

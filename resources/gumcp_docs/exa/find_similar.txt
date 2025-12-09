@@ -1,0 +1,39 @@
+Parameters Schema:
+```json
+{
+  "url": {
+    "type": "string",
+    "description": "The URL to find similar links for (e.g., 'https://arxiv.org/abs/2307.06435')"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return across all pages (automatically handles pagination)",
+    "default": 10,
+    "maximum": 1000
+  },
+  "includeDomains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of domains to include in results"
+  },
+  "excludeDomains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of domains to exclude from results"
+  },
+  "includeText": {
+    "type": "boolean",
+    "description": "Include full page text in results",
+    "default": false
+  },
+  "includeSummary": {
+    "type": "boolean",
+    "description": "Include AI-generated summary of the page",
+    "default": false
+  }
+}
+```

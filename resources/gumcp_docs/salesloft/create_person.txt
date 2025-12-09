@@ -1,0 +1,170 @@
+Parameters Schema:
+```json
+{
+  "email_address": {
+    "type": "string",
+    "description": "Email address"
+  },
+  "secondary_email_address": {
+    "type": "string",
+    "description": "Alternate email address"
+  },
+  "personal_email_address": {
+    "type": "string",
+    "description": "Personal email address"
+  },
+  "first_name": {
+    "type": "string",
+    "description": "First name"
+  },
+  "last_name": {
+    "type": "string",
+    "description": "Last name"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Phone number without formatting"
+  },
+  "phone_extension": {
+    "type": "string",
+    "description": "Phone extension without formatting"
+  },
+  "mobile_phone": {
+    "type": "string",
+    "description": "Mobile phone without formatting"
+  },
+  "home_phone": {
+    "type": "string",
+    "description": "Home phone without formatting"
+  },
+  "linkedin_url": {
+    "type": "string",
+    "description": "LinkedIn URL"
+  },
+  "title": {
+    "type": "string",
+    "description": "Job title"
+  },
+  "city": {
+    "type": "string",
+    "description": "City"
+  },
+  "state": {
+    "type": "string",
+    "description": "State"
+  },
+  "country": {
+    "type": "string",
+    "description": "Country"
+  },
+  "work_city": {
+    "type": "string",
+    "description": "Work location city"
+  },
+  "work_state": {
+    "type": "string",
+    "description": "Work location state"
+  },
+  "work_country": {
+    "type": "string",
+    "description": "Work location country"
+  },
+  "person_company_name": {
+    "type": "string",
+    "description": "Company name (person-specific, consider updating linked account object instead)"
+  },
+  "person_company_website": {
+    "type": "string",
+    "description": "Company website (person-specific, consider updating linked account object instead)"
+  },
+  "person_company_industry": {
+    "type": "string",
+    "description": "Company industry (person-specific, consider updating linked account object instead)"
+  },
+  "job_seniority": {
+    "type": "string",
+    "description": "Job seniority level",
+    "enum": [
+      "director",
+      "executive",
+      "individual_contributor",
+      "manager",
+      "vice_president",
+      "unknown"
+    ]
+  },
+  "do_not_contact": {
+    "type": "boolean",
+    "description": "Whether this person has opted out of all communication"
+  },
+  "eu_resident": {
+    "type": "boolean",
+    "description": "Whether this person is a European Union resident (GDPR compliance)"
+  },
+  "locale": {
+    "type": "string",
+    "description": "Time locale of the person"
+  },
+  "personal_website": {
+    "type": "string",
+    "description": "Personal website URL"
+  },
+  "twitter_handle": {
+    "type": "string",
+    "description": "Twitter handle"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Tags to apply to this person"
+  },
+  "contact_restrictions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Communication methods to prevent (call, email, message)"
+  },
+  "custom_fields": {
+    "type": "object",
+    "description": "Custom fields defined by the team"
+  },
+  "account_id": {
+    "type": "integer",
+    "description": "ID of the Account to link this person to"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "ID of the User that owns this person"
+  },
+  "import_id": {
+    "type": "integer",
+    "description": "ID of the Import this person is part of"
+  },
+  "person_stage_id": {
+    "type": "integer",
+    "description": "ID of the PersonStage for this person"
+  },
+  "crm_id_type": {
+    "type": "string",
+    "description": "CRM type for the provided crm_id",
+    "enum": [
+      "salesforce"
+    ]
+  },
+  "external_source": {
+    "type": "string",
+    "description": "External source from where this person was imported"
+  },
+  "crm_id": {
+    "type": "string",
+    "description": "CRM ID (requires crm_id_type and proper scope)"
+  },
+  "autotag_date": {
+    "type": "boolean",
+    "description": "Whether to add current date as a tag (Y-m-d format)"
+  }
+}
+```

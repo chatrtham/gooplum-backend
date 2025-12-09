@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "target_user_id": {
+    "type": "string",
+    "description": "Unique identifier of the User to follow/unfollow. Either target_user_id or target_username must be provided."
+  },
+  "target_username": {
+    "type": "string",
+    "description": "Username of the User to follow/unfollow (e.g., 'gumloop'). Either target_user_id or target_username must be provided."
+  },
+  "follow": {
+    "type": "boolean",
+    "description": "True to follow, false to unfollow."
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "instruction_id": {
+    "type": "string",
+    "description": "Call instruction ID to fetch"
+  }
+}
+```

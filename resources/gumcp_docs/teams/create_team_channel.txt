@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "team_id": {
+    "type": "string",
+    "description": "The ID of the team (optional if team_name is provided)"
+  },
+  "team_name": {
+    "type": "string",
+    "description": "The name of the team (optional if team_id is provided)"
+  },
+  "display_name": {
+    "type": "string",
+    "description": "The display name of the channel (required)"
+  },
+  "description": {
+    "type": "string",
+    "description": "A description of the channel"
+  },
+  "membership_type": {
+    "type": "string",
+    "description": "Type of channel membership: 'standard' (visible to everyone) or 'private' (visible only to channel members)",
+    "enum": [
+      "standard",
+      "private"
+    ]
+  }
+}
+```

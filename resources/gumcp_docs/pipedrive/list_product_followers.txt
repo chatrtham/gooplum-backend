@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "product_id": {
+    "type": "integer",
+    "description": "The ID of the product"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of followers to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

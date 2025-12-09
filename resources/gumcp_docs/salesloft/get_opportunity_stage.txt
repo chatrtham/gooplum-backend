@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "stage_id": {
+    "type": "integer",
+    "description": "Opportunity stage ID to fetch"
+  }
+}
+```

@@ -1,0 +1,16 @@
+# Gdrive Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (10 total)
+
+1. **search** - Search for files and folders in Google Drive with granular filtering options. Unless user explicitly mentions search, always resort to URLs or IDs and directly call tools instead of searching.
+2. **copy_file** - Create a copy of the specified file.
+3. **create_folder_subfolder** - Create folders and subfolders in Google Drive.
+4. **move_file** - Move a file from one folder to another.
+5. **create_plain_text_file** - Create a new file from plain text.
+6. **add_file_sharing_preference** - Adds a sharing scope to the sharing preference of a file. Does not remove existing sharing settings. Provides a sharing URL.
+7. **update_name** - Update the name of a file or folder.
+8. **get_file** - Get comprehensive file information including metadata and optionally read content from various file types.
+9. **list_contents** - List all files and folders. If folder is specified, lists contents of that folder recursively.
+10. **delete** - Delete a file or folder from Google Drive. For folders with contents, use recursive_delete option.

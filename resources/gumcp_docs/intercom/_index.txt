@@ -1,0 +1,29 @@
+# Intercom Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (23 total)
+
+1. **search_contacts** - Search for contacts in Intercom using various criteria with advanced filtering capabilities. If no search parameters are provided, lists all contacts.
+2. **update_contact** - Update or manage a contact
+3. **create_contact** - Create a new contact in Intercom
+4. **create_conversation** - Create a new conversation in Intercom by sending the first message
+5. **reply_to_conversation** - Reply to an existing conversation in Intercom. By default, replies as an admin. Only specify user_id if you want to reply on behalf of a specific contact/user.
+6. **update_conversation** - Manage conversation tags and contacts
+7. **search_conversations** - Search for conversations in Intercom using various criteria with advanced filtering capabilities. If no search parameters are provided, lists all conversations.
+8. **retrieve_conversation** - Retrieve a single conversation with all its details and conversation parts
+9. **search_companies** - Search for companies in Intercom using various criteria. If no search parameters are provided, lists all companies using the scroll API.
+10. **create_company** - Create a new company in Intercom
+11. **associate_contact_with_company** - Associate a contact with a company
+12. **list_articles** - List articles
+13. **retrieve_article** - Retrieve articles by ID
+14. **search_tickets** - Search for tickets in Intercom using various criteria with advanced filtering capabilities. If no search parameters are provided, lists all tickets.
+15. **get_ticket** - Get details of a specific support ticket
+16. **create_ticket** - Create a new support ticket in Intercom
+17. **update_ticket** - Update or manage a ticket
+18. **add_comment_to_ticket** - Add a comment to an existing support ticket
+19. **list_ticket_types** - List all available ticket types in the Intercom workspace
+20. **get_current_admin** - Get information about the currently authenticated admin
+21. **list_tags** - List all tags available in the Intercom workspace
+22. **retrieve_company** - Retrieve a single company by its Intercom ID
+23. **list_company_contacts** - List all contacts that belong to a company

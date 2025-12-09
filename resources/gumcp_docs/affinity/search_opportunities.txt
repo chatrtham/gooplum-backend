@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "Search term - can be part of opportunity name"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination)"
+  }
+}
+```

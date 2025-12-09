@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "chat_type": {
+    "type": "string",
+    "description": "Type of chat to create",
+    "enum": [
+      "oneOnOne",
+      "group"
+    ]
+  },
+  "members": {
+    "type": "array",
+    "description": "List of email addresses or user IDs of chat members",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

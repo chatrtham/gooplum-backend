@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query for contacts"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of contacts to return"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific contact properties to return (optional)"
+  }
+}
+```

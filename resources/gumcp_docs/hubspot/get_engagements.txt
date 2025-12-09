@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "HubSpot contact ID"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of engagements to return"
+  },
+  "engagement_type": {
+    "type": "string",
+    "description": "Type of engagement (EMAIL, CALL, MEETING, etc.)"
+  }
+}
+```

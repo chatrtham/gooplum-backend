@@ -1,0 +1,66 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The name of the person"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "The ID of the user who owns the person"
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "The ID of the organization linked to the person"
+  },
+  "add_time": {
+    "type": "string",
+    "description": "The creation date and time of the person"
+  },
+  "update_time": {
+    "type": "string",
+    "description": "The last updated date and time of the person"
+  },
+  "emails": {
+    "type": "array",
+    "description": "The emails of the person",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "phones": {
+    "type": "array",
+    "description": "The phones of the person",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "visible_to": {
+    "type": "integer",
+    "description": "The visibility of the person"
+  },
+  "label_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "The IDs of labels assigned to the person"
+  },
+  "marketing_status": {
+    "type": "string",
+    "enum": [
+      "no_consent",
+      "unsubscribed",
+      "subscribed",
+      "archived"
+    ],
+    "description": "Marketing consent status. no_consent: no consent given, unsubscribed: unsubscribed from all marketing, subscribed: subscribed to marketing, archived: archived but consent saved. Only allowed to change once from old to new status."
+  }
+}
+```

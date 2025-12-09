@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Domain, subdomain, or URL to investigate (e.g., example.com, www.example.com, http://...)"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Type of target",
+    "enum": [
+      "root_domain",
+      "domain",
+      "url"
+    ]
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "ascore",
+        "total",
+        "domains_num",
+        "urls_num",
+        "ips_num",
+        "ipclassc_num",
+        "follows_num",
+        "nofollows_num",
+        "sponsored_num",
+        "ugc_num",
+        "texts_num",
+        "images_num",
+        "forms_num",
+        "frames_num"
+      ]
+    },
+    "description": "Specific columns to include in the response. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "string",
+    "description": "Page ID to get blocks from"
+  },
+  "page_url": {
+    "type": "string",
+    "description": "Page URL to get blocks from (preferred - just copy from browser address bar)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of blocks to return. Optional - defaults to 10 if not specified"
+  }
+}
+```

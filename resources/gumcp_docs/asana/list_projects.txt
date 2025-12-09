@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "workspace": {
+    "type": "string",
+    "description": "The workspace or organization to filter projects on, Available in resource and workspace is needed to get projects"
+  },
+  "team": {
+    "type": "string",
+    "description": "The team to filter projects on"
+  },
+  "archived": {
+    "type": "boolean",
+    "description": "Only return projects whose archived field takes on this value"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of projects to return across all pages",
+    "default": 100,
+    "maximum": 1000
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

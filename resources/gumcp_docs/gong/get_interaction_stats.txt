@@ -1,0 +1,32 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of records to return. If provided, the API will automatically paginate through results until this limit is reached."
+  },
+  "fromDate": {
+    "type": "string",
+    "description": "The date from which to list user activity (inclusive). Accepts ISO-8601 format (e.g., '2023-04-10T00:00:00Z')."
+  },
+  "toDate": {
+    "type": "string",
+    "description": "The date until which to list user activity (exclusive). Accepts ISO-8601 format (e.g., '2023-04-11T00:00:00Z')."
+  },
+  "createdFromDateTime": {
+    "type": "string",
+    "description": "Filter by user creation date (lower limit) in ISO-8601 format (e.g., '2023-04-10T12:30:00Z')."
+  },
+  "createdToDateTime": {
+    "type": "string",
+    "description": "Filter by user creation date (upper limit) in ISO-8601 format (e.g., '2023-04-11T12:30:00Z')."
+  },
+  "userIds": {
+    "type": "array",
+    "description": "Set of specific user IDs to retrieve activity for.",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

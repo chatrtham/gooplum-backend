@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "form_id": {
+    "type": "string",
+    "description": "Unique identifier for a Form"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of submissions to return",
+    "default": 100
+  }
+}
+```

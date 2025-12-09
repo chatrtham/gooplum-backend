@@ -1,0 +1,32 @@
+Parameters Schema:
+```json
+{
+  "urls": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of URLs to retrieve contents for (e.g., ['https://arxiv.org/abs/2307.06435'])"
+  },
+  "includeText": {
+    "type": "boolean",
+    "description": "Include full page text in results",
+    "default": false
+  },
+  "includeSummary": {
+    "type": "boolean",
+    "description": "Include AI-generated summary of the page",
+    "default": false
+  },
+  "livecrawl": {
+    "type": "string",
+    "enum": [
+      "never",
+      "fallback",
+      "always",
+      "preferred"
+    ],
+    "description": "Livecrawl options: 'never' disables, 'fallback' (default) crawls when cache empty, 'always' always crawls, 'preferred' tries crawling with cache fallback"
+  }
+}
+```

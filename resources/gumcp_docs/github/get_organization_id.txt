@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "org_name": {
+    "type": "string",
+    "description": "GitHub organization name to get the ID for"
+  }
+}
+```

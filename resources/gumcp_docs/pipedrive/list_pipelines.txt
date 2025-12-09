@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time",
+      "add_time"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pipelines to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

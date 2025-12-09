@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "account_id": {
+    "type": "integer",
+    "description": "Account ID to delete"
+  }
+}
+```

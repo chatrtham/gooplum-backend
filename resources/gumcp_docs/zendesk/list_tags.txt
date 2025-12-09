@@ -1,0 +1,11 @@
+Parameters Schema:
+```json
+{
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of tags to return (default: 100)",
+    "default": 100
+  }
+}
+```

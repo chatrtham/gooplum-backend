@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "session_id": {
+    "type": "string",
+    "description": "The unique identifier of the session (e.g., 'devin-xxx')"
+  },
+  "message": {
+    "type": "string",
+    "description": "The message to send to Devin"
+  }
+}
+```

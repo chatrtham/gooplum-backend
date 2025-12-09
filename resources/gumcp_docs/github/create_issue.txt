@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the issue"
+  },
+  "body": {
+    "type": "string",
+    "description": "Body/content of the issue"
+  },
+  "labels": {
+    "type": "string",
+    "description": "Comma-separated list of labels to add"
+  },
+  "assignees": {
+    "type": "string",
+    "description": "Comma-separated list of users to assign"
+  },
+  "milestone": {
+    "type": "integer",
+    "description": "Milestone ID to assign to this issue"
+  }
+}
+```

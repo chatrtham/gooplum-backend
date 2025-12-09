@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "api_ticket_id": {
+    "type": "string",
+    "description": "ID of the ticket to retrieve"
+  }
+}
+```

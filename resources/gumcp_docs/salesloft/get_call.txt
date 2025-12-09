@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "call_id": {
+    "type": "string",
+    "description": "Call ID to fetch"
+  }
+}
+```

@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "segment_id": {
+    "type": "string",
+    "description": "The prefixed ID of the segment (e.g., seg_00000000-0000-0000-0000-000000000000)"
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats"
+      ]
+    }
+  }
+}
+```

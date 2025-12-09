@@ -1,0 +1,19 @@
+# Devin Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (13 total)
+
+1. **list_sessions** - List all Devin sessions for your organization. Returns session details including status, title, timestamps, and associated pull requests.
+2. **create_session** - Create a new Devin session with a task prompt. Returns the session ID and URL to view the session.
+3. **get_session** - Get detailed information about an existing Devin session including status, messages, and structured output.
+4. **send_session_message** - Send a message to an existing Devin session to provide additional instructions or information.
+5. **terminate_session** - Terminate an active Devin session. Once terminated, the session cannot be resumed.
+6. **update_session_tags** - Update the tags associated with a Devin session. Replaces existing tags with the new list.
+7. **list_secrets** - List metadata for all secrets in your organization. Does not return secret values.
+8. **create_secret** - Create a new encrypted secret that can be used in Devin sessions.
+9. **delete_secret** - Permanently delete a secret by its ID. This action cannot be undone.
+10. **list_knowledge** - List all knowledge and folders in your organization. Does not return system knowledge managed by Cognition.
+11. **create_knowledge** - Create a new piece of knowledge that Devin can use during sessions.
+12. **update_knowledge** - Update the name, body, or trigger of an existing piece of knowledge.
+13. **delete_knowledge** - Permanently delete a piece of knowledge by its ID. This action cannot be undone.

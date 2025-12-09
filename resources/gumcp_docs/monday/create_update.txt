@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "item_id": {
+    "type": "integer",
+    "description": "The unique identifier of the item to create the update on. Not required if creating a reply using parent_id."
+  },
+  "body": {
+    "type": "string",
+    "description": "The update text content."
+  },
+  "parent_id": {
+    "type": "integer",
+    "description": "The unique identifier of the parent update to reply to. When provided, creates a reply to an existing update."
+  }
+}
+```

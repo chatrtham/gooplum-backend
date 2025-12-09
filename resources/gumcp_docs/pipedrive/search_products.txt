@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "The search term to look for. Minimum 2 characters (or 1 if using exact_match). URL encoded."
+  },
+  "fields": {
+    "type": "string",
+    "description": "A comma-separated string array. The fields to perform the search from. Values: code, custom_fields, name. Defaults to all."
+  },
+  "exact_match": {
+    "type": "boolean",
+    "description": "When enabled, only full exact matches against the given term are returned. Not case sensitive.",
+    "default": false
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Supports including optional fields in the results. Values: product.price"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of products to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

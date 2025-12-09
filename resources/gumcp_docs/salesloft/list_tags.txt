@@ -1,0 +1,36 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tags to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "search": {
+    "type": "string",
+    "description": "Filter tags by name"
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter tags by their IDs"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "name"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

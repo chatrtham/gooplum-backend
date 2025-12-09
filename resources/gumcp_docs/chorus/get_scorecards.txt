@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of scorecards to return"
+  },
+  "recipients": {
+    "type": "string",
+    "description": "Comma-separated list of user IDs who were scored"
+  },
+  "reviewers": {
+    "type": "string",
+    "description": "Comma-separated list of user IDs who completed the scorecards"
+  },
+  "initiative_id": {
+    "type": "string",
+    "description": "ID of the initiative that scorecards were completed against"
+  },
+  "submitted_from": {
+    "type": "string",
+    "description": "Start date for submitted scorecards in ISO 8601 format (e.g., '2024-01-01T00:00:00Z')"
+  },
+  "submitted_to": {
+    "type": "string",
+    "description": "End date for submitted scorecards in ISO 8601 format (e.g., '2024-12-31T23:59:59Z')"
+  }
+}
+```

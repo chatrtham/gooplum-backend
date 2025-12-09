@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "message": {
+    "type": "string",
+    "description": "The message content. Use {mention_email_id:user@example.com} or {mention_user_id:005xx...} to @mention users inline."
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Optional record ID to post to. If not provided, posts to user's feed"
+  }
+}
+```

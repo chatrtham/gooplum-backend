@@ -1,0 +1,56 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "string",
+    "description": "The ID of the User to lookup."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of liked tweets to return across all pages .",
+    "minimum": 5
+  },
+  "tweet_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Tweet fields to display. Minimum length: 1"
+  },
+  "expansions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of fields to expand. Minimum length: 1"
+  },
+  "media_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Media fields to display. Minimum length: 1"
+  },
+  "poll_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Poll fields to display. Minimum length: 1"
+  },
+  "user_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of User fields to display. Minimum length: 1"
+  },
+  "place_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Place fields to display. Minimum length: 1"
+  }
+}
+```

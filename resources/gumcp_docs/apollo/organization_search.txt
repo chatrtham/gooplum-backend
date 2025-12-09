@@ -1,0 +1,67 @@
+Parameters Schema:
+```json
+{
+  "q_organization_name": {
+    "type": "string",
+    "description": "Keywords to search for in organization names. Partial matches are accepted. Example: 'apollo' or 'mining'"
+  },
+  "revenue_range_min": {
+    "type": "number",
+    "description": "Minimum annual revenue (lower range). Do not enter currency symbols, commas, or decimal points. Example: 300000"
+  },
+  "revenue_range_max": {
+    "type": "number",
+    "description": "Maximum annual revenue (upper range). Do not enter currency symbols, commas, or decimal points. Example: 50000000"
+  },
+  "organization_num_employees_ranges": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Employee count ranges for companies. Format as 'min,max' strings. Examples: '1,10', '250,500', '10000,20000'"
+  },
+  "organization_locations": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Headquarters locations of companies. Search across cities, US states, and countries. Examples: 'texas', 'tokyo', 'spain'"
+  },
+  "organization_not_locations": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Exclude companies based on headquarters location. Useful for avoiding undesirable territories. Examples: 'minnesota', 'ireland', 'seoul'"
+  },
+  "currently_using_any_of_technology_uids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Technologies currently used by organizations. Use underscores to replace spaces and periods. Examples: 'salesforce', 'google_analytics', 'wordpress_org'"
+  },
+  "q_organization_keyword_tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Keywords associated with companies for industry filtering. Examples: 'mining', 'sales strategy', 'consulting'"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Apollo organization IDs to include in search. Find IDs using this endpoint's results. Example: '5e66b6381e05b4008c8331b8'"
+  },
+  "page": {
+    "type": "integer",
+    "description": "The page number of results to retrieve"
+  },
+  "per_page": {
+    "type": "integer",
+    "description": "Number of results per page"
+  }
+}
+```

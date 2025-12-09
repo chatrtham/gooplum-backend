@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "incident_id": {
+    "type": "string",
+    "description": "The incident to edit. Use reference (e.g., 'INC-4') or full ID."
+  },
+  "name": {
+    "type": "string",
+    "description": "Updated name/title of the incident"
+  },
+  "summary": {
+    "type": "string",
+    "description": "Updated detailed description of the incident"
+  },
+  "call_url": {
+    "type": "string",
+    "description": "The call URL to attach to this incident"
+  },
+  "severity_id": {
+    "type": "string",
+    "description": "ID of the severity to change the incident to"
+  },
+  "incident_status_id": {
+    "type": "string",
+    "description": "ID of the status to change incident to (only active status changes allowed)"
+  },
+  "slack_channel_name_override": {
+    "type": "string",
+    "description": "Override the name of the incident Slack channel"
+  },
+  "notify_incident_channel": {
+    "type": "boolean",
+    "description": "Should we send Slack channel notifications about this update"
+  }
+}
+```

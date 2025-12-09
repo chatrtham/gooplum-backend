@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "channel": {
+    "type": "string",
+    "description": "Slack channel ID"
+  },
+  "user": {
+    "type": "string",
+    "description": "User ID who will receive the ephemeral message"
+  },
+  "text": {
+    "type": "string",
+    "description": "Message text to send"
+  },
+  "thread_ts": {
+    "type": "string",
+    "description": "Optional thread timestamp to reply to a thread"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

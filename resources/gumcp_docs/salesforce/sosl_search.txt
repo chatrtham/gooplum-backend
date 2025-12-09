@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "search": {
+    "type": "string",
+    "description": "The SOSL search string (e.g., 'FIND {Cloud} IN ALL FIELDS RETURNING Account, Opportunity')"
+  }
+}
+```

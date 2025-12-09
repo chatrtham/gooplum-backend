@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "account_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the account"
+  },
+  "campaign_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the campaign"
+  },
+  "status": {
+    "type": "string",
+    "description": "The campaign member status to assign (e.g., 'Sent', 'Responded')"
+  }
+}
+```

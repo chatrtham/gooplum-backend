@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet"
+  },
+  "row_index": {
+    "type": "integer",
+    "description": "Index of the row to delete (1-based)"
+  }
+}
+```

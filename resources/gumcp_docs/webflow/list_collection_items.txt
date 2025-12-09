@@ -1,0 +1,47 @@
+Parameters Schema:
+```json
+{
+  "collection_id": {
+    "type": "string",
+    "description": "Unique identifier for a Collection"
+  },
+  "type": {
+    "type": "string",
+    "description": "Type of items to list: 'staging' (draft/unpublished) or 'live' (published)",
+    "enum": [
+      "staging",
+      "live"
+    ],
+    "default": "staging"
+  },
+  "cms_locale_id": {
+    "type": "string",
+    "description": "Unique identifier for a CMS Locale"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of items to return",
+    "default": 100
+  },
+  "name": {
+    "type": "string",
+    "description": "Filter by the exact name of the item(s)"
+  },
+  "slug": {
+    "type": "string",
+    "description": "Filter by the exact slug of the item"
+  },
+  "last_published": {
+    "type": "object",
+    "description": "Filter by the last published date of the item(s)"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Sort results by the provided value (lastPublished, name, slug)"
+  },
+  "sort_order": {
+    "type": "string",
+    "description": "Sorts the results by asc or desc"
+  }
+}
+```

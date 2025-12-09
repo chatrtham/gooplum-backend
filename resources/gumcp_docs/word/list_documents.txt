@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of documents to return",
+    "default": 50
+  },
+  "query": {
+    "type": "string",
+    "description": "Optional search query to filter documents (defaults to all .docx files)"
+  }
+}
+```

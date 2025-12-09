@@ -1,0 +1,36 @@
+Parameters Schema:
+```json
+{
+  "usernames": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of TikTok usernames to get connections for (with or without @). Examples: ['username1', '@username2']"
+  },
+  "connection_types": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "follower",
+        "following"
+      ]
+    },
+    "description": "Types of connections to scrape. Options: 'follower' (users following this profile), 'following' (users this profile follows)",
+    "default": [
+      "follower"
+    ]
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of connections to retrieve per profile",
+    "default": 10
+  },
+  "include_avatar_links": {
+    "type": "boolean",
+    "description": "Whether to include profile avatar image download links in the response",
+    "default": false
+  }
+}
+```

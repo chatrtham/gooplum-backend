@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The UUID or name of the user to retrieve"
+  }
+}
+```

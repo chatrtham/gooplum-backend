@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "The issue title"
+  },
+  "team": {
+    "type": "string",
+    "description": "The team name, key, or UUID (automatically resolved to UUID)"
+  },
+  "description": {
+    "type": "string",
+    "description": "The issue description as Markdown"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "The user to assign (User ID, name, email, or \"me\")"
+  },
+  "state": {
+    "type": "string",
+    "description": "The issue state type, name, or ID"
+  },
+  "priority": {
+    "type": "number",
+    "description": "The issue priority. 0 = No priority, 1 = Urgent, 2 = High, 3 = Normal, 4 = Low. Do not set this field unless explicitly requested."
+  },
+  "labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of label names or IDs to set on the issue (you can use label names directly, no need to look up IDs)"
+  },
+  "project": {
+    "type": "string",
+    "description": "The project name or ID to add the issue to"
+  },
+  "cycle": {
+    "type": "string",
+    "description": "The cycle name, number, or ID to add the issue to"
+  },
+  "dueDate": {
+    "type": "string",
+    "description": "The due date for the issue in ISO format"
+  },
+  "parentId": {
+    "type": "string",
+    "description": "The parent issue ID, if this is a sub-issue"
+  }
+}
+```

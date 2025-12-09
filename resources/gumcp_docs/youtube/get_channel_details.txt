@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "channel_url": {
+    "type": "string",
+    "description": "YouTube channel URL (e.g., 'https://www.youtube.com/c/channelname' or 'https://www.youtube.com/@username')"
+  },
+  "channel_name": {
+    "type": "string",
+    "description": "YouTube channel name or @username (alternative to URL)"
+  }
+}
+```

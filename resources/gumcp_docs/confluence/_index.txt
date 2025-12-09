@@ -1,0 +1,19 @@
+# Confluence Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (13 total)
+
+1. **list_pages** - Returns all pages from Confluence. Filter pages by id, space-id, status, title, or sort.
+2. **get_page** - Returns a specific page by ID with comprehensive details including body content, labels, properties, operations, likes, and versions.
+3. **create_page** - Creates a new page in a Confluence space. Pages are created as published by default unless specified as draft. Published pages require a title.
+4. **update_page** - Update a page by id. When updating 'current' version, content is merged into draft. Changing status from 'current' to 'draft' deletes existing draft. Can restore 'trashed' or 'deleted' pages to 'current' status.
+5. **get_database** - Returns a specific database by ID with optional includes for collaborators, direct children, operations, and properties.
+6. **list_tasks** - Returns all tasks. Filter tasks by status, task-id, space-id, page-id, blogpost-id, created-by, assigned-to, or completed-by.
+7. **get_task** - Returns a specific task by ID with optional body format specification.
+8. **update_task** - Update a task by id. Currently only supports updating task status (complete/incomplete).
+9. **list_blogposts** - Returns all blog posts. Filter by id, space-id, status, title, or sort.
+10. **get_blogpost** - Returns a specific blog post by ID with optional includes for labels, properties, operations, likes, versions, and collaborators.
+11. **create_blogpost** - Creates a new blog post in a space. By default creates as non-draft unless status is specified as draft.
+12. **update_blogpost** - Update a blog post by id. Can update title, body, status, and version. Can also restore trashed/deleted blog posts to current status.
+13. **get_spaces** - Returns all spaces from Confluence. Filter spaces by ids, keys, type, status, or sort.

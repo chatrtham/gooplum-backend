@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal to get products for"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of products to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "add_time",
+      "update_time"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  }
+}
+```

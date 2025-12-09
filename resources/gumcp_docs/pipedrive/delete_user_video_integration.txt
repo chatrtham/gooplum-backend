@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "user_provider_id": {
+    "type": "string",
+    "description": "Unique identifier linking a user to the installed integration (UUID format)"
+  }
+}
+```

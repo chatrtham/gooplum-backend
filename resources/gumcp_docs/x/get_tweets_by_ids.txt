@@ -1,0 +1,56 @@
+Parameters Schema:
+```json
+{
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Post IDs. Up to 100 are allowed in a single request. Required array length: 1 - 100 elements",
+    "minItems": 1,
+    "maxItems": 100
+  },
+  "tweet_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Tweet fields to display. Minimum length: 1"
+  },
+  "expansions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of fields to expand. Minimum length: 1"
+  },
+  "media_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Media fields to display. Minimum length: 1"
+  },
+  "poll_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Poll fields to display. Minimum length: 1"
+  },
+  "user_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of User fields to display. Minimum length: 1"
+  },
+  "place_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Place fields to display. Minimum length: 1"
+  }
+}
+```

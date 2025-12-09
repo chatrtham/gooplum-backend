@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "field_value_id": {
+    "type": "integer",
+    "description": "The unique identifier of the field value to update"
+  },
+  "value": {
+    "description": "The new value. Type depends on field value_type: string for text/dropdown, integer for number/person/organization, object for location, ISO date string for date fields"
+  }
+}
+```

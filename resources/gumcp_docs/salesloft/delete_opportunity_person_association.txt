@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "association_id": {
+    "type": "integer",
+    "description": "ID of the opportunity-person association to delete"
+  }
+}
+```

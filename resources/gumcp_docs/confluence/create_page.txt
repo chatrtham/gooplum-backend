@@ -1,0 +1,62 @@
+Parameters Schema:
+```json
+{
+  "space_id": {
+    "type": "string",
+    "description": "ID of the space where the page will be created"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "current",
+      "draft"
+    ],
+    "description": "The status of the page (current=published, draft)",
+    "default": "current"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the page (required if status is not draft)"
+  },
+  "parent_id": {
+    "type": "string",
+    "description": "The parent content ID of the page"
+  },
+  "body_representation": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "wiki"
+    ],
+    "description": "Type of content representation used for the body value",
+    "default": "storage"
+  },
+  "body_value": {
+    "type": "string",
+    "description": "Body content of the page in the format specified by body_representation"
+  },
+  "subtype": {
+    "type": "string",
+    "enum": [
+      "live"
+    ],
+    "description": "The subtype of the page (provide 'live' to create a live doc)"
+  },
+  "embedded": {
+    "type": "boolean",
+    "description": "Tag the content as embedded and content will be created in NCS",
+    "default": false
+  },
+  "private": {
+    "type": "boolean",
+    "description": "The page will be private (only creator can view/edit)",
+    "default": false
+  },
+  "root_level": {
+    "type": "boolean",
+    "description": "Create page at root level of space (outside space homepage tree)",
+    "default": false
+  }
+}
+```

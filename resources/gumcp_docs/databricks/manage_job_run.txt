@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "run_id": {
+    "type": "integer",
+    "description": "ID of the job run to manage"
+  },
+  "action": {
+    "type": "string",
+    "enum": [
+      "cancel",
+      "delete"
+    ],
+    "description": "Action to perform: 'cancel' for active runs, 'delete' for non-active runs"
+  }
+}
+```

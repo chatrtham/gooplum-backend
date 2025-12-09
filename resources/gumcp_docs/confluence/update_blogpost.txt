@@ -1,0 +1,50 @@
+Parameters Schema:
+```json
+{
+  "blogpost_id": {
+    "type": "integer",
+    "description": "The blog post ID to update"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "current",
+      "draft"
+    ],
+    "description": "The updated status"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the blog post"
+  },
+  "space_id": {
+    "type": "string",
+    "description": "ID of the containing space (moving not currently supported)"
+  },
+  "body_representation": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "wiki"
+    ],
+    "description": "Content representation type"
+  },
+  "body_value": {
+    "type": "string",
+    "description": "Body content"
+  },
+  "version_number": {
+    "type": "integer",
+    "description": "The new version number"
+  },
+  "version_message": {
+    "type": "string",
+    "description": "Optional message for the version"
+  },
+  "created_at": {
+    "type": "string",
+    "description": "Created date in format yyyy-MM-ddTHH:mm:ss.SSSZ"
+  }
+}
+```

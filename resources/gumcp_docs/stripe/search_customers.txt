@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The search query string using Stripe's Search Query Language. Examples: 'name:\"John Doe\"', 'email:\"test@example.com\"', 'metadata[\"key\"]:\"value\"'"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of customers to return (1-100, default is 10)"
+  },
+  "page": {
+    "type": "string",
+    "description": "A cursor for pagination across multiple pages of results. Use the next_page value returned in a previous response to request subsequent results."
+  }
+}
+```

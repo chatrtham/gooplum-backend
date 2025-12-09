@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet containing the table"
+  },
+  "table_name": {
+    "type": "string",
+    "description": "Name of the table"
+  },
+  "column_name": {
+    "type": "string",
+    "description": "Name of the column to update"
+  },
+  "values": {
+    "type": "array",
+    "items": {},
+    "description": "Array of values for the column"
+  }
+}
+```

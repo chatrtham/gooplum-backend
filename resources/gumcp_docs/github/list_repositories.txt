@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "username_or_org": {
+    "type": "string",
+    "description": "GitHub username or organization name to list repositories for"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return. Default: all results."
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "all",
+      "owner",
+      "member"
+    ],
+    "description": "Type of repositories to include (only for users)"
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "created",
+      "updated",
+      "pushed",
+      "full_name"
+    ],
+    "description": "Sort by field"
+  },
+  "direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Direction of sort"
+  }
+}
+```

@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "task_id": {
+    "type": "string",
+    "description": "Task ID to update"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Subject line of the task"
+  },
+  "person_id": {
+    "type": "string",
+    "description": "ID of the person to be contacted"
+  },
+  "task_type": {
+    "type": "string",
+    "description": "Task type",
+    "enum": [
+      "call",
+      "email",
+      "general"
+    ]
+  },
+  "due_date": {
+    "type": "string",
+    "description": "Date of when the Task is due, ISO-8601 date format required"
+  },
+  "due_at": {
+    "type": "string",
+    "description": "DateTime of when the Task is due, ISO-8601 datetime format required"
+  },
+  "current_state": {
+    "type": "string",
+    "description": "Current state of the task",
+    "enum": [
+      "completed"
+    ]
+  },
+  "user_id": {
+    "type": "string",
+    "description": "ID of the user linked to the task. Defaults to the authenticated user"
+  },
+  "user_guid": {
+    "type": "string",
+    "description": "USER GUID of the internal organization/team member linked to the task (NOT person_id from external contacts). Defaults to the authenticated user"
+  },
+  "remind_at": {
+    "type": "string",
+    "description": "Datetime of when the user will be reminded of the task, ISO-8601 datetime format required"
+  },
+  "description": {
+    "type": "string",
+    "description": "A description of the task recorded for person at completion time"
+  },
+  "is_logged": {
+    "type": "boolean",
+    "description": "A flag to indicate that the task should only be logged"
+  }
+}
+```

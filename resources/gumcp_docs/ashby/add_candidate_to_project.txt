@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "candidateId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the candidate."
+  },
+  "projectId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the project to add the candidate to."
+  }
+}
+```

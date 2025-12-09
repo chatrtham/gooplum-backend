@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of specific worksheet (optional - if not provided, uses first worksheet)"
+  },
+  "range": {
+    "type": "string",
+    "description": "Cell range to get data from (e.g., 'A1:D10', 'B2:E20')"
+  }
+}
+```

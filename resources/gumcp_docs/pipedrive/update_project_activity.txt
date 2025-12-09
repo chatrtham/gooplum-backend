@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "project_id": {
+    "type": "integer",
+    "description": "The ID of the project"
+  },
+  "activity_id": {
+    "type": "integer",
+    "description": "The ID of the activity"
+  },
+  "phase_id": {
+    "type": "number",
+    "description": "The ID of a phase on a project board"
+  },
+  "group_id": {
+    "type": "number",
+    "description": "The ID of a group on a project board"
+  }
+}
+```

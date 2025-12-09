@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "filter_property": {
+    "type": "string",
+    "description": "Property to filter on (e.g., 'email', 'firstname')"
+  },
+  "filter_operator": {
+    "type": "string",
+    "description": "Filter operator (e.g., 'EQ', 'CONTAINS_TOKEN', 'GT')"
+  },
+  "filter_value": {
+    "type": "string",
+    "description": "Value to filter for"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of contacts to return"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific contact properties to return"
+  }
+}
+```

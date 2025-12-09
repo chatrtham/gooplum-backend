@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "first_name": {
+    "type": "string",
+    "description": "The first name of the person"
+  },
+  "last_name": {
+    "type": "string",
+    "description": "The last name of the person"
+  },
+  "emails": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of email addresses for the person (use empty array if no emails)"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Optional: Array of organization IDs to associate with this person"
+  }
+}
+```

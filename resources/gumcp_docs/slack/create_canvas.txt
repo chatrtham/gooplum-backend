@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "channel": {
+    "type": "string",
+    "description": "Slack channel ID"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the canvas"
+  },
+  "blocks": {
+    "type": "array",
+    "description": "Array of Slack block kit elements as JSON objects",
+    "items": {
+      "type": "object"
+    }
+  },
+  "thread_ts": {
+    "type": "string",
+    "description": "Optional thread timestamp to attach canvas to a thread"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

@@ -1,0 +1,51 @@
+Parameters Schema:
+```json
+{
+  "type": {
+    "type": "integer",
+    "description": "The type of interactions to retrieve: 0=Meeting, 1=Call, 2=Chat message, 3=Email",
+    "enum": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "Get interactions involving this person"
+  },
+  "organization_id": {
+    "type": "integer",
+    "description": "Get interactions involving this organization"
+  },
+  "opportunity_id": {
+    "type": "integer",
+    "description": "Get interactions involving this opportunity"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start of time range for interactions (ISO 8601 format, required)"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "End of time range for interactions (ISO 8601 format, required)"
+  },
+  "internal_person_id": {
+    "type": "integer",
+    "description": "Filter by internal person involved in interactions"
+  },
+  "direction": {
+    "type": "integer",
+    "description": "Direction of interactions (only for chat messages and emails): 0=Sent by internal person, 1=Received from external person",
+    "enum": [
+      0,
+      1
+    ]
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of interactions to collect across all pages (automatically handles pagination)"
+  }
+}
+```

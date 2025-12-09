@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "ad_id": {
+    "type": "string",
+    "description": "The unique identifier of the ad to retrieve (e.g., 'ad_1234567890')."
+  }
+}
+```

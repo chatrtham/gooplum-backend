@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of results to return per page (default: 50, max: 100)"
+  },
+  "start_at": {
+    "type": "integer",
+    "description": "Index of the first user to return (0-based, used for pagination)"
+  },
+  "query": {
+    "type": "string",
+    "description": "Filter users based on username, display name, or email address"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

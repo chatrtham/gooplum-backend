@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "The unique identifier of the person to delete"
+  }
+}
+```

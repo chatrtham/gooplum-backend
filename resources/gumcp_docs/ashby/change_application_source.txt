@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "applicationId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the application to update the source of."
+  },
+  "sourceId": {
+    "type": "string",
+    "description": "The source (UUID) to set on the application. Pass null to unset an application's source."
+  }
+}
+```

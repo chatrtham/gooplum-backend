@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "view_id": {
+    "type": "string",
+    "description": "Zendesk view ID to retrieve (required)"
+  }
+}
+```

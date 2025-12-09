@@ -1,0 +1,39 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Domain, subdomain, or URL to investigate"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Type of target",
+    "enum": [
+      "root_domain",
+      "domain",
+      "url"
+    ]
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "category_name",
+        "rating"
+      ]
+    },
+    "description": "Specific columns to include in the response. Use only the ID part (before ' - ') from the available options"
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return",
+    "minimum": 1
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip",
+    "minimum": 0
+  }
+}
+```

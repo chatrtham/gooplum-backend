@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "ticket_id": {
+    "type": "string",
+    "description": "Zendesk ticket ID to get comments for (required)"
+  },
+  "include_users": {
+    "type": "boolean",
+    "description": "Include user information for email CCs by side-loading users (default: false)",
+    "default": false
+  },
+  "include_inline_images": {
+    "type": "boolean",
+    "description": "Include inline images as attachments in the response (default: false)",
+    "default": false
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order by creation date: ascending (asc) or descending (desc) (default: asc)",
+    "default": "asc"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 100,
+    "description": "Maximum number of comments to return per page (1-100, default: 100)",
+    "default": 100
+  },
+  "page": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Page number for pagination (starts at 1)",
+    "default": 1
+  }
+}
+```

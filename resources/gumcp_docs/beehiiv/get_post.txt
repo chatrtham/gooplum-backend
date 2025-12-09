@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "post_id": {
+    "type": "string",
+    "description": "The prefixed ID of the post (e.g., post_00000000-0000-0000-0000-000000000000)"
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats",
+        "free_web_content",
+        "free_email_content",
+        "free_rss_content",
+        "premium_web_content",
+        "premium_email_content"
+      ]
+    }
+  }
+}
+```

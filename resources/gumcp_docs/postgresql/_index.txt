@@ -1,0 +1,11 @@
+# Postgresql Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **list_schemas** - List all schemas with their owners
+2. **list_objects** - List tables, views, sequences, or extensions in a schema
+3. **get_object_details** - Get detailed information about a table, view, sequence, or extension
+4. **execute_sql** - Execute any SQL query and return results
+5. **explain_query** - Show query execution plan with costs and strategy

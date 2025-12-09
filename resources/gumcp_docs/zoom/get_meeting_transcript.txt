@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string",
+    "description": "Meeting ID or UUID of the cloud recording meeting"
+  }
+}
+```

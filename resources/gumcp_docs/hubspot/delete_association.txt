@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "from_object_type": {
+    "type": "string",
+    "description": "Source object type (contacts, companies, deals, tickets)"
+  },
+  "from_object_id": {
+    "type": "string",
+    "description": "Source object ID"
+  },
+  "to_object_type": {
+    "type": "string",
+    "description": "Target object type (contacts, companies, deals, tickets)"
+  },
+  "to_object_id": {
+    "type": "string",
+    "description": "Target object ID"
+  }
+}
+```

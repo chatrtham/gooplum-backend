@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "follower",
+      "participant"
+    ],
+    "description": "The type of entity to add to the deal"
+  },
+  "user_id": {
+    "type": "integer",
+    "description": "The ID of the user to add as a follower (required when type='follower')"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person to add as a participant (required when type='participant')"
+  }
+}
+```

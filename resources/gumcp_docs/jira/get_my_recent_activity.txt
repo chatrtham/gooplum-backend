@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of results to return"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

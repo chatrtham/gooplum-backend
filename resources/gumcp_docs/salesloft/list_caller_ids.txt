@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "phone_number": {
+    "type": "string",
+    "description": "Phone number in E.164 format (required). Example: +17705550212"
+  }
+}
+```

@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "instructions": {
+    "type": "string",
+    "description": "Instructions for what you would like research on. Define what information you want, how research should be conducted, and what the output should look like (e.g., 'What species of ant are similar to honeypot ants?')"
+  },
+  "model": {
+    "type": "string",
+    "enum": [
+      "exa-research",
+      "exa-research-pro"
+    ],
+    "description": "Research model to use. 'exa-research' is faster and cheaper, 'exa-research-pro' provides more thorough analysis and stronger reasoning",
+    "default": "exa-research"
+  },
+  "outputSchema": {
+    "type": "object",
+    "description": "JSON Schema to enforce structured output. When provided, the research output will be validated against this schema and returned as parsed JSON"
+  }
+}
+```

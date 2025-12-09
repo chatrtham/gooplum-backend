@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the company"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "Unique identifier for the company in your system (optional)"
+  },
+  "website": {
+    "type": "string",
+    "description": "Website URL of the company (optional)"
+  },
+  "industry": {
+    "type": "string",
+    "description": "Industry of the company (optional)"
+  },
+  "custom_attributes": {
+    "type": "object",
+    "description": "Custom attributes for the company (optional)"
+  }
+}
+```

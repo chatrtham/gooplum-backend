@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "doc_id": {
+    "type": "string",
+    "description": "Document ID"
+  },
+  "tableIndex": {
+    "type": "integer",
+    "description": "Index of the table in the document (0-based)"
+  },
+  "rowIndex": {
+    "type": "integer",
+    "description": "Row index (0-based)"
+  },
+  "columnIndex": {
+    "type": "integer",
+    "description": "Column index (0-based)"
+  },
+  "content": {
+    "type": "string",
+    "description": "Cell content"
+  }
+}
+```

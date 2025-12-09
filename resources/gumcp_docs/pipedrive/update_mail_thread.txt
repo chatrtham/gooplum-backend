@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "thread_id": {
+    "type": "integer",
+    "description": "The ID of the mail thread"
+  },
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal this thread is associated with"
+  },
+  "lead_id": {
+    "type": "string",
+    "description": "The ID of the lead this thread is associated with (UUID format)"
+  },
+  "shared_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether this thread is shared with other users in your company. 0 = Not shared, 1 = Shared"
+  },
+  "read_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether this thread is read or unread. 0 = Unread, 1 = Read"
+  },
+  "archived_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether this thread is archived or not. You can only archive threads that belong to Inbox folder. 0 = Not archived, 1 = Archived"
+  }
+}
+```

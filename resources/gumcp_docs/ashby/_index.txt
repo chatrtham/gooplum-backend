@@ -1,0 +1,34 @@
+# Ashby Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (28 total)
+
+1. **list_candidates** - List all candidates in your organization with pagination support. Supports search by email/name.
+2. **get_candidate_info** - Get detailed information about a specific candidate by their unique identifier. Returns comprehensive profile including contact details, applications, and history.
+3. **create_candidate** - Create a new candidate in your organization with comprehensive profile information including contact details, social links, and source attribution.
+4. **update_candidate** - Update candidate profile information including contact details, social links, source attribution, and location.
+5. **add_candidate_to_project** - Add a candidate to a specific project for organization and tracking purposes.
+6. **add_candidate_tag** - Add a tag to a candidate for categorization and filtering purposes.
+7. **create_candidate_note** - Create a note on a candidate with support for plain text or HTML formatting with limited tags.
+8. **anonymize_candidate** - Anonymize a candidate - this action cannot be reversed and requires all applications to be in archived or hired state.
+9. **list_applications** - Get all applications in your organization with comprehensive filtering and pagination support. Filter by job, status, creation date, and expand related data.
+10. **get_application_info** - Get detailed information about a specific application by application ID or submitted form instance ID. Returns comprehensive application data including candidate details and interview history.
+11. **update_application** - Update application properties including source, credited user, creation date, and notification settings.
+12. **remove_application_hiring_team_member** - Remove a user from the hiring team at the application level for a specific role.
+13. **change_application_source** - Change the source of an application. Pass null for sourceId to unset the application's source.
+14. **change_application_stage** - Move an application to a different interview stage, with optional archiving and email configuration.
+15. **list_interviewer_pools** - List all interviewer pools in your Ashby organization with optional filtering and pagination support. Retrieves comprehensive details about each pool including training paths and stages.
+16. **get_interviewer_pool_info** - Get detailed information about a specific interviewer pool including its configuration, training paths, and member details.
+17. **add_user_to_interviewer_pool** - Add a user to an interviewer pool, optionally assigning them to a specific training path stage. If no training stage is specified, the user will be added as a fully qualified member.
+18. **list_users** - List or search Ashby users in your organization. Supports listing all users with pagination, or searching by specific email address.
+19. **get_user_info** - Get detailed information about a specific Ashby user by their unique identifier, including their role, permissions, and profile details.
+20. **list_interviews** - List all interviews in your organization with optional filtering and pagination support. Includes both shared and job-specific interviews with archival options.
+21. **get_interview_info** - Get detailed information about a specific interview by its unique identifier, including interview structure, participants, and scheduling details.
+22. **list_interview_schedules** - Get all interview schedules in your organization with filtering options and pagination support. Filter by application, interview stage, or creation date.
+23. **create_interview_schedule** - Create a new interview schedule in Ashby for a specific application with defined interview events, interviewers, and timing.
+24. **update_interview_schedule** - Update an existing interview schedule with new interview events and timing information. Include interviewEventId to update existing events, or omit to create new ones.
+25. **cancel_interview_schedule** - Cancel an existing interview schedule with optional reschedule allowance.
+26. **list_jobs** - List or search jobs in your organization with comprehensive filtering and pagination support. Supports filtering by status, date ranges, or searching by title.
+27. **update_job** - Update job properties including title, team, location, interview plans, and custom requisition ID.
+28. **set_job_status** - Change the status of a job with validation. Status transitions: Draft→Open/Archived, Open→Closed, Closed→Draft/Archived, Archived→Draft.

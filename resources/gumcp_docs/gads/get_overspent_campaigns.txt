@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "days_to_check": {
+    "type": "integer",
+    "description": "Number of days to look back (default: 7)",
+    "minimum": 1,
+    "maximum": 90
+  },
+  "overspend_threshold_percent": {
+    "type": "number",
+    "description": "Percentage threshold for overspend (default: 0, any overspend)",
+    "minimum": 0
+  },
+  "campaign_status": {
+    "type": "string",
+    "description": "Filter by campaign status (ENABLED, PAUSED, REMOVED)"
+  },
+  "include_budget_details": {
+    "type": "boolean",
+    "description": "Include detailed budget information (default: true)"
+  }
+}
+```

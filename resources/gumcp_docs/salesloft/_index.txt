@@ -1,0 +1,90 @@
+# Salesloft Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (84 total)
+
+1. **list_accounts** - List accounts with filtering and pagination support (returns basic account info and IDs only)
+2. **create_account** - Create a new account
+3. **get_account** - Fetch a specific account by ID with complete details including custom fields and all associated metadata
+4. **update_account** - Update an existing account
+5. **delete_account** - Delete an account (irreversible without contacting support)
+6. **list_people** - List people with comprehensive filtering and pagination support (returns basic contact info and IDs only)
+7. **create_person** - Create a new person. Either email_address or phone/last_name must be provided
+8. **get_person** - Fetch a specific person by ID with complete contact details, custom fields, and all associated metadata
+9. **update_person** - Update an existing person
+10. **delete_person** - Delete a person. This operation is not reversible without contacting support
+11. **upsert_person** - Upsert a person (create or update based on upsert_key). The upsert_key determines how the upsert is performed
+12. **list_person_stages** - List person stages with filtering and pagination support (returns basic stage info and IDs only)
+13. **create_person_stage** - Create a new person stage
+14. **get_person_stage** - Fetch a specific person stage by ID with complete stage details and configuration
+15. **update_person_stage** - Update an existing person stage
+16. **delete_person_stage** - Delete a person stage. This operation is not reversible without contacting support
+17. **export_cadence** - Export a cadence as JSON by ID
+18. **list_cadence_memberships** - List cadence memberships (association between people and cadences) with filtering and pagination support (returns basic membership info and IDs only)
+19. **create_cadence_membership** - Add a person to a cadence. Creates the association between a person and cadence
+20. **get_cadence_membership** - Fetch a specific cadence membership by ID
+21. **delete_cadence_membership** - Remove a person from a cadence by deleting the membership
+22. **get_cadence_stats** - Fetch statistics for a specific cadence including performance metrics
+23. **list_cadences** - List cadences with comprehensive filtering and pagination support
+24. **get_cadence** - Fetch a specific cadence by ID
+25. **list_call_data_records** - List call data records with filtering and pagination support (returns basic call metadata and IDs only). Records are from the past year only
+26. **get_call_data_record** - Fetch a specific call data record by ID with complete call details including duration, recordings, and all metadata
+27. **list_call_dispositions** - List all available call dispositions with sorting and pagination support (returns basic disposition info and IDs only)
+28. **get_call_disposition** - Fetch a specific call disposition by ID
+29. **list_call_instructions** - List call instructions with filtering and pagination support (returns basic instruction info and IDs only)
+30. **get_call_instruction** - Fetch a specific call instruction by ID
+31. **list_call_sentiments** - List all available call sentiments with filtering and pagination support (returns basic sentiment info and IDs only)
+32. **get_call_sentiment** - Fetch a specific call sentiment by ID
+33. **list_caller_ids** - Get possible caller ID matches for a phone number. Returns multiple entries if number is present on multiple people
+34. **list_calls** - Fetches multiple call records. The records can be filtered, paged, and sorted according to the respective parameters.
+35. **get_call** - Fetch a specific call by ID with complete call details including sentiment, disposition, and all associated data
+36. **list_conversations** - List conversations with comprehensive filtering and pagination support (returns basic conversation metadata and IDs only)
+37. **get_conversation** - Fetch a specific conversation by ID with basic conversation details and metadata
+38. **get_conversation_extensive** - Fetch an extended version of a conversation with AI-generated features like summary, action items, and key moments
+39. **get_conversation_recording** - Fetch conversation recording media with signed URL
+40. **list_emails** - List emails with comprehensive filtering and pagination support (returns email metadata, Not email content)
+41. **get_email** - Fetch a specific email by ID with complete details including subject, body, and all metadata
+42. **list_actions** - List actions with filtering and pagination support. Only returns actions that are currently in_progress
+43. **get_action** - Fetch a specific action by ID. Only returns actions that are in_progress or pending_activity
+44. **list_activity_histories** - List past activities from the SalesLoft Activity Feed with filtering and pagination support
+45. **list_audit_reports** - List all generated audit reports with pagination support
+46. **get_audit_report** - Fetch a specific audit report by ID
+47. **create_activity** - Create an activity to mark an associated action as completed. Only certain action types (integration) can have activities created
+48. **upsert_calendar_event** - Create or update a calendar event. Upsert key is a combination of id and i_cal_uid scoped to the given calendar_id
+49. **list_calendar_events** - List calendar events with filtering and pagination support
+50. **list_meetings** - List meetings with comprehensive filtering and pagination support
+51. **list_opportunities** - List opportunities with comprehensive filtering and pagination support (returns basic opportunity info and IDs only). Returns opportunities synced from CRM and created via API
+52. **get_opportunity** - Fetch a specific opportunity by ID. Returns opportunities synced from CRM and created via API
+53. **create_opportunity_person_association** - Associate a SalesLoft person with an opportunity. Use this to associate members of a buying group with opportunities
+54. **list_opportunity_people** - List associations between SalesLoft people and opportunities with filtering and pagination support
+55. **delete_opportunity_person_association** - Delete an association between a person and an opportunity
+56. **create_opportunity_stage** - Create a new opportunity stage. Opportunities cannot be created without valid stages
+57. **list_opportunity_stages** - List opportunity stages with filtering and pagination support. Returns stages synced from CRM and created via API
+58. **get_opportunity_stage** - Fetch a specific opportunity stage by ID
+59. **update_opportunity_stage** - Update an existing opportunity stage
+60. **delete_opportunity_stage** - Delete an opportunity stage by ID
+61. **list_notes** - List notes with filtering and pagination support (returns basic note info including content and IDs)
+62. **create_note** - Create a new note
+63. **get_note** - Fetch a specific note by ID with complete note details and all associated relationships
+64. **update_note** - Update an existing note. Changes to the note or associated records will not reflect in your CRM
+65. **delete_note** - Delete a note by ID. This operation is not reversible without contacting support
+66. **create_task** - Create a new task
+67. **list_tasks** - Fetches multiple task records. The records can be filtered, paged, and sorted according to the respective parameters. Tasks associated with cadence steps will not be returned in the response.
+68. **get_task** - Fetch a specific task by ID
+69. **update_task** - Update an existing task
+70. **delete_task** - Delete a task. This operation is not reversible without contacting support
+71. **list_groups** - List groups with filtering and sorting support (returns basic group info and IDs only)
+72. **create_group** - Create a new group
+73. **get_group** - Fetch a specific group by ID
+74. **update_group** - Update an existing group
+75. **delete_group** - Delete a group by ID
+76. **list_transcriptions** - List conversation transcriptions with filtering and pagination support
+77. **get_transcription** - Fetch a complete conversation transcription with all sentences assembled into readable text, Provide either transcription_id or conversation_id
+78. **get_transcription_artifact** - Fetch a conversation transcription artifact with signed URL for downloading
+79. **list_phone_number_assignments** - List phone number assignments with filtering and pagination support
+80. **get_phone_number_assignment** - Fetch a specific phone number assignment by ID
+81. **list_tags** - List team tags with filtering and pagination support
+82. **list_users** - List users with filtering and pagination support. Non Admin: Lists only your user, or all on team depending on group visibility policy. Team Admin: Lists users associated with your team
+83. **get_user** - Fetch a specific user by User ID or User GUID
+84. **get_current_user** - Retrieve details about the currently authenticated user

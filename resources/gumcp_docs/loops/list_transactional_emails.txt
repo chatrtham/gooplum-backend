@@ -1,0 +1,10 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of emails to return across all pages (automatically handles pagination)",
+    "default": 100
+  }
+}
+```

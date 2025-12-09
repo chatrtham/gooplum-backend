@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "call_id": {
+    "type": "string",
+    "description": "Gong's unique numeric identifier for the call (up to 20 digits)."
+  }
+}
+```

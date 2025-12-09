@@ -1,0 +1,71 @@
+Parameters Schema:
+```json
+{
+  "active": {
+    "type": "boolean",
+    "description": "Filter by active status: true for active triggers, false for inactive triggers"
+  },
+  "category_id": {
+    "type": "string",
+    "description": "Filter triggers by category ID"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "alphabetical",
+      "created_at",
+      "updated_at",
+      "usage_1h",
+      "usage_24h",
+      "usage_7d",
+      "position"
+    ],
+    "description": "Sort triggers by field: alphabetical, created_at, updated_at, usage metrics, or position (default: position)",
+    "default": "position"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending (default: asc for alphabetical/position, desc for others)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of triggers to return across all pages (default: 100). Pagination is handled internally.",
+    "default": 100
+  },
+  "include_app_installation": {
+    "type": "boolean",
+    "description": "Include app installation information that requires each trigger (default: false)",
+    "default": false
+  },
+  "include_permissions": {
+    "type": "boolean",
+    "description": "Include permissions information for each trigger (default: false)",
+    "default": false
+  },
+  "include_usage_1h": {
+    "type": "boolean",
+    "description": "Include usage count for the past hour (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_24h": {
+    "type": "boolean",
+    "description": "Include usage count for the past 24 hours (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_7d": {
+    "type": "boolean",
+    "description": "Include usage count for the past 7 days (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  },
+  "include_usage_30d": {
+    "type": "boolean",
+    "description": "Include usage count for the past 30 days (Professional/Suite Growth plan or above, default: false)",
+    "default": false
+  }
+}
+```

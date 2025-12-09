@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "string",
+    "description": "Unique identifier for a Page"
+  },
+  "locale_id": {
+    "type": "string",
+    "description": "Unique identifier for a specific locale. Applicable when using localization."
+  },
+  "limit": {
+    "type": "number",
+    "description": "Maximum number of records to be returned (max limit: 100)"
+  },
+  "offset": {
+    "type": "number",
+    "description": "Offset used for pagination if the results have more than limit records"
+  }
+}
+```

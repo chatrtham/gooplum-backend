@@ -1,0 +1,58 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "issue_number": {
+    "type": "string",
+    "description": "Issue number to update"
+  },
+  "title": {
+    "type": "string",
+    "description": "New title for the issue (optional)"
+  },
+  "body": {
+    "type": "string",
+    "description": "New body content for the issue (optional)"
+  },
+  "state": {
+    "type": "string",
+    "enum": [
+      "OPEN",
+      "CLOSED"
+    ],
+    "description": "State of the issue - use 'CLOSED' to close the issue (optional)"
+  },
+  "label_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of label IDs to assign to the issue (replaces all existing labels, optional)"
+  },
+  "assignee_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user IDs to assign to the issue (replaces all existing assignees, optional)"
+  },
+  "milestone_id": {
+    "type": "string",
+    "description": "Milestone ID to assign to the issue (optional, use null to remove milestone)"
+  },
+  "project_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of project IDs to add the issue to (optional)"
+  }
+}
+```

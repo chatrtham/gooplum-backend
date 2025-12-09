@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string",
+    "description": "The ID of the meeting to delete (required)"
+  }
+}
+```

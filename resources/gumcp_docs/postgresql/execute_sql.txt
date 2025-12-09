@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "sql": {
+    "type": "string",
+    "description": "SQL query"
+  }
+}
+```

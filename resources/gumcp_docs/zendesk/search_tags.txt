@@ -1,0 +1,10 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "minLength": 2,
+    "description": "Tag name prefix to search for (minimum 2 characters required)"
+  }
+}
+```

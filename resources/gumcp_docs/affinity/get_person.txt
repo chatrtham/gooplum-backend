@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "The unique identifier of the person to retrieve"
+  },
+  "with_interaction_dates": {
+    "type": "boolean",
+    "description": "Include interaction dates in response"
+  },
+  "with_interaction_persons": {
+    "type": "boolean",
+    "description": "Include internal persons associated with interactions"
+  },
+  "with_opportunities": {
+    "type": "boolean",
+    "description": "Include opportunity IDs for this person"
+  },
+  "with_current_organizations": {
+    "type": "boolean",
+    "description": "Include current organization IDs"
+  }
+}
+```

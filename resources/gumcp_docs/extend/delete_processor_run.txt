@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "processor_run_id": {
+    "type": "string",
+    "description": "The unique identifier of the processor run to permanently delete. Example: 'dpr_Xj8mK2pL9nR4vT7qY5wZ'"
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The UUID, key, or name of the team to retrieve"
+  }
+}
+```

@@ -1,0 +1,50 @@
+Parameters Schema:
+```json
+{
+  "content": {
+    "type": "string",
+    "description": "The content of the note. Use HTML format for rich text (set type=2) or plain text (type=0)"
+  },
+  "person_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of person IDs to associate with this note"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of organization IDs to associate with this note"
+  },
+  "opportunity_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of opportunity IDs to associate with this note"
+  },
+  "type": {
+    "type": "integer",
+    "description": "Note type: 0 for plain text, 2 for HTML (default: 0)",
+    "enum": [
+      0,
+      2
+    ]
+  },
+  "parent_id": {
+    "type": "integer",
+    "description": "ID of parent note to reply to (ignores other entity associations when set)"
+  },
+  "creator_id": {
+    "type": "integer",
+    "description": "ID of the person who should be recorded as the author (defaults to API key owner)"
+  },
+  "created_at": {
+    "type": "string",
+    "description": "ISO 8601 formatted creation time (defaults to current time)"
+  }
+}
+```

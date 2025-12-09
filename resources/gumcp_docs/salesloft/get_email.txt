@@ -1,0 +1,16 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "Email ID to fetch"
+  },
+  "scoped_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specify explicit scoped fields desired on the Email Resource (e.g. 'subject')"
+  }
+}
+```

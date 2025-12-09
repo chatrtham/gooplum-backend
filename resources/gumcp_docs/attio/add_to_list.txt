@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "string",
+    "description": "List ID"
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Record ID to add"
+  },
+  "record_type": {
+    "type": "string",
+    "description": "Type of record (company or person)",
+    "enum": [
+      "company",
+      "person"
+    ]
+  }
+}
+```

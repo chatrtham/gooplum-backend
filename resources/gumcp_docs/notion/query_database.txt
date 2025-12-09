@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "database_id": {
+    "type": "string",
+    "description": "Database ID to query"
+  },
+  "database_url": {
+    "type": "string",
+    "description": "Database URL to query (preferred - just copy from browser address bar)"
+  },
+  "filter": {
+    "type": "object",
+    "description": "Filter conditions. Supports property filters (e.g., {'property': 'Status', 'select': {'equals': 'Done'}}) and compound filters with 'and'/'or' arrays. Property filter types: checkbox, date, files, formula, multi_select, number, people, phone_number, relation, rich_text, select, status, timestamp, unique_id",
+    "additionalProperties": true
+  },
+  "sorts": {
+    "type": "array",
+    "description": "Sort criteria. Each object needs direction and either property or timestamp",
+    "items": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property name to sort by"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp type to sort by",
+          "enum": [
+            "created_time",
+            "last_edited_time"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "description": "Sort direction",
+          "enum": [
+            "ascending",
+            "descending"
+          ]
+        }
+      },
+      "required": [
+        "direction"
+      ]
+    }
+  },
+  "filter_properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of property IDs to limit which page properties are returned in the response"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pages to return. Optional - defaults to 10 if not specified"
+  }
+}
+```

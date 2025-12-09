@@ -1,0 +1,34 @@
+Parameters Schema:
+```json
+{
+  "target_ticket_id": {
+    "type": "string",
+    "description": "Target ticket ID to merge other tickets into (required)"
+  },
+  "source_ticket_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of source ticket IDs to merge into the target ticket (required)"
+  },
+  "target_comment": {
+    "type": "string",
+    "description": "Private comment to add to the target ticket explaining the merge"
+  },
+  "source_comment": {
+    "type": "string",
+    "description": "Private comment to add to each source ticket before merging"
+  },
+  "target_comment_is_public": {
+    "type": "boolean",
+    "description": "Whether the target comment should be public (default: false)",
+    "default": false
+  },
+  "source_comment_is_public": {
+    "type": "boolean",
+    "description": "Whether the source comments should be public (default: false)",
+    "default": false
+  }
+}
+```

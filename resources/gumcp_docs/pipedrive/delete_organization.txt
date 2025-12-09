@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "organization_id": {
+    "type": "integer",
+    "description": "The ID of the organization to delete"
+  }
+}
+```

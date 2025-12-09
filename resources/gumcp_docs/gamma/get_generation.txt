@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "generationId": {
+    "type": "string",
+    "description": "The generation ID returned from create_gamma request."
+  }
+}
+```

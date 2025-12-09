@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "primary_ticket_id": {
+    "type": "string",
+    "description": "Primary ticket ID that will remain after the merge (required)"
+  },
+  "secondary_ticket_id": {
+    "type": "string",
+    "description": "Secondary ticket ID that will be merged into the primary ticket (required)"
+  }
+}
+```

@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The contact's email address (required if userId not provided)"
+  },
+  "userId": {
+    "type": "string",
+    "description": "A unique user ID (required if email not provided)"
+  },
+  "firstName": {
+    "type": "string",
+    "description": "The contact's first name"
+  },
+  "lastName": {
+    "type": "string",
+    "description": "The contact's last name"
+  },
+  "source": {
+    "type": "string",
+    "description": "A custom source value"
+  },
+  "subscribed": {
+    "type": "boolean",
+    "description": "Whether the contact will receive emails (use carefully - can re-subscribe unsubscribed users)"
+  },
+  "userGroup": {
+    "type": "string",
+    "description": "User group for segmentation"
+  },
+  "mailingLists": {
+    "type": "object",
+    "description": "Mailing list subscriptions as key-value pairs"
+  }
+}
+```

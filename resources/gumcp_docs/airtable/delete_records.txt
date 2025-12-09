@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Airtable table ID"
+  },
+  "record_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of record IDs to delete"
+  }
+}
+```

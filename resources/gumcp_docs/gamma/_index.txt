@@ -1,0 +1,8 @@
+# Gamma Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (2 total)
+
+1. **create_gamma** - Create a new gamma presentation, document, or social media content using AI generation. Returns a generationId that can be used to check status and retrieve results.
+2. **get_generation** - Check the status of a gamma generation and retrieve results.

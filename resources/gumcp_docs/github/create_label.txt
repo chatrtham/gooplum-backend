@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "name": {
+    "type": "string",
+    "description": "The name of the label"
+  },
+  "color": {
+    "type": "string",
+    "description": "A 6 character hex code, without the leading #, identifying the color of the label"
+  },
+  "description": {
+    "type": "string",
+    "description": "A short description of the label (optional)"
+  }
+}
+```

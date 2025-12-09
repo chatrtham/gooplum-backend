@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "ticket_id": {
+    "type": "string",
+    "description": "Zendesk ticket ID to add comment to (required)"
+  },
+  "body": {
+    "type": "string",
+    "description": "Comment text body (supports Markdown for agent comments)"
+  },
+  "html_body": {
+    "type": "string",
+    "description": "Comment body as HTML (recommended for Agent Workspace, alternative to body)"
+  },
+  "public": {
+    "type": "boolean",
+    "description": "Whether the comment is public (visible to end users) or private (internal note) (default: true)",
+    "default": true
+  },
+  "author_id": {
+    "type": "string",
+    "description": "User ID of the comment author (defaults to authenticated user)"
+  },
+  "uploads": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of upload tokens from file uploads for attachments"
+  }
+}
+```

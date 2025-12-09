@@ -1,0 +1,15 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string"
+  },
+  "attendees": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of email addresses of attendees"
+  }
+}
+```

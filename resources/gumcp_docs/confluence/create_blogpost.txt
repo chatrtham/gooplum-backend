@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "space_id": {
+    "type": "string",
+    "description": "ID of the space"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "current",
+      "draft"
+    ],
+    "description": "Status of the blog post"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title (required if creating non-draft)"
+  },
+  "body_representation": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "wiki"
+    ],
+    "description": "Content representation type",
+    "default": "storage"
+  },
+  "body_value": {
+    "type": "string",
+    "description": "Body content"
+  },
+  "created_at": {
+    "type": "string",
+    "description": "Created date in format yyyy-MM-ddTHH:mm:ss.SSSZ"
+  },
+  "private": {
+    "type": "boolean",
+    "description": "Create as private blog post"
+  }
+}
+```

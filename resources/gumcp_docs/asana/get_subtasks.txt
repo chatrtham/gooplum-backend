@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "parent_task_gid": {
+    "type": "string",
+    "description": "GID of the parent task (required)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of subtasks to return across all pages",
+    "default": 100,
+    "maximum": 1000
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

@@ -1,0 +1,51 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Company name"
+  },
+  "description": {
+    "type": "string",
+    "description": "Company description"
+  },
+  "domains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Company domains (e.g., ['example.com', 'example.org'])"
+  },
+  "categories": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Company categories"
+  },
+  "primary_location": {
+    "type": "string",
+    "description": "Company primary location"
+  },
+  "linkedin": {
+    "type": "string",
+    "description": "LinkedIn URL"
+  },
+  "twitter": {
+    "type": "string",
+    "description": "Twitter handle"
+  },
+  "facebook": {
+    "type": "string",
+    "description": "Facebook URL"
+  },
+  "instagram": {
+    "type": "string",
+    "description": "Instagram URL"
+  },
+  "angellist": {
+    "type": "string",
+    "description": "AngelList URL"
+  }
+}
+```

@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "Search term - can be part of organization name or domain"
+  },
+  "with_interaction_dates": {
+    "type": "boolean",
+    "description": "Include interaction dates in response (only returns organizations with interactions)"
+  },
+  "with_interaction_persons": {
+    "type": "boolean",
+    "description": "Include internal persons associated with interactions"
+  },
+  "with_opportunities": {
+    "type": "boolean",
+    "description": "Include opportunity IDs for each organization"
+  },
+  "min_last_email_date": {
+    "type": "string",
+    "description": "Filter by minimum last email date (ISO 8601 format)"
+  },
+  "max_last_email_date": {
+    "type": "string",
+    "description": "Filter by maximum last email date (ISO 8601 format)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination)"
+  }
+}
+```

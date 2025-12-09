@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "run_id": {
+    "type": "string",
+    "description": "Task run ID"
+  },
+  "timeout": {
+    "type": "integer",
+    "description": "Timeout in seconds",
+    "default": 600
+  }
+}
+```

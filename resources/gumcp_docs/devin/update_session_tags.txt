@@ -1,0 +1,16 @@
+Parameters Schema:
+```json
+{
+  "session_id": {
+    "type": "string",
+    "description": "The unique identifier of the session (e.g., 'devin-xxx')"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "New list of tags for the session"
+  }
+}
+```

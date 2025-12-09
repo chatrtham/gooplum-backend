@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "item_id": {
+    "type": "integer",
+    "description": "The ID of the item to archive"
+  }
+}
+```

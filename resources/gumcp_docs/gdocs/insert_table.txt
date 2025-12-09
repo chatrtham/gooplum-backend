@@ -1,0 +1,38 @@
+Parameters Schema:
+```json
+{
+  "doc_id": {
+    "type": "string",
+    "description": "Document ID"
+  },
+  "rows": {
+    "type": "integer",
+    "description": "Number of rows"
+  },
+  "columns": {
+    "type": "integer",
+    "description": "Number of columns"
+  },
+  "index": {
+    "type": "integer",
+    "description": "Position to insert table (optional, defaults to end of document)"
+  },
+  "data": {
+    "type": "array",
+    "description": "Optional 2D array of cell content. Each cell can be string or dict with text/textStyle",
+    "items": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "cellStyle": {
+    "type": "object",
+    "description": "Optional styling for all cells (backgroundColor, borderWidth, etc.)",
+    "additionalProperties": true
+  },
+  "headerRow": {
+    "type": "boolean",
+    "description": "Apply header styling to first row (default: false)"
+  }
+}
+```

@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "candidateId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the candidate to create a note for."
+  },
+  "note": {
+    "type": "object",
+    "description": "Note content object with type and value.",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "text/plain",
+          "text/html"
+        ],
+        "description": "Content type of the note. HTML supports limited tags: <b>, <i>, <u>, <a>, <ul>, <ol>, <li>, <code>, <pre>."
+      },
+      "value": {
+        "type": "string",
+        "description": "The note content."
+      }
+    },
+    "required": [
+      "type",
+      "value"
+    ]
+  },
+  "sendNotifications": {
+    "type": "boolean",
+    "description": "Whether subscribed users should be notified that the note was posted. Default is false.",
+    "default": false
+  },
+  "createdAt": {
+    "type": "string",
+    "description": "Set the note's creation timestamp. Use ISO 8601 format"
+  }
+}
+```

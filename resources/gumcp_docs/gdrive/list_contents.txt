@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "folder_id": {
+    "type": "string",
+    "description": "ID of the folder to list contents from (optional). If not provided, lists from root."
+  },
+  "folder_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the folder to list contents from (optional)"
+  },
+  "recursive": {
+    "type": "boolean",
+    "description": "Whether to recursively list contents of subfolders (default: true)",
+    "default": true
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of items to return (default: 100)",
+    "default": 100
+  }
+}
+```

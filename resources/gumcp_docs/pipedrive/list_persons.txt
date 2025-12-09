@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "filter_id": {
+    "type": "integer",
+    "description": "If supplied, only persons matching the specified filter are returned"
+  },
+  "ids": {
+    "type": "string",
+    "description": "Optional comma separated string array of up to 100 entity IDs to fetch. If filter_id is provided, this is ignored."
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "If supplied, only persons owned by the specified user are returned. If filter_id is provided, this is ignored."
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "If supplied, only persons linked to the specified organization are returned. If filter_id is provided, this is ignored."
+  },
+  "updated_since": {
+    "type": "string",
+    "description": "If set, only persons with an update_time later than or equal to this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "updated_until": {
+    "type": "string",
+    "description": "If set, only persons with an update_time earlier than this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time",
+      "add_time"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of additional fields to include. Values: next_activity_id, last_activity_id, open_deals_count, related_open_deals_count, closed_deals_count, related_closed_deals_count, participant_open_deals_count, participant_closed_deals_count, email_messages_count, activities_count, done_activities_count, undone_activities_count, files_count, notes_count, followers_count, won_deals_count, related_won_deals_count, lost_deals_count, related_lost_deals_count, last_incoming_mail_time, last_outgoing_mail_time, marketing_status, doi_status"
+  },
+  "custom_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of custom fields keys to include. Maximum of 15 keys allowed."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of persons to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

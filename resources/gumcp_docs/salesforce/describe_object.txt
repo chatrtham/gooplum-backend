@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "object_name": {
+    "type": "string",
+    "description": "The API name of the Salesforce object (e.g., 'Account', 'Contact', 'Custom_Object__c')"
+  }
+}
+```

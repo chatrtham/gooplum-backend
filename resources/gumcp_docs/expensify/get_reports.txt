@@ -1,0 +1,85 @@
+Parameters Schema:
+```json
+{
+  "report_ids": {
+    "type": "string",
+    "description": "Comma-separated list of report IDs to export (e.g., 'R00bCluvcO4T,R006AseGxMka'). Required if start_date or approved_after are not provided."
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Filter reports created/submitted on or after this date (ISO 8601 format: YYYY-MM-DD). Required if report_ids or approved_after are not provided."
+  },
+  "end_date": {
+    "type": "string",
+    "description": "Filter reports created/submitted on or before this date (ISO 8601 format: YYYY-MM-DD). Required if start_date or approved_after is more than one year ago. Total date range cannot exceed one year."
+  },
+  "approved_after": {
+    "type": "string",
+    "description": "Filter reports approved after this date (ISO 8601 format: YYYY-MM-DD). Only used for approved reports. Required if report_ids or start_date are not provided."
+  },
+  "report_state": {
+    "type": "string",
+    "description": "Filter by report status. Options: OPEN, SUBMITTED, APPROVED, REIMBURSED, ARCHIVED. Use comma-separated values for multiple (e.g., 'APPROVED,REIMBURSED')."
+  },
+  "limit": {
+    "type": "string",
+    "description": "Maximum number of reports to export (as string)."
+  },
+  "policy_ids": {
+    "type": "string",
+    "description": "Comma-separated list of policy IDs to filter reports (e.g., 'policy123,policy456')."
+  },
+  "marked_as_exported": {
+    "type": "string",
+    "description": "Filter out reports already exported with this label. Use with mark_as_exported_label to avoid duplicate exports."
+  },
+  "employee_email": {
+    "type": "string",
+    "description": "Export reports from this specific employee's account. Note: Cannot export OPEN reports when using this parameter."
+  },
+  "file_extension": {
+    "type": "string",
+    "enum": [
+      "csv",
+      "xls",
+      "xlsx",
+      "txt",
+      "pdf",
+      "json",
+      "xml"
+    ],
+    "description": "Format of exported file. Note: pdf generates one file per report.",
+    "default": "csv"
+  },
+  "file_basename": {
+    "type": "string",
+    "description": "Base name for the exported file.",
+    "default": "expensify_export"
+  },
+  "include_full_page_receipts_pdf": {
+    "type": "boolean",
+    "description": "Include full page receipts in PDF exports. Only applicable when file_extension is 'pdf'."
+  },
+  "mark_as_exported_label": {
+    "type": "string",
+    "description": "If provided, exported reports will be marked with this label in Expensify to prevent duplicate exports."
+  },
+  "email_recipients": {
+    "type": "string",
+    "description": "Comma-separated email addresses to notify when export completes (e.g., 'manager@domain.com,finance@domain.com')."
+  },
+  "email_message": {
+    "type": "string",
+    "description": "Custom message to include in notification email."
+  },
+  "test_mode": {
+    "type": "boolean",
+    "description": "If true, performs export but skips onFinish actions (mark_as_exported, email notifications). Use for testing."
+  },
+  "upload_to_workspace": {
+    "type": "boolean",
+    "description": "If true, uploads file to workspace. Default: false.",
+    "default": false
+  }
+}
+```

@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "ID of the contact associated with the ticket"
+  },
+  "ticket_type_id": {
+    "type": "string",
+    "description": "ID of the ticket type"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title/subject of the ticket"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the issue"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "ID of the company to associate with the ticket (optional)"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "ID of the admin to assign the ticket to. If not provided, will auto-resolve to the currently authenticated admin."
+  }
+}
+```

@@ -1,0 +1,13 @@
+# Netsuite Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (7 total)
+
+1. **list_record** - List records with filtering and automatic pagination. Supports any NetSuite record type.
+2. **get_record** - Get a single record by ID with optional field selection and expansion.
+3. **create_record** - Create a new record.
+4. **update_record** - Update an existing record.
+5. **delete_record** - Delete a record.
+6. **run_suiteql_query** - Execute a SuiteQL query. Use FETCH FIRST N ROWS ONLY for pagination and include ORDER BY to avoid duplicate results.
+7. **get_record_schema** - Get the complete schema definition for a NetSuite record type. Returns all objects and their fields for the specified record type.

@@ -1,0 +1,54 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of opportunity stages to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of opportunity stages to fetch"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns stages updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns stages updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns stages updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns stages updated on or before this ISO 8601 timestamp"
+  },
+  "active": {
+    "type": "boolean",
+    "description": "Filter by whether the opportunity stage is active"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at",
+      "order"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

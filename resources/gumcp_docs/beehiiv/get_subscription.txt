@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "subscription_id": {
+    "type": "string",
+    "description": "The prefixed ID of the subscription (e.g., sub_00000000-0000-0000-0000-000000000000)"
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats",
+        "custom_fields",
+        "referrals",
+        "tags"
+      ]
+    }
+  }
+}
+```

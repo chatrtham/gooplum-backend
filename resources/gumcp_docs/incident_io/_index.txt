@@ -1,0 +1,12 @@
+# Incident_Io Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (6 total)
+
+1. **list_users** - List users in your Incident.io account OR get a specific user by ID. When user_id is provided, returns that single user. Otherwise, lists users with filtering options and automatic pagination support.
+2. **list_incidents** - List incidents in your organization OR get a specific incident by ID. When incident_id is provided, returns that single incident. Otherwise, lists incidents with advanced filtering options and automatic pagination support.
+3. **create_incident** - Create a new incident in your organization. Note: retrospective mode incidents are not announced in Slack.
+4. **edit_incident** - Edit an existing incident's properties like severity, status, custom fields, and role assignments
+5. **list_alerts** - List all alerts for your account with filtering options
+6. **list_incident_alerts** - List connections/relationships between incidents and alerts

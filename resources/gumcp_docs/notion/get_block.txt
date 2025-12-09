@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "block_id": {
+    "type": "string",
+    "description": "Identifier for the block to retrieve"
+  }
+}
+```

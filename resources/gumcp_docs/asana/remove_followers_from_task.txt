@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "GID of the task to remove followers from (required)"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of user GIDs or email addresses to remove as followers"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

@@ -1,0 +1,42 @@
+# Zendesk Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (36 total)
+
+1. **list_tickets** - List and search tickets with comprehensive filtering, pagination, and sorting options
+2. **get_ticket** - Get complete ticket details including collaborators, followers, email CCs, and comments
+3. **create_ticket** - Create new tickets with comprehensive options including custom fields, collaborators, and attachments
+4. **update_ticket** - Update existing tickets including status, assignee, priority, custom fields, and add comments
+5. **merge_tickets** - Merge multiple tickets into a target ticket with comments and proper audit trail
+6. **create_comment** - Add public or private comments to existing tickets with rich formatting and attachment support
+7. **list_comments** - Get all comments for a ticket with optional user information and attachment details
+8. **list_ticket_fields** - Get ticket field schema, options, and configurations for form building and validation
+9. **list_ticket_forms** - Get available ticket forms and their field requirements for agents and end users
+10. **list_users** - List users (agents, end-users) with filtering options for role, organization, and groups
+11. **get_user** - Get detailed user information including permissions, custom fields, and profile data
+12. **search_users** - Search users by email, name, phone, notes, or other attributes using Zendesk search syntax
+13. **list_groups** - List agent groups for ticket assignment and workflow management
+14. **get_group** - Get detailed group information including members and configuration
+15. **list_tags** - List all available tags in the system, ordered by popularity in the last 60 days
+16. **search_tags** - Search and autocomplete tags by name prefix (minimum 2 characters required)
+17. **add_tags** - Add tags to tickets, organizations, or users with optional safe update protection
+18. **remove_tags** - Remove tags from tickets, organizations, or users with optional safe update protection
+19. **list_views** - List shared and personal views available to the current user with filtering options
+20. **get_view** - Get detailed view information including conditions, execution settings, and restrictions
+21. **get_tickets_in_view** - Get tickets from a specific view with sorting and pagination options
+22. **list_automations** - List all automations with comprehensive filtering, sorting, and usage analytics options
+23. **search_automations** - Search automations by title with filtering, sorting, and usage analytics options
+24. **get_automation** - Get detailed automation information including conditions, actions, and configuration
+25. **list_triggers** - List all ticket triggers with comprehensive filtering, sorting, and usage analytics options
+26. **search_triggers** - Search ticket triggers by title with filtering, sorting, and usage analytics options
+27. **get_trigger** - Get detailed ticket trigger information including conditions, actions, and configuration
+28. **list_trigger_categories** - List all ticket trigger categories for organizing and managing triggers
+29. **list_macros** - List all shared and personal macros available to the current user with comprehensive filtering, sorting, and usage analytics options
+30. **search_macros** - Search macros by title with filtering, sorting, and usage analytics options
+31. **get_macro** - Get detailed macro information including actions, restrictions, and configuration
+32. **list_articles** - List Help Center articles with filtering, sorting, and pagination options
+33. **get_article** - Get detailed article information including title, body, metadata, and translations
+34. **search_help_center** - Unified search across Help Center articles and community posts with comprehensive filtering
+35. **list_posts** - List community posts with filtering, sorting, and pagination options
+36. **get_post** - Get detailed community post information including title, content, author, and engagement metrics

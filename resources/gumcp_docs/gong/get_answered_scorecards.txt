@@ -1,0 +1,48 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of records to return. If provided, the API will automatically paginate through results until this limit is reached."
+  },
+  "callFromDate": {
+    "type": "string",
+    "description": "The date from when to list calls (inclusive). Accepts ISO-8601 format (e.g., '2023-04-10T00:00:00Z')."
+  },
+  "callToDate": {
+    "type": "string",
+    "description": "The date until when to list calls (exclusive). Accepts ISO-8601 format (e.g., '2023-04-11T00:00:00Z')."
+  },
+  "reviewFromDate": {
+    "type": "string",
+    "description": "The review date from when to list calls (inclusive). Accepts ISO-8601 format (e.g., '2023-04-10T00:00:00Z')."
+  },
+  "reviewToDate": {
+    "type": "string",
+    "description": "The review date until when to list calls (exclusive). Accepts ISO-8601 format (e.g., '2023-04-11T00:00:00Z')."
+  },
+  "reviewMethod": {
+    "type": "string",
+    "description": "Select whether to return scorecards that have been reviewed manually, automatically, or both. Default: MANUAL",
+    "enum": [
+      "AUTOMATIC",
+      "MANUAL",
+      "BOTH"
+    ]
+  },
+  "reviewedUserIds": {
+    "type": "array",
+    "description": "List of user IDs of the team members being reviewed.",
+    "items": {
+      "type": "string"
+    }
+  },
+  "scorecardIds": {
+    "type": "array",
+    "description": "List of scorecard IDs to retrieve.",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

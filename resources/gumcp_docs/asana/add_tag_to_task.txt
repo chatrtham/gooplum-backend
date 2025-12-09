@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "GID of the task to add tag to (required)"
+  },
+  "tag": {
+    "type": "string",
+    "description": "GID of the tag to add to the task (required)"
+  }
+}
+```

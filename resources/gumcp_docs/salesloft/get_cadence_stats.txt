@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "cadence_id": {
+    "type": "integer",
+    "description": "Cadence ID to get stats for"
+  }
+}
+```

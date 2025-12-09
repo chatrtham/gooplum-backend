@@ -1,0 +1,72 @@
+Parameters Schema:
+```json
+{
+  "clientUniqueId": {
+    "type": "string",
+    "description": "A call's unique identifier in the PBX or the recording system. Used to prevent repeated uploads."
+  },
+  "title": {
+    "type": "string",
+    "description": "The title of the call. This title is available in the Gong system for indexing and search."
+  },
+  "purpose": {
+    "type": "string",
+    "description": "The purpose of the call. This optional field is a free text of up to 255 characters."
+  },
+  "actualStart": {
+    "type": "string",
+    "description": "The actual date and time when the call started in the ISO-8601 format."
+  },
+  "duration": {
+    "type": "number",
+    "description": "The actual call duration in seconds."
+  },
+  "primaryUser": {
+    "type": "string",
+    "description": "The Gong internal user ID of the team member who hosted the call."
+  },
+  "direction": {
+    "type": "string",
+    "description": "Whether the call is inbound, outbound, or a conference call.",
+    "enum": [
+      "Inbound",
+      "Outbound",
+      "Conference",
+      "Unknown"
+    ]
+  },
+  "downloadMediaUrl": {
+    "type": "string",
+    "description": "The URL from which Gong can download the media file."
+  },
+  "workspaceId": {
+    "type": "string",
+    "description": "Optional workspace identifier."
+  },
+  "parties": {
+    "type": "array",
+    "description": "A list of the call's participants. A party must be provided for the primaryUser.",
+    "items": {
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the party, if available."
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address of the party, if available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the party, if available."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The user ID of the participant within the Gong system."
+        }
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,53 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of engagements to return"
+  },
+  "engagement_id": {
+    "type": "string",
+    "description": "Comma-separated list of engagement IDs to filter by"
+  },
+  "engagement_type": {
+    "type": "string",
+    "description": "Type of engagement (e.g., 'meeting', 'call')"
+  },
+  "content_type": {
+    "type": "string",
+    "description": "Content type of engagement (e.g., 'activity')"
+  },
+  "max_date": {
+    "type": "string",
+    "description": "Maximum date of engagement in ISO 8601 format (e.g., '2024-12-31T23:59:59Z' for datetime or '2024-12-31' for date only)"
+  },
+  "min_date": {
+    "type": "string",
+    "description": "Minimum date of engagement in ISO 8601 format (e.g., '2024-01-01T00:00:00Z' for datetime or '2024-01-01' for date only)"
+  },
+  "max_duration": {
+    "type": "number",
+    "description": "Maximum duration of meeting in seconds"
+  },
+  "min_duration": {
+    "type": "number",
+    "description": "Minimum duration of meeting in seconds"
+  },
+  "participants_email": {
+    "type": "string",
+    "description": "Email address of a participant to filter by"
+  },
+  "team_id": {
+    "type": "string",
+    "description": "Comma-separated list of Team IDs for engagement owner"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "Comma-separated list of User IDs for engagement owner"
+  },
+  "with_trackers": {
+    "type": "boolean",
+    "description": "Include tracker information with results"
+  }
+}
+```

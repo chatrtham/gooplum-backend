@@ -1,0 +1,24 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string"
+  },
+  "summary": {
+    "type": "string",
+    "description": "Summary/title of the meeting"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the meeting"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start time in ISO format (YYYY-MM-DDTHH:MM:SS)"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "End time in ISO format (YYYY-MM-DDTHH:MM:SS)"
+  }
+}
+```

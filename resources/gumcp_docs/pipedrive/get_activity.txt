@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "activity_id": {
+    "type": "integer",
+    "description": "The ID of the activity to retrieve"
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of additional fields to include. Values: attendees"
+  }
+}
+```

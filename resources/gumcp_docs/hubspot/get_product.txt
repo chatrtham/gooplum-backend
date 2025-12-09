@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "product_id": {
+    "type": "string",
+    "description": "HubSpot product ID (required)"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific product properties to return"
+  },
+  "properties_with_history": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Properties to return with their history of previous values"
+  }
+}
+```

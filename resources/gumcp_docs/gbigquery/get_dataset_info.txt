@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "project_id": {
+    "type": "string",
+    "description": "The Google Cloud project ID"
+  },
+  "dataset_id": {
+    "type": "string",
+    "description": "The dataset ID to get information about"
+  }
+}
+```

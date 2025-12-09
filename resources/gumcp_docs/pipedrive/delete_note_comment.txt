@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The ID of the note"
+  },
+  "comment_id": {
+    "type": "string",
+    "description": "The ID of the comment (UUID format)"
+  }
+}
+```

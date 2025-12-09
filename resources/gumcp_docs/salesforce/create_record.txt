@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "object_name": {
+    "type": "string",
+    "description": "The API name of the Salesforce object (e.g., 'Account', 'Contact')"
+  },
+  "data": {
+    "type": "object",
+    "description": "Field data for the new record as key-value pairs",
+    "additionalProperties": true
+  }
+}
+```

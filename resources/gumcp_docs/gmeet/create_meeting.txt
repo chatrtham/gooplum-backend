@@ -1,0 +1,38 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "Title of the meeting"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the meeting"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start time in UTC ISO format (YYYY-MM-DDTHH:MM:SSZ or YYYY-MM-DDTHH:MM:SS)"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "End time in UTC ISO format (YYYY-MM-DDTHH:MM:SSZ or YYYY-MM-DDTHH:MM:SS). Optional if duration is provided."
+  },
+  "duration": {
+    "type": "string",
+    "enum": [
+      "15min",
+      "30min",
+      "45min",
+      "1hr"
+    ],
+    "description": "Meeting duration. Use this instead of end_time for common durations. Cannot be used together with end_time."
+  },
+  "attendees": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of email addresses of attendees"
+  }
+}
+```

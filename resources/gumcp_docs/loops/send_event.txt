@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The contact's email address (required if userId not provided)"
+  },
+  "userId": {
+    "type": "string",
+    "description": "The contact's unique user ID (required if email not provided)"
+  },
+  "eventName": {
+    "type": "string",
+    "description": "The name of the event (required)"
+  },
+  "eventProperties": {
+    "type": "object",
+    "description": "Event property data with string, number, boolean or date values"
+  },
+  "mailingLists": {
+    "type": "object",
+    "description": "Manage contact's mailing list subscriptions"
+  }
+}
+```

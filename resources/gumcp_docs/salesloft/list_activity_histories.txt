@@ -1,0 +1,121 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of activities to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "occurred_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  },
+  "type": {
+    "type": "string",
+    "description": "Filter by activity type",
+    "enum": [
+      "added_to_cadence",
+      "account_added_to_cadence",
+      "call",
+      "completed_action",
+      "dnc_event",
+      "email_reply",
+      "external_meeting",
+      "missed_call",
+      "live_chat",
+      "meeting",
+      "meeting_held",
+      "message_conversation",
+      "note",
+      "opportunity_amount_change",
+      "opportunity_close_date_change",
+      "opportunity_stage_change",
+      "received_email",
+      "requested_email",
+      "residency_change",
+      "sent_email",
+      "site_visit",
+      "share_internal_note",
+      "success",
+      "task",
+      "voicemail",
+      "review"
+    ]
+  },
+  "occurred_at_gt": {
+    "type": "string",
+    "description": "Returns activities that occurred after this timestamp (ISO 8601 format)"
+  },
+  "occurred_at_gte": {
+    "type": "string",
+    "description": "Returns activities that occurred on or after this timestamp (ISO 8601 format)"
+  },
+  "occurred_at_lt": {
+    "type": "string",
+    "description": "Returns activities that occurred before this timestamp (ISO 8601 format)"
+  },
+  "occurred_at_lte": {
+    "type": "string",
+    "description": "Returns activities that occurred on or before this timestamp (ISO 8601 format)"
+  },
+  "pinned": {
+    "type": "boolean",
+    "description": "Filter by pinned status of activity"
+  },
+  "resource_type": {
+    "type": "string",
+    "description": "Filter by resource type",
+    "enum": [
+      "person",
+      "account",
+      "crm_opportunity"
+    ]
+  },
+  "resource_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by resource IDs (requires resource_type to be specified)"
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by activity IDs"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns activities updated after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns activities updated on or after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns activities updated before this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns activities updated on or before this timestamp (ISO 8601 format)"
+  },
+  "user_guid": {
+    "type": "string",
+    "description": "Filter activities by USER GUID - internal organization/team member GUID (NOT person_id from external contacts)"
+  }
+}
+```

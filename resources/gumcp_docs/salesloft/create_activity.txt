@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "action_id": {
+    "type": "integer",
+    "description": "Action ID that is being completed (action must have type 'integration')"
+  },
+  "task_id": {
+    "type": "integer",
+    "description": "Task ID that is being completed (task must have type 'integration')"
+  }
+}
+```

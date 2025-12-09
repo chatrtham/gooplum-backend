@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "asset_group_id": {
+    "type": "string",
+    "description": "Asset group ID to update (required)"
+  },
+  "name": {
+    "type": "string",
+    "description": "New asset group name"
+  },
+  "status": {
+    "type": "string",
+    "description": "New asset group status (ENABLED, PAUSED, REMOVED)"
+  },
+  "cpc_bid_micros": {
+    "type": "integer",
+    "description": "New CPC bid in micros (1 USD = 1,000,000 micros)"
+  },
+  "cpm_bid_micros": {
+    "type": "integer",
+    "description": "New CPM bid in micros (1 USD = 1,000,000 micros)"
+  },
+  "target_cpa_micros": {
+    "type": "integer",
+    "description": "New target CPA bid in micros (1 USD = 1,000,000 micros)"
+  }
+}
+```

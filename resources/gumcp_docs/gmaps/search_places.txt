@@ -1,0 +1,75 @@
+Parameters Schema:
+```json
+{
+  "search_terms": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Search terms to find places (e.g., ['restaurant', 'coffee shop']). Each term is searched separately."
+  },
+  "location": {
+    "type": "string",
+    "description": "Location to search in. Use simple formats like 'New York, NY' or 'San Francisco, CA'."
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of places to return per search term",
+    "default": 20
+  },
+  "language": {
+    "type": "string",
+    "description": "Language for results (default: 'en')",
+    "default": "en"
+  },
+  "min_rating": {
+    "type": "string",
+    "description": "Minimum star rating filter",
+    "enum": [
+      "",
+      "two",
+      "twoAndHalf",
+      "three",
+      "threeAndHalf",
+      "four",
+      "fourAndHalf"
+    ],
+    "default": "four"
+  },
+  "website_filter": {
+    "type": "string",
+    "description": "Filter places by website presence",
+    "enum": [
+      "allPlaces",
+      "withWebsite",
+      "withoutWebsite"
+    ],
+    "default": "allPlaces"
+  },
+  "skip_closed_places": {
+    "type": "boolean",
+    "description": "Skip places that are temporarily or permanently closed",
+    "default": false
+  },
+  "include_reviews": {
+    "type": "boolean",
+    "description": "Include reviews in the results",
+    "default": false
+  },
+  "max_reviews": {
+    "type": "integer",
+    "description": "Maximum number of reviews to extract per place",
+    "default": 5
+  },
+  "include_images": {
+    "type": "boolean",
+    "description": "Include images in the results",
+    "default": false
+  },
+  "max_images": {
+    "type": "integer",
+    "description": "Maximum number of images to extract per place",
+    "default": 5
+  }
+}
+```

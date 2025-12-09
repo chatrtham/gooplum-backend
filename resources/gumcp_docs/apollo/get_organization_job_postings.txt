@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "organization_id": {
+    "type": "string",
+    "description": "The Apollo ID for the organization to get job postings for. Find IDs using Organization Search endpoint. Example: '5e66b6381e05b4008c8331b8'"
+  },
+  "page": {
+    "type": "integer",
+    "description": "The page number of results to retrieve. Use with per_page for navigation"
+  },
+  "per_page": {
+    "type": "integer",
+    "description": "Number of results per page. Improves endpoint performance"
+  }
+}
+```

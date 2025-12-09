@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "view": {
+    "type": "string",
+    "enum": [
+      "DEFINITION_VIEW_BASIC",
+      "DEFINITION_VIEW_FULL",
+      "DEFINITION_VIEW_DEFAULT"
+    ],
+    "description": "Level of detail: BASIC (definition only), FULL (with metrics), DEFAULT (with default metric)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of definitions to return"
+  }
+}
+```

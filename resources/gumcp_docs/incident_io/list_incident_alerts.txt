@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of incident alerts to return across all pages (automatically handles pagination)"
+  },
+  "alert_id": {
+    "type": "string",
+    "description": "Filter by alert ID to see which incidents it's connected to"
+  },
+  "incident_id": {
+    "type": "string",
+    "description": "Filter by incident ID to see which alerts are connected to it. Use reference (e.g., 'INC-4') or full ID."
+  }
+}
+```

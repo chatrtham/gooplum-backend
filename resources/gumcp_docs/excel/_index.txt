@@ -1,0 +1,27 @@
+# Excel Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (21 total)
+
+1. **create_workbook** - Create a new Excel workbook in OneDrive or SharePoint
+2. **list_worksheets** - List all worksheets in an Excel workbook
+3. **add_worksheet** - Add a new worksheet to an Excel workbook
+4. **read_worksheet** - Read data from a worksheet
+5. **update_cells** - Update cell values in a worksheet
+6. **search_data** - Get data from a specific range in Excel worksheet (e.g., A1:D10)
+7. **add_row** - Add a row to the end of a worksheet
+8. **add_table** - Create a new table in a worksheet
+9. **add_table_row** - Add a row to a table
+10. **find_row** - Find a row by column value
+11. **find_or_create_row** - Find a row by column value or create it if not found
+12. **update_row** - Update a specific row in a worksheet
+13. **delete_worksheet_row** - Delete a row from a worksheet
+14. **list_tables** - List all tables in an Excel workbook
+15. **get_table** - Get table metadata
+16. **list_table_rows** - List rows in a table
+17. **add_table_column** - Add a column to a table
+18. **update_table_column** - Update data in a table column
+19. **delete_table** - Delete a table (data remains, only deletes the table object)
+20. **download_workbook** - Get a download URL for the workbook
+21. **search_workbooks** - Search for workbooks in OneDrive and SharePoint

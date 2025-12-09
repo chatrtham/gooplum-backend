@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "session_id": {
+    "type": "string",
+    "description": "The unique identifier of the session to terminate (e.g., 'devin-xxx')"
+  }
+}
+```

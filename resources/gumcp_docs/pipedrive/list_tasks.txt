@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "assignee_id": {
+    "type": "integer",
+    "description": "If supplied, only tasks that are assigned to this user are returned"
+  },
+  "project_id": {
+    "type": "integer",
+    "description": "If supplied, only tasks that are assigned to this project are returned"
+  },
+  "parent_task_id": {
+    "type": [
+      "integer",
+      "null"
+    ],
+    "description": "If null is supplied then only parent tasks are returned. If integer is supplied then only subtasks of a specific task are returned. By default all tasks are returned."
+  },
+  "done": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Whether the task is done or not. 0 = Not done, 1 = Done. If not omitted then returns both done and not done tasks."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tasks to return across all pages (automatically handles pagination). Default: 500",
+    "default": 500
+  }
+}
+```

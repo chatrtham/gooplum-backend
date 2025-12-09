@@ -1,0 +1,16 @@
+# Cal Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (10 total)
+
+1. **get_me** - Get your Cal.com user profile information
+2. **get_event_types** - Get all event types from Cal.com
+3. **get_booking** - Get a booking from Cal.com by its unique ID
+4. **reschedule_booking** - Reschedule an existing booking to a new time
+5. **cancel_booking** - Cancel an existing booking
+6. **confirm_booking** - Confirm a pending booking
+7. **decline_booking** - Decline a pending booking
+8. **create_booking** - Create a booking in Cal.com. At least one event type identifier is required: eventTypeId OR (eventTypeSlug and username) OR (eventTypeSlug and teamSlug).
+9. **get_bookings** - Get all bookings from Cal.com
+10. **get_schedules** - Get all schedules from the authenticated user in Cal.com

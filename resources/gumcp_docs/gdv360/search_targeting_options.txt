@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "advertiser_id": {
+    "type": "string",
+    "description": "Required. The ID of the advertiser the line items belong to (int64 format as string)"
+  },
+  "line_item_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Required. The IDs of the line items to list targeting options for"
+  },
+  "filter": {
+    "type": "string",
+    "description": "Filter expression (e.g., 'targetingType=\"TARGETING_TYPE_GEO_REGION\" OR targetingType=\"TARGETING_TYPE_CHANNEL\"')"
+  },
+  "order_by": {
+    "type": "string",
+    "description": "Field to sort by: lineItemId (default), assignedTargetingOption.targetingType. Add 'desc' for descending"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of targeting options to return across all pages (automatically handles pagination)",
+    "default": 5000
+  }
+}
+```

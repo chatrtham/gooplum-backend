@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "sentiment_id": {
+    "type": "string",
+    "description": "Call sentiment ID to fetch"
+  }
+}
+```

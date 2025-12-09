@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Table ID or table name containing the record"
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Record ID to list comments for"
+  },
+  "max_comments": {
+    "type": "integer",
+    "description": "Maximum number of comments to return (default 100)",
+    "minimum": 1
+  }
+}
+```

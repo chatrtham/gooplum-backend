@@ -1,0 +1,164 @@
+Parameters Schema:
+```json
+{
+  "search_queries": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Search terms to find videos (enter as you would in YouTube's search bar)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of regular videos to return per search term",
+    "default": 10
+  },
+  "max_shorts": {
+    "type": "integer",
+    "description": "Maximum number of YouTube Shorts to return per search term",
+    "default": 0
+  },
+  "max_streams": {
+    "type": "integer",
+    "description": "Maximum number of live streams to return per search term",
+    "default": 0
+  },
+  "sorting_order": {
+    "type": "string",
+    "enum": [
+      "relevance",
+      "rating",
+      "date",
+      "views"
+    ],
+    "description": "YouTube sorting parameter for search results"
+  },
+  "date_filter": {
+    "type": "string",
+    "enum": [
+      "hour",
+      "today",
+      "week",
+      "month",
+      "year"
+    ],
+    "description": "Filter videos by upload date"
+  },
+  "video_type": {
+    "type": "string",
+    "enum": [
+      "video",
+      "movie"
+    ],
+    "description": "Filter by video type"
+  },
+  "length_filter": {
+    "type": "string",
+    "enum": [
+      "under4",
+      "between420",
+      "plus20"
+    ],
+    "description": "Filter by video length (under 4 min, 4-20 min, over 20 min)"
+  },
+  "is_hd": {
+    "type": "boolean",
+    "description": "Filter for HD videos only"
+  },
+  "has_subtitles": {
+    "type": "boolean",
+    "description": "Filter for videos with subtitles/CC"
+  },
+  "has_cc": {
+    "type": "boolean",
+    "description": "Filter for videos with Creative Commons license"
+  },
+  "is_3d": {
+    "type": "boolean",
+    "description": "Filter for 3D videos"
+  },
+  "is_live": {
+    "type": "boolean",
+    "description": "Filter for live videos"
+  },
+  "is_4k": {
+    "type": "boolean",
+    "description": "Filter for 4K videos"
+  },
+  "is_360": {
+    "type": "boolean",
+    "description": "Filter for 360-degree videos"
+  },
+  "has_location": {
+    "type": "boolean",
+    "description": "Filter for videos with location data"
+  },
+  "is_hdr": {
+    "type": "boolean",
+    "description": "Filter for HDR videos"
+  },
+  "is_vr180": {
+    "type": "boolean",
+    "description": "Filter for VR180 videos"
+  },
+  "published_after": {
+    "type": "string",
+    "description": "Only include videos published after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z' or '2023-01-01')"
+  },
+  "include_subtitles": {
+    "type": "boolean",
+    "description": "Include subtitles in the response for videos that have them available"
+  },
+  "subtitles_language": {
+    "type": "string",
+    "enum": [
+      "any",
+      "en",
+      "de",
+      "es",
+      "fr",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "ar",
+      "zh",
+      "hi",
+      "tr",
+      "pl",
+      "sv",
+      "da",
+      "no",
+      "fi",
+      "he",
+      "th",
+      "vi",
+      "cs",
+      "hu",
+      "ro",
+      "el",
+      "bg",
+      "hr",
+      "sk",
+      "sl",
+      "et",
+      "lv",
+      "lt",
+      "mt"
+    ],
+    "description": "Language for subtitles to include (requires include_subtitles=true). Supports: any, English (en), German (de), Spanish (es), French (fr), Italian (it), Japanese (ja), Korean (ko), Dutch (nl), Portuguese (pt), Russian (ru), Arabic (ar), Chinese (zh), Hindi (hi), Turkish (tr), Polish (pl), Swedish (sv), Danish (da), Norwegian (no), Finnish (fi), Hebrew (he), Thai (th), Vietnamese (vi), Czech (cs), Hungarian (hu), Romanian (ro), Greek (el), Bulgarian (bg), Croatian (hr), Slovak (sk), Slovenian (sl), Estonian (et), Latvian (lv), Lithuanian (lt), Maltese (mt)"
+  },
+  "subtitles_format": {
+    "type": "string",
+    "enum": [
+      "srt",
+      "vtt",
+      "xml",
+      "plaintext"
+    ],
+    "description": "Format for subtitle text (requires include_subtitles=true)"
+  }
+}
+```

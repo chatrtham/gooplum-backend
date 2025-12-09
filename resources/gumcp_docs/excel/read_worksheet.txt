@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet to read"
+  },
+  "range": {
+    "type": "string",
+    "description": "Cell range to read (e.g., 'A1:D10'), defaults to used range if not specified"
+  }
+}
+```

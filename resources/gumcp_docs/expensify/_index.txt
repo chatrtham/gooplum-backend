@@ -1,0 +1,9 @@
+# Expensify Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (3 total)
+
+1. **get_reports** - Get Expensify reports and return a public download URL. Supports multiple file formats.
+2. **get_card_transactions** - Get card transactions and return a public download URL. Useful for reconciliation.
+3. **create_expenses** - Create expenses in bulk in a user's account. Useful for importing cleaned/categorized expense data.

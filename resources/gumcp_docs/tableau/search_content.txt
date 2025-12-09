@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "terms": {
+    "type": "string",
+    "description": "Search terms to find relevant content"
+  },
+  "content_types": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by content types: lens, datasource, virtualconnection, collection, project, flow, datarole, table, database, view, workbook"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Number of items to return (default 100, max 2000)"
+  }
+}
+```

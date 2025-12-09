@@ -1,0 +1,11 @@
+# Parallel Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **extract** - Extract relevant content from web URLs
+2. **search** - Search the web
+3. **create_task_run** - Create a task run
+4. **get_task_run** - Retrieve a task run
+5. **get_task_run_result** - Retrieve task run result, blocking until completion

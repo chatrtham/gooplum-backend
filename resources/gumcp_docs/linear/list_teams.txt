@@ -1,0 +1,36 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of teams to return across all pages",
+    "default": 100
+  },
+  "orderBy": {
+    "type": "string",
+    "enum": [
+      "createdAt",
+      "updatedAt"
+    ],
+    "description": "Order by field",
+    "default": "updatedAt"
+  },
+  "query": {
+    "type": "string",
+    "description": "An optional search query"
+  },
+  "createdAt": {
+    "type": "string",
+    "description": "Return only teams created on or after this ISO-8601 date-time or duration. e.g. -P1D to get teams created in the last day"
+  },
+  "updatedAt": {
+    "type": "string",
+    "description": "Return only teams updated on or after this ISO-8601 date-time or duration. e.g. -P1D to get teams updated in the last day"
+  },
+  "includeArchived": {
+    "type": "boolean",
+    "description": "Whether to include archived teams",
+    "default": false
+  }
+}
+```

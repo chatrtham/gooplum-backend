@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet (optional, if specified will only list tables in this worksheet)"
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "domain": {
+    "type": "string",
+    "description": "The domain of the company to enrich. Do not include www., @ symbol, or similar. Examples: 'apollo.io', 'microsoft.com'"
+  }
+}
+```

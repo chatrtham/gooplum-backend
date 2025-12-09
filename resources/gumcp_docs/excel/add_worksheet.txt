@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name for the new worksheet (optional, Excel will generate a name if not provided)"
+  }
+}
+```

@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "integer",
+    "description": "Optional: Get fields specific to this list. If not provided, returns all global and list-specific fields"
+  },
+  "value_type": {
+    "type": "integer",
+    "description": "Optional: Filter by value type (0=Person, 1=Organization, 2=Dropdown, 3=Number, 4=Date, 5=Location, 6=Text, 7=Ranked Dropdown)"
+  },
+  "entity_type": {
+    "type": "integer",
+    "description": "Optional: Filter by entity type (0=Person, 1=Organization, 8=Opportunity)"
+  },
+  "with_modified_names": {
+    "type": "boolean",
+    "description": "Optional: Return field names in format [List Name] Field Name"
+  },
+  "exclude_dropdown_options": {
+    "type": "boolean",
+    "description": "Optional: Exclude dropdown options from response to reduce payload size"
+  }
+}
+```

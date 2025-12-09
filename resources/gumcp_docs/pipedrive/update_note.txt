@@ -1,0 +1,81 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The ID of the note"
+  },
+  "content": {
+    "type": "string",
+    "description": "The content of the note in HTML format. Subject to sanitization on the back-end."
+  },
+  "lead_id": {
+    "type": "string",
+    "description": "The ID of the lead the note will be attached to (UUID format)"
+  },
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal the note will be attached to"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person the note will be attached to"
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "The ID of the organization the note will be attached to"
+  },
+  "project_id": {
+    "type": "integer",
+    "description": "The ID of the project the note will be attached to"
+  },
+  "user_id": {
+    "type": "integer",
+    "description": "The ID of the user who will be marked as the author of the note. Only an admin can change the author."
+  },
+  "add_time": {
+    "type": "string",
+    "description": "The optional creation date & time of the note in UTC. Can be set in the past or in the future. YYYY-MM-DD HH:MM:SS format"
+  },
+  "pinned_to_lead_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Pin note to lead state (lead_id is also required). 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_deal_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Pin note to deal state (deal_id is also required). 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_organization_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Pin note to organization state (org_id is also required). 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_person_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Pin note to person state (person_id is also required). 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_project_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "Pin note to project state (project_id is also required). 0 = Not pinned, 1 = Pinned"
+  }
+}
+```

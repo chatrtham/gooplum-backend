@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "doc_id": {
+    "type": "string",
+    "description": "Document ID"
+  }
+}
+```

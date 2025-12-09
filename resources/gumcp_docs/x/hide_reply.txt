@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "tweet_id": {
+    "type": "string",
+    "description": "The ID of the reply that you want to hide or unhide."
+  },
+  "hidden": {
+    "type": "boolean",
+    "description": "Whether to hide (true) or unhide (false) the reply."
+  }
+}
+```

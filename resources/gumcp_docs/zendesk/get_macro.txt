@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "macro_id": {
+    "type": "string",
+    "description": "Zendesk macro ID to retrieve (required)"
+  }
+}
+```

@@ -1,0 +1,12 @@
+# Gcalendar Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (6 total)
+
+1. **list_events** - List events from Google Calendar for a specified time range
+2. **create_event** - Create a new event in Google Calendar
+3. **update_event** - Update an existing event in Google Calendar
+4. **delete_event** - Delete an event from Google Calendar
+5. **update_attendee_status** - Update an attendee's response status for an event
+6. **check_free_slots** - Check for available time slots in a calendar

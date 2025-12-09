@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "database_id": {
+    "type": "string",
+    "description": "Database ID to retrieve"
+  },
+  "database_url": {
+    "type": "string",
+    "description": "Database URL to retrieve (preferred - just copy from browser address bar)"
+  }
+}
+```

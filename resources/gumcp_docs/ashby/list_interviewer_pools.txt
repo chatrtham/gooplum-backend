@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of interviewer pools to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "includeArchivedPools": {
+    "type": "boolean",
+    "description": "Include archived interviewer pools in the response. Default is false.",
+    "default": false
+  },
+  "includeArchivedTrainingStages": {
+    "type": "boolean",
+    "description": "Include archived training stages within pools. Default is false.",
+    "default": false
+  }
+}
+```

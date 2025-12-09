@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "content": {
+    "type": "string",
+    "description": "The content of the note (required)"
+  },
+  "associated_with_type": {
+    "type": "string",
+    "description": "Case insensitive type of item with which the note is associated (required)",
+    "enum": [
+      "person",
+      "account"
+    ]
+  },
+  "associated_with_id": {
+    "type": "integer",
+    "description": "ID of the item with which the note is associated (required)"
+  },
+  "skip_crm_sync": {
+    "type": "boolean",
+    "description": "Boolean indicating if the CRM sync should be skipped. No syncing will occur if true"
+  },
+  "call_id": {
+    "type": "integer",
+    "description": "ID of the call with which the note is associated. The call cannot already have a note"
+  },
+  "subject": {
+    "type": "string",
+    "description": "The subject of the note's crm activity, defaults to 'Note'"
+  },
+  "user_guid": {
+    "type": "string",
+    "description": "The USER GUID of the internal organization/team member to create the note for (NOT person_id from external contacts). Only team admins may create notes on behalf of other users. Defaults to the requesting user"
+  }
+}
+```

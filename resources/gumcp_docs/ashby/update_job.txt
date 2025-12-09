@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "jobId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the job to update."
+  },
+  "title": {
+    "type": "string",
+    "description": "New title for the job."
+  },
+  "teamId": {
+    "type": "string",
+    "description": "The new team (UUID) to associate with the job."
+  },
+  "locationId": {
+    "type": "string",
+    "description": "The new location (UUID) to associate with the job."
+  },
+  "defaultInterviewPlanId": {
+    "type": "string",
+    "description": "The new default interview plan (UUID) to associate with the job."
+  },
+  "customRequisitionId": {
+    "type": "string",
+    "description": "The new custom requisition ID for the job."
+  }
+}
+```

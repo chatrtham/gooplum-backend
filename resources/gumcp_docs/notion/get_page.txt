@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "string",
+    "description": "Page ID to retrieve"
+  },
+  "page_url": {
+    "type": "string",
+    "description": "Page URL to retrieve (preferred - just copy from browser address bar)"
+  },
+  "filter_properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of property IDs to limit which page properties are returned in the response"
+  }
+}
+```

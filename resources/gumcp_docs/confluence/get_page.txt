@@ -1,0 +1,76 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "integer",
+    "description": "The page ID"
+  },
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format",
+      "view",
+      "export_view",
+      "anonymous_export_view",
+      "styled_view",
+      "editor"
+    ],
+    "description": "The content format to return in the body field"
+  },
+  "get_draft": {
+    "type": "boolean",
+    "description": "Retrieve the draft version of this page",
+    "default": false
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "current",
+        "archived",
+        "trashed",
+        "deleted",
+        "historical",
+        "draft"
+      ]
+    },
+    "description": "Filter the page by its status"
+  },
+  "version": {
+    "type": "integer",
+    "description": "Retrieve a previously published version by number"
+  },
+  "include_labels": {
+    "type": "boolean",
+    "description": "Include labels associated with this page",
+    "default": false
+  },
+  "include_properties": {
+    "type": "boolean",
+    "description": "Include content properties associated with this page",
+    "default": false
+  },
+  "include_operations": {
+    "type": "boolean",
+    "description": "Include operations associated with this page",
+    "default": false
+  },
+  "include_likes": {
+    "type": "boolean",
+    "description": "Include likes associated with this page",
+    "default": false
+  },
+  "include_versions": {
+    "type": "boolean",
+    "description": "Include versions associated with this page",
+    "default": false
+  },
+  "include_version": {
+    "type": "boolean",
+    "description": "Include the current version associated with this page",
+    "default": true
+  }
+}
+```

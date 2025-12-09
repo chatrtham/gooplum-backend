@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "opportunity_id": {
+    "type": "integer",
+    "description": "The unique identifier of the opportunity to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The name of the opportunity"
+  },
+  "person_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of person IDs (must include existing IDs to keep them)"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of organization IDs (must include existing IDs to keep them)"
+  }
+}
+```

@@ -1,0 +1,74 @@
+Parameters Schema:
+```json
+{
+  "filter_id": {
+    "type": "integer",
+    "description": "If supplied, only activities matching the specified filter are returned"
+  },
+  "ids": {
+    "type": "string",
+    "description": "Optional comma separated string array of up to 100 entity ids to fetch. If filter_id is provided, this is ignored."
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "If supplied, only activities owned by the specified user are returned. If filter_id is provided, this is ignored."
+  },
+  "deal_id": {
+    "type": "integer",
+    "description": "If supplied, only activities linked to the specified deal are returned. If filter_id is provided, this is ignored."
+  },
+  "lead_id": {
+    "type": "string",
+    "description": "If supplied, only activities linked to the specified lead are returned. If filter_id is provided, this is ignored."
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "If supplied, only activities whose primary participant is the given person are returned. If filter_id is provided, this is ignored."
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "If supplied, only activities linked to the specified organization are returned. If filter_id is provided, this is ignored."
+  },
+  "done": {
+    "type": "boolean",
+    "description": "If supplied, only activities with specified 'done' flag value are returned"
+  },
+  "updated_since": {
+    "type": "string",
+    "description": "If set, only activities with an update_time later than or equal to this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "updated_until": {
+    "type": "string",
+    "description": "If set, only activities with an update_time earlier than this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time",
+      "add_time",
+      "due_date"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of additional fields to include. Values: attendees"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of activities to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

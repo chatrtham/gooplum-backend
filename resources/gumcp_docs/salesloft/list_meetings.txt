@@ -1,0 +1,171 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of meetings to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of meetings to fetch"
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter meetings by status",
+    "enum": [
+      "pending",
+      "booked",
+      "failed",
+      "retry"
+    ]
+  },
+  "person_id": {
+    "type": "string",
+    "description": "Filter meetings by person ID"
+  },
+  "account_id": {
+    "type": "string",
+    "description": "Filter meetings by account ID"
+  },
+  "person_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter meetings by person IDs"
+  },
+  "event_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter meetings by event IDs"
+  },
+  "i_cal_uids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter meetings by iCal UIDs from calendar provider"
+  },
+  "task_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter meetings by task IDs"
+  },
+  "include_meetings_settings": {
+    "type": "boolean",
+    "description": "Include owned_by_meetings_settings and booked_by_meetings_settings objects"
+  },
+  "start_time_gt": {
+    "type": "string",
+    "description": "Returns meetings starting after this ISO 8601 timestamp"
+  },
+  "start_time_gte": {
+    "type": "string",
+    "description": "Returns meetings starting on or after this ISO 8601 timestamp"
+  },
+  "start_time_lt": {
+    "type": "string",
+    "description": "Returns meetings starting before this ISO 8601 timestamp"
+  },
+  "start_time_lte": {
+    "type": "string",
+    "description": "Returns meetings starting on or before this ISO 8601 timestamp"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns meetings created after this ISO 8601 timestamp"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns meetings created on or after this ISO 8601 timestamp"
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns meetings created before this ISO 8601 timestamp"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns meetings created on or before this ISO 8601 timestamp"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns meetings updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns meetings updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns meetings updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns meetings updated on or before this ISO 8601 timestamp"
+  },
+  "user_guids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter meetings by user GUIDs"
+  },
+  "show_deleted": {
+    "type": "boolean",
+    "description": "Show only canceled events when true, only active events when false"
+  },
+  "booked_by_user_uuid": {
+    "type": "string",
+    "description": "Filter meetings by booked_by_user_uuid"
+  },
+  "no_show": {
+    "type": "boolean",
+    "description": "Include or exclude 'no show' meetings in results"
+  },
+  "meeting_type_id": {
+    "type": "string",
+    "description": "Filter meetings by meeting type ID. Use 'default_personal_meeting' for default personal meetings"
+  },
+  "cadence_id": {
+    "type": "string",
+    "description": "Filter meetings by cadence ID"
+  },
+  "step_id": {
+    "type": "string",
+    "description": "Filter meetings by step ID"
+  },
+  "counted_towards_meetings_attended_metric": {
+    "type": "boolean",
+    "description": "Filter meetings complying with Meetings Attended configurable metric"
+  },
+  "counted_towards_meetings_booked_metric": {
+    "type": "boolean",
+    "description": "Filter meetings complying with Meetings Booked configurable metric"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "start_time",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

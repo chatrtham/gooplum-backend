@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "goal_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the goal (required)"
+  },
+  "current_number_value": {
+    "type": "number",
+    "description": "Current value of the goal metric (required)"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

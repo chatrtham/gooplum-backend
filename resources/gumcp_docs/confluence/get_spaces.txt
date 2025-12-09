@@ -1,0 +1,83 @@
+Parameters Schema:
+```json
+{
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter results by space IDs (max 100)",
+    "maxItems": 100
+  },
+  "keys": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter results by space keys (max 100)",
+    "maxItems": 100
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "global",
+      "personal"
+    ],
+    "description": "Filter results by space type"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "current",
+      "archived"
+    ],
+    "description": "Filter results by space status"
+  },
+  "labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter results by space labels (max 100)",
+    "maxItems": 100
+  },
+  "favorite_user_key": {
+    "type": "string",
+    "description": "Filter results by favorited by user key"
+  },
+  "not_favorite_user_key": {
+    "type": "string",
+    "description": "Filter results by not favorited by user key"
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "id",
+      "-id",
+      "key",
+      "-key",
+      "name",
+      "-name"
+    ],
+    "description": "Sort the results by a particular field"
+  },
+  "description_format": {
+    "type": "string",
+    "enum": [
+      "plain",
+      "view"
+    ],
+    "description": "The content format for the description"
+  },
+  "include_icon": {
+    "type": "boolean",
+    "description": "Include the space icon",
+    "default": false
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of spaces to return",
+    "default": 25
+  }
+}
+```

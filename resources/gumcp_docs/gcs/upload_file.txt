@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "bucket_name": {
+    "type": "string",
+    "description": "Name of the bucket to upload to"
+  },
+  "file_name": {
+    "type": "string",
+    "description": "Name of the file to upload (Use type file during node generation)"
+  },
+  "destination_path": {
+    "type": "string",
+    "description": "Destination path in the bucket (optional, defaults to file_name)"
+  },
+  "content_type": {
+    "type": "string",
+    "description": "MIME type of the file (optional, will be auto-detected if not provided)"
+  }
+}
+```

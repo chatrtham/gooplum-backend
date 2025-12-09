@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of users to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "includeDeactivated": {
+    "type": "boolean",
+    "description": "Include deactivated users in the response. Default is false.",
+    "default": false
+  },
+  "email": {
+    "type": "string",
+    "description": "Search by email address to find a specific user."
+  }
+}
+```

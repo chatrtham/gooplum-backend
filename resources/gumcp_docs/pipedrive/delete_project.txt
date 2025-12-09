@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "project_id": {
+    "type": "integer",
+    "description": "The ID of the project to delete"
+  }
+}
+```

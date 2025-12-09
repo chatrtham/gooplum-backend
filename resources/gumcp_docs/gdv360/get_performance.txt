@@ -1,0 +1,36 @@
+Parameters Schema:
+```json
+{
+  "resource_type": {
+    "type": "string",
+    "description": "Required. The type of resource to get performance for",
+    "enum": [
+      "campaign",
+      "line_item",
+      "advertiser"
+    ]
+  },
+  "resource_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Required. Resource IDs to get performance for (int64 format as strings)"
+  },
+  "date_range": {
+    "type": "string",
+    "description": "Required. Predefined date range for the report",
+    "enum": [
+      "LAST_7_DAYS",
+      "LAST_14_DAYS",
+      "LAST_30_DAYS",
+      "LAST_90_DAYS",
+      "PREVIOUS_WEEK",
+      "PREVIOUS_MONTH",
+      "YEAR_TO_DATE",
+      "PREVIOUS_YEAR"
+    ],
+    "default": "LAST_7_DAYS"
+  }
+}
+```

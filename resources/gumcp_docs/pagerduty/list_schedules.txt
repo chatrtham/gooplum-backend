@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Filters the result, showing only the records whose name matches the query."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "schedule_layers"
+      ]
+    },
+    "description": "Array of additional details to include."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination). If not provided, uses single page with limit parameter.",
+    "default": 10
+  }
+}
+```

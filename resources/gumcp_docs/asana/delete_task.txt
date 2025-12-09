@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the task to delete (required)"
+  }
+}
+```

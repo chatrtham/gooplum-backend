@@ -1,0 +1,32 @@
+Parameters Schema:
+```json
+{
+  "team": {
+    "type": "string",
+    "description": "The team name, key, or UUID (automatically resolved to UUID)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of cycles to return across all pages",
+    "default": 100
+  },
+  "orderBy": {
+    "type": "string",
+    "enum": [
+      "createdAt",
+      "updatedAt"
+    ],
+    "description": "Order by field",
+    "default": "updatedAt"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "current",
+      "previous",
+      "next"
+    ],
+    "description": "Retrieve the current, previous, next, or all cycles. If no type is provided all cycles in the team will be returned"
+  }
+}
+```

@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "subject": {
+    "type": "string",
+    "description": "The subject of the meeting (required)"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start time of the meeting in ISO 8601 format (e.g., '2025-04-20T10:00:00Z') (required)"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "End time of the meeting in ISO 8601 format (e.g., '2025-04-20T11:00:00Z') (required)"
+  },
+  "attendees": {
+    "type": "array",
+    "description": "List of email addresses of attendees",
+    "items": {
+      "type": "string"
+    }
+  },
+  "content": {
+    "type": "string",
+    "description": "The agenda or content of the meeting"
+  }
+}
+```

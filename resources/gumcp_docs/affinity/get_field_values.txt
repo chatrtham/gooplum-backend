@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "Get field values for this person entity"
+  },
+  "organization_id": {
+    "type": "integer",
+    "description": "Get field values for this organization entity"
+  },
+  "opportunity_id": {
+    "type": "integer",
+    "description": "Get field values for this opportunity entity"
+  },
+  "list_entry_id": {
+    "type": "integer",
+    "description": "Get field values for this specific list entry"
+  }
+}
+```

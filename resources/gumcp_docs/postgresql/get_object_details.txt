@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "schema_name": {
+    "type": "string",
+    "description": "Schema name",
+    "default": "public"
+  },
+  "object_name": {
+    "type": "string",
+    "description": "Object name"
+  },
+  "object_type": {
+    "type": "string",
+    "enum": [
+      "table",
+      "view",
+      "sequence",
+      "extension"
+    ],
+    "description": "Object type",
+    "default": "table"
+  }
+}
+```

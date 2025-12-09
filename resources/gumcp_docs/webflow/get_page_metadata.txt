@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "page_id": {
+    "type": "string",
+    "description": "Unique identifier for a Page"
+  },
+  "locale_id": {
+    "type": "string",
+    "description": "Unique identifier for a specific locale. Applicable when using localization."
+  }
+}
+```

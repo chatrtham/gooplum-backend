@@ -1,0 +1,16 @@
+# Gads Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (10 total)
+
+1. **list_campaigns** - Get all campaigns with filtering by status, type, date ranges, and performance metrics
+2. **get_campaign** - Retrieve specific campaign details by ID with optional performance metrics
+3. **list_asset_groups** - Get all asset groups with filtering by campaign, status, and performance metrics
+4. **get_asset_group** - Retrieve specific asset group details by ID with optional performance metrics
+5. **get_account** - Retrieve account-level information and settings
+6. **update_campaign** - Modify campaign properties like name, status, budget settings, and bidding strategy
+7. **update_asset_group** - Modify asset group properties like name, status, and bid amounts
+8. **list_negative_keywords** - Get negative keywords from shared sets or specific asset groups
+9. **get_low_quality_score_keywords** - List all keywords with Quality Score below a specified threshold for optimization opportunities
+10. **get_overspent_campaigns** - Find campaigns that exceeded their daily budget in the last X days for budget optimization

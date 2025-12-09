@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "project_url": {
+    "type": "string",
+    "description": "GitHub project URL (e.g., https://github.com/users/username/projects/123 or https://github.com/orgs/orgname/projects/123 or https://github.com/owner/repo/projects/123). Use this instead of individual parameters when available."
+  },
+  "owner": {
+    "type": "string",
+    "description": "Owner username or organization name"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (optional, if not provided lists organization/user projects)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of projects to return across all pages"
+  },
+  "query": {
+    "type": "string",
+    "description": "Search query to filter projects by title"
+  },
+  "orderBy_field": {
+    "type": "string",
+    "enum": [
+      "CREATED_AT",
+      "NUMBER",
+      "TITLE",
+      "UPDATED_AT"
+    ],
+    "description": "Field to order projects by (default: NUMBER)"
+  },
+  "orderBy_direction": {
+    "type": "string",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "description": "Direction to order projects (default: DESC)"
+  },
+  "minPermissionLevel": {
+    "type": "string",
+    "enum": [
+      "READ",
+      "WRITE",
+      "ADMIN"
+    ],
+    "description": "Minimum permission level to filter projects (default: READ)"
+  }
+}
+```

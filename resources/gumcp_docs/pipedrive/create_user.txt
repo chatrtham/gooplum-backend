@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The email of the user"
+  },
+  "access": {
+    "type": "array",
+    "description": "The access given to the user. Each item represents access to a specific app. Structure: [{ app: 'sales', permission_set_id: 'uuid' }, { app: 'global', admin: true }, { app: 'account_settings' }]",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "active_flag": {
+    "type": "boolean",
+    "description": "Whether the user is active or not. false = Not activated, true = Activated. Default: true",
+    "default": true
+  }
+}
+```

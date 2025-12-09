@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query string to find users"
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "relevance",
+      "activity"
+    ],
+    "description": "Sort order for results (default: relevance)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return",
+    "default": 10,
+    "maximum": 100
+  }
+}
+```

@@ -1,0 +1,53 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "subscription_id": {
+    "type": "string",
+    "description": "The prefixed ID of the subscription (e.g., sub_00000000-0000-0000-0000-000000000000)"
+  },
+  "tier": {
+    "type": "string",
+    "description": "The tier for this subscription",
+    "enum": [
+      "free",
+      "premium"
+    ]
+  },
+  "stripe_customer_id": {
+    "type": "string",
+    "description": "The Stripe Customer ID of the subscription"
+  },
+  "unsubscribe": {
+    "type": "boolean",
+    "description": "Whether to unsubscribe this subscription from the publication"
+  },
+  "custom_fields": {
+    "type": "array",
+    "description": "Custom fields to update for the subscription",
+    "items": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom field"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the custom field"
+        },
+        "delete": {
+          "type": "boolean",
+          "description": "Whether to delete this custom field from the subscription"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  }
+}
+```

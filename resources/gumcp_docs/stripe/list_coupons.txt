@@ -1,0 +1,39 @@
+Parameters Schema:
+```json
+{
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of coupons to return (1-100, default is 10)"
+  },
+  "starting_after": {
+    "type": "string",
+    "description": "Cursor for pagination - coupon ID to start after"
+  },
+  "ending_before": {
+    "type": "string",
+    "description": "Cursor for pagination - coupon ID to end before"
+  },
+  "created": {
+    "type": "object",
+    "properties": {
+      "gt": {
+        "type": "integer",
+        "description": "Return coupons created after this timestamp"
+      },
+      "gte": {
+        "type": "integer",
+        "description": "Return coupons created after or on this timestamp"
+      },
+      "lt": {
+        "type": "integer",
+        "description": "Return coupons created before this timestamp"
+      },
+      "lte": {
+        "type": "integer",
+        "description": "Return coupons created before or on this timestamp"
+      }
+    },
+    "description": "Filter coupons based on creation date using Unix timestamps"
+  }
+}
+```

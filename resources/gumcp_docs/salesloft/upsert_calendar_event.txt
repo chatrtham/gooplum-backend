@@ -1,0 +1,96 @@
+Parameters Schema:
+```json
+{
+  "calendar_id": {
+    "type": "string",
+    "description": "Calendar ID of the calendar event owner. For External Calendar connection use external_{salesloft_user_guid} format (required)"
+  },
+  "id": {
+    "type": "string",
+    "description": "Id of the calendar event, different for each occurrence in a recurring series (required)"
+  },
+  "i_cal_uid": {
+    "type": "string",
+    "description": "icalUID of the calendar event. Unique identifier for a calendar event across calendars (required)"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start time of the calendar event in ISO 8601 format with timezone offset (required). Example: 2022-02-14T10:12:59+00:00"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "End time of the calendar event in ISO 8601 format with timezone offset (required). Example: 2022-02-14T10:12:59+00:00"
+  },
+  "title": {
+    "type": "string",
+    "description": "Title of the calendar event"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the calendar event"
+  },
+  "location": {
+    "type": "string",
+    "description": "Location of the calendar event as free-form text"
+  },
+  "organizer": {
+    "type": "string",
+    "description": "Email address of the organizer"
+  },
+  "status": {
+    "type": "string",
+    "description": "Status of the calendar event",
+    "enum": [
+      "confirmed",
+      "tentative",
+      "cancelled"
+    ]
+  },
+  "transparency": {
+    "type": "string",
+    "description": "Transparency of the calendar event",
+    "enum": [
+      "opaque",
+      "transparent"
+    ]
+  },
+  "busy": {
+    "type": "boolean",
+    "description": "Whether the user is busy during the calendar event (default: true)"
+  },
+  "all_day": {
+    "type": "boolean",
+    "description": "Whether this is an all-day calendar event"
+  },
+  "recurring": {
+    "type": "boolean",
+    "description": "Whether this is part of a recurring series"
+  },
+  "recurrence": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of RRULE for recurring events as specified in RFC5545. Example: ['RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20230731T000000Z']"
+  },
+  "attendees": {
+    "type": "object",
+    "description": "List of attendees with their details (name, email, status, organizer flag)"
+  },
+  "updated_at": {
+    "type": "string",
+    "description": "Last modification time in ISO 8601 format. Event will not be updated if this is earlier than database timestamp"
+  },
+  "canceled_at": {
+    "type": "string",
+    "description": "Cancellation time in ISO 8601 format"
+  },
+  "upsert_key": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Custom keys for identifying events. Default: ['id', 'i_cal_uid']"
+  }
+}
+```

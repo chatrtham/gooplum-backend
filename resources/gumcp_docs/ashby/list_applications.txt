@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of applications to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "jobId": {
+    "type": "string",
+    "description": "Filter applications by job ID. Only applications for this specific job will be returned."
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter applications by status."
+  },
+  "createdAfter": {
+    "type": "string",
+    "description": "Return applications created after this date. Use ISO 8601 format"
+  },
+  "expand": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Choose to expand the result and include additional data for related objects."
+  }
+}
+```

@@ -1,0 +1,45 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of playlists to return"
+  },
+  "conversation_filter": {
+    "type": "string",
+    "description": "Only return playlists containing moments from the specified conversation"
+  },
+  "name_filter": {
+    "type": "string",
+    "description": "Filter by playlist name"
+  },
+  "parent_filter": {
+    "type": "string",
+    "description": "Filter by playlist parent ID"
+  },
+  "include_parent": {
+    "type": "boolean",
+    "description": "Whether to include the parent playlist in results (used with parent_filter)"
+  },
+  "recursive": {
+    "type": "boolean",
+    "description": "Return all children recursively or only direct children (used with parent_filter)"
+  },
+  "subscribed_only": {
+    "type": "boolean",
+    "description": "Return only playlists you are subscribed to"
+  },
+  "top_level_only": {
+    "type": "boolean",
+    "description": "Return only top-level playlists"
+  },
+  "playlist_types": {
+    "type": "string",
+    "description": "Comma-delimited list of playlist types (BOOKMARKS, HASHTAG_PLAYLIST, PINNED_MOMENTS, PLAYLIST, SMART_PLAYLIST)"
+  },
+  "sort": {
+    "type": "string",
+    "description": "Sort field (e.g., '-_modified_at' for descending modified date)"
+  }
+}
+```

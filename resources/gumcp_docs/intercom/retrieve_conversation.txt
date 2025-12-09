@@ -1,0 +1,16 @@
+Parameters Schema:
+```json
+{
+  "conversation_id": {
+    "type": "string",
+    "description": "The ID of the conversation to retrieve"
+  },
+  "display_as": {
+    "type": "string",
+    "description": "Set to 'plaintext' to retrieve conversation messages in plain text format",
+    "enum": [
+      "plaintext"
+    ]
+  }
+}
+```

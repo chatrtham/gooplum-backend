@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name for the new workbook (will add .xlsx extension if not included)"
+  },
+  "folder_path": {
+    "type": "string",
+    "description": "Path to folder in OneDrive or SharePoint (optional, defaults to root)"
+  }
+}
+```

@@ -1,0 +1,68 @@
+Parameters Schema:
+```json
+{
+  "employee_email": {
+    "type": "string",
+    "description": "Email address of the employee account to create expenses in."
+  },
+  "expenses": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "merchant": {
+          "type": "string",
+          "description": "Merchant name"
+        },
+        "created": {
+          "type": "string",
+          "description": "Expense date (ISO 8601 format: YYYY-MM-DD)"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Amount in cents"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Three-letter currency code (e.g., USD)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Tag name"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Expense comment"
+        },
+        "billable": {
+          "type": "boolean",
+          "description": "Mark as billable"
+        },
+        "reimbursable": {
+          "type": "boolean",
+          "description": "Mark as reimbursable"
+        },
+        "report_id": {
+          "type": "string",
+          "description": "Attach to specific report ID"
+        },
+        "external_id": {
+          "type": "string",
+          "description": "Custom identifier for tracking"
+        }
+      },
+      "required": [
+        "merchant",
+        "created",
+        "amount",
+        "currency"
+      ]
+    },
+    "description": "Array of expense objects to create"
+  }
+}
+```

@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "opportunity_id": {
+    "type": "integer",
+    "description": "Opportunity ID to associate with (required)"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "Person ID to associate with (required)"
+  }
+}
+```

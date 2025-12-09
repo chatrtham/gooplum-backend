@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "emails": {
+    "type": "array",
+    "description": "Array of emails of users (max 100)",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

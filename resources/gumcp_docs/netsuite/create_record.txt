@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., customer, invoice, salesOrder)"
+  },
+  "record_data": {
+    "type": "object",
+    "description": "Record data to insert"
+  },
+  "replace": {
+    "type": "string",
+    "description": "Comma-separated sublist names to replace"
+  }
+}
+```

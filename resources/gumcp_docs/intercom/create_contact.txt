@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "Email of the contact"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the contact"
+  },
+  "role": {
+    "type": "string",
+    "description": "Role of the contact (user or lead)",
+    "enum": [
+      "user",
+      "lead"
+    ]
+  },
+  "custom_attributes": {
+    "type": "object",
+    "description": "Custom attributes for the contact (optional)"
+  }
+}
+```

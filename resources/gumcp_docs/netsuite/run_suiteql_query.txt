@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "q": {
+    "type": "string",
+    "description": "SuiteQL query (e.g., 'SELECT id, companyName FROM customer ORDER BY id FETCH FIRST 10 ROWS ONLY')"
+  }
+}
+```

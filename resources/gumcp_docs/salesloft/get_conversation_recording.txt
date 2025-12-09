@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "conversation_id": {
+    "type": "string",
+    "description": "Conversation ID to fetch recording for"
+  }
+}
+```

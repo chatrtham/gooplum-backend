@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "branch_name": {
+    "type": "string",
+    "description": "Name for the new branch"
+  },
+  "start_point": {
+    "type": "string",
+    "description": "Name of the reference branch to start from (usually 'main' or 'master')"
+  }
+}
+```

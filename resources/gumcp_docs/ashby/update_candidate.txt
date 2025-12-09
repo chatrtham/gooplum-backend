@@ -1,0 +1,69 @@
+Parameters Schema:
+```json
+{
+  "candidateId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the candidate to update."
+  },
+  "name": {
+    "type": "string",
+    "description": "The first and last name of the candidate."
+  },
+  "email": {
+    "type": "string",
+    "description": "Primary, personal email of the candidate."
+  },
+  "phoneNumber": {
+    "type": "string",
+    "description": "Primary, personal phone number of the candidate."
+  },
+  "linkedInUrl": {
+    "type": "string",
+    "description": "URL to the candidate's LinkedIn profile. Must be valid."
+  },
+  "githubUrl": {
+    "type": "string",
+    "description": "URL to the candidate's Github profile. Must be valid."
+  },
+  "websiteUrl": {
+    "type": "string",
+    "description": "URL of the candidate's website. Must be valid."
+  },
+  "alternateEmail": {
+    "type": "string",
+    "description": "Alternate email address to add to the candidate's profile."
+  },
+  "socialLinks": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "description": "Array of social links to set on the candidate. Replaces existing links."
+  },
+  "sourceId": {
+    "type": "string",
+    "description": "The source (UUID) for this candidate."
+  },
+  "creditedToUserId": {
+    "type": "string",
+    "description": "The user (UUID) the candidate will be credited to."
+  },
+  "creditedToUserEmail": {
+    "type": "string",
+    "description": "(Preferred) Email address of the user to credit the candidate to. Will be automatically resolved to creditedToUserId."
+  },
+  "location": {
+    "type": "object",
+    "description": "The location object for the candidate."
+  },
+  "createdAt": {
+    "type": "string",
+    "description": "Set the candidate's createdAt timestamp. Use ISO 8601 format"
+  },
+  "sendNotifications": {
+    "type": "boolean",
+    "description": "Whether subscribed users should be notified of the update. Default is true.",
+    "default": true
+  }
+}
+```

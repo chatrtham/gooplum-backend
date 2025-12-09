@@ -1,0 +1,73 @@
+Parameters Schema:
+```json
+{
+  "usernames": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of TikTok usernames to scrape (with or without @). Examples: ['username1', '@username2']"
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of videos to retrieve per profile",
+    "default": 10
+  },
+  "profile_sections": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Sections to scrape from profile. Options: 'videos' (original videos), 'reposts' (reposted content)",
+    "default": [
+      "videos"
+    ]
+  },
+  "sorting": {
+    "type": "string",
+    "enum": [
+      "latest",
+      "popular",
+      "oldest"
+    ],
+    "description": "How to sort profile videos. 'latest' for most recent, 'popular' for most liked, 'oldest' for chronological order",
+    "default": "latest"
+  },
+  "exclude_pinned": {
+    "type": "boolean",
+    "description": "Whether to exclude pinned posts (videos pinned to top of profile)",
+    "default": false
+  },
+  "newest_post_date": {
+    "type": "string",
+    "description": "Only include videos uploaded before this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z' or '2023-01-01'). Cannot be used with popularity filters (min_hearts/max_hearts)."
+  },
+  "oldest_post_date": {
+    "type": "string",
+    "description": "Only include videos uploaded after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z' or '2023-01-01'). Cannot be used with popularity filters (min_hearts/max_hearts)."
+  },
+  "min_hearts": {
+    "type": "integer",
+    "description": "Minimum number of hearts (likes) required for videos. Cannot be used with date filters (newest_post_date/oldest_post_date)."
+  },
+  "max_hearts": {
+    "type": "integer",
+    "description": "Maximum number of hearts (likes) for videos. Cannot be used with date filters (newest_post_date/oldest_post_date)."
+  },
+  "include_video_links": {
+    "type": "boolean",
+    "description": "Whether to include direct video download links in the response",
+    "default": false
+  },
+  "include_cover_links": {
+    "type": "boolean",
+    "description": "Whether to include video thumbnail/cover image download links in the response",
+    "default": false
+  },
+  "include_avatar_links": {
+    "type": "boolean",
+    "description": "Whether to include profile avatar image download links in the response",
+    "default": false
+  }
+}
+```

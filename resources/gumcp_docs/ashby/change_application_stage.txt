@@ -1,0 +1,31 @@
+Parameters Schema:
+```json
+{
+  "applicationId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the application to update the stage of."
+  },
+  "interviewStageId": {
+    "type": "string",
+    "description": "The interview stage (UUID) to move the application to."
+  },
+  "archiveReasonId": {
+    "type": "string",
+    "description": "Archive reason (UUID) required when moving to an Interview Stage with type: Archived."
+  },
+  "archiveEmail": {
+    "type": "object",
+    "description": "Email to send to the candidate when moving to an Interview Stage with type: Archived.",
+    "properties": {
+      "communicationTemplateId": {
+        "type": "string",
+        "description": "The communication template (UUID) for the email. Template must include 'email' in intendedTypes."
+      },
+      "sendAt": {
+        "type": "string",
+        "description": "ISO 8601 date-time string for when to send the email (e.g. 2025-02-24T08:27:01Z). If omitted, emails at 9:32am next morning in your default timezone."
+      }
+    }
+  }
+}
+```

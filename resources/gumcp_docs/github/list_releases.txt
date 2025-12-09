@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of releases to return across all pages"
+  },
+  "orderBy_field": {
+    "type": "string",
+    "enum": [
+      "CREATED_AT",
+      "NAME"
+    ],
+    "description": "The field to order releases by"
+  },
+  "orderBy_direction": {
+    "type": "string",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "description": "The ordering direction"
+  }
+}
+```

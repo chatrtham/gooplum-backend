@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of sessions to return (1-1000)",
+    "default": 100
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter sessions by specific tags"
+  }
+}
+```

@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The ID of the note"
+  },
+  "content": {
+    "type": "string",
+    "description": "The content of the comment in HTML format. Subject to sanitization on the back-end."
+  }
+}
+```

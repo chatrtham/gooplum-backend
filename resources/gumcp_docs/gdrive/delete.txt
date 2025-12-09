@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "ID of the file or folder to delete"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file or folder to delete"
+  },
+  "recursive_delete": {
+    "type": "boolean",
+    "description": "If true, delete folder and all its contents. Required for non-empty folders.",
+    "default": false
+  }
+}
+```

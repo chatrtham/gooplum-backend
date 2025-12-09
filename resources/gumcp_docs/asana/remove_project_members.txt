@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "project_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the project (required)"
+  },
+  "members": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of user GIDs or email addresses to remove from members"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

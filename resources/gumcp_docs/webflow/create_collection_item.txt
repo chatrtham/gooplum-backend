@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "collection_id": {
+    "type": "string",
+    "description": "Unique identifier for a Collection"
+  },
+  "type": {
+    "type": "string",
+    "description": "Type of item to create: 'staging' (draft) or 'live' (immediately published)",
+    "enum": [
+      "staging",
+      "live"
+    ],
+    "default": "staging"
+  },
+  "is_archived": {
+    "type": "boolean",
+    "description": "Boolean determining if the Item is set to archived"
+  },
+  "is_draft": {
+    "type": "boolean",
+    "description": "Boolean determining if the Item is set to draft"
+  },
+  "field_data": {
+    "type": "object",
+    "description": "Fields for the new item including name and slug"
+  }
+}
+```

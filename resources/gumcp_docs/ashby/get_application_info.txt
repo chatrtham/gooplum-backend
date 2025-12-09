@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "applicationId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the application to retrieve information for."
+  },
+  "submittedFormInstanceId": {
+    "type": "string",
+    "description": "Alternative lookup by submitted form instance ID (returned by applicationForm.submit). If both IDs are provided, applicationId takes precedence."
+  }
+}
+```

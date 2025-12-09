@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "automation_id": {
+    "type": "string",
+    "description": "Zendesk automation ID to retrieve (required)"
+  }
+}
+```

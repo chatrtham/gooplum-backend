@@ -1,0 +1,15 @@
+Parameters Schema:
+```json
+{
+  "company_id": {
+    "type": "string",
+    "description": "The unique Intercom identifier for the company"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of contacts to return (default: 50)",
+    "default": 10,
+    "minimum": 1
+  }
+}
+```

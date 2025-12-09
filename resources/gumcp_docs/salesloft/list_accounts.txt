@@ -1,0 +1,237 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of accounts to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of accounts to fetch. If a record can't be found, that record won't be returned and your request will be successful"
+  },
+  "crm_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by crm_id. Multiple crm ids can be applied (salesforce id or hubspot id etc)"
+  },
+  "tag": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by the tags applied to the account. Multiple tags can be applied"
+  },
+  "tag_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters accounts by tag_id. Multiple values can be applied. Special values of \"_is_not_null\" or \"_is_null\" can be passed to filter accounts with or without tags. A \"_not_in\" modifier can be used to exclude specific tags, for example: \"tag_id[_not_in][]=123\""
+  },
+  "name": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Names of accounts to fetch. Name matches are exact and case insensitive. Multiple names can be fetched. Partial match is supported and applied when the \"_starts_with\" value is passed: v2/accounts?name[_starts_with]=value"
+  },
+  "account_type": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by account type using exact or partial matching."
+  },
+  "account_stage_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters accounts by account_stage_id. Multiple account_stage_ids can be applied. An additional value of \"_is_null\" can be passed to filter accounts that do not have account_stage_id"
+  },
+  "account_tier_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters accounts by account_tier_id. Multiple account tier ids can be applied"
+  },
+  "owner_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by owner_id. Multiple owner_ids can be applied. An additional value of \"_is_null\" can be passed to filter accounts that are unowned"
+  },
+  "owner_is_active": {
+    "type": "boolean",
+    "description": "Filters accounts by whether the owner is active or not."
+  },
+  "last_contacted_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "custom_fields": {
+    "type": "object",
+    "description": "Filters by accounts matching all given custom fields. The custom field names are case-sensitive, but the provided values are case-insensitive. Example: v2/accounts?custom_fields[custom_field_name]=custom_field_value"
+  },
+  "domain": {
+    "type": "string",
+    "description": "Domain of the accounts to fetch. Domains are unique and lowercase. Note this is not the same as the website domain. If user mentions domain use this, or if they mention account link or website link use website field."
+  },
+  "website": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by website. Multiple websites can be applied. An additional value of \"_is_null\" can be passed to filter accounts that do not have a website."
+  },
+  "industry": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by industry by exact match. Supports partial matching"
+  },
+  "country": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by country by exact match. Supports partial matching"
+  },
+  "state": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by state by exact match. Supports partial matching"
+  },
+  "city": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by city by exact match. Supports partial matching"
+  },
+  "owner_crm_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by owner_crm_id. Multiple owner_crm_ids can be applied. An additional value of \"_is_null\" can be passed to filter accounts that are unowned. A \"_not_in\" modifier can be used to exclude specific owner_crm_ids. Example: v2/accounts?owner_crm_id[_not_in]=id (salesforce id)"
+  },
+  "prospector_engagement_level": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by different levels of account engagement. Multiple levels of account engagement can be applied",
+    "enum": [
+      "very_low",
+      "low",
+      "medium",
+      "high",
+      "very_high"
+    ]
+  },
+  "has_open_opportunity": {
+    "type": "boolean",
+    "description": "Filters accounts by opportunity status. This filter is not applied if any value other than \"true\" or \"false\" is passed. When this field is true, it returns only accounts that have at least one open opportunity. When this field is false, it returns only accounts that do not have any open opportunities."
+  },
+  "locales": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters accounts by locale. Multiple locales are allowed"
+  },
+  "user_relationships": {
+    "type": "object",
+    "description": "Filters by accounts matching all given user relationship fields, _is_null or _unmapped can be passed to filter accounts with null or unmapped user relationship values. Example: v2/accounts?user_relationships[name]=value"
+  },
+  "your_related_accounts_active": {
+    "type": "boolean",
+    "description": "Filter accounts by user on Account teams or User Relationship"
+  },
+  "archived": {
+    "type": "boolean",
+    "description": "Filters accounts by archived_at status. Returns only accounts where archived_at is not null if this field is true. Returns only accounts where archived_at is null if this field is false. Do not pass this parameter to return both archived and unarchived accounts. This filter is not applied if any value other than \"true\" or \"false\" is passed."
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Key to sort on, must be one of: created_at, updated_at, last_contacted_at, account_stage, account_stage_name, account_tier, account_tier_name, name, counts_people, prospector_engagement_score. Defaults to updated_at",
+    "enum": [
+      "created_at",
+      "updated_at",
+      "last_contacted_at",
+      "account_stage",
+      "account_stage_name",
+      "account_tier",
+      "account_tier_name",
+      "name",
+      "counts_people",
+      "prospector_engagement_score"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Direction to sort in, must be one of: ASC, DESC.",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "default": "DESC"
+  }
+}
+```

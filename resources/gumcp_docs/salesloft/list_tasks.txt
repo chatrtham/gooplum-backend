@@ -1,0 +1,162 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tasks to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of tasks to fetch."
+  },
+  "user_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters tasks by the user to which they are assigned."
+  },
+  "person_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters tasks by the person to which they are associated."
+  },
+  "account_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters tasks by the account to which they are associated."
+  },
+  "current_state": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters tasks by their current state. Valid current_states include: ['scheduled', 'completed']."
+  },
+  "task_type": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters tasks by their task type. Valid task_types include: ['call', 'email', 'general']."
+  },
+  "time_interval_filter": {
+    "type": "string",
+    "description": "Filters tasks by time interval. Valid time_intervals include: ['overdue', 'today', 'tomorrow', 'this_week', 'next_week'].",
+    "enum": [
+      "overdue",
+      "today",
+      "tomorrow",
+      "this_week",
+      "next_week"
+    ]
+  },
+  "completed_time_interval": {
+    "type": "string",
+    "description": "Filters tasks by time interval.",
+    "enum": [
+      "today",
+      "yesterday",
+      "this_week",
+      "previous_week",
+      "this_month"
+    ]
+  },
+  "idempotency_key": {
+    "type": "string",
+    "description": "Filters tasks by idempotency key."
+  },
+  "locale": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters tasks by locale of the person to which they are associated."
+  },
+  "source": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters tasks by source."
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "completed_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "completed_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "completed_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "completed_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "include_counts_acted_on_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "include_counts_acted_on_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "include_counts_acted_on_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "include_counts_acted_on_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Key to sort on, must be one of: due_date, due_at, utc_offset, company, updated_at, completed_at, salesloft.prioritizers/rhythm.",
+    "enum": [
+      "due_date",
+      "due_at",
+      "utc_offset",
+      "company",
+      "updated_at",
+      "completed_at",
+      "salesloft.prioritizers/rhythm"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Direction to sort in, must be one of: ASC, DESC.",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "default": "ASC"
+  }
+}
+```

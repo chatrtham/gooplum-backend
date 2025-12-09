@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "group_id": {
+    "type": "string",
+    "description": "ID of the group to delete"
+  }
+}
+```

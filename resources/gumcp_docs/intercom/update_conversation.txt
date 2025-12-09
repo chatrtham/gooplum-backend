@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "operation": {
+    "type": "string",
+    "description": "Type of operation to perform",
+    "enum": [
+      "add_tag",
+      "remove_tag",
+      "attach_contact",
+      "detach_contact"
+    ]
+  },
+  "conversation_id": {
+    "type": "string",
+    "description": "The ID of the conversation to update"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "The ID of the admin performing the operation. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "Tag ID (required for add_tag and remove_tag operations)"
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "Contact ID (required for attach_contact with ID or detach_contact operations)"
+  },
+  "contact_email": {
+    "type": "string",
+    "description": "Contact email (alternative to contact_id for attach_contact operation)"
+  }
+}
+```

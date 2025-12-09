@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "transcription_id": {
+    "type": "string",
+    "description": "Transcription ID to fetch artifact for"
+  }
+}
+```

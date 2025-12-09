@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The unique identifier of the board containing the item."
+  },
+  "item_id": {
+    "type": "integer",
+    "description": "The unique identifier of the item (row) to update."
+  },
+  "column_id": {
+    "type": "string",
+    "description": "The unique identifier of the column to modify. Get this from column resources."
+  },
+  "value": {
+    "type": "string",
+    "description": "The new value for the column. Format varies by type: text/long_text/numbers/date/email/link/phone ('simple string'), people ('123456,789012' or 'user@example.com'), status/dropdown ('label text'), checkbox ('true'/'false'), name ('item name'), country ('US,United States'), hour ('14:30'), location ('40.7128,-74.0060,New York'), rating ('5'), timeline ('2024-01-01,2024-01-31'), connect_boards/dependency ('123456,789012')."
+  },
+  "column_type": {
+    "type": "string",
+    "description": "The column type. Get this from column resources. Supported: text, long_text, numbers, date, email, link, phone, people, status, dropdown, checkbox, name, country, hour, location, rating, timeline, connect_boards, dependency."
+  }
+}
+```

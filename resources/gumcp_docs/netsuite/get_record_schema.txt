@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., account, customer, invoice, salesOrder)"
+  }
+}
+```

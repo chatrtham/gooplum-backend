@@ -1,0 +1,47 @@
+Parameters Schema:
+```json
+{
+  "start_date": {
+    "type": "string",
+    "description": "Beginning date for transactions (ISO 8601 format: YYYY-MM-DD)."
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date for transactions (ISO 8601 format: YYYY-MM-DD)."
+  },
+  "domain": {
+    "type": "string",
+    "description": "Your company domain (e.g., 'example.com'). Must be domain admin."
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "Unreported",
+      "All"
+    ],
+    "description": "Transaction type to export.",
+    "default": "Unreported"
+  },
+  "feed": {
+    "type": "string",
+    "description": "Card feed name to export, or 'export_all_feeds' for all feeds. Default: 'export_all_feeds'.",
+    "default": "export_all_feeds"
+  },
+  "file_extension": {
+    "type": "string",
+    "enum": [
+      "csv",
+      "txt",
+      "json",
+      "xml"
+    ],
+    "description": "Format of exported file.",
+    "default": "csv"
+  },
+  "upload_to_workspace": {
+    "type": "boolean",
+    "description": "If true, uploads file to workspace.",
+    "default": false
+  }
+}
+```

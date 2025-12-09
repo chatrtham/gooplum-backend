@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "fromDateTime": {
+    "type": "string",
+    "description": "Date and time (in ISO-8601 format) from which to list recorded calls. Returns calls that started on or after the specified date and time."
+  },
+  "toDateTime": {
+    "type": "string",
+    "description": "Date and time (in ISO-8601 format) until which to list recorded calls. Returns calls that started up to but excluding specified date and time."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of records to return. If provided, the API will automatically paginate through results until this limit is reached."
+  },
+  "workspaceId": {
+    "type": "string",
+    "description": "Optional Workspace identifier, if supplied the API will return only the calls belonging to this workspace."
+  }
+}
+```

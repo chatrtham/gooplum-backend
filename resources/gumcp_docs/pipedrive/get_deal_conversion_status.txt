@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal"
+  },
+  "conversion_id": {
+    "type": "string",
+    "description": "The ID of the conversion (UUID format)"
+  }
+}
+```

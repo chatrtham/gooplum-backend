@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The ID of the board to search in"
+  },
+  "filters": {
+    "type": "array",
+    "description": "Column filters to match items by column values",
+    "items": {
+      "type": "object",
+      "properties": {
+        "column_id": {
+          "type": "string",
+          "description": "Column ID to filter by"
+        },
+        "values": {
+          "type": "array",
+          "description": "Values to match in this column",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "column_id",
+        "values"
+      ]
+    }
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of items to return (default 25, handles pagination internally)"
+  }
+}
+```

@@ -1,0 +1,46 @@
+Parameters Schema:
+```json
+{
+  "owner_id": {
+    "type": "integer",
+    "description": "If supplied, only products owned by the given user will be returned"
+  },
+  "ids": {
+    "type": "string",
+    "description": "Optional comma separated string array of up to 100 entity IDs to fetch. If filter_id is provided, this is ignored."
+  },
+  "filter_id": {
+    "type": "integer",
+    "description": "The ID of the filter to use"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "name",
+      "add_time",
+      "update_time"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "custom_fields": {
+    "type": "string",
+    "description": "Comma separated string array of custom fields keys to include. Maximum of 15 keys allowed."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of products to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

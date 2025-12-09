@@ -1,0 +1,13 @@
+# Word Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (7 total)
+
+1. **list_documents** - List Word documents from OneDrive
+2. **create_document** - Create a new Word document in OneDrive
+3. **read_document** - Read text content from a Word document
+4. **write_document** - Append content to an existing Word document
+5. **search_documents** - Search for Word documents by content
+6. **download_document** - Get a download URL for a Word document
+7. **delete_document** - Delete a Word document from OneDrive

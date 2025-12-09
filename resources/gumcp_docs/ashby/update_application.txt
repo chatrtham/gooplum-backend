@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "applicationId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the application to update."
+  },
+  "sourceId": {
+    "type": "string",
+    "description": "The source (UUID) to set on the application. Pass null to unset."
+  },
+  "creditedToUserId": {
+    "type": "string",
+    "description": "The user (UUID) the application will be credited to."
+  },
+  "creditedToUserEmail": {
+    "type": "string",
+    "description": "(Preferred) Email address of the user to credit the application to. Will be automatically resolved to creditedToUserId."
+  },
+  "createdAt": {
+    "type": "string",
+    "description": "Set the application's createdAt timestamp. Use ISO 8601 format"
+  },
+  "sendNotifications": {
+    "type": "boolean",
+    "description": "Whether subscribed users should be notified of the update. Default is true.",
+    "default": true
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The SOQL query to execute (e.g., 'SELECT Id, Name FROM Account WHERE Industry = \\'Technology\\'')"
+  }
+}
+```

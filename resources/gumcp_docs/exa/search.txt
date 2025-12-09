@@ -1,0 +1,81 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The search query string (e.g., 'Latest developments in LLM capabilities')"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "keyword",
+      "neural",
+      "fast",
+      "auto"
+    ],
+    "description": "Search type: 'neural' uses embeddings, 'keyword' is traditional search, 'auto' (default) intelligently combines both, 'fast' uses streamlined versions",
+    "default": "auto"
+  },
+  "category": {
+    "type": "string",
+    "enum": [
+      "company",
+      "research paper",
+      "news",
+      "pdf",
+      "github",
+      "tweet",
+      "personal site",
+      "linkedin profile",
+      "financial report"
+    ],
+    "description": "Focus search on a specific data category"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return across all pages (automatically handles pagination)",
+    "default": 10,
+    "maximum": 1000
+  },
+  "includeDomains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of domains to include in search results (e.g., ['arxiv.org', 'paperswithcode.com'])"
+  },
+  "excludeDomains": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of domains to exclude from search results"
+  },
+  "startCrawlDate": {
+    "type": "string",
+    "description": "Include links crawled after this date (ISO 8601 format: '2023-01-01T00:00:00.000Z')"
+  },
+  "endCrawlDate": {
+    "type": "string",
+    "description": "Include links crawled before this date (ISO 8601 format: '2023-12-31T00:00:00.000Z')"
+  },
+  "startPublishedDate": {
+    "type": "string",
+    "description": "Include links published after this date (ISO 8601 format: '2023-01-01T00:00:00.000Z')"
+  },
+  "endPublishedDate": {
+    "type": "string",
+    "description": "Include links published before this date (ISO 8601 format: '2023-12-31T00:00:00.000Z')"
+  },
+  "includeText": {
+    "type": "boolean",
+    "description": "Include full page text in results",
+    "default": false
+  },
+  "includeSummary": {
+    "type": "boolean",
+    "description": "Include AI-generated summary of the page",
+    "default": false
+  }
+}
+```

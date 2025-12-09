@@ -1,0 +1,57 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "The conversation ID"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "account",
+        "company_name",
+        "_created_at",
+        "_modified_at",
+        "deal",
+        "disposition",
+        "language",
+        "metrics",
+        "meeting.id",
+        "name",
+        "owner",
+        "owner.email",
+        "participants",
+        "private",
+        "recording",
+        "recording.audio_only",
+        "recording.autojoin",
+        "recording.autojoin_reason",
+        "recording.clusters",
+        "recording.duration",
+        "recording.end_reason",
+        "recording.recordable",
+        "recording.schedule_end_time",
+        "recording.schedule_start_time",
+        "recording.start_time",
+        "recording.thumbnails",
+        "recording.trackers",
+        "recording.utterances",
+        "source",
+        "status",
+        "user_company_name"
+      ]
+    },
+    "description": "Array of specific fields to populate in the response. Select from available conversation fields."
+  },
+  "force_regeneration": {
+    "type": "boolean",
+    "description": "Force conversation regeneration based on latest information"
+  },
+  "skip_summary_generation": {
+    "type": "boolean",
+    "description": "Skip summary generation"
+  }
+}
+```

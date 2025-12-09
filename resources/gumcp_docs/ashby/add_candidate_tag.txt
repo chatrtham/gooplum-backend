@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "candidateId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the candidate to add the tag to."
+  },
+  "tagId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the tag to add to the candidate."
+  }
+}
+```

@@ -1,0 +1,39 @@
+Parameters Schema:
+```json
+{
+  "lead_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the lead to convert"
+  },
+  "account_id": {
+    "type": "string",
+    "description": "Optional account ID to use instead of creating a new account"
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "Optional contact ID to use instead of creating a new contact"
+  },
+  "owner_id": {
+    "type": "string",
+    "description": "Optional user ID to assign as the owner of the resulting records"
+  },
+  "opportunity_name": {
+    "type": "string",
+    "description": "Name for the opportunity to create (if create_opportunity is true)"
+  },
+  "create_opportunity": {
+    "type": "boolean",
+    "description": "Whether to create an opportunity during conversion",
+    "default": false
+  },
+  "converted_status": {
+    "type": "string",
+    "description": "Lead status to assign after conversion"
+  },
+  "send_notification_email": {
+    "type": "boolean",
+    "description": "Whether to send a notification email to the owner",
+    "default": false
+  }
+}
+```

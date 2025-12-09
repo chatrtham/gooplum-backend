@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "integer",
+    "description": "The ID of the user to update"
+  },
+  "active_flag": {
+    "type": "boolean",
+    "description": "Whether the user is active or not. false = Not activated, true = Activated"
+  }
+}
+```

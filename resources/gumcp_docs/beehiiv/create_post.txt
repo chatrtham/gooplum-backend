@@ -1,0 +1,277 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "title": {
+    "type": "string",
+    "description": "The title of the post"
+  },
+  "body_content": {
+    "type": "string",
+    "description": "The content of the post. This is the raw HTML content that will be rendered in the email and web views"
+  },
+  "blocks": {
+    "type": "array",
+    "description": "The blocks that make up the post's contents. Supported types: paragraph (with plaintext), image, embed_link",
+    "items": {
+      "type": "object",
+      "description": "A content block. Use 'type' field to specify: 'paragraph' (with plaintext), 'image', or 'embed_link'",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "paragraph",
+            "image",
+            "embed_link"
+          ],
+          "description": "The type of block"
+        },
+        "plaintext": {
+          "type": "string",
+          "description": "For paragraph blocks: The plaintext content"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "For image blocks: The URL of the image"
+        },
+        "alt_text": {
+          "type": "string",
+          "description": "For image blocks: Alternative text for the image"
+        },
+        "caption": {
+          "type": "string",
+          "description": "For image blocks: A caption for the image"
+        },
+        "captionAlignment": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "description": "For image blocks: The text alignment of the caption"
+        },
+        "imageAlignment": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "description": "For image blocks: The text alignment of the image"
+        },
+        "title": {
+          "type": "string",
+          "description": "For image blocks: The title of the image"
+        },
+        "url": {
+          "type": "string",
+          "description": "For image blocks: The URL that the image should link to. For embed_link blocks: The URL of the embed link"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "For image blocks: The width of the image (1-100)"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  },
+  "subtitle": {
+    "type": "string",
+    "description": "The subtitle of the post"
+  },
+  "post_template_id": {
+    "type": "string",
+    "description": "The ID of the template to use for the post (e.g., post_template_00000000-0000-0000-0000-000000000000)"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "draft",
+      "confirmed"
+    ],
+    "description": "The status of the post. Defaults to confirmed if not provided"
+  },
+  "scheduled_at": {
+    "type": "string",
+    "format": "date-time",
+    "description": "The time in which the post will be published (UTC ISO 8601 format)"
+  },
+  "custom_link_tracking_enabled": {
+    "type": "boolean",
+    "description": "If true, custom link tracking will be enabled for this post"
+  },
+  "email_capture_type_override": {
+    "type": "string",
+    "enum": [
+      "none",
+      "gated",
+      "popup"
+    ],
+    "description": "The email capture type to use for this post"
+  },
+  "override_scheduled_at": {
+    "type": "string",
+    "format": "date-time",
+    "description": "If you wish to display a date other than the scheduled_at date in the email (ISO 8601 format)"
+  },
+  "social_share": {
+    "type": "string",
+    "enum": [
+      "comments_and_likes_only",
+      "with_comments_and_likes",
+      "top",
+      "none"
+    ],
+    "description": "The social share type to use for this post"
+  },
+  "thumbnail_image_url": {
+    "type": "string",
+    "description": "The URL of the thumbnail image to use for the post"
+  },
+  "recipients": {
+    "type": "object",
+    "description": "The recipients to use for this post",
+    "properties": {
+      "web": {
+        "type": "object",
+        "properties": {
+          "tier_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "include_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclude_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "email": {
+        "type": "object",
+        "properties": {
+          "tier_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "include_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exclude_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "email_settings": {
+    "type": "object",
+    "description": "The email settings to use for this post",
+    "properties": {
+      "from_address": {
+        "type": "string"
+      },
+      "custom_live_url": {
+        "type": "string"
+      },
+      "display_title_in_email": {
+        "type": "boolean"
+      },
+      "display_byline_in_email": {
+        "type": "boolean"
+      },
+      "display_subtitle_in_email": {
+        "type": "boolean"
+      },
+      "email_header_engagement_buttons": {
+        "type": "string"
+      },
+      "email_header_social_share": {
+        "type": "string"
+      },
+      "email_preview_text": {
+        "type": "string"
+      },
+      "email_subject_line": {
+        "type": "string"
+      }
+    }
+  },
+  "web_settings": {
+    "type": "object",
+    "description": "The web settings to use for this post",
+    "properties": {
+      "display_thumbnail_on_web": {
+        "type": "boolean"
+      },
+      "hide_from_feed": {
+        "type": "boolean"
+      },
+      "paywall_break_price_id": {
+        "type": "string"
+      },
+      "paywall_id": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string"
+      }
+    }
+  },
+  "seo_settings": {
+    "type": "object",
+    "description": "The metadata to use for this post",
+    "properties": {
+      "default_description": {
+        "type": "string"
+      },
+      "default_title": {
+        "type": "string"
+      },
+      "og_description": {
+        "type": "string"
+      },
+      "og_title": {
+        "type": "string"
+      },
+      "twitter_description": {
+        "type": "string"
+      },
+      "twitter_title": {
+        "type": "string"
+      }
+    }
+  },
+  "content_tags": {
+    "type": "array",
+    "description": "The content tags to use for this post",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

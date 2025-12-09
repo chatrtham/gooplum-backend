@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "username": {
+    "type": "string",
+    "description": "Instagram username (with or without @). Examples: 'username', '@username'"
+  },
+  "profile_url": {
+    "type": "string",
+    "description": "Full Instagram profile URL. Example: 'https://www.instagram.com/username/'"
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of stories to retrieve",
+    "default": 10
+  }
+}
+```

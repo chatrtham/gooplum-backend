@@ -1,0 +1,15 @@
+# Pagerduty Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (9 total)
+
+1. **get_user** - Get details about an existing user in PagerDuty
+2. **list_incidents** - List existing incidents from PagerDuty
+3. **list_services** - List existing services from PagerDuty
+4. **list_schedules** - List on-call schedules from PagerDuty
+5. **create_schedule** - Create a new on-call schedule in PagerDuty
+6. **get_schedule** - Get details about an existing schedule in PagerDuty
+7. **delete_schedule** - Delete an on-call schedule in PagerDuty
+8. **list_oncalls** - List on-call entries from PagerDuty
+9. **list_notifications** - List notifications from PagerDuty

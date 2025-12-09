@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "chat_id": {
+    "type": "string",
+    "description": "The ID of the conversation (get this from get_direct_messages first)"
+  },
+  "message": {
+    "type": "string",
+    "description": "The message to send (supports mentions like {email:user@domain.com} or {user_id:some-user-id})"
+  }
+}
+```

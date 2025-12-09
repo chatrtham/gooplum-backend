@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "GID of the task to add to project (required)"
+  },
+  "project": {
+    "type": "string",
+    "description": "GID of the project to add the task to (required)"
+  },
+  "section": {
+    "type": "string",
+    "description": "GID of the section to add the task to within the project"
+  },
+  "insert_before": {
+    "type": "string",
+    "description": "GID of the task to insert this task before"
+  },
+  "insert_after": {
+    "type": "string",
+    "description": "GID of the task to insert this task after"
+  }
+}
+```

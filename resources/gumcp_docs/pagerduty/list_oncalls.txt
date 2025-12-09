@@ -1,0 +1,59 @@
+Parameters Schema:
+```json
+{
+  "earliest": {
+    "type": "boolean",
+    "description": "Return only the earliest on-call for each combination of escalation policy, escalation level, and user."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "escalation_policies",
+        "users",
+        "schedules"
+      ]
+    },
+    "description": "Array of additional details to include."
+  },
+  "user_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters the results, showing only on-calls for the specified user IDs."
+  },
+  "escalation_policy_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters the results, showing only on-calls for the specified escalation policy IDs."
+  },
+  "schedule_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters the results, showing only on-calls for the specified schedule IDs."
+  },
+  "since": {
+    "type": "string",
+    "description": "The start of the time range over which to search."
+  },
+  "until": {
+    "type": "string",
+    "description": "The end of the time range over which to search."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination). If not provided, uses single page with limit parameter.",
+    "default": 10
+  }
+}
+```

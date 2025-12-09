@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Channel name (lowercase, no spaces/periods, max 80 chars)"
+  },
+  "is_private": {
+    "type": "boolean",
+    "description": "Whether the channel should be private (default: false)"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

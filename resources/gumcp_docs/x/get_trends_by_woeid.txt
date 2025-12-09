@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "woeid": {
+    "type": "integer",
+    "description": "The WOEID of the place to lookup a trend for."
+  },
+  "max_trends": {
+    "type": "integer",
+    "description": "The maximum number of results. Required range: 1 <= x <= 50",
+    "minimum": 1,
+    "maximum": 50,
+    "default": 20
+  },
+  "trend_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Trend fields to display. Minimum length: 1"
+  }
+}
+```

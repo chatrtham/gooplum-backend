@@ -1,0 +1,29 @@
+# X Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (23 total)
+
+1. **search_tweets** - Search for tweets matching a query. Can search recent (last 7 days) or full archive.
+2. **get_user_tweets** - Retrieves a list of posts authored by a specific User by their ID.
+3. **get_user_mentions** - Retrieves a list of Posts that mention a specific User by their ID.
+4. **get_user_timeline** - Retrieves a reverse chronological list of Posts in the authenticated User's Timeline.
+5. **get_tweets_by_ids** - Retrieves details of multiple Posts by their IDs.
+6. **get_bookmarks** - Retrieves a list of Posts bookmarked by the authenticated user.
+7. **create_bookmark** - Adds a post to the authenticated user's bookmarks.
+8. **delete_bookmark** - Removes a Post from the authenticated user's Bookmarks by its ID.
+9. **create_tweet** - Creates a new Post for the authenticated user, or edits an existing Post when edit_options are provided.
+10. **delete_tweet** - Deletes a specific Post by its ID, if owned by the authenticated user.
+11. **get_me** - Retrieves details of the authenticated user.
+12. **search_users** - Retrieves a list of Users matching a search query.
+13. **get_followers** - Retrieves a list of Users who follow a specific User by their ID.
+14. **get_following** - Retrieves a list of Users followed by a specific User by their ID.
+15. **manage_follow** - Causes the authenticated user to follow or unfollow a specific user by their ID or username.
+16. **get_blocking** - Retrieves a list of Users blocked by the authenticated user.
+17. **get_liked_tweets** - Retrieves a list of Posts liked by a specific User by their ID.
+18. **get_liking_users** - Retrieves a list of Users who liked a specific Post by its ID.
+19. **get_trends_by_woeid** - Retrieves trending topics for a specific location identified by its WOEID.
+20. **get_personalized_trends** - Retrieves personalized trending topics for the authenticated user.
+21. **get_usage** - Retrieves usage statistics for Posts over a specified number of days.
+22. **hide_reply** - Hides or unhides a reply to a conversation owned by the authenticated user.
+23. **manage_mute** - Causes the authenticated user to mute or unmute a specific User by their ID.

@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "goal_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the goal (required)"
+  },
+  "followers": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of user GIDs or email addresses to remove as followers"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

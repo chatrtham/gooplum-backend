@@ -1,0 +1,8 @@
+Parameters Schema:
+```json
+{
+  "comment_id": {
+    "type": "string"
+  }
+}
+```

@@ -1,0 +1,58 @@
+Parameters Schema:
+```json
+{
+  "operation": {
+    "type": "string",
+    "description": "Type of operation to perform",
+    "enum": [
+      "update",
+      "add_tag",
+      "remove_tag"
+    ]
+  },
+  "api_ticket_id": {
+    "type": "string",
+    "description": "ID of the ticket to update"
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "Tag ID (required for add_tag and remove_tag operations)"
+  },
+  "title": {
+    "type": "string",
+    "description": "New title/subject of the ticket (for update operation)"
+  },
+  "description": {
+    "type": "string",
+    "description": "New description of the ticket (for update operation)"
+  },
+  "ticket_state_id": {
+    "type": "string",
+    "description": "The ID of the ticket state (for update operation)"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "The ID of the company to associate. Set to empty string to remove (for update operation)"
+  },
+  "open": {
+    "type": "boolean",
+    "description": "Set to false to close a ticket (for update operation)"
+  },
+  "is_shared": {
+    "type": "boolean",
+    "description": "Whether the ticket is visible to users (for update operation)"
+  },
+  "snoozed_until": {
+    "type": "integer",
+    "description": "Unix timestamp for when you want the ticket to reopen (for update operation)"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "ID of the admin performing the action. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "assignee_id": {
+    "type": "string",
+    "description": "The ID of the admin or team to assign the ticket to. Set to '0' to unassign (for update operation)"
+  }
+}
+```

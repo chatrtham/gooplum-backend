@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "candidateId": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the candidate to anonymize."
+  }
+}
+```

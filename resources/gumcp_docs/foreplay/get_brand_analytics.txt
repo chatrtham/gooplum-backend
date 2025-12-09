@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "Brand ID (20-25 character alphanumeric string) or Facebook page ID (numeric). System automatically detects the type."
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date (inclusive). Format: 'YYYY-MM-DD'. Max 30 day range."
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date (inclusive). Format: 'YYYY-MM-DD'. Max 30 day range."
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "newest",
+      "oldest"
+    ],
+    "description": "Sort order for results.",
+    "default": "newest"
+  }
+}
+```

@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "issueId": {
+    "type": "string",
+    "description": "The issue ID"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of comments to return across all pages",
+    "default": 100
+  },
+  "orderBy": {
+    "type": "string",
+    "enum": [
+      "createdAt",
+      "updatedAt"
+    ],
+    "description": "Order by field",
+    "default": "createdAt"
+  }
+}
+```

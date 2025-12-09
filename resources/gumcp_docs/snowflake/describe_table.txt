@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "database_name": {
+    "type": "string",
+    "description": "Name of the database (e.g., 'SNOWFLAKE', 'MY_DATABASE')"
+  },
+  "schema_name": {
+    "type": "string",
+    "description": "Schema name containing the table (e.g., 'ACCOUNT_USAGE', 'PUBLIC')"
+  },
+  "table_name": {
+    "type": "string",
+    "description": "Name of the actual table or view (e.g., 'ACCESS_HISTORY', 'USERS')"
+  },
+  "warehouse": {
+    "type": "string",
+    "description": "Name of the warehouse to use. Required if no default warehouse is configured."
+  }
+}
+```

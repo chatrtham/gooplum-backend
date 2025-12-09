@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "HubSpot contact ID (required)"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Email subject line (required)"
+  },
+  "body": {
+    "type": "string",
+    "description": "Email body content (required)"
+  },
+  "from_name": {
+    "type": "string",
+    "description": "Sender name"
+  }
+}
+```

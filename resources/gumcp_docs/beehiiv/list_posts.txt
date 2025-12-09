@@ -1,0 +1,94 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats",
+        "free_web_content",
+        "free_email_content",
+        "free_rss_content",
+        "premium_web_content",
+        "premium_email_content"
+      ]
+    }
+  },
+  "audience": {
+    "type": "string",
+    "description": "Filter results by audience",
+    "enum": [
+      "free",
+      "premium",
+      "all"
+    ]
+  },
+  "platform": {
+    "type": "string",
+    "description": "Filter results by platform",
+    "enum": [
+      "web",
+      "email",
+      "both",
+      "all"
+    ]
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter results by status",
+    "enum": [
+      "draft",
+      "confirmed",
+      "archived",
+      "all"
+    ]
+  },
+  "content_tags": {
+    "type": "array",
+    "description": "Filter posts by content tags",
+    "items": {
+      "type": "string"
+    }
+  },
+  "limit": {
+    "type": "integer",
+    "description": "A limit on the number of objects to be returned (1-100)"
+  },
+  "page": {
+    "type": "integer",
+    "description": "Page number for paginated results"
+  },
+  "order_by": {
+    "type": "string",
+    "description": "The field to sort by",
+    "enum": [
+      "created",
+      "publish_date",
+      "displayed_date"
+    ]
+  },
+  "direction": {
+    "type": "string",
+    "description": "The direction to sort results",
+    "enum": [
+      "asc",
+      "desc"
+    ]
+  },
+  "hidden_from_feed": {
+    "type": "string",
+    "description": "Filter by hidden_from_feed attribute",
+    "enum": [
+      "all",
+      "true",
+      "false"
+    ]
+  }
+}
+```

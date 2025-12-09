@@ -1,0 +1,63 @@
+Parameters Schema:
+```json
+{
+  "customer": {
+    "type": "string",
+    "description": "Only return invoices for the customer specified by this customer ID"
+  },
+  "customer_email": {
+    "type": "string",
+    "description": "Only return invoices for the customer specified by this email (alternative to customer)"
+  },
+  "status": {
+    "type": "string",
+    "description": "The status of the invoice, one of draft, Failed, open, paid, uncollectible, or void"
+  },
+  "subscription": {
+    "type": "string",
+    "description": "Only return invoices for the subscription specified by this subscription ID"
+  },
+  "collection_method": {
+    "type": "string",
+    "enum": [
+      "charge_automatically",
+      "send_invoice"
+    ],
+    "description": "The collection method of the invoice to retrieve. Either charge_automatically or send_invoice"
+  },
+  "created": {
+    "type": "object",
+    "properties": {
+      "gt": {
+        "type": "integer",
+        "description": "Return invoices created after this timestamp (exclusive)"
+      },
+      "gte": {
+        "type": "integer",
+        "description": "Return invoices created after or equal to this timestamp (inclusive)"
+      },
+      "lt": {
+        "type": "integer",
+        "description": "Return invoices created before this timestamp (exclusive)"
+      },
+      "lte": {
+        "type": "integer",
+        "description": "Return invoices created before or equal to this timestamp (inclusive)"
+      }
+    },
+    "description": "Only return invoices that were created during the given date interval using Unix timestamps"
+  },
+  "ending_before": {
+    "type": "string",
+    "description": "A cursor for use in pagination. ending_before is an object ID that defines your place in the list"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10"
+  },
+  "starting_after": {
+    "type": "string",
+    "description": "A cursor for use in pagination. starting_after is an object ID that defines your place in the list"
+  }
+}
+```

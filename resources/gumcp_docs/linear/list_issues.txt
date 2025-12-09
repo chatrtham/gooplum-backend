@@ -1,0 +1,68 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of issues to return across all pages",
+    "default": 100
+  },
+  "orderBy": {
+    "type": "string",
+    "enum": [
+      "createdAt",
+      "updatedAt"
+    ],
+    "description": "Order by field",
+    "default": "updatedAt"
+  },
+  "query": {
+    "type": "string",
+    "description": "Search for content in the issue title or description"
+  },
+  "team": {
+    "type": "string",
+    "description": "The team name, key, or UUID to filter by (automatically resolved to UUID)"
+  },
+  "state": {
+    "type": "string",
+    "description": "The state name or ID to filter by"
+  },
+  "cycle": {
+    "type": "string",
+    "description": "The cycle name or ID to filter by"
+  },
+  "label": {
+    "type": "string",
+    "description": "A label name or ID to filter by"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "The assignee to filter by (User ID, name, email, or \"me\")"
+  },
+  "delegate": {
+    "type": "string",
+    "description": "An agent name or ID to filter by"
+  },
+  "project": {
+    "type": "string",
+    "description": "The project name or ID to filter by"
+  },
+  "parentId": {
+    "type": "string",
+    "description": "The parent issue ID to filter by"
+  },
+  "createdAt": {
+    "type": "string",
+    "description": "Return only issues created on or after this ISO-8601 date-time (e.g., '2025-01-01T10:00:00Z')"
+  },
+  "updatedAt": {
+    "type": "string",
+    "description": "Return only issues updated on or after this ISO-8601 date-time (e.g., '2025-01-01T10:00:00Z')"
+  },
+  "includeArchived": {
+    "type": "boolean",
+    "description": "Whether to include archived issues",
+    "default": false
+  }
+}
+```

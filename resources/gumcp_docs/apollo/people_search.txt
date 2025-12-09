@@ -1,0 +1,82 @@
+Parameters Schema:
+```json
+{
+  "q_keywords": {
+    "type": "string",
+    "description": "A string of keywords to filter results across all people fields"
+  },
+  "include_similar_titles": {
+    "type": "boolean",
+    "description": "Include people with job titles similar to those specified in person_titles. Set to false for strict matches only"
+  },
+  "person_titles": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Job titles held by people you want to find. People only need to match 1 title to be included. Examples: 'sales development representative', 'marketing manager', 'research analyst'"
+  },
+  "person_locations": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Personal locations where people live. Search across cities, US states, and countries. Examples: 'california', 'ireland', 'chicago'"
+  },
+  "person_seniorities": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Job seniority levels within current employer. Valid options: 'owner', 'founder', 'c_suite', 'partner', 'vp', 'head', 'director', 'manager', 'senior', 'entry', 'intern'"
+  },
+  "organization_locations": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Headquarters locations of person's current employer. Search across cities, US states, and countries. Examples: 'texas', 'tokyo', 'spain'"
+  },
+  "q_organization_domains_list": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Domain names of person's current or previous employers. Do not include www., @ symbol, or similar. Up to 1,000 domains per request. Examples: 'apollo.io', 'microsoft.com'"
+  },
+  "contact_email_status": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Email statuses to filter by. Valid options: 'verified', 'unverified', 'likely to engage', 'unavailable'"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Apollo organization IDs to include in search. Find IDs using Organization Search endpoint. Example: '5e66b6381e05b4008c8331b8'"
+  },
+  "organization_num_employees_ranges": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Employee count ranges for person's current company. Format as 'min,max' strings. Examples: '1,10', '250,500', '10000,20000'"
+  },
+  "page": {
+    "type": "integer",
+    "description": "The page number of results to retrieve"
+  },
+  "per_page": {
+    "type": "integer",
+    "description": "Number of results per page"
+  },
+  "reveal_email": {
+    "type": "boolean",
+    "description": "If true, returns each person's real email address (when available) instead of a placeholder like email_not_unlocked@domain.com.",
+    "default": true
+  }
+}
+```

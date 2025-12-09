@@ -1,0 +1,67 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "General search query field for flexible searching"
+  },
+  "contact_id": {
+    "type": "string",
+    "description": "Search conversations for a specific contact ID"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "Search conversations assigned to a specific admin ID. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "team_id": {
+    "type": "string",
+    "description": "Search conversations assigned to a specific team ID"
+  },
+  "state": {
+    "type": "string",
+    "description": "Filter conversations by state"
+  },
+  "open": {
+    "type": "boolean",
+    "description": "Filter by open/closed status. True for open conversations, false for closed"
+  },
+  "read": {
+    "type": "boolean",
+    "description": "Filter by read status. True for read conversations, false for unread"
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "Filter conversations by tag ID"
+  },
+  "source_type": {
+    "type": "string",
+    "description": "Filter by conversation source type"
+  },
+  "created_after": {
+    "type": "string",
+    "description": "Find conversations created after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "created_before": {
+    "type": "string",
+    "description": "Find conversations created before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "updated_after": {
+    "type": "string",
+    "description": "Find conversations updated after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "updated_before": {
+    "type": "string",
+    "description": "Find conversations updated before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "priority": {
+    "type": "string",
+    "description": "Filter conversations by priority level"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of conversations to return (default: 20, max: 150)",
+    "default": 10,
+    "minimum": 1
+  }
+}
+```

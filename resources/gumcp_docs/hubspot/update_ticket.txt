@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "ticket_id": {
+    "type": "string",
+    "description": "HubSpot ticket ID (required)"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Ticket subject"
+  },
+  "content": {
+    "type": "string",
+    "description": "Ticket content/description"
+  },
+  "hs_pipeline": {
+    "type": "string",
+    "description": "Ticket pipeline ID"
+  },
+  "hs_pipeline_stage": {
+    "type": "string",
+    "description": "Ticket pipeline stage"
+  },
+  "hs_ticket_priority": {
+    "type": "string",
+    "description": "Ticket priority (LOW, MEDIUM, HIGH)"
+  },
+  "hs_ticket_category": {
+    "type": "string",
+    "description": "Ticket category"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the ticket"
+  }
+}
+```

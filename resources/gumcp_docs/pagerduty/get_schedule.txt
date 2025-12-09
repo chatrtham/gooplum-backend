@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "The ID of the schedule to retrieve."
+  },
+  "since": {
+    "type": "string",
+    "description": "The start of the date range over which to show schedule entries."
+  },
+  "until": {
+    "type": "string",
+    "description": "The end of the date range over which to show schedule entries."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "overflow": {
+    "type": "boolean",
+    "description": "If true, on-call schedule entries that pass the date range bounds will not be truncated.",
+    "default": false
+  }
+}
+```

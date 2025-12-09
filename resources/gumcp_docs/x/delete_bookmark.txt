@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "tweet_id": {
+    "type": "string",
+    "description": "The ID of the Post that the source User is removing from bookmarks."
+  }
+}
+```

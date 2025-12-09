@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "channel_id": {
+    "type": "string",
+    "description": "Channel ID or User ID in the case of DMs"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "User ID to remove from channel"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

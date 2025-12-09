@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The ID of the note"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of comments to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

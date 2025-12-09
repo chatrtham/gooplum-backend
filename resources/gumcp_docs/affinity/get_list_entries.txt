@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "integer",
+    "description": "The unique identifier of the list whose entries to retrieve"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of entries to collect across all pages (automatically handles pagination)"
+  }
+}
+```

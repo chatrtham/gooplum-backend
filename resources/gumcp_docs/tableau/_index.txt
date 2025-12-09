@@ -1,0 +1,18 @@
+# Tableau Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (12 total)
+
+1. **list_views** - List all views on a Tableau site with optional filtering. Returns view metadata including name, owner, workbook, and usage statistics.
+2. **get_view_data** - Retrieves data in CSV format for the specified view in a Tableau workbook.
+3. **get_view_image** - Retrieves an image of the specified view in a Tableau workbook. Default size is 800x800 pixels.
+4. **list_workbooks** - List all workbooks on a Tableau site with optional filtering. Returns workbook metadata including name, description, project, owner, and views.
+5. **get_workbook** - Retrieves information about a specific workbook, including views contained in the workbook.
+6. **list_datasources** - List all published data sources on a Tableau site with optional filtering.
+7. **search_content** - Search across all supported content types (workbooks, views, datasources, projects, etc.) for objects matching the search expression.
+8. **list_all_pulse_metric_definitions** - List all Pulse Metric Definitions on the current site. Pulse metrics provide automated insights.
+9. **list_pulse_metrics_from_definition_id** - List all Pulse Metrics for a specific Pulse Metric Definition.
+10. **list_pulse_metrics_from_metric_ids** - Retrieve Pulse Metrics by their IDs. Useful for getting details of specific metrics.
+11. **list_pulse_metric_subscriptions** - List all Pulse Metric Subscriptions for the current user.
+12. **generate_pulse_insight_bundle** - Generate an insight bundle for a Pulse Metric showing current value, trends, and AI-generated insights.

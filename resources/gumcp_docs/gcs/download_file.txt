@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "bucket_name": {
+    "type": "string",
+    "description": "Name of the bucket containing the file"
+  },
+  "file_name": {
+    "type": "string",
+    "description": "Name/path of the file in the bucket"
+  },
+  "expiration": {
+    "type": "integer",
+    "description": "URL expiration time in minutes (default: 60). Only applies when public=false"
+  },
+  "public": {
+    "type": "boolean",
+    "description": "If true, returns a public URL that anyone can open directly and download without authentication (default: false)"
+  }
+}
+```

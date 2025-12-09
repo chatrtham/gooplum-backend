@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "project_id": {
+    "type": "string",
+    "description": "The Google Cloud project ID to run the query in"
+  },
+  "query": {
+    "type": "string",
+    "description": "The SQL query to execute (use LIMIT clause to control result size)"
+  }
+}
+```

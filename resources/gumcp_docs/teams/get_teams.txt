@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "filter": {
+    "type": "string",
+    "description": "OData filter for filtering teams"
+  },
+  "select": {
+    "type": "string",
+    "description": "Comma-separated list of properties to include in the response"
+  }
+}
+```

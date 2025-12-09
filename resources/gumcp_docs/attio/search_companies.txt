@@ -1,0 +1,57 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Search query to find companies by name (partial matches supported)"
+  },
+  "domains": {
+    "type": "string",
+    "description": "Search by company domain (e.g., 'acme.com')"
+  },
+  "categories": {
+    "type": "string",
+    "description": "Search by company category"
+  },
+  "primary_location": {
+    "type": "string",
+    "description": "Search by company location/address"
+  },
+  "linkedin": {
+    "type": "string",
+    "description": "Search by LinkedIn URL or handle"
+  },
+  "twitter": {
+    "type": "string",
+    "description": "Search by Twitter handle"
+  },
+  "exact_match": {
+    "type": "boolean",
+    "description": "If true, search for exact name matches instead of partial matches (default: false)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of companies to return",
+    "default": 10,
+    "maximum": 500
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ],
+    "description": "Sort companies by field",
+    "default": "created_at"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order - ascending or descending",
+    "default": "asc"
+  }
+}
+```

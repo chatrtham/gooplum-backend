@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "disposition_id": {
+    "type": "integer",
+    "description": "Call disposition ID to fetch"
+  }
+}
+```

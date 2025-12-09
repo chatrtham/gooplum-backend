@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "team_id": {
+    "type": "string",
+    "description": "The ID of the team (optional if team_name is provided)"
+  },
+  "team_name": {
+    "type": "string",
+    "description": "The name of the team (optional if team_id is provided)"
+  },
+  "channel_id": {
+    "type": "string",
+    "description": "The ID of the channel (optional if channel_name is provided)"
+  },
+  "channel_name": {
+    "type": "string",
+    "description": "The name of the channel (optional if channel_id is provided)"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "The ID of the user (optional if email is provided)"
+  },
+  "email": {
+    "type": "string",
+    "description": "The email of the user (optional if user_id is provided)"
+  },
+  "roles": {
+    "type": "array",
+    "description": "The roles assigned to the user (e.g., 'owner', 'member')",
+    "items": {
+      "type": "string",
+      "enum": [
+        "owner",
+        "member"
+      ]
+    }
+  }
+}
+```

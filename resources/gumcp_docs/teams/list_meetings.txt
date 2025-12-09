@@ -1,0 +1,10 @@
+Parameters Schema:
+```json
+{
+  "top": {
+    "type": "integer",
+    "description": "Maximum number of meetings to return (default: 10)",
+    "default": 10
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "bucket_name": {
+    "type": "string",
+    "description": "Name of the bucket to create (must be globally unique)"
+  },
+  "location": {
+    "type": "string",
+    "description": "Location for the bucket (e.g., 'US', 'EU', 'us-central1'). Defaults to 'US'"
+  },
+  "storage_class": {
+    "type": "string",
+    "description": "Storage class (STANDARD, NEARLINE, COLDLINE, ARCHIVE). Defaults to STANDARD"
+  }
+}
+```

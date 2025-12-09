@@ -1,0 +1,13 @@
+# Chorus Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (7 total)
+
+1. **get_me** - Retrieve information about the authenticated Chorus user, including profile, permissions, and team assignments. Use this to identify the current user or to fetch their related engagements.
+2. **get_engagements** - Get conversations matching the specified criteria. Returns engagement data including meetings, calls, and other interactions.
+3. **delete_engagement** - Delete a single engagement by ID.
+4. **get_conversation** - Fetch a specific conversation by ID.
+5. **get_playlists** - Fetch all playlists with various filtering options.
+6. **get_scorecards** - Fetch all scorecards with filtering options.
+7. **get_users** - Fetch all users from Chorus.

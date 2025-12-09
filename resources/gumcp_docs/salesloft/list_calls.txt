@@ -1,0 +1,103 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of calls to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of calls to fetch. If a record can't be found, that record won't be returned and your request will be successful"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "user_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by USER GUIDs - these are internal organization/team member GUIDs (NOT person_id from external contacts). Use this when filtering by which team member made the calls"
+  },
+  "person_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters calls by person_id. Multiple person ids can be applied"
+  },
+  "sentiment": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters calls by sentiment. Sentiment matches are exact and case sensitive. Multiple sentiments are allowed."
+  },
+  "disposition": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters calls by disposition. Disposition matches are exact and case sensitive. Multiple dispositions are allowed."
+  },
+  "positive": {
+    "type": "boolean",
+    "description": "Filters calls by positive sentiment"
+  },
+  "connected": {
+    "type": "boolean",
+    "description": "Filters calls by connected disposition"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Key to sort on, must be one of: created_at, updated_at.",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ],
+    "default": "updated_at"
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Direction to sort in, must be one of: ASC, DESC.",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "default": "DESC"
+  }
+}
+```

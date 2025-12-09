@@ -1,0 +1,31 @@
+# Jira Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (25 total)
+
+1. **create_project** - Set up a new JIRA project for a team, client, or initiative. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+2. **get_project** - Retrieve metadata about a specific project. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+3. **update_project** - Modify project details like name, lead, or description. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+4. **delete_project** - Delete an entire project and its issues. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+5. **list_projects** - List all accessible JIRA projects. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+6. **get_issue_types_for_project** - Get all valid issue types (e.g., Task, Bug, Story) for a project. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+7. **create_issue** - Create a new issue, bug, task, or story in a project. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+8. **get_issue** - Get full details of an issue (title, description, status, comments, etc.). If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+9. **update_issue** - Modify issue fields such as assignee, priority, or status. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+10. **delete_issue** - Permanently remove an issue from a project. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+11. **transition_my_issue** - Move an assigned issue to a new status (e.g., 'In Progress', 'Done'). If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+12. **list_issues** - List issues by JQL query. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+13. **comment_on_issue** - Add a comment to an issue. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+14. **search_issues** - Search for issues using simple filters without requiring JQL knowledge. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+15. **execute_jql** - Execute a raw JQL (Jira Query Language) query for advanced searching and filtering. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+16. **add_user_to_issue** - Add a user as assignee, reporter, or watcher to an issue. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+17. **get_myself** - Get information about the authenticated user. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+18. **get_my_issues** - Fetch all open issues assigned to the current user. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+19. **get_my_recent_activity** - View recently updated issues the user interacted with. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+20. **get_my_permissions** - Determine what actions the user is allowed to perform in a project. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+21. **list_users** - List all users in the Jira instance with pagination support. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+22. **list_groups** - List all user groups in the Jira instance with pagination support. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+23. **create_group** - Create a new user group in the Jira instance. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+24. **add_user_to_group** - Add a user to a specified group in the Jira instance. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.
+25. **remove_user_from_group** - Remove a user from a specified group in the Jira instance. If you have access to multiple Jira sites, you must specify either cloud_id or site_name.

@@ -1,0 +1,24 @@
+# Gong Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (18 total)
+
+1. **list_calls** - List calls that took place during a specified date range
+2. **get_call** - Retrieve data for a specific call by ID
+3. **add_call** - Add a new call to Gong. When using this endpoint, either provide a downloadMediaUrl
+4. **get_call_transcript** - Retrieve transcript for a specific call
+5. **get_detailed_calls** - List detailed call data with various filters including content and interaction metrics
+6. **list_users** - List all of the company's users
+7. **get_user** - Retrieve data for a specific user by ID
+8. **get_answered_scorecards** - Retrieve all the answers for the scorecards that were reviewed during a specified date range
+9. **get_interaction_stats** - Returns interaction stats for users based on calls that have Whisper turned on
+10. **get_scorecards** - Retrieve all the scorecards within the Gong system
+11. **get_trackers** - Retrieve details of all keyword trackers in the system or in a given workspace
+12. **list_workspaces** - Returns a list of all workspaces including their details
+13. **list_library_folders** - List all library folders
+14. **get_folder_content** - Get content of a specific library folder
+15. **validate_meeting_integration** - Validate Gong meeting integration for users
+16. **give_users_access_to_calls** - Give individual users access to specific calls
+17. **get_users_with_access_to_calls** - Retrieve users that have specific individual access to calls
+18. **remove_users_access_from_calls** - Remove specific individual users access from calls

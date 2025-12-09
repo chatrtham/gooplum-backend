@@ -1,0 +1,17 @@
+# Attio Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (11 total)
+
+1. **search_companies** - Search for companies in Attio with advanced filtering options
+2. **read_company** - Read a specific company by ID
+3. **create_company** - Create a new company in Attio
+4. **update_company** - Update an existing company in Attio
+5. **search_people** - Search for people in Attio with advanced filtering options
+6. **read_person** - Read a specific person by ID
+7. **create_person** - Create a new person in Attio
+8. **update_person** - Update an existing person in Attio
+9. **list_lists** - List all available lists in Attio
+10. **read_list** - Read records from a specific list
+11. **add_to_list** - Add a record to a list

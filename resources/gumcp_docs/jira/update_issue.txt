@@ -1,0 +1,51 @@
+Parameters Schema:
+```json
+{
+  "issue_key": {
+    "type": "string",
+    "description": "Issue key (e.g., PRJ-123)"
+  },
+  "summary": {
+    "type": "string",
+    "description": "Issue summary/title"
+  },
+  "description": {
+    "type": "string",
+    "description": "Issue description (supports mentions like {acc_id:account_id} or {email_id:email})"
+  },
+  "assignee_account_id": {
+    "type": "string",
+    "description": "Account ID of assignee"
+  },
+  "priority": {
+    "type": "string",
+    "description": "Priority",
+    "enum": [
+      "Highest",
+      "High",
+      "Medium",
+      "Low",
+      "Lowest"
+    ]
+  },
+  "story_points": {
+    "type": "number",
+    "description": "Story points estimate"
+  },
+  "labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Issue labels"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

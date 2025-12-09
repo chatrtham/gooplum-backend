@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "Note ID to update"
+  },
+  "content": {
+    "type": "string",
+    "description": "The content of the note"
+  },
+  "call_id": {
+    "type": "integer",
+    "description": "ID of the call with which the note is associated. The call cannot already have a note. If the note is associated to a call already, it will become associated to the requested call"
+  }
+}
+```

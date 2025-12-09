@@ -1,0 +1,38 @@
+# Salesforce Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (32 total)
+
+1. **soql_query** - Executes a SOQL query to retrieve Salesforce records with support for relationships and complex filters
+2. **sosl_search** - Performs a text-based search across multiple Salesforce objects using SOSL
+3. **describe_object** - Retrieves detailed metadata about a Salesforce object including fields, relationships, and permissions
+4. **get_record** - Retrieves a specific Salesforce record by ID with all accessible fields
+5. **create_record** - Creates a new record in Salesforce
+6. **update_record** - Updates an existing Salesforce record
+7. **delete_record** - Deletes a Salesforce record
+8. **get_org_limits** - Retrieves current organization limits and usage
+9. **get_user_info** - Retrieves information about the currently logged-in user
+10. **add_contact_to_campaign** - Adds an existing contact to an existing campaign
+11. **add_file_to_record** - Adds an existing file to an existing record
+12. **add_lead_to_campaign** - Adds an existing lead to an existing campaign
+13. **add_account_to_campaign** - Adds all contacts from an account to a campaign
+14. **convert_lead** - Converts a lead to an account, contact, and optionally an opportunity
+15. **create_child_records** - Creates child records from line items and sets the parent-child relationship
+16. **create_enhanced_note** - Creates a new enhanced note (ContentNote) with rich text support and optional record attachment. This is the preferred method for creating notes in Salesforce. Supports HTML formatting for rich content.
+17. **create_file** - Creates a new file (ContentVersion) with optional record attachment
+18. **create_note** - Creates a new note (legacy Note object / Deprecated) and links it to a parent record. Don't give user option for legacy note unless user explicitly asks for it, use create_enhanced_note instead.
+19. **find_child_records** - Finds child records for a given parent ID and returns them as line items
+20. **list_campaigns** - Lists existing campaigns in Salesforce
+21. **list_email_templates** - Retrieves available email templates in Salesforce
+22. **list_reports** - Lists available reports in Salesforce
+23. **get_report** - Retrieves detailed metadata about a specific report
+24. **run_report** - Executes a report and retrieves the data
+25. **describe_report** - Retrieves the structure and metadata of a report
+26. **get_report_instances** - Retrieves instances of a report that have been run
+27. **get_report_instance_data** - Retrieves data from a specific report instance
+28. **get_note** - Retrieves notes linked to a record with their actual decoded content. This tool finds all notes attached to a specific record (like Opportunity, Account, Contact, etc.) and returns them with their decoded content.
+29. **get_chatter_feed** - Retrieves Chatter feed posts from a record or user feed
+30. **post_chatter_message** - Creates a new Chatter post to a record feed or user feed. Supports inline @mentions.
+31. **get_chatter_comments** - Retrieves comments on a specific Chatter feed item
+32. **post_chatter_comment** - Adds a comment to a Chatter feed item. Supports inline @mentions.

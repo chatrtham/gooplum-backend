@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query for companies"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of companies to return"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific company properties to return"
+  }
+}
+```

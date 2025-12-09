@@ -1,0 +1,88 @@
+Parameters Schema:
+```json
+{
+  "archived": {
+    "type": "boolean",
+    "description": "Whether to return archived deals. If false or omitted, returns active deals. If true, returns archived deals.",
+    "default": false
+  },
+  "filter_id": {
+    "type": "integer",
+    "description": "If supplied, only deals matching the specified filter are returned"
+  },
+  "ids": {
+    "type": "string",
+    "description": "Optional comma separated string array of up to 100 entity ids to fetch. If filter_id is provided, this is ignored."
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "If supplied, only deals owned by the specified user are returned. If filter_id is provided, this is ignored."
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "If supplied, only deals linked to the specified person are returned. If filter_id is provided, this is ignored."
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "If supplied, only deals linked to the specified organization are returned. If filter_id is provided, this is ignored."
+  },
+  "pipeline_id": {
+    "type": "integer",
+    "description": "If supplied, only deals in the specified pipeline are returned. If filter_id is provided, this is ignored."
+  },
+  "stage_id": {
+    "type": "integer",
+    "description": "If supplied, only deals in the specified stage are returned. If filter_id is provided, this is ignored."
+  },
+  "status": {
+    "type": "string",
+    "description": "Only fetch deals with a specific status. Multiple statuses can be included as comma separated values. If filter_id is provided, this is ignored.",
+    "enum": [
+      "open",
+      "won",
+      "lost",
+      "deleted"
+    ]
+  },
+  "updated_since": {
+    "type": "string",
+    "description": "If set, only deals with an update_time later than or equal to this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "updated_until": {
+    "type": "string",
+    "description": "If set, only deals with an update_time earlier than this time are returned. ISO 8601 format (RFC3339)."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time",
+      "add_time"
+    ],
+    "description": "The field to sort by. Default: id",
+    "default": "id"
+  },
+  "sort_direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sorting direction. Default: asc",
+    "default": "asc"
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of additional fields to include. Values: next_activity_id, last_activity_id, first_won_time, products_count, files_count, notes_count, followers_count, email_messages_count, activities_count, done_activities_count, undone_activities_count, participants_count, last_incoming_mail_time, last_outgoing_mail_time, smart_bcc_email"
+  },
+  "custom_fields": {
+    "type": "string",
+    "description": "Optional comma separated string array of custom fields keys to include. Maximum of 15 keys allowed."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of deals to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

@@ -1,0 +1,88 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal"
+  },
+  "product_attachment_id": {
+    "type": "integer",
+    "description": "The ID of the deal-product (the ID of the product attached to the deal)"
+  },
+  "product_id": {
+    "type": "integer",
+    "description": "The ID of the product"
+  },
+  "item_price": {
+    "type": "number",
+    "description": "The price value of the product"
+  },
+  "quantity": {
+    "type": "number",
+    "description": "The quantity of the product"
+  },
+  "tax": {
+    "type": "number",
+    "description": "The product tax. Default: 0",
+    "default": 0
+  },
+  "comments": {
+    "type": "string",
+    "description": "The comments of the product"
+  },
+  "discount": {
+    "type": "number",
+    "description": "The value of the discount. The discount_type field can be used to specify whether the value is an amount or a percentage. Default: 0",
+    "default": 0
+  },
+  "is_enabled": {
+    "type": "boolean",
+    "description": "Whether this product is enabled for the deal. Default: true",
+    "default": true
+  },
+  "tax_method": {
+    "type": "string",
+    "enum": [
+      "exclusive",
+      "inclusive",
+      "none"
+    ],
+    "description": "The tax option to be applied to the products. When using inclusive, the tax percentage will already be included in the price. When using exclusive, the tax will not be included in the price. When using none, no tax will be added."
+  },
+  "discount_type": {
+    "type": "string",
+    "enum": [
+      "percentage",
+      "amount"
+    ],
+    "description": "The value of the discount type. Default: percentage",
+    "default": "percentage"
+  },
+  "product_variation_id": {
+    "type": "integer",
+    "description": "The ID of the product variation"
+  },
+  "billing_frequency": {
+    "type": "string",
+    "enum": [
+      "one-time",
+      "annually",
+      "semi-annually",
+      "quarterly",
+      "monthly",
+      "weekly"
+    ],
+    "description": "How often a customer is billed for access to a service or product"
+  },
+  "billing_frequency_cycles": {
+    "type": "integer",
+    "description": "The number of times the billing frequency repeats for a product in a deal. Must be a positive integer less or equal to 208.",
+    "maximum": 208,
+    "minimum": 1
+  },
+  "billing_start_date": {
+    "type": "string",
+    "description": "The billing start date. Must be between 10 years in the past and 10 years in the future. YYYY-MM-DD format"
+  }
+}
+```

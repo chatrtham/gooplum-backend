@@ -1,0 +1,67 @@
+Parameters Schema:
+```json
+{
+  "amount_off": {
+    "type": "integer",
+    "description": "A positive integer representing the amount to subtract from an invoice total in cents (required if percent_off is not passed)"
+  },
+  "currency": {
+    "type": "string",
+    "description": "Three-letter ISO code for the currency of the amount_off parameter (required if amount_off is passed)"
+  },
+  "duration": {
+    "type": "string",
+    "enum": [
+      "forever",
+      "once",
+      "repeating"
+    ],
+    "description": "Specifies how long the discount will be in effect. 'forever' applies to all charges, 'once' applies to first charge only, 'repeating' applies for duration_in_months"
+  },
+  "percent_off": {
+    "type": "number",
+    "description": "A positive float larger than 0 and smaller or equal to 100, representing the discount percentage (required if amount_off is not passed)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the coupon displayed to customers on invoices or receipts"
+  },
+  "id": {
+    "type": "string",
+    "description": "Unique string identifier for this coupon. If not specified, Stripe will generate a random code"
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Set of key-value pairs for storing additional information about the coupon"
+  },
+  "duration_in_months": {
+    "type": "integer",
+    "description": "Number of months the coupon applies (required only if duration is 'repeating')"
+  },
+  "max_redemptions": {
+    "type": "integer",
+    "description": "Maximum number of times this coupon can be redeemed across all customers"
+  },
+  "redeem_by": {
+    "type": "integer",
+    "description": "Unix timestamp specifying the last time the coupon can be redeemed"
+  },
+  "applies_to": {
+    "type": "object",
+    "properties": {
+      "products": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Array of product IDs this coupon applies to"
+      }
+    },
+    "description": "Object specifying what this coupon applies to"
+  },
+  "currency_options": {
+    "type": "object",
+    "description": "Coupons defined in each available currency option (only supported if amount_off is passed)"
+  }
+}
+```

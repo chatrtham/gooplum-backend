@@ -1,0 +1,28 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "ID of the contact to create conversation with"
+  },
+  "message": {
+    "type": "string",
+    "description": "Initial message content for the conversation"
+  },
+  "subject": {
+    "type": "string",
+    "description": "Subject/title for the conversation (optional, defaults to 'New conversation')"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "ID of the admin initiating the conversation. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "tag_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Tag IDs to apply to the conversation after creation (optional)"
+  }
+}
+```

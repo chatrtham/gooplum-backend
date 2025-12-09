@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "team_id": {
+    "type": "string",
+    "description": "The ID of the team (optional if team_name is provided)"
+  },
+  "channel_id": {
+    "type": "string",
+    "description": "The ID of the channel (optional if channel_name is provided)"
+  },
+  "team_name": {
+    "type": "string",
+    "description": "The name of the team (e.g., 'Marketing Team', 'Development') - optional if team_id is provided"
+  },
+  "channel_name": {
+    "type": "string",
+    "description": "The name of the channel (e.g., 'General', 'Project Updates') - optional if channel_id is provided"
+  },
+  "top": {
+    "type": "integer",
+    "description": "Maximum number of messages to return (default: 20)"
+  }
+}
+```

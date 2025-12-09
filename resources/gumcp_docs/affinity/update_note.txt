@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The unique identifier of the note to update"
+  },
+  "content": {
+    "type": "string",
+    "description": "The new content for the note"
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "parser_run_id": {
+    "type": "string",
+    "description": "The unique identifier of the parser run to retrieve. Example: 'parser_run_xK9mLPqRtN3vS8wF5hB2cQ'"
+  },
+  "response_type": {
+    "type": "string",
+    "enum": [
+      "json",
+      "url"
+    ],
+    "description": "Response format: 'json' returns chunks with inline content, 'url' returns presigned URLs to content. Defaults to 'json'."
+  }
+}
+```

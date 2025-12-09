@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "string",
+    "description": "The ID of the knowledge to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "Updated name for the knowledge"
+  },
+  "body": {
+    "type": "string",
+    "description": "Updated content for the knowledge"
+  },
+  "trigger_description": {
+    "type": "string",
+    "description": "Updated trigger description"
+  },
+  "parent_folder_id": {
+    "type": "string",
+    "description": "ID of the folder to move this knowledge to"
+  },
+  "pinned_repo": {
+    "type": "string",
+    "description": "Pin to specific repo ('all' for all repos, 'owner/repo' for specific)"
+  }
+}
+```

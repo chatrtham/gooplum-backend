@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "source_bucket": {
+    "type": "string",
+    "description": "Name of the source bucket"
+  },
+  "source_file": {
+    "type": "string",
+    "description": "Path of the source file"
+  },
+  "destination_bucket": {
+    "type": "string",
+    "description": "Name of the destination bucket"
+  },
+  "destination_file": {
+    "type": "string",
+    "description": "Path of the destination file"
+  }
+}
+```

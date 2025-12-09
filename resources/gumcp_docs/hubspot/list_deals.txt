@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query for deals"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of deals to return"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific deal properties to return"
+  }
+}
+```

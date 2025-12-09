@@ -1,0 +1,62 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by blog post IDs (max 250)",
+    "maxItems": 250
+  },
+  "space_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by space IDs (max 100)",
+    "maxItems": 100
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "id",
+      "-id",
+      "created-date",
+      "-created-date",
+      "modified-date",
+      "-modified-date"
+    ],
+    "description": "Sort by field"
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "current",
+        "deleted",
+        "trashed"
+      ]
+    },
+    "description": "Filter by status (default: current)"
+  },
+  "title": {
+    "type": "string",
+    "description": "Filter by title"
+  },
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format"
+    ],
+    "description": "Content format to return in body"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of blog posts to return",
+    "default": 25
+  }
+}
+```

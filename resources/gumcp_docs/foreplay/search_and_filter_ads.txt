@@ -1,0 +1,134 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search text for ad name or description. Leave empty to search all ads with filters only."
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date (inclusive). Format: 'YYYY-MM-DD', 'YYYY-MM-DDTHH:MM:SS', or 'YYYY-MM-DD HH:MM:SS'. Examples: '2024-11-12', '2024-11-12 00:00:00'."
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date (inclusive). Format: 'YYYY-MM-DD', 'YYYY-MM-DDTHH:MM:SS', or 'YYYY-MM-DD HH:MM:SS'. Examples: '2024-11-12', '2024-11-12 23:59:59'."
+  },
+  "live": {
+    "type": "boolean",
+    "description": "Filter ads by live status. true means currently active ads, false means inactive ads. Leave empty to include both."
+  },
+  "display_format": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "video",
+        "carousel",
+        "image",
+        "dco",
+        "dpa",
+        "multi_images",
+        "multi_videos",
+        "multi_medias",
+        "event",
+        "text",
+        "page_like"
+      ]
+    },
+    "description": "Filter by one or more display formats. Available formats: video, carousel, image, dco, dpa, multi_images, multi_videos, multi_medias, event, text, page_like."
+  },
+  "publisher_platform": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "tiktok",
+        "youtube",
+        "linkedin",
+        "threads"
+      ]
+    },
+    "description": "Filter by one or more publisher platforms. Available platforms: facebook, instagram, audience_network, messenger, tiktok, youtube, linkedin, threads."
+  },
+  "niches": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "accessories",
+        "app/software",
+        "beauty",
+        "business/professional",
+        "education",
+        "entertainment",
+        "fashion",
+        "food/drink",
+        "health/wellness",
+        "home/garden",
+        "jewelry/watches",
+        "other",
+        "parenting",
+        "pets",
+        "real estate",
+        "service business"
+      ]
+    },
+    "description": "Filter by one or more niches. Available niches: accessories, app/software, beauty, business/professional, education, entertainment, fashion, food/drink, health/wellness, home/garden, jewelry/watches, other, parenting, pets, real estate, service business."
+  },
+  "market_target": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "b2b",
+        "b2c"
+      ]
+    },
+    "description": "Filter by market target. Available targets: b2b (business-to-business), b2c (business-to-consumer)."
+  },
+  "languages": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "dutch, flemish",
+        "english",
+        "french",
+        "german",
+        "italian",
+        "japanese",
+        "latvian",
+        "lithuanian",
+        "polish",
+        "portuguese",
+        "romanian, moldavian, moldovan",
+        "serbian",
+        "slovene",
+        "spanish, castilian",
+        "swedish"
+      ]
+    },
+    "description": "Filter by languages. Examples: 'english', 'french', 'german', etc."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of ads to return across all pages (automatically handles pagination). Default 10, max 250.",
+    "default": 10
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "newest",
+      "oldest",
+      "longest_running",
+      "most_relevant"
+    ],
+    "description": "Order of results: 'newest' (default), 'oldest', 'longest_running', or 'most_relevant'. Sorts ads by creation date or longest running duration.",
+    "default": "newest"
+  }
+}
+```

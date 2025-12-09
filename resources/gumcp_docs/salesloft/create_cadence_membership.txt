@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "ID of the person to add to the cadence (required)"
+  },
+  "cadence_id": {
+    "type": "integer",
+    "description": "ID of the cadence to add the person to (required)"
+  },
+  "user_id": {
+    "type": "integer",
+    "description": "ID of the user to create the membership for (defaults to authenticated user)"
+  },
+  "step_id": {
+    "type": "integer",
+    "description": "ID of the step where the person should start the cadence (defaults to first step)"
+  },
+  "task_id": {
+    "type": "integer",
+    "description": "ID of the task that causes this action (task will be completed automatically)"
+  }
+}
+```

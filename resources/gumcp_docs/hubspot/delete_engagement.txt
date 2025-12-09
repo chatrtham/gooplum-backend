@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "engagement_id": {
+    "type": "string",
+    "description": "HubSpot engagement ID (required)"
+  }
+}
+```

@@ -1,0 +1,53 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "Name of the repository to create"
+  },
+  "description": {
+    "type": "string",
+    "description": "Description of the repository"
+  },
+  "private": {
+    "type": "boolean",
+    "description": "Whether the repository should be private (default: false)"
+  },
+  "autoInit": {
+    "type": "boolean",
+    "description": "Initialize with empty README (default: false)"
+  },
+  "gitignore_template": {
+    "type": "string",
+    "description": "Template name for .gitignore file"
+  },
+  "license_template": {
+    "type": "string",
+    "description": "Template name for license"
+  },
+  "homepage": {
+    "type": "string",
+    "description": "URL for repository homepage"
+  },
+  "has_issues": {
+    "type": "boolean",
+    "description": "Enable issues for this repository"
+  },
+  "has_projects": {
+    "type": "boolean",
+    "description": "Enable projects for this repository"
+  },
+  "has_wiki": {
+    "type": "boolean",
+    "description": "Enable wiki for this repository"
+  },
+  "has_downloads": {
+    "type": "boolean",
+    "description": "Enable downloads for this repository"
+  },
+  "topics": {
+    "type": "string",
+    "description": "Comma-separated list of topic names"
+  }
+}
+```

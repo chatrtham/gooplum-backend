@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "advertiser_id": {
+    "type": "string",
+    "description": "Required. The ID of the advertiser to list line items for (int64 format as string)"
+  },
+  "filter": {
+    "type": "string",
+    "description": "Filter expression for line items (e.g., 'entityStatus=\"ENTITY_STATUS_ACTIVE\"' or 'insertionOrderId=\"1234\"')"
+  },
+  "order_by": {
+    "type": "string",
+    "description": "Field to sort by: displayName (default), entityStatus, updateTime. Add 'desc' for descending (e.g., 'displayName desc')"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of line items to return across all pages (automatically handles pagination)",
+    "default": 100
+  }
+}
+```

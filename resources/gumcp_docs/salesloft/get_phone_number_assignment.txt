@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "assignment_id": {
+    "type": "integer",
+    "description": "Phone number assignment ID to fetch"
+  }
+}
+```

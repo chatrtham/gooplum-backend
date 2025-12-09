@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "coupon_id": {
+    "type": "string",
+    "description": "The ID of the coupon to retrieve"
+  },
+  "coupon_name": {
+    "type": "string",
+    "description": "The name of the coupon to retrieve (alternative to coupon_id)"
+  }
+}
+```

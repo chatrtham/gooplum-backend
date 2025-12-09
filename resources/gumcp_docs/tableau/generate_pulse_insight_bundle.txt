@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "bundle_request": {
+    "type": "object",
+    "description": "The bundle request object containing metric configuration. See Tableau Pulse API documentation for schema.",
+    "additionalProperties": true
+  },
+  "bundle_type": {
+    "type": "string",
+    "enum": [
+      "ban",
+      "springboard",
+      "basic",
+      "detail"
+    ],
+    "description": "Type of insight bundle: ban (basic), springboard, basic (low bandwidth), detail (comprehensive)"
+  }
+}
+```

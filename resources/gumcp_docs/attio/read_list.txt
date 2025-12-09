@@ -1,0 +1,15 @@
+Parameters Schema:
+```json
+{
+  "list_id": {
+    "type": "string",
+    "description": "List ID"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of entries to return",
+    "default": 500,
+    "maximum": 1000
+  }
+}
+```

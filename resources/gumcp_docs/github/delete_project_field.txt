@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "field_id": {
+    "type": "string",
+    "description": "The global ID of the field to delete"
+  },
+  "client_mutation_id": {
+    "type": "string",
+    "description": "A unique identifier for the client performing the mutation (optional)"
+  }
+}
+```

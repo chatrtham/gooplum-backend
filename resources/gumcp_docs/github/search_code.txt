@@ -1,0 +1,32 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The search query string"
+  },
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL to limit search to a specific repository (optional)"
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "indexed"
+    ],
+    "description": "The sort field. Can only be 'indexed', which indicates how recently the file was indexed."
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "The sort order"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return. Default: all results."
+  }
+}
+```

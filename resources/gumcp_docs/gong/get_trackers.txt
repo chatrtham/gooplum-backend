@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "workspaceId": {
+    "type": "string",
+    "description": "The ID of the workspace the keyword trackers are in. When empty, all trackers in all workspaces are returned."
+  }
+}
+```

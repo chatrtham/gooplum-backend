@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "domain": {
+    "type": "string",
+    "description": "Domain name to search for. Can be a full URL (e.g., 'https://example.com') or just the domain (e.g., 'example.com'). Can be combined with query for merged results."
+  },
+  "query": {
+    "type": "string",
+    "description": "Brand name to search for using fuzzy matching (e.g., 'nike', 'lululemon'). Can be combined with domain for merged results."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of brands to return across all pages (automatically handles pagination). Default 10.",
+    "default": 10
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "most_ranked",
+      "least_ranked"
+    ],
+    "description": "Order of results: 'most_ranked' (default) or 'least_ranked'. Sorts brands by relevance ranking. Only applies to domain search.",
+    "default": "most_ranked"
+  }
+}
+```

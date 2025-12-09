@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "engagement_id": {
+    "type": "string",
+    "description": "The engagement ID to delete"
+  }
+}
+```

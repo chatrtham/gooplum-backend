@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Filters the result, showing only the records whose name matches the query."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "escalation_policies",
+        "teams",
+        "integrations",
+        "auto_pause_notifications_parameters"
+      ]
+    },
+    "description": "Array of additional details to include."
+  },
+  "name": {
+    "type": "string",
+    "description": "Filters the results, showing only services with the specified name."
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "name",
+      "name:asc",
+      "name:desc"
+    ],
+    "description": "Used to specify the field to sort the results on.",
+    "default": "name"
+  },
+  "team_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "An array of team IDs to filter services by."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination). If not provided, uses single page with limit parameter.",
+    "default": 10
+  }
+}
+```

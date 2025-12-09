@@ -1,0 +1,42 @@
+Parameters Schema:
+```json
+{
+  "project": {
+    "type": "string",
+    "description": "The project GID to filter tasks on"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "The assignee user GID to filter tasks on. Use 'null' for unassigned tasks. If specified, workspace must also be provided."
+  },
+  "workspace": {
+    "type": "string",
+    "description": "The workspace GID to filter tasks on. Required if assignee is specified."
+  },
+  "section": {
+    "type": "string",
+    "description": "The section GID to filter tasks on"
+  },
+  "completed_since": {
+    "type": "string",
+    "description": "ISO 8601 datetime. Only return tasks that are incomplete or completed since this time"
+  },
+  "modified_since": {
+    "type": "string",
+    "description": "ISO 8601 datetime. Only return tasks modified since this time"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tasks to return across all pages",
+    "default": 100,
+    "maximum": 1000
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

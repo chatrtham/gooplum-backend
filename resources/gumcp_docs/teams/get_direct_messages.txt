@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "chat_type": {
+    "type": "string",
+    "description": "Type of conversations to show",
+    "enum": [
+      "all",
+      "oneOnOne",
+      "group"
+    ]
+  },
+  "recent_only": {
+    "type": "boolean",
+    "description": "Show only conversations with recent activity (default: true)"
+  }
+}
+```

@@ -1,0 +1,78 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of opportunity-person associations to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of the records to fetch"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the given person"
+  },
+  "opportunity_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of opportunities to fetch associations for"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns records created after this ISO 8601 timestamp"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns records created on or after this ISO 8601 timestamp"
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns records created before this ISO 8601 timestamp"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns records created on or before this ISO 8601 timestamp"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns records updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns records updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns records updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns records updated on or before this ISO 8601 timestamp"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "opportunity_id",
+      "person_id",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

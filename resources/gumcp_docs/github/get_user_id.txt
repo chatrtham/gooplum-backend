@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "username": {
+    "type": "string",
+    "description": "GitHub username to get the ID for"
+  }
+}
+```

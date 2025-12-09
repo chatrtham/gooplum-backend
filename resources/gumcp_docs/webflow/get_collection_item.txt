@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "collection_id": {
+    "type": "string",
+    "description": "Unique identifier for a Collection"
+  },
+  "item_id": {
+    "type": "string",
+    "description": "Unique identifier for an Item"
+  },
+  "type": {
+    "type": "string",
+    "description": "Type of item to get: 'staging' (draft/unpublished) or 'live' (published)",
+    "enum": [
+      "staging",
+      "live"
+    ],
+    "default": "staging"
+  },
+  "cms_locale_id": {
+    "type": "string",
+    "description": "Unique identifier for a CMS Locale"
+  }
+}
+```

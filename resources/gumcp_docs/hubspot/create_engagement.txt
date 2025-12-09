@@ -1,0 +1,53 @@
+Parameters Schema:
+```json
+{
+  "type": {
+    "type": "string",
+    "description": "Engagement type (EMAIL, CALL, MEETING, TASK, NOTE)"
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Engagement metadata (varies by type)"
+  },
+  "metadata_body": {
+    "type": "string",
+    "description": "Engagement metadata body"
+  },
+  "owner_id": {
+    "type": "string",
+    "description": "Owner ID for the engagement"
+  },
+  "timestamp": {
+    "type": "integer",
+    "description": "Time of engagement (in milliseconds)"
+  },
+  "contact_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Contact IDs to associate with this engagement"
+  },
+  "company_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Company IDs to associate with this engagement"
+  },
+  "deal_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Deal IDs to associate with this engagement"
+  },
+  "ticket_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Ticket IDs to associate with this engagement"
+  }
+}
+```

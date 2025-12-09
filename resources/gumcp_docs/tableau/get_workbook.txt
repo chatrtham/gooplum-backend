@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "workbook_id": {
+    "type": "string",
+    "description": "The ID of the workbook to retrieve"
+  }
+}
+```

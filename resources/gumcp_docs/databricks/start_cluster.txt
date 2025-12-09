@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "cluster_id": {
+    "type": "string",
+    "description": "The cluster ID to start"
+  }
+}
+```

@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of records to return. If provided, the API will automatically paginate through results until this limit is reached."
+  },
+  "includeAvatars": {
+    "type": "boolean",
+    "description": "Avatars are synthetic users representing Gong employees when they access your instance. If not provided, avatars will not be included."
+  }
+}
+```

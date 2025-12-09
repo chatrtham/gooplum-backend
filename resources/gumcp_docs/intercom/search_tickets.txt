@@ -1,0 +1,79 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "General search query field for flexible searching"
+  },
+  "ticket_id": {
+    "type": "string",
+    "description": "Search for a specific ticket by ID"
+  },
+  "state": {
+    "type": "string",
+    "description": "Filter tickets by state"
+  },
+  "open": {
+    "type": "boolean",
+    "description": "Filter by open/closed status. True for open tickets, false for closed"
+  },
+  "contact_ids": {
+    "type": "string",
+    "description": "Filter tickets by contact ID"
+  },
+  "admin_assignee_id": {
+    "type": "string",
+    "description": "Filter tickets assigned to a specific admin ID. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "team_assignee_id": {
+    "type": "string",
+    "description": "Filter tickets assigned to a specific team ID"
+  },
+  "ticket_type_id": {
+    "type": "string",
+    "description": "Filter tickets by ticket type ID"
+  },
+  "default_title": {
+    "type": "string",
+    "description": "Search tickets by title content (partial match)"
+  },
+  "default_description": {
+    "type": "string",
+    "description": "Search tickets by description content (partial match)"
+  },
+  "category": {
+    "type": "string",
+    "description": "Filter tickets by category"
+  },
+  "created_after": {
+    "type": "string",
+    "description": "Find tickets created after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "created_before": {
+    "type": "string",
+    "description": "Find tickets created before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "updated_after": {
+    "type": "string",
+    "description": "Find tickets updated after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "updated_before": {
+    "type": "string",
+    "description": "Find tickets updated before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "snoozed_until_after": {
+    "type": "string",
+    "description": "Find tickets snoozed until after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z') or YYYY-MM-DD format"
+  },
+  "snoozed_until_before": {
+    "type": "string",
+    "description": "Find tickets snoozed until before this date. Use ISO 8601 format (e.g., '2023-12-31T23:59:59Z') or YYYY-MM-DD format"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tickets to return (default: 20, max: 150)",
+    "default": 10,
+    "minimum": 1
+  }
+}
+```

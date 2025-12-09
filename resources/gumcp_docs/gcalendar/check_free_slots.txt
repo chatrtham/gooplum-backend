@@ -1,0 +1,45 @@
+Parameters Schema:
+```json
+{
+  "calendar_id": {
+    "type": "string",
+    "description": "Calendar ID (optional - defaults to primary)"
+  },
+  "start_datetime": {
+    "type": "string",
+    "description": "Start of time range (format: YYYY-MM-DD HH:MM)"
+  },
+  "end_datetime": {
+    "type": "string",
+    "description": "End of time range (format: YYYY-MM-DD HH:MM)"
+  },
+  "duration_minutes": {
+    "type": "integer",
+    "description": "Minimum duration of free slots in minutes (default: 30)"
+  },
+  "timezone": {
+    "type": "string",
+    "description": "Timezone for the free slots search (default: UTC)"
+  },
+  "items": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Calendar ID to check"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "description": "List of calendars to check for availability"
+  },
+  "group_exp_expand": {
+    "type": "boolean",
+    "description": "Whether to expand group members (default: false)"
+  }
+}
+```

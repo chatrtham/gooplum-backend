@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "string",
+    "description": "User ID to retrieve information for"
+  }
+}
+```

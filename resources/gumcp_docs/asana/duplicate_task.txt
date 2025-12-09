@@ -1,0 +1,52 @@
+Parameters Schema:
+```json
+{
+  "task_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the task to duplicate (required)"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name for the duplicated task. If not provided, will use original name with 'Copy of' prefix."
+  },
+  "include_attachments": {
+    "type": "boolean",
+    "description": "Whether to include attachments in the duplicate"
+  },
+  "include_dependencies": {
+    "type": "boolean",
+    "description": "Whether to include task dependencies in the duplicate"
+  },
+  "include_followers": {
+    "type": "boolean",
+    "description": "Whether to include followers in the duplicate"
+  },
+  "include_notes": {
+    "type": "boolean",
+    "description": "Whether to include notes/description in the duplicate"
+  },
+  "include_parent": {
+    "type": "boolean",
+    "description": "Whether to include parent task relationship in the duplicate"
+  },
+  "include_projects": {
+    "type": "boolean",
+    "description": "Whether to include project memberships in the duplicate"
+  },
+  "include_subtasks": {
+    "type": "boolean",
+    "description": "Whether to include subtasks in the duplicate"
+  },
+  "include_tags": {
+    "type": "boolean",
+    "description": "Whether to include tags in the duplicate"
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

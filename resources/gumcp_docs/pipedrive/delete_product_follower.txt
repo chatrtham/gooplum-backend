@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "product_id": {
+    "type": "integer",
+    "description": "The ID of the product"
+  },
+  "follower_id": {
+    "type": "integer",
+    "description": "The ID of the following user"
+  }
+}
+```

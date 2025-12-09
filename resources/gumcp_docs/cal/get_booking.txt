@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "bookingUid": {
+    "type": "string",
+    "description": "The unique ID of the booking to fetch. Can be uid of a normal booking, uid of a recurring booking recurrence, or uid of a recurring booking which will return an array of all recurrences."
+  }
+}
+```

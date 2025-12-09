@@ -1,0 +1,19 @@
+# Gdv360 Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (13 total)
+
+1. **list_partners** - List partners accessible to the current user to get valid partner IDs for other operations
+2. **list_advertisers** - List advertisers in your Google DV360 account with filtering options
+3. **get_advertiser** - Get detailed information about a specific advertiser by ID
+4. **list_campaigns** - List campaigns for a specific advertiser with filtering options
+5. **get_campaign** - Get detailed information about a specific campaign by ID
+6. **list_line_items** - List line items for a specific advertiser with filtering options
+7. **get_line_item** - Get detailed information about a specific line item by ID
+8. **get_targeting_option** - Get a specific targeting option assigned to a line item
+9. **list_targeting_options** - List targeting options assigned to a line item for a specific targeting type
+10. **search_targeting_options** - Search targeting options across multiple line items and targeting types
+11. **update_targeting_options** - Update targeting options for multiple line items (delete and create in one operation)
+12. **update_status** - Update the status of a campaign, insertion order, or line item (pause/activate)
+13. **get_performance** - Get comprehensive performance data for campaigns, line items, or advertisers including: impressions, clicks, CTR, spend, revenue, conversions, viewability metrics

@@ -1,0 +1,69 @@
+Parameters Schema:
+```json
+{
+  "topic_id": {
+    "type": "string",
+    "description": "Filter posts by topic ID"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "Filter posts by author user ID (use 'me' for current user)"
+  },
+  "filter_by": {
+    "type": "string",
+    "enum": [
+      "planned",
+      "not_planned",
+      "completed",
+      "answered",
+      "none"
+    ],
+    "description": "Filter posts by status"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "created_at",
+      "edited_at",
+      "updated_at",
+      "recent_activity",
+      "votes",
+      "comments"
+    ],
+    "description": "Sort posts by field (default: created_at)",
+    "default": "created_at"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 100,
+    "description": "Maximum number of posts to return per page (1-100, default: 30)",
+    "default": 30
+  },
+  "page": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Page number for pagination (starts at 1)",
+    "default": 1
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "users",
+        "topics"
+      ]
+    },
+    "description": "Additional data to include: users (authors), topics"
+  }
+}
+```

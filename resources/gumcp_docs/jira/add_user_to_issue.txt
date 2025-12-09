@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "issue_key": {
+    "type": "string",
+    "description": "Key of the issue to modify (e.g., PROJ-123)"
+  },
+  "account_id": {
+    "type": "string",
+    "description": "Account ID of the user to add to the issue"
+  },
+  "role": {
+    "type": "string",
+    "description": "Role to assign to the user",
+    "enum": [
+      "assignee",
+      "reporter",
+      "watcher"
+    ]
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

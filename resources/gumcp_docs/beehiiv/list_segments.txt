@@ -1,0 +1,64 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "type": {
+    "type": "string",
+    "description": "Filter results by segment type",
+    "enum": [
+      "dynamic",
+      "static",
+      "manual",
+      "all"
+    ]
+  },
+  "status": {
+    "type": "string",
+    "description": "Filter results by segment status",
+    "enum": [
+      "pending",
+      "processing",
+      "completed",
+      "failed",
+      "all"
+    ]
+  },
+  "limit": {
+    "type": "integer",
+    "description": "A limit on the number of objects to be returned (1-100)"
+  },
+  "page": {
+    "type": "integer",
+    "description": "Page number for paginated results"
+  },
+  "order_by": {
+    "type": "string",
+    "description": "The field to sort by",
+    "enum": [
+      "created",
+      "last_calculated"
+    ]
+  },
+  "direction": {
+    "type": "string",
+    "description": "The direction to sort results",
+    "enum": [
+      "asc",
+      "desc"
+    ]
+  },
+  "expand": {
+    "type": "array",
+    "description": "Optionally expand the results with additional information",
+    "items": {
+      "type": "string",
+      "enum": [
+        "stats"
+      ]
+    }
+  }
+}
+```

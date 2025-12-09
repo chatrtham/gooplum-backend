@@ -1,0 +1,73 @@
+Parameters Schema:
+```json
+{
+  "place_urls": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Google Maps URLs of places to get details for (must be valid google.com/maps/ URLs)"
+  },
+  "place_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Google Maps place IDs (format: ChIJ...)"
+  },
+  "include_reviews": {
+    "type": "boolean",
+    "description": "Include reviews in the results",
+    "default": false
+  },
+  "max_reviews": {
+    "type": "integer",
+    "description": "Maximum number of reviews to extract per place",
+    "default": 10
+  },
+  "reviews_sort": {
+    "type": "string",
+    "description": "How to sort reviews when included",
+    "enum": [
+      "newest",
+      "mostRelevant",
+      "highestRanking",
+      "lowestRanking"
+    ],
+    "default": "newest"
+  },
+  "reviews_start_date": {
+    "type": "string",
+    "description": "Only include reviews posted after this date (ISO format: YYYY-MM-DD or relative like '30 days')"
+  },
+  "review_keywords": {
+    "type": "string",
+    "description": "Filter reviews by keywords - only reviews containing these keywords will be included"
+  },
+  "include_images": {
+    "type": "boolean",
+    "description": "Include images in the results",
+    "default": false
+  },
+  "max_images": {
+    "type": "integer",
+    "description": "Maximum number of images to extract per place",
+    "default": 10
+  },
+  "include_questions": {
+    "type": "boolean",
+    "description": "Include questions and answers",
+    "default": false
+  },
+  "max_questions": {
+    "type": "integer",
+    "description": "Maximum number of questions to extract per place",
+    "default": 5
+  },
+  "language": {
+    "type": "string",
+    "description": "Language for results (default: 'en')",
+    "default": "en"
+  }
+}
+```

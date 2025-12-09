@@ -1,0 +1,63 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Airtable table ID or table name"
+  },
+  "view": {
+    "type": "string",
+    "description": "Name or ID of a view to filter records. Only records visible in this view will be returned, sorted by the view's order (unless overridden by sort parameter)"
+  },
+  "sort": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Field name or ID to sort by"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "description": "Sort direction: 'asc' for ascending, 'desc' for descending",
+          "default": "asc"
+        }
+      },
+      "required": [
+        "field"
+      ]
+    },
+    "description": "Array of sort objects to specify record ordering. Overrides view sorting if both are specified"
+  },
+  "filter_by_formula": {
+    "type": "string",
+    "description": "Airtable formula to filter records. Examples: '{Status} = \"Active\"', 'AND({Priority} = \"High\", {Due Date} >= TODAY())', 'SEARCH(\"urgent\", {Notes}) != \"\"'. Use field names in curly braces. Returns records where formula evaluates to non-empty/non-zero value"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of field names or IDs to include in results. Only specified fields will be returned, reducing data transfer"
+  },
+  "max_records": {
+    "type": "integer",
+    "description": "Maximum total number of records to return across all pages (we handle pagination automatically)",
+    "minimum": 1
+  },
+  "return_fields_by_field_id": {
+    "type": "boolean",
+    "description": "If true, field values are keyed by field ID instead of field name. Useful when field names might change",
+    "default": true
+  }
+}
+```

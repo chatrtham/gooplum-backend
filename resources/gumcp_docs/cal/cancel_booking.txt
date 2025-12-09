@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "bookingUid": {
+    "type": "string",
+    "description": "The unique ID of the booking to cancel."
+  },
+  "cancellationReason": {
+    "type": "string",
+    "description": "Reason for cancelling the booking (optional)"
+  },
+  "cancelSubsequentBookings": {
+    "type": "boolean",
+    "description": "For recurring bookings, whether to cancel subsequent bookings too (optional)"
+  }
+}
+```

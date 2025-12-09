@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The unique identifier of the board where the item will be created. You can get board IDs from get_boards or board resources."
+  },
+  "item_name": {
+    "type": "string",
+    "description": "The display name for the new item (task/row). This will appear as the item title in the board."
+  },
+  "group_id": {
+    "type": "string",
+    "description": "Optional group ID where the item should be created within the board. If not specified, item will be created in the default group."
+  }
+}
+```

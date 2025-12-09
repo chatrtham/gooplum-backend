@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the file to copy"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file to copy"
+  },
+  "name": {
+    "type": "string",
+    "description": "Name of the copy (optional)"
+  },
+  "folder_id": {
+    "type": "string",
+    "description": "Parent folder ID for the copy (optional)"
+  },
+  "folder_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the folder for copy destination"
+  }
+}
+```

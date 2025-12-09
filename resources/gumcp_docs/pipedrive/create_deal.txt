@@ -1,0 +1,92 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "The title of the deal"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "The ID of the user who owns the deal"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person linked to the deal"
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "The ID of the organization linked to the deal"
+  },
+  "pipeline_id": {
+    "type": "integer",
+    "description": "The ID of the pipeline associated with the deal"
+  },
+  "stage_id": {
+    "type": "integer",
+    "description": "The ID of the deal stage"
+  },
+  "value": {
+    "type": "number",
+    "description": "The value of the deal"
+  },
+  "currency": {
+    "type": "string",
+    "description": "The currency associated with the deal"
+  },
+  "is_deleted": {
+    "type": "boolean",
+    "description": "Whether the deal is deleted or not"
+  },
+  "is_archived": {
+    "type": "boolean",
+    "description": "Whether the deal is archived or not"
+  },
+  "archive_time": {
+    "type": "string",
+    "description": "The optional date and time of archiving the deal in UTC. YYYY-MM-DD HH:MM:SS format. If omitted and is_archived is true, it will be set to the current date and time."
+  },
+  "status": {
+    "type": "string",
+    "description": "The status of the deal"
+  },
+  "probability": {
+    "type": "number",
+    "description": "The success probability percentage of the deal"
+  },
+  "lost_reason": {
+    "type": "string",
+    "description": "The reason for losing the deal. Can only be set if deal status is lost."
+  },
+  "visible_to": {
+    "type": "integer",
+    "description": "The visibility of the deal"
+  },
+  "close_time": {
+    "type": "string",
+    "description": "The date and time of closing the deal. Can only be set if deal status is won or lost."
+  },
+  "won_time": {
+    "type": "string",
+    "description": "The date and time of changing the deal status as won. Can only be set if deal status is won."
+  },
+  "lost_time": {
+    "type": "string",
+    "description": "The date and time of changing the deal status as lost. Can only be set if deal status is lost."
+  },
+  "expected_close_date": {
+    "type": "string",
+    "description": "The expected close date of the deal. YYYY-MM-DD format"
+  },
+  "label_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "The IDs of labels assigned to the deal"
+  },
+  "custom_fields": {
+    "type": "object",
+    "description": "A map of custom fields with hash-based keys"
+  }
+}
+```

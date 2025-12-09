@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "task_id": {
+    "type": "integer",
+    "description": "Task ID to fetch"
+  }
+}
+```

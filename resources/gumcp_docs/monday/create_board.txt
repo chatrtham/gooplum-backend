@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "workspace_id": {
+    "type": "integer",
+    "description": "The unique identifier of the workspace where the board will be created. Get workspace IDs from get_workspaces or workspace resources."
+  },
+  "board_name": {
+    "type": "string",
+    "description": "The display name for the new board. This will be visible to all team members with access."
+  },
+  "board_kind": {
+    "type": "string",
+    "description": "The visibility and access level for the board. 'public' allows all workspace members to view, 'private' restricts access to invited users only, 'share' allows external sharing.",
+    "enum": [
+      "public",
+      "private",
+      "share"
+    ]
+  },
+  "description": {
+    "type": "string",
+    "description": "Optional description explaining the purpose or context of the board. This helps team members understand what the board is for."
+  }
+}
+```

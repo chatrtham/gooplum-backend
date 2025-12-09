@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "trigger_id": {
+    "type": "string",
+    "description": "Zendesk trigger ID to retrieve (required)"
+  }
+}
+```

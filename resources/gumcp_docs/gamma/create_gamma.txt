@@ -1,0 +1,154 @@
+Parameters Schema:
+```json
+{
+  "inputText": {
+    "type": "string",
+    "description": "Text that is used to generate your gamma. Can be as little as a few words or pages of text.Example: 'Pitch deck on deep sea exploration'."
+  },
+  "format": {
+    "type": "string",
+    "enum": [
+      "presentation",
+      "document",
+      "social"
+    ],
+    "description": "The type of artifact you want to create. Options: presentation, document, social.",
+    "default": "presentation"
+  },
+  "textMode": {
+    "type": "string",
+    "enum": [
+      "generate",
+      "condense",
+      "preserve"
+    ],
+    "description": "How you want your inputText to be modified by Gamma, if at all. Options: generate, condense, preserve.",
+    "default": "generate"
+  },
+  "themeName": {
+    "type": "string",
+    "description": "The theme from Gamma that will be used for your creation. You can create custom themes in Gamma. If nothing is specified, the default theme for your workspace is chosen."
+  },
+  "numCards": {
+    "type": "integer",
+    "description": "How many cards you want to create when cardSplit is set to auto. Options: any integer between 1 and 60.",
+    "default": 10,
+    "minimum": 1,
+    "maximum": 60
+  },
+  "cardSplit": {
+    "type": "string",
+    "enum": [
+      "auto",
+      "inputTextBreaks"
+    ],
+    "description": "How you want your content to be divided up. Options: auto, inputTextBreaks.",
+    "default": "auto"
+  },
+  "additionalInstructions": {
+    "type": "string",
+    "description": "Extra specifications about the desired content and layouts. Character limits: 1-500. Example: 'Make the titles catchy'."
+  },
+  "exportAs": {
+    "type": "string",
+    "enum": [
+      "pdf",
+      "pptx"
+    ],
+    "description": "Additional file types for saving your gamma. Options: pdf, pptx."
+  },
+  "textOptions": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "string",
+        "enum": [
+          "brief",
+          "medium",
+          "detailed",
+          "extensive"
+        ],
+        "description": "How much text each card contains. Options: brief, medium, detailed, extensive.",
+        "default": "medium"
+      },
+      "tone": {
+        "type": "string",
+        "description": "Defines the mood or voice of the gamma. Character limits: 1-500. Example: 'professional and inspiring'."
+      },
+      "audience": {
+        "type": "string",
+        "description": "Defines the intended readers/viewers of the gamma for a more catered output. Character limits: 1-500. Example: 'tech investors and enthusiasts'."
+      },
+      "language": {
+        "type": "string",
+        "description": "The intended language of your gamma. Common language codes: en (English US), es (Spanish), fr (French), de (German), it (Italian), pt-br (Portuguese Brazil), zh-cn (Chinese Simplified), ja (Japanese), ko (Korean), ar (Arabic), hi (Hindi), ru (Russian), and many others.",
+        "default": "en"
+      }
+    }
+  },
+  "imageOptions": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": "string",
+        "enum": [
+          "aiGenerated",
+          "pictographic",
+          "unsplash",
+          "webAllImages",
+          "webFreeToUse",
+          "webFreeToUseCommercially",
+          "giphy",
+          "placeholder",
+          "noImages"
+        ],
+        "description": "Where you want to source images for your gamma. Options: aiGenerated, pictographic, unsplash, webAllImages, webFreeToUse, webFreeToUseCommercially, giphy, placeholder, noImages.",
+        "default": "aiGenerated"
+      },
+      "model": {
+        "type": "string",
+        "description": "If you want AI generated images, this specifies which model to use. If no value specified, Gamma automatically chooses a model for you. Available models: dall-e-3, flux-1-quick, flux-1-pro, flux-1-ultra, flux-kontext-fast, flux-kontext-pro, flux-kontext-max, gpt-image-1-medium, ideogram-v3, ideogram-v3-turbo, imagen-3-pro, imagen-3-flash, imagen-4-pro, imagen-4-ultra, leonardo-phoenix, luma-photon-1, luma-photon-flash-1, recraft-v3, recraft-v3-svg."
+      },
+      "style": {
+        "type": "string",
+        "description": "Influences the artistic style of the AI generated images. Character limits: 1-500. Example: 'minimal lineart style illustrations with lots of white space'."
+      }
+    }
+  },
+  "cardOptions": {
+    "type": "object",
+    "properties": {
+      "dimensions": {
+        "type": "string",
+        "description": "Aspect ratio of the cards to be generated. Options for presentation: fluid (default), 16x9, 4x3; document: fluid (default), pageless, letter, a4; social: 1x1, 4x5 (default), 9x16."
+      }
+    }
+  },
+  "sharingOptions": {
+    "type": "object",
+    "properties": {
+      "workspaceAccess": {
+        "type": "string",
+        "enum": [
+          "noAccess",
+          "view",
+          "comment",
+          "edit",
+          "fullAccess"
+        ],
+        "description": "Level of access to your gamma for members in your workspace. Options: noAccess, view, comment, edit, fullAccess. If nothing specified, defaults to workspace share setting."
+      },
+      "externalAccess": {
+        "type": "string",
+        "enum": [
+          "noAccess",
+          "view",
+          "comment",
+          "edit"
+        ],
+        "description": "Level of access to your gamma for members outside your workspace. Options: noAccess, view, comment, edit. If nothing specified, defaults to workspace share setting."
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "resource_type": {
+    "type": "string",
+    "enum": [
+      "ticket",
+      "organization",
+      "user"
+    ],
+    "description": "Type of resource to add tags to (default: ticket)",
+    "default": "ticket"
+  },
+  "resource_id": {
+    "type": "string",
+    "description": "ID of the resource (ticket, organization, or user) to add tags to (required)"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of tag names to add (required)"
+  },
+  "safe_update": {
+    "type": "boolean",
+    "description": "Enable safe update to prevent conflicts (default: false)",
+    "default": false
+  },
+  "updated_stamp": {
+    "type": "string",
+    "description": "Timestamp for safe update conflict detection (ISO 8601 format)"
+  }
+}
+```

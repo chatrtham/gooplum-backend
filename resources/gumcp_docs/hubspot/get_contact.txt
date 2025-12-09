@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "HubSpot contact ID (required)"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific contact properties to return. If not specified, returns default properties."
+  },
+  "properties_with_history": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Properties to return along with their history of previous values"
+  },
+  "associations": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Object types to retrieve associated IDs for (e.g., companies, deals)"
+  },
+  "archived": {
+    "type": "boolean",
+    "description": "Whether to return archived contacts",
+    "default": false
+  }
+}
+```

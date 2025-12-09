@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "filter": {
+    "type": "string",
+    "description": "Filter expression (e.g., 'name:eq:Overview', 'projectName:eq:Finance'). Supports fields: name, caption, contentUrl, createdAt, updatedAt, favoritesTotal, hitsTotal, ownerName, projectName, tags, workbookName. Operators: eq, in, gt, gte, lt, lte."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of views to return across all pages (automatically handles pagination)"
+  }
+}
+```

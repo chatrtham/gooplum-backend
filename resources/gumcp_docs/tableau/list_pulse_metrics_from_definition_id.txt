@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "definition_id": {
+    "type": "string",
+    "description": "The ID of the Pulse Metric Definition (36-character UUID)"
+  }
+}
+```

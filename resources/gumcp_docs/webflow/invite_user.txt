@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "site_id": {
+    "type": "string",
+    "description": "Unique identifier for a Site"
+  },
+  "email": {
+    "type": "string",
+    "description": "Email address of user to send invite to"
+  },
+  "accessGroups": {
+    "type": "array",
+    "description": "An array of access group slugs",
+    "items": {
+      "type": "string"
+    }
+  }
+}
+```

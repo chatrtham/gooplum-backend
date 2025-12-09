@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The ID of the board where the column will be created"
+  },
+  "title": {
+    "type": "string",
+    "description": "The title/name of the new column"
+  },
+  "column_type": {
+    "type": "string",
+    "description": "The type of the column (e.g., 'status', 'text', 'number')"
+  }
+}
+```

@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "The search term to look for"
+  },
+  "search_by_email": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "When enabled, the term will only be matched against email addresses of users. 0 = Search by name (default), 1 = Search by email only",
+    "default": 0
+  }
+}
+```

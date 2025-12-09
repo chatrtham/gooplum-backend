@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of notes to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "associated_with_type": {
+    "type": "string",
+    "description": "Case insensitive type of item with which the note is associated",
+    "enum": [
+      "person",
+      "account"
+    ]
+  },
+  "associated_with_id": {
+    "type": "integer",
+    "description": "ID of the item with which the note is associated. The associated_with_type must also be present if this parameter is used"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns notes updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns notes updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns notes updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns notes updated on or before this ISO 8601 timestamp"
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of notes to fetch"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

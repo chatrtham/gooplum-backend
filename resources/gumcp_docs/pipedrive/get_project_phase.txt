@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "phase_id": {
+    "type": "integer",
+    "description": "The ID of the project phase"
+  }
+}
+```

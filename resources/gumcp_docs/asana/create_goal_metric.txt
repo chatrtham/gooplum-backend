@@ -1,0 +1,48 @@
+Parameters Schema:
+```json
+{
+  "goal_gid": {
+    "type": "string",
+    "description": "Globally unique identifier for the goal (required)"
+  },
+  "precision": {
+    "type": "integer",
+    "description": "Number of decimal places to round to (0-6). Only relevant for Number metrics."
+  },
+  "unit": {
+    "type": "string",
+    "description": "Unit of measure: 'none', 'currency', or 'percentage'"
+  },
+  "currency_code": {
+    "type": "string",
+    "description": "ISO 4217 currency code (e.g., 'USD', 'EUR'). Required if unit is 'currency'."
+  },
+  "initial_number_value": {
+    "type": "number",
+    "description": "Start value of the goal metric"
+  },
+  "target_number_value": {
+    "type": "number",
+    "description": "Target value of the goal metric. Cannot equal initial_number_value."
+  },
+  "current_number_value": {
+    "type": "number",
+    "description": "Current value of the goal metric"
+  },
+  "progress_source": {
+    "type": "string",
+    "description": "How progress is calculated: 'manual', 'subgoal_progress', 'project_task_completion', 'project_milestone_completion', 'task_completion', or 'external'"
+  },
+  "is_custom_weight": {
+    "type": "boolean",
+    "description": "If true, use supporting object's custom weight to calculate progress. Only relevant for certain progress_source values."
+  },
+  "opt_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional fields to include in response"
+  }
+}
+```

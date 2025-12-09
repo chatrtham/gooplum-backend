@@ -1,0 +1,24 @@
+Parameters Schema:
+```json
+{
+  "api_ticket_id": {
+    "type": "string",
+    "description": "ID of the ticket to add a comment to"
+  },
+  "comment": {
+    "type": "string",
+    "description": "Content of the comment"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "ID of the admin adding the comment. If not provided, will auto-resolve to the currently authenticated admin."
+  },
+  "message_type": {
+    "type": "string",
+    "description": "Type of message (only note is supported)",
+    "enum": [
+      "note"
+    ]
+  }
+}
+```

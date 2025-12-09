@@ -1,0 +1,209 @@
+Parameters Schema:
+```json
+{
+  "topic": {
+    "type": "string",
+    "description": "The meeting's topic (max 200 characters)"
+  },
+  "type": {
+    "type": "string",
+    "description": "Meeting type",
+    "enum": [
+      "instant",
+      "scheduled",
+      "recurring_no_fixed_time",
+      "recurring_fixed_time"
+    ],
+    "default": "scheduled"
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Start time in ISO format (YYYY-MM-DDTHH:MM:SSZ)"
+  },
+  "duration": {
+    "type": "integer",
+    "description": "Duration in minutes (1-1440)",
+    "minimum": 1,
+    "maximum": 1440
+  },
+  "timezone": {
+    "type": "string",
+    "description": "Timezone for start_time"
+  },
+  "password": {
+    "type": "string",
+    "description": "Meeting passcode (max 10 characters)"
+  },
+  "default_password": {
+    "type": "boolean",
+    "description": "Auto-generate passcode when none provided"
+  },
+  "agenda": {
+    "type": "string",
+    "description": "The meeting's agenda (max 2000 characters)"
+  },
+  "pre_schedule": {
+    "type": "boolean",
+    "description": "Create prescheduled meeting via GSuite app"
+  },
+  "schedule_for": {
+    "type": "string",
+    "description": "Email or user ID to schedule meeting for"
+  },
+  "template_id": {
+    "type": "string",
+    "description": "Account admin meeting template ID"
+  },
+  "recurrence": {
+    "type": "object",
+    "description": "Recurrence settings for recurring meetings",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "Recurrence type",
+        "enum": [
+          "daily",
+          "weekly",
+          "monthly"
+        ]
+      },
+      "repeat_interval": {
+        "type": "integer",
+        "description": "Recurrence interval"
+      },
+      "weekly_days": {
+        "type": "array",
+        "description": "Days of week for weekly recurrence",
+        "items": {
+          "type": "string",
+          "enum": [
+            "sunday",
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday"
+          ]
+        }
+      },
+      "monthly_day": {
+        "type": "integer",
+        "description": "Day of month for monthly recurrence (1-31)"
+      },
+      "monthly_week": {
+        "type": "string",
+        "description": "Week of month for monthly recurrence",
+        "enum": [
+          "last",
+          "first",
+          "second",
+          "third",
+          "fourth"
+        ]
+      },
+      "monthly_week_day": {
+        "type": "string",
+        "description": "Day of week for monthly recurrence",
+        "enum": [
+          "sunday",
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday",
+          "saturday"
+        ]
+      },
+      "end_times": {
+        "type": "integer",
+        "description": "Number of occurrences (max 60)"
+      },
+      "end_date_time": {
+        "type": "string",
+        "description": "End date for recurrence (ISO format)"
+      }
+    }
+  },
+  "settings": {
+    "type": "object",
+    "description": "Meeting settings",
+    "properties": {
+      "host_video": {
+        "type": "boolean",
+        "description": "Start video when host joins"
+      },
+      "participant_video": {
+        "type": "boolean",
+        "description": "Start video when participants join"
+      },
+      "join_before_host": {
+        "type": "boolean",
+        "description": "Allow participants to join before host"
+      },
+      "mute_upon_entry": {
+        "type": "boolean",
+        "description": "Mute participants upon entry"
+      },
+      "watermark": {
+        "type": "boolean",
+        "description": "Add watermark to shared content"
+      },
+      "use_pmi": {
+        "type": "boolean",
+        "description": "Use Personal Meeting ID"
+      },
+      "approval_type": {
+        "type": "string",
+        "description": "Registration approval type",
+        "enum": [
+          "automatic",
+          "manual",
+          "none"
+        ],
+        "default": "none"
+      },
+      "auto_recording": {
+        "type": "string",
+        "description": "Auto recording: local, cloud, none",
+        "enum": [
+          "local",
+          "cloud",
+          "none"
+        ]
+      },
+      "alternative_hosts": {
+        "type": "string",
+        "description": "Semicolon-separated list of alternative host emails"
+      },
+      "waiting_room": {
+        "type": "boolean",
+        "description": "Enable waiting room"
+      },
+      "meeting_authentication": {
+        "type": "boolean",
+        "description": "Require authentication to join"
+      },
+      "registrants_email_notification": {
+        "type": "boolean",
+        "description": "Send email notifications to registrants"
+      }
+    }
+  },
+  "tracking_fields": {
+    "type": "array",
+    "description": "Meeting tracking fields",
+    "items": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+```

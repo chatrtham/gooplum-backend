@@ -1,0 +1,40 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "The search term to look for. Minimum 2 characters (or 1 if match is exact). URL encoded."
+  },
+  "entity_type": {
+    "type": "string",
+    "enum": [
+      "deal",
+      "lead",
+      "person",
+      "organization",
+      "product",
+      "project"
+    ],
+    "description": "The type of the field to perform the search from"
+  },
+  "field": {
+    "type": "string",
+    "description": "The key of the field to search from. The field key can be obtained by fetching the list of the fields using fields' API GET methods (dealFields, personFields, etc.). Only custom field types: address, varchar, text, varchar_auto, double, monetary and phone are searchable."
+  },
+  "match": {
+    "type": "string",
+    "enum": [
+      "exact",
+      "beginning",
+      "middle"
+    ],
+    "description": "The type of match used against the term. exact: only if term is exact match, beginning: if term matches beginning or whole string, middle: if term matches any substring. Default: exact",
+    "default": "exact"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of items to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

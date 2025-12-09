@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "bookingUid": {
+    "type": "string",
+    "description": "The unique ID of the booking to confirm."
+  }
+}
+```

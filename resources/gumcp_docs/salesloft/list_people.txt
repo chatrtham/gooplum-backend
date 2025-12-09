@@ -1,0 +1,292 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of people to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of people to fetch. If a record can't be found, that record won't be returned and your request will be successful"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "last_contacted_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "email_addresses": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by email address. Multiple emails can be applied. An additional value of \"_is_null\" can be passed to filter people that do not have an email address."
+  },
+  "first_name": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by first name. Multiple first names can be applied"
+  },
+  "last_name": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by last name. Multiple last names can be applied"
+  },
+  "company": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by company. Multiple last company names can be applied"
+  },
+  "title": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by their title by exact match. Supports partial matching"
+  },
+  "city": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by their city by exact match. Supports partial matching"
+  },
+  "state": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by their state by exact match. Supports partial matching"
+  },
+  "country": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by their country by exact match. Supports partial matching"
+  },
+  "owned_by_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by the owner's guid. Multiple owner guids can be applied"
+  },
+  "owner_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters people by owner_id. Multiple owner_ids can be applied."
+  },
+  "person_stage_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter people by person stage IDs. Use '_is_null' to filter people without stages"
+  },
+  "crm_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter people by CRM IDs"
+  },
+  "owner_crm_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter people by owner CRM IDs. Use '_is_null' for unowned people"
+  },
+  "account_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter people by account IDs they are linked to"
+  },
+  "cadence_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter people by cadence IDs they are currently on. Use '_is_null' for people not on cadences"
+  },
+  "tag_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter people by tag IDs. Use '_is_null' or '_is_not_null' for people without/with tags"
+  },
+  "import_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter people by import IDs. Use '_is_null' for people not imported"
+  },
+  "job_seniority": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter people by job seniority levels. Use '_is_null' for people without seniority"
+  },
+  "starred_by_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter people starred by specific user GUIDs"
+  },
+  "locales": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter people by locales. Use 'Null' for people without locales"
+  },
+  "do_not_contact": {
+    "type": "boolean",
+    "description": "Filter people by do not contact status"
+  },
+  "can_email": {
+    "type": "boolean",
+    "description": "Filter people who can be emailed"
+  },
+  "can_call": {
+    "type": "boolean",
+    "description": "Filter people who can be called"
+  },
+  "can_text": {
+    "type": "boolean",
+    "description": "Filter people who can be texted"
+  },
+  "active_cadences": {
+    "type": "boolean",
+    "description": "Filter people by whether they have active cadences"
+  },
+  "replied": {
+    "type": "boolean",
+    "description": "Filter people by whether they have replied to emails"
+  },
+  "bounced": {
+    "type": "boolean",
+    "description": "Filter people by whether their emails have bounced"
+  },
+  "success": {
+    "type": "boolean",
+    "description": "Filter people by whether they have been marked as success"
+  },
+  "eu_resident": {
+    "type": "boolean",
+    "description": "Filter people by EU resident status"
+  },
+  "last_contacted_type": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters people by last contacted type. Multiple last contact types can be applied"
+  },
+  "phone_number": {
+    "type": "boolean",
+    "description": "Filter people by whether or not they have a phone number or not"
+  },
+  "new": {
+    "type": "boolean",
+    "description": "Filters people by whether or not that person is on a cadence or if they have been contacted in any way."
+  },
+  "owner_is_active": {
+    "type": "boolean",
+    "description": "Filters people by whether the owner is active or not."
+  },
+  "custom_fields": {
+    "type": "object",
+    "description": "Filters by people matching all given custom fields. The custom field names are case-sensitive, but the provided values are case-insensitive. Example: v2/people?custom_fields[custom_field_name]=custom_field_value"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Key to sort on, must be one of: created_at, updated_at, last_contacted_at, name, title, job_seniority, call_count, sent_emails, clicked_emails, replied_emails, viewed_emails, account, cadence_stage_name. Defaults to updated_at",
+    "enum": [
+      "created_at",
+      "updated_at",
+      "last_contacted_at",
+      "name",
+      "title",
+      "job_seniority",
+      "call_count",
+      "sent_emails",
+      "clicked_emails",
+      "replied_emails",
+      "viewed_emails",
+      "account",
+      "cadence_stage_name"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Direction to sort in, must be one of: ASC, DESC.",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "default": "DESC"
+  }
+}
+```

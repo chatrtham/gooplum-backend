@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "primary_contact_id": {
+    "type": "string",
+    "description": "Primary contact ID that will remain after the merge (required)"
+  },
+  "secondary_contact_id": {
+    "type": "string",
+    "description": "Secondary contact ID that will be merged into the primary contact (required)"
+  }
+}
+```

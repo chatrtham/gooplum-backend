@@ -1,0 +1,73 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter results by page IDs (max 250)",
+    "maxItems": 250
+  },
+  "space_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter results by space IDs (max 100)",
+    "maxItems": 100
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "id",
+      "-id",
+      "created-date",
+      "-created-date",
+      "modified-date",
+      "-modified-date",
+      "title",
+      "-title"
+    ],
+    "description": "Sort the results by a particular field"
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "current",
+        "archived",
+        "deleted",
+        "trashed"
+      ]
+    },
+    "description": "Filter results by page status (default: current, archived)"
+  },
+  "title": {
+    "type": "string",
+    "description": "Filter results by page title"
+  },
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format"
+    ],
+    "description": "The content format to return in the body field"
+  },
+  "subtype": {
+    "type": "string",
+    "enum": [
+      "live",
+      "page"
+    ],
+    "description": "Filter results by page subtype"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pages to return across all pages",
+    "default": 25
+  }
+}
+```

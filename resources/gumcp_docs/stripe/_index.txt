@@ -1,0 +1,26 @@
+# Stripe Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (20 total)
+
+1. **list_customers** - List customers
+2. **retrieve_balance** - Retrieve account balance
+3. **list_subscriptions** - List subscriptions
+4. **update_subscription** - Update subscription with specified parameters
+5. **list_payment_intents** - List payment intents
+6. **list_charges** - List charges
+7. **create_customer** - Create customer with complete details as needed
+8. **list_invoices** - List invoices, Either customer or customer_email is required
+9. **retrieve_customer** - Retrieve customer
+10. **list_products** - List products
+11. **cancel_subscription** - Cancel subscription
+12. **retrieve_subscription** - Retrieve subscription
+13. **create_subscription** - Create subscription with all required parameters
+14. **update_customer** - Update customer with all relevant details
+15. **create_coupon** - Create coupon with discount configuration
+16. **retrieve_coupon** - Retrieve coupon
+17. **list_coupons** - List coupons
+18. **delete_coupon** - Delete coupon
+19. **search_customers** - Search customers
+20. **search_invoices** - Search invoices

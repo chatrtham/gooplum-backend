@@ -1,0 +1,75 @@
+Parameters Schema:
+```json
+{
+  "locale": {
+    "type": "string",
+    "description": "The locale to display articles in (e.g., 'en-us', 'fr'). Optional for admins/agents, required for end users"
+  },
+  "category_id": {
+    "type": "string",
+    "description": "Filter articles by category ID"
+  },
+  "section_id": {
+    "type": "string",
+    "description": "Filter articles by section ID"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "Filter articles by author user ID"
+  },
+  "label_names": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by label names (up to 10 labels). Returns articles that have all specified labels"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "position",
+      "title",
+      "created_at",
+      "updated_at",
+      "edited_at"
+    ],
+    "description": "Sort articles by field (default: position)",
+    "default": "position"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending (default: asc)",
+    "default": "asc"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 100,
+    "description": "Maximum number of articles to return per page (1-100, default: 30)",
+    "default": 30
+  },
+  "page": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Page number for pagination (starts at 1)",
+    "default": 1
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "users",
+        "sections",
+        "categories",
+        "translations"
+      ]
+    },
+    "description": "Additional data to include: users (author), sections, categories, translations"
+  }
+}
+```

@@ -1,0 +1,23 @@
+Parameters Schema:
+```json
+{
+  "product_id": {
+    "type": "integer",
+    "description": "The ID of the product"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of files to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "id",
+      "update_time"
+    ],
+    "description": "Field to sort by. Default: id",
+    "default": "id"
+  }
+}
+```

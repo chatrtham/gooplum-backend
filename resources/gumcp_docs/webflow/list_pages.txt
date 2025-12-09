@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "site_id": {
+    "type": "string",
+    "description": "Unique identifier for a Site"
+  },
+  "locale_id": {
+    "type": "string",
+    "description": "Unique identifier for a specific locale. Applicable when using localization."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pages to return",
+    "default": 100
+  }
+}
+```

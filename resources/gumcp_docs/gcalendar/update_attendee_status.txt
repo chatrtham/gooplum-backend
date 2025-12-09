@@ -1,0 +1,44 @@
+Parameters Schema:
+```json
+{
+  "calendar_id": {
+    "type": "string",
+    "description": "Calendar ID (optional - defaults to primary)"
+  },
+  "event_id": {
+    "type": "string",
+    "description": "Event ID to update"
+  },
+  "attendee_email": {
+    "type": "string",
+    "description": "Email address of the attendee to update"
+  },
+  "response_status": {
+    "type": "string",
+    "enum": [
+      "accepted",
+      "declined",
+      "tentative",
+      "needsAction"
+    ],
+    "description": "New response status for the attendee"
+  },
+  "send_notifications": {
+    "type": "boolean",
+    "description": "Whether to send notifications to attendees (default: false)"
+  },
+  "send_updates": {
+    "type": "string",
+    "enum": [
+      "all",
+      "externalOnly",
+      "none"
+    ],
+    "description": "Specifies who should receive notifications (default: none)"
+  },
+  "comment": {
+    "type": "string",
+    "description": "A comment to include with the response status"
+  }
+}
+```

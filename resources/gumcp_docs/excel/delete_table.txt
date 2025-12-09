@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet containing the table"
+  },
+  "table_name": {
+    "type": "string",
+    "description": "Name of the table to delete"
+  }
+}
+```

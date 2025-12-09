@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "calendar_id": {
+    "type": "string",
+    "description": "Calendar ID (optional - defaults to primary)"
+  },
+  "event_id": {
+    "type": "string",
+    "description": "Event ID to delete"
+  },
+  "send_notifications": {
+    "type": "boolean",
+    "description": "Whether to send notifications to attendees (default: false)"
+  },
+  "send_updates": {
+    "type": "string",
+    "enum": [
+      "all",
+      "externalOnly",
+      "none"
+    ],
+    "description": "Specifies who should receive notifications (default: none)"
+  }
+}
+```

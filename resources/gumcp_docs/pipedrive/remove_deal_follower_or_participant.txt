@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "follower",
+      "participant"
+    ],
+    "description": "The type of entity to remove from the deal"
+  },
+  "follower_id": {
+    "type": "integer",
+    "description": "The ID of the following user (required when type='follower')"
+  },
+  "deal_participant_id": {
+    "type": "integer",
+    "description": "The ID of the participant of the deal (required when type='participant')"
+  }
+}
+```

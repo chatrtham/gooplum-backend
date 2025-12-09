@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "personalized_trend_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of PersonalizedTrend fields to display. Minimum length: 1"
+  }
+}
+```

@@ -1,0 +1,99 @@
+# Pipedrive Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (93 total)
+
+1. **get_all_users** - Get data about all users within the company. Returns information about all team members and their access levels.
+2. **find_users_by_name** - Find users by their name. Search for team members by name or email address within the company.
+3. **get_current_user** - Get current user data. Returns data about the authorized user including company information, permissions, and locale settings.
+4. **get_user** - Get details of a specific user. Returns comprehensive information about a team member within the company.
+5. **list_user_followers** - List followers of a user. Returns users who are following the specified user with pagination support.
+6. **create_user** - Add a new user to the company. Creates a team member with email and access permissions, returns the ID upon success.
+7. **update_user** - Update user details. Currently allows updating the active status of a user (activate/deactivate).
+8. **list_activities** - Get all activities assigned to a particular user with filtering options. Returns activities like appointments, tasks, and events that can be associated with deals, leads, persons, and organizations.
+9. **get_activity** - Get details of a specific activity by ID. Returns comprehensive information about an activity including subject, type, participants, and scheduling details.
+10. **create_activity** - Create a new activity such as an appointment, task, or event. Activities can be associated with deals, leads, persons, and organizations.
+11. **update_activity** - Update the properties of an existing activity. You can modify scheduling, participants, status, and other activity details.
+12. **delete_activity** - Delete an activity by marking it as deleted. After 30 days, the activity will be permanently deleted.
+13. **list_deals** - Get all deals (active or archived). Returns data about deals including monetary value, stage, owner, and associated contacts. Can filter by various criteria like owner, person, organization, pipeline, or stage.
+14. **search_deals** - Search all deals by title, notes, and/or custom fields. Found deals can be filtered by person ID, organization ID, and status.
+15. **get_deal** - Get details of a specific deal by ID. Returns comprehensive information about a deal including title, value, stage, pipeline, owner, and associated contacts.
+16. **list_deal_files** - List files attached to a specific deal. Returns information about files associated with the deal.
+17. **list_deal_products** - List products attached to a specific deal. Returns information about products and their details associated with the deal.
+18. **get_deals_products** - Get products attached to multiple deals. Returns data about products attached to the specified deals.
+19. **get_deal_conversion_status** - Get Deal conversion status (BETA). Returns information about the conversion status and lead ID if conversion was successful.
+20. **create_deal** - Add a new deal. Creates a deal with title and optional properties like owner, person, organization, pipeline, stage, value, and custom fields.
+21. **update_deal** - Update the properties of a deal. Updates an existing deal with new values for any of its properties.
+22. **delete_deal** - Delete a deal. Marks a deal as deleted. After 30 days, the deal will be permanently deleted.
+23. **add_deal_follower_or_participant** - Add a follower or participant to a deal. Add users as followers or people as participants.
+24. **add_deal_product** - Add a product to a deal. Creates a new deal-product item with pricing, quantity, tax, and billing information.
+25. **update_deal_product** - Update the product attached to a deal. Updates the details of the product that has been attached to a deal.
+26. **remove_deal_follower_or_participant** - Remove a follower or participant from a deal. Remove users as followers or participants from deals.
+27. **delete_deal_product** - Delete an attached product from a deal. Removes a product attachment from a deal using the product_attachment_id.
+28. **get_mail_message** - Get details of a specific mail message. Returns data about email content, recipients, and metadata.
+29. **get_mail_threads** - Get mail threads in a specified folder ordered by the most recent message. Lists email conversations from inbox, drafts, sent, or archive folders.
+30. **get_mail_thread** - Get details of a specific mail thread. Returns information about an email conversation thread.
+31. **get_mail_thread_messages** - Get all mail messages inside a specified mail thread. Returns all emails in a conversation thread.
+32. **update_mail_thread** - Update mail thread details. Update properties like associated deal, lead, sharing, read status, and archive status.
+33. **delete_mail_thread** - Delete mail thread. Marks a mail thread as deleted.
+34. **link_user_video_integration** - Link a user with the installed video call integration. Must be called after a user installs a video calling app to send user information.
+35. **delete_user_video_integration** - Delete the link between a user and the installed video call integration. Removes the connection between user and video calling app.
+36. **get_all_notes** - Get all notes. Returns textual HTML-formatted information attached to deals, persons, organizations, leads, or projects.
+37. **get_note** - Get details about a specific note. Returns information about a single note including content and metadata.
+38. **get_note_comments** - Get all comments for a note. Returns all comments associated with a specific note.
+39. **get_note_comment** - Get details of a specific comment. Returns information about a single comment on a note.
+40. **create_note** - Add a new note. Creates a note with HTML content attached to deals, persons, organizations, leads, or projects.
+41. **add_note_comment** - Add a comment to a note. Creates a new comment on an existing note.
+42. **update_note** - Update a note. Modifies the content and properties of an existing note.
+43. **update_note_comment** - Update a comment related to a note. Modifies the content of an existing comment.
+44. **delete_note** - Delete a note. Permanently removes a specific note.
+45. **delete_note_comment** - Delete a comment related to a note. Permanently removes a specific comment from a note.
+46. **search_organizations** - Search organizations by name, address, notes and/or custom fields. Comprehensive search across multiple organization fields.
+47. **get_organization** - Get details of a specific organization. Returns comprehensive information about a single organization including counts and relationships.
+48. **create_organization** - Add a new organization. Creates an organization with name and optional properties like owner, visibility, labels, address, and custom fields.
+49. **update_organization** - Update the properties of an organization. Modifies an existing organization with new values for any of its properties.
+50. **delete_organization** - Delete an organization. Marks an organization as deleted. After 30 days, the organization will be permanently deleted.
+51. **add_organization_follower** - Add a follower to an organization. Adds a user as a follower to the organization.
+52. **delete_organization_follower** - Delete a follower from an organization. Removes a user follower from the organization.
+53. **get_organization_relationships** - Get all relationships for an organization. Returns hierarchical (parent-child) or lateral relationships for a specified organization.
+54. **create_organization_relationship** - Create an organization relationship. Creates hierarchical (parent-child) or lateral relationships between organizations.
+55. **update_organization_relationship** - Update an organization relationship. Modifies existing relationships between organizations.
+56. **delete_organization_relationship** - Delete an organization relationship. Permanently removes a relationship between organizations and returns the deleted ID.
+57. **list_persons** - Get all persons. Returns data about contacts/customers with filtering, sorting, and pagination. Includes comprehensive person information and relationships.
+58. **search_persons** - Search persons by name, email, phone, notes and/or custom fields. Comprehensive search across multiple person fields with organization filtering.
+59. **get_person** - Get details of a specific person. Returns comprehensive information about a contact including relationships, counts, and marketing status.
+60. **create_person** - Add a new person. Creates a contact with name and optional properties like owner, organization, emails, phones, visibility, labels, and marketing status.
+61. **update_person** - Update the properties of a person. Modifies an existing contact with new values for any of its properties including marketing status.
+62. **delete_person** - Delete a person. Marks a person as deleted. After 30 days, the person will be permanently deleted.
+63. **list_products** - Get all products. Returns data about goods or services with pricing, variations, and currencies. Supports filtering by owner, custom fields, and sorting.
+64. **search_products** - Search products by name, code and/or custom fields. Comprehensive search across product catalog with exact match and field-specific options.
+65. **get_product** - Get details of a specific product. Returns comprehensive information about a product including pricing, variations, currencies, and custom fields.
+66. **list_product_files** - List files attached to a product. Returns information about files associated with the product including metadata and download links.
+67. **list_product_followers** - List followers of a product. Returns users who are following the product with pagination support.
+68. **add_product_follower** - Add a follower to a product. Adds a user as a follower to the product for notifications and updates.
+69. **delete_product_follower** - Delete a follower from a product. Removes a user follower from the product.
+70. **list_projects** - Get all projects. Returns ongoing, completed or canceled projects with filtering by status, phase, and boards. Supports cursor pagination.
+71. **get_project** - Get details of a specific project. Returns comprehensive project information including custom fields with long hashes as keys.
+72. **create_project** - Add a new project. Creates a project with title, board, phase and optional properties like description, owner, dates, deals, organization, person, and labels.
+73. **update_project** - Update a project. Modifies an existing project with new values for title, board, phase, description, status, dates, associations, and labels.
+74. **delete_project** - Delete a project. Marks a project as deleted.
+75. **archive_project** - Archive a project. Archives a project to keep it but mark it as inactive.
+76. **get_project_plan** - Get project plan. Returns information about items in a project plan including tasks and activities linked to specific project phases and groups.
+77. **get_project_groups** - Get project groups. Returns all active groups under a specific project for organization and planning.
+78. **update_project_activity** - Update activity in project plan. Updates an activity phase or group assignment within a project plan.
+79. **update_project_task** - Update task in project plan. Updates a task phase or group assignment within a project plan.
+80. **list_project_boards** - Get all project boards. Returns all project boards that are not deleted for project organization and management.
+81. **get_project_board** - Get details of a project board. Returns comprehensive information about a specific project board.
+82. **list_project_phases** - Get project phases. Returns all active project phases under a specific board for project workflow management.
+83. **get_project_phase** - Get details of a project phase. Returns comprehensive information about a specific project phase.
+84. **list_tasks** - Get all tasks. Returns tasks with filtering by assignee, project, parent task, and completion status. Supports cursor pagination.
+85. **get_task** - Get details of a specific task. Returns comprehensive task information including title, description, assignee, project, parent task, completion status, and due date.
+86. **create_task** - Add a new task. Creates a task with title, project assignment, and optional properties like description, parent task, assignee, completion status, and due date.
+87. **update_task** - Update a task. Modifies an existing task with new values for title, project, description, parent task, assignee, completion status, and due date.
+88. **delete_task** - Delete a task. Marks a task as deleted. If the task has subtasks then those will also be deleted.
+89. **list_pipelines** - Get all pipelines. Returns data about all sales pipelines with sorting and pagination support.
+90. **list_stages** - Get all stages. Returns data about all pipeline stages with optional pipeline filtering, sorting and pagination support.
+91. **list_activity_types** - Get all activity types. Returns all available activity types including custom ones with their configuration details like name, icon, color, and active status.
+92. **search_items** - Perform a comprehensive search across multiple item types. Search deals, persons, organizations, products, leads, files, mail attachments, and projects with advanced filtering and field-specific searching.
+93. **search_item_field** - Perform a search using a specific field from an item type. Search for distinct field values or actual item IDs based on field content with exact, beginning, or middle matching.

@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "object_type": {
+    "type": "string",
+    "description": "Source object type (contacts, companies, deals, tickets)"
+  },
+  "object_id": {
+    "type": "string",
+    "description": "Source object ID"
+  },
+  "to_object_type": {
+    "type": "string",
+    "description": "Target object type to get associations for (contacts, companies, deals, tickets)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of associations to return (max 500)"
+  },
+  "after": {
+    "type": "string",
+    "description": "Paging cursor token for retrieving the next page"
+  }
+}
+```

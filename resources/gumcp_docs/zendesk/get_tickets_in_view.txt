@@ -1,0 +1,27 @@
+Parameters Schema:
+```json
+{
+  "view_id": {
+    "type": "string",
+    "description": "Zendesk view ID to get tickets from (required)"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Sort tickets by a view column (status, updated, priority, etc.)"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending or descending"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of tickets to return (default: 100)",
+    "default": 100
+  }
+}
+```

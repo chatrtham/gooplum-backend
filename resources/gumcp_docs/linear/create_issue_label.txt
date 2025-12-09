@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the label"
+  },
+  "color": {
+    "type": "string",
+    "description": "The color of the label (hex color code)"
+  },
+  "description": {
+    "type": "string",
+    "description": "An optional description of the label"
+  },
+  "teamId": {
+    "type": "string",
+    "description": "The team UUID. If not provided, the label will be created as a workspace label"
+  },
+  "parentId": {
+    "type": "string",
+    "description": "The parent label UUID, if this is a child of a label group"
+  },
+  "isGroup": {
+    "type": "boolean",
+    "description": "Whether this is label group (cannot be applied to issues directly)",
+    "default": false
+  }
+}
+```

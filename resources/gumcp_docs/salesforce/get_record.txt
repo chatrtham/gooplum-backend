@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "object_name": {
+    "type": "string",
+    "description": "The API name of the Salesforce object (e.g., 'Account', 'Contact')"
+  },
+  "record_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the record"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional list of specific fields to retrieve (retrieves all accessible fields if not specified)"
+  }
+}
+```

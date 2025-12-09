@@ -1,0 +1,20 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet"
+  },
+  "values": {
+    "type": "array",
+    "items": {
+      "type": "object"
+    },
+    "description": "Array of values to add as a new row"
+  }
+}
+```

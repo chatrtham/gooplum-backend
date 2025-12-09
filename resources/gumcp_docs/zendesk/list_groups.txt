@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "string",
+    "description": "List groups for a specific user ID"
+  },
+  "exclude_deleted": {
+    "type": "boolean",
+    "description": "Whether to exclude deleted groups (default: false)",
+    "default": false
+  },
+  "assignable_only": {
+    "type": "boolean",
+    "description": "Only return groups that can be assigned tickets (default: false)",
+    "default": false
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of groups to return (default: 100)",
+    "default": 100
+  }
+}
+```

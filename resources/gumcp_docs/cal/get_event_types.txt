@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "username": {
+    "type": "string",
+    "description": "The username of the user to get event types for. If only username provided will get all event types."
+  },
+  "eventSlug": {
+    "type": "string",
+    "description": "Slug of event type to return. If eventSlug is provided then username must be provided too."
+  },
+  "usernames": {
+    "type": "string",
+    "description": "Get dynamic event type for multiple usernames separated by comma. e.g usernames=alice,bob"
+  },
+  "orgSlug": {
+    "type": "string",
+    "description": "Slug of the user's organization if they are in one. orgId is not required if using this parameter."
+  },
+  "orgId": {
+    "type": "number",
+    "description": "ID of the organization. orgSlug is not needed when using this parameter."
+  }
+}
+```

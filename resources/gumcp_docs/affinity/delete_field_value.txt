@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "field_value_id": {
+    "type": "integer",
+    "description": "The unique identifier of the field value to delete"
+  }
+}
+```

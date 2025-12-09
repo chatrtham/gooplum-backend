@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "bucket_name": {
+    "type": "string",
+    "description": "Name of the bucket to search in"
+  },
+  "prefix": {
+    "type": "string",
+    "description": "Filter files by prefix (optional)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of files to return (optional)"
+  },
+  "delimiter": {
+    "type": "string",
+    "description": "Delimiter for folder-like listing (optional)"
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Filter files created after this date (ISO 8601 format, optional)"
+  },
+  "end_date": {
+    "type": "string",
+    "description": "Filter files created before this date (ISO 8601 format, optional)"
+  }
+}
+```

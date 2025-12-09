@@ -1,0 +1,37 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of calendar events to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "start_time": {
+    "type": "string",
+    "description": "Lower bound (inclusive) for calendar event's end time in ISO 8601 format. Example: 2022-02-14T10:12:59+00:00"
+  },
+  "end_time": {
+    "type": "string",
+    "description": "Upper bound (exclusive) for calendar event's start time in ISO 8601 format. Example: 2022-02-14T10:12:59+00:00"
+  },
+  "user_guid": {
+    "type": "string",
+    "description": "USER GUID of the internal organization/team member who created or is included as guest in the event (NOT person_id from external contacts)"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "start_time"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

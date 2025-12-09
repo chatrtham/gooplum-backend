@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of cadence memberships to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of cadence memberships to fetch"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "ID of the person to find cadence memberships for"
+  },
+  "cadence_id": {
+    "type": "integer",
+    "description": "ID of the cadence to find cadence memberships for"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns memberships updated after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns memberships updated on or after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns memberships updated before this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns memberships updated on or before this timestamp (ISO 8601 format)"
+  },
+  "currently_on_cadence": {
+    "type": "boolean",
+    "description": "If true, return only people currently on cadences. If false, return people who have been removed/completed"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "added_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

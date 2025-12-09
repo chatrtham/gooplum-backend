@@ -1,0 +1,61 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "HubSpot contact ID (required)"
+  },
+  "email": {
+    "type": "string",
+    "description": "Email address"
+  },
+  "firstname": {
+    "type": "string",
+    "description": "First name"
+  },
+  "lastname": {
+    "type": "string",
+    "description": "Last name"
+  },
+  "phone": {
+    "type": "string",
+    "description": "Phone number"
+  },
+  "company": {
+    "type": "string",
+    "description": "Company name"
+  },
+  "website": {
+    "type": "string",
+    "description": "Website URL"
+  },
+  "jobtitle": {
+    "type": "string",
+    "description": "Job title"
+  },
+  "address": {
+    "type": "string",
+    "description": "Street address"
+  },
+  "city": {
+    "type": "string",
+    "description": "City"
+  },
+  "state": {
+    "type": "string",
+    "description": "State/province/region"
+  },
+  "zip": {
+    "type": "string",
+    "description": "Postal/ZIP code"
+  },
+  "country": {
+    "type": "string",
+    "description": "Country"
+  },
+  "properties": {
+    "type": "object",
+    "description": "Additional properties to set on the contact (key-value pairs)"
+  }
+}
+```

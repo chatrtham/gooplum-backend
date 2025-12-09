@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "The unique identifier (UUID) of the interview schedule to cancel."
+  },
+  "allowReschedule": {
+    "type": "boolean",
+    "description": "Whether this interview schedule can be rescheduled after cancellation. Default is false.",
+    "default": false
+  }
+}
+```

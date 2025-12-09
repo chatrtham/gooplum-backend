@@ -1,0 +1,86 @@
+Parameters Schema:
+```json
+{
+  "start": {
+    "type": "string",
+    "description": "The start time of the booking in ISO 8601 format in UTC timezone (e.g., '2024-08-13T09:00:00Z')"
+  },
+  "attendee": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "The attendee's email"
+      },
+      "name": {
+        "type": "string",
+        "description": "The attendee's name"
+      },
+      "timeZone": {
+        "type": "string",
+        "description": "The attendee's timezone (e.g., 'America/New_York')"
+      },
+      "phoneNumber": {
+        "type": "string",
+        "description": "The attendee's phone number"
+      },
+      "language": {
+        "type": "string",
+        "description": "The attendee's preferred language"
+      }
+    },
+    "required": [
+      "email",
+      "name"
+    ],
+    "description": "The attendee's details"
+  },
+  "lengthInMinutes": {
+    "type": "number",
+    "description": "If it's an event type with multiple possible lengths, specify the desired booking length here"
+  },
+  "eventTypeId": {
+    "type": "number",
+    "description": "The ID of the event type to book. Required unless eventTypeSlug and username/teamSlug are provided."
+  },
+  "eventTypeSlug": {
+    "type": "string",
+    "description": "The slug of the event type. Required with username/teamSlug if eventTypeId not provided."
+  },
+  "username": {
+    "type": "string",
+    "description": "The username of the event owner. Used with eventTypeSlug if eventTypeId not provided."
+  },
+  "teamSlug": {
+    "type": "string",
+    "description": "Team slug for team that owns the event type. Used with eventTypeSlug if eventTypeId not provided."
+  },
+  "organizationSlug": {
+    "type": "string",
+    "description": "The organization slug. Optional, used with eventTypeSlug + username or eventTypeSlug + teamSlug."
+  },
+  "guests": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional list of guest emails attending the event"
+  },
+  "instant": {
+    "type": "boolean",
+    "description": "Set to true to create an instant meeting (for team event types only)"
+  },
+  "location": {
+    "type": "object",
+    "description": "One of the event type locations"
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Additional data to store with the booking"
+  },
+  "bookingFieldsResponses": {
+    "type": "object",
+    "description": "Booking field responses with field slug as keys and user response as values"
+  }
+}
+```

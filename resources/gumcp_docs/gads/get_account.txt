@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "include_metrics": {
+    "type": "boolean",
+    "description": "Include account-level performance metrics"
+  },
+  "include_budgets": {
+    "type": "boolean",
+    "description": "Include account budget information"
+  },
+  "date_range": {
+    "type": "string",
+    "description": "Date range for metrics"
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date for CUSTOM date range (YYYY-MM-DD)"
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date for CUSTOM date range (YYYY-MM-DD)"
+  }
+}
+```

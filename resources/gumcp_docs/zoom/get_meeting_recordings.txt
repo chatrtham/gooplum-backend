@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string",
+    "description": "Meeting ID or UUID"
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Include additional fields (e.g., 'download_access_token')"
+  },
+  "ttl": {
+    "type": "integer",
+    "description": "Download access token TTL in seconds (0-604800)",
+    "minimum": 0,
+    "maximum": 604800
+  }
+}
+```

@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "string",
+    "description": "Get a specific user by their unique identifier (e.g., '01FCNDV6P870EA6S7TK1DSYDG0'). When provided, returns only this user and ignores other filters."
+  },
+  "email": {
+    "type": "string",
+    "description": "Filter users by email address (exact match). Ignored when user_id is specified."
+  },
+  "slack_user_id": {
+    "type": "string",
+    "description": "Filter users by their Slack user ID (format: U12345678). Ignored when user_id is specified."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of users to return across all pages (automatically handles pagination). Ignored when user_id is specified.",
+    "default": 100
+  }
+}
+```

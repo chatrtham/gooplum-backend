@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pages to return. Optional - defaults to 10 if not specified"
+  }
+}
+```

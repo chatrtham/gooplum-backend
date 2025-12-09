@@ -1,0 +1,158 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query string (e.g., 'status:open priority:high', 'tag:urgent', 'requester:user@example.com'). Uses Zendesk search syntax."
+  },
+  "view_type": {
+    "type": "string",
+    "enum": [
+      "all",
+      "assigned",
+      "requested",
+      "ccd",
+      "followed",
+      "recent"
+    ],
+    "description": "Type of ticket view: 'all' (default), 'assigned' (tickets assigned to user), 'requested' (tickets requested by user), 'ccd' (tickets user is CC'd on), 'followed' (tickets user is following), 'recent' (recently viewed tickets)",
+    "default": "all"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "User ID for user-specific views (assigned, requested, ccd, followed). If not provided, uses authenticated user."
+  },
+  "organization_id": {
+    "type": "string",
+    "description": "Organization ID to filter tickets by organization"
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "new",
+      "open",
+      "pending",
+      "hold",
+      "solved",
+      "closed"
+    ],
+    "description": "Filter by ticket status"
+  },
+  "priority": {
+    "type": "string",
+    "enum": [
+      "urgent",
+      "high",
+      "normal",
+      "low"
+    ],
+    "description": "Filter by ticket priority"
+  },
+  "type": {
+    "type": "string",
+    "enum": [
+      "problem",
+      "incident",
+      "question",
+      "task"
+    ],
+    "description": "Filter by ticket type"
+  },
+  "assignee_id": {
+    "type": "string",
+    "description": "Filter by assignee user ID"
+  },
+  "requester_id": {
+    "type": "string",
+    "description": "Filter by requester user ID"
+  },
+  "group_id": {
+    "type": "string",
+    "description": "Filter by group ID"
+  },
+  "tags": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by tags (tickets must have all specified tags)"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "Filter by external ID"
+  },
+  "created_after": {
+    "type": "string",
+    "description": "Filter tickets created after this date (ISO 8601 format, e.g., '2023-01-01T00:00:00Z')"
+  },
+  "created_before": {
+    "type": "string",
+    "description": "Filter tickets created before this date (ISO 8601 format, e.g., '2023-12-31T23:59:59Z')"
+  },
+  "updated_after": {
+    "type": "string",
+    "description": "Filter tickets updated after this date (ISO 8601 format, e.g., '2023-01-01T00:00:00Z')"
+  },
+  "updated_before": {
+    "type": "string",
+    "description": "Filter tickets updated before this date (ISO 8601 format, e.g., '2023-12-31T23:59:59Z')"
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "id",
+      "status",
+      "subject",
+      "requester",
+      "assignee",
+      "group",
+      "priority",
+      "created_at",
+      "updated_at"
+    ],
+    "description": "Sort tickets by field (default: id)",
+    "default": "id"
+  },
+  "sort_order": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Sort order: ascending (asc) or descending (desc) (default: asc)",
+    "default": "asc"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 100,
+    "description": "Maximum number of tickets to return per page (1-100, default: 25)",
+    "default": 25
+  },
+  "page": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Page number for pagination (starts at 1)",
+    "default": 1
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "users",
+        "groups",
+        "organizations",
+        "last_audits",
+        "metric_events",
+        "sharing_agreements",
+        "comment_count",
+        "incident_counts",
+        "ticket_forms",
+        "custom_statuses"
+      ]
+    },
+    "description": "Additional data to include with tickets (sideloading)"
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "Company ID"
+  }
+}
+```

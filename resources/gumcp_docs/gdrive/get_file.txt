@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the file to get information for"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file"
+  },
+  "read": {
+    "type": "boolean",
+    "description": "Whether to attempt reading the file content (default: false)",
+    "default": false
+  }
+}
+```

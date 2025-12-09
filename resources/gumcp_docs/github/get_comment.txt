@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (required when using comment_database_id)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "comment_id": {
+    "type": "string",
+    "description": "GraphQL node ID of the comment (e.g., 'IC_kwDOKdQ8L86sGe-r'). Use this OR comment_database_id."
+  },
+  "comment_database_id": {
+    "type": "integer",
+    "description": "Numeric database ID of the comment visible in URLs (e.g., 2887380907). Use this OR comment_id."
+  }
+}
+```

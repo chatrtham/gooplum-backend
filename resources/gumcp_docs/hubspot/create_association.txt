@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "from_object_type": {
+    "type": "string",
+    "description": "Source object type (contacts, companies, deals, tickets)"
+  },
+  "from_object_id": {
+    "type": "string",
+    "description": "Source object ID"
+  },
+  "to_object_type": {
+    "type": "string",
+    "description": "Target object type (contacts, companies, deals, tickets)"
+  },
+  "to_object_id": {
+    "type": "string",
+    "description": "Target object ID"
+  },
+  "association_category": {
+    "type": "string",
+    "description": "Association category (HUBSPOT_DEFINED, USER_DEFINED, INTEGRATOR_DEFINED)",
+    "default": "HUBSPOT_DEFINED"
+  },
+  "association_type_id": {
+    "type": "integer",
+    "description": "Association type ID (varies by object types)"
+  }
+}
+```

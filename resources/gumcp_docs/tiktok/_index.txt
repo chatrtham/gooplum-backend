@@ -1,0 +1,11 @@
+# Tiktok Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **get_hashtag_videos** - Get videos from TikTok hashtags. Returns video details including captions, engagement metrics (likes, shares, comments), play counts, author information, and metadata for each video. NOTE: Date filters and popularity filters cannot be used simultaneously.
+2. **get_profile_videos** - Get videos from TikTok user profiles. Returns video details including captions, engagement metrics (likes, shares, comments, play counts), author information, video metadata, music information, and timestamps for each video. NOTE: Date filters and popularity filters cannot be used simultaneously.
+3. **get_profile_followers** - Get followers or following list from TikTok user profiles. Returns user profile information including usernames, display names, follower counts, following counts, bio information, and profile metadata for each user.
+4. **get_video_details** - Get details from specific TikTok videos using their URLs. Returns comprehensive video data including captions, engagement metrics (likes, shares, comments, play counts), author information, video metadata (duration, format), music information (name, author, original status), timestamps, and direct video URLs.
+5. **search_videos** - Search for TikTok videos and users using search queries. Returns matching content including video details with captions, engagement metrics (likes, shares, comments), author information, and user profiles with follower counts, bio information, and profile metadata.

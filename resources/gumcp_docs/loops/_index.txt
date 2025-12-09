@@ -1,0 +1,15 @@
+# Loops Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (9 total)
+
+1. **list_mailing_lists** - Retrieve a list of your account's mailing lists. Returns all mailing lists with their basic information including name, description, and privacy settings.
+2. **find_contact** - Find a contact by email address or user ID. Only one parameter is allowed - either email or userId.
+3. **create_contact** - Create a new contact with an email address and any other contact properties. Returns 409 Conflict if contact already exists.
+4. **update_contact** - Update or create a contact. Requires either email or userId. If contact doesn't exist, creates a new one.
+5. **delete_contact** - Delete a contact by email address or user ID.
+6. **list_contact_properties** - Retrieve a list of your account's contact properties. Use ?list=custom to only list custom properties.
+7. **send_event** - Send events to trigger emails in Loops. Provide either email or userId to identify the contact.
+8. **send_transactional_email** - Send a transactional email to a contact. Use dummy transactional ID for testing.
+9. **list_transactional_emails** - Retrieve a list of your transactional emails with automatic pagination support.

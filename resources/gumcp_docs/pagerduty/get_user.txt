@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "The ID of the user to retrieve."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "contact_methods",
+        "notification_rules",
+        "teams",
+        "subdomains"
+      ]
+    },
+    "description": "Array of additional Models to include in response."
+  }
+}
+```

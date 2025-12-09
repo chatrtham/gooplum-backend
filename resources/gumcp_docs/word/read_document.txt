@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Word document"
+  }
+}
+```

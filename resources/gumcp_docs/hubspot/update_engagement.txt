@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "engagement_id": {
+    "type": "string",
+    "description": "HubSpot engagement ID (required)"
+  },
+  "owner_id": {
+    "type": "string",
+    "description": "Owner ID for the engagement"
+  },
+  "timestamp": {
+    "type": "integer",
+    "description": "Time of engagement (in milliseconds)"
+  },
+  "metadata": {
+    "type": "object",
+    "description": "Engagement metadata (varies by type)"
+  },
+  "metadata_body": {
+    "type": "string",
+    "description": "Engagement metadata body text"
+  }
+}
+```

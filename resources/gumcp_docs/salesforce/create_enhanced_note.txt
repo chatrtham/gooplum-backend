@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "Title of the note"
+  },
+  "content": {
+    "type": "string",
+    "description": "Content of the note. Use HTML format for rich text with formatting or plain text for simple notes (e.g., '<h1>Title</h1><p>Body text</p><ul><li>List item</li></ul>') or plain text for simple notes. HTML is recommended for structured content. Content will be automatically base64-encoded for Salesforce."
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Optional record ID to link this note to"
+  },
+  "share_type": {
+    "type": "string",
+    "description": "Optional sharing type if record_id is provided (e.g., 'V' for Viewer)",
+    "default": "V"
+  }
+}
+```

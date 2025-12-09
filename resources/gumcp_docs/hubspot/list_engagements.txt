@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of engagements to return (max 250)"
+  },
+  "offset": {
+    "type": "string",
+    "description": "Paging offset for retrieving the next page"
+  }
+}
+```

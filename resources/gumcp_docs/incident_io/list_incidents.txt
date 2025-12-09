@@ -1,0 +1,140 @@
+Parameters Schema:
+```json
+{
+  "incident_id": {
+    "type": "string",
+    "description": "Get a specific incident by reference (e.g., 'INC-4') or full ID. When provided, returns only this incident and ignores other filters."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of incidents to return across all pages (automatically handles pagination). Ignored when incident_id is specified."
+  },
+  "status_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by status IDs (includes incidents with any of these statuses)"
+  },
+  "status_not_in": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by status IDs (excludes incidents with these statuses)"
+  },
+  "status_category_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "triage",
+        "declined",
+        "merged",
+        "canceled",
+        "live",
+        "learning",
+        "closed"
+      ]
+    },
+    "description": "Filter incidents by status category (triage, declined, merged, canceled, live, learning, closed)"
+  },
+  "status_category_not_in": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "triage",
+        "declined",
+        "merged",
+        "canceled",
+        "live",
+        "learning",
+        "closed"
+      ]
+    },
+    "description": "Filter incidents by status category (excludes incidents with these categories)"
+  },
+  "severity_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by severity IDs (includes incidents with any of these severities)"
+  },
+  "severity_not_in": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by severity IDs (excludes incidents with these severities)"
+  },
+  "severity_gte": {
+    "type": "string",
+    "description": "Filter incidents where severity rank is greater than or equal to this severity ID"
+  },
+  "severity_lte": {
+    "type": "string",
+    "description": "Filter incidents where severity rank is less than or equal to this severity ID"
+  },
+  "incident_type_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by type IDs (includes incidents with any of these types)"
+  },
+  "incident_type_not_in": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter incidents by type IDs (excludes incidents with these types)"
+  },
+  "mode_one_of": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "retrospective",
+        "test",
+        "tutorial"
+      ]
+    },
+    "description": "Filter incidents by mode (standard, retrospective, test, tutorial). Defaults to standard and retrospective if not specified"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Filter incidents created on or after this date (ISO 8601 format)"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Filter incidents created on or before this date (ISO 8601 format)"
+  },
+  "created_at_from": {
+    "type": "string",
+    "description": "Start date for created_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "created_at_to": {
+    "type": "string",
+    "description": "End date for created_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Filter incidents updated on or after this date (ISO 8601 format)"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Filter incidents updated on or before this date (ISO 8601 format)"
+  },
+  "updated_at_from": {
+    "type": "string",
+    "description": "Start date for updated_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  },
+  "updated_at_to": {
+    "type": "string",
+    "description": "End date for updated_at range filter (ISO 8601 format: YYYY-MM-DD)"
+  }
+}
+```

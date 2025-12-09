@@ -1,0 +1,22 @@
+Parameters Schema:
+```json
+{
+  "view_id": {
+    "type": "string",
+    "description": "The ID of the view to get an image for"
+  },
+  "width": {
+    "type": "integer",
+    "description": "Width of the image in pixels (default 800)"
+  },
+  "height": {
+    "type": "integer",
+    "description": "Height of the image in pixels (default 800)"
+  },
+  "upload_to_workspace": {
+    "type": "boolean",
+    "description": "If true, uploads file to workspace. Default: false.",
+    "default": false
+  }
+}
+```

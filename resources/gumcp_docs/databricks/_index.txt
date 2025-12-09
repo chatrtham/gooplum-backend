@@ -1,0 +1,20 @@
+# Databricks Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (14 total)
+
+1. **get_me** - Get information about the authenticated user. Returns the current user's details including username, email, and account information.
+2. **list_clusters** - List all pinned and active clusters, and all clusters terminated within the last 30 days.
+3. **terminate_cluster** - Terminates a Spark cluster with the specified ID. Cluster is removed asynchronously and will be in TERMINATED state when complete.
+4. **start_cluster** - Starts a terminated Spark cluster. Preserves previous cluster ID and attributes. Starts with last specified size or minimum nodes if autoscaling.
+5. **list_jobs** - Retrieves a list of jobs in the workspace.
+6. **manage_job_run** - Cancel a running job or delete a non-active job run.
+7. **run_job** - Trigger a new job run and return the run_id. Supports idempotency tokens to prevent duplicate runs.
+8. **get_job_run_output** - Retrieve the output and metadata of a single task run. Returns first 5 MB of output. For notebook tasks, gets the value from dbutils.notebook.exit().
+9. **query_serving_endpoint** - Query a serving endpoint with input data. Supports various input formats including dataframes, tensors, and prompts for external/foundation models.
+10. **query_vector_index** - Query a vector index for similarity search. Supports ANN and HYBRID search with optional filtering.
+11. **execute_sql** - Execute a SQL statement and optionally await its results. Supports inline results (<25 MiB) or external links (up to 100 GiB).
+12. **list_warehouses** - List all SQL warehouses that you have access to.
+13. **list_serving_endpoints** - List all model serving endpoints in the workspace.
+14. **list_vector_search_endpoints** - List all vector search endpoints in the workspace.

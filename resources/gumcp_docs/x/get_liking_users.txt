@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "tweet_id": {
+    "type": "string",
+    "description": "A single Post ID."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of liking users to return across all pages .",
+    "minimum": 1
+  },
+  "user_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of User fields to display. Minimum length: 1"
+  },
+  "expansions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of fields to expand. Minimum length: 1"
+  },
+  "tweet_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Tweet fields to display. Minimum length: 1"
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "pull_request_number": {
+    "type": "string",
+    "description": "Pull request number to retrieve"
+  }
+}
+```

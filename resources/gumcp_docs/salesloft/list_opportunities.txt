@@ -1,0 +1,180 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of opportunities to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of opportunities to fetch. If a record can't be found, that record won't be returned and your request will be successful"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "crm_id": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "CRM IDs of opportunities to fetch. If a record can't be found, that record won't be returned and your request will be successful"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the given person"
+  },
+  "tag": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters opportunities by the tags applied to the opportunity. Multiple tags can be applied"
+  },
+  "tag_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filters opportunities by the tag id's applied to the opportunity. Multiple tag id's can be applied"
+  },
+  "account_crm_id": {
+    "type": "string",
+    "description": "Filters to only opportunities associated with the given crm account"
+  },
+  "account_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the given account for teams without a CRM connected"
+  },
+  "associated_account_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the given associated account for CRM connected teams"
+  },
+  "owner_crm_id": {
+    "type": "string",
+    "description": "Filters to only opportunities associated with the given crm owner"
+  },
+  "opportunity_type": {
+    "type": "string",
+    "description": "Filters to only opportunities associated with the opportunity type"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the given user"
+  },
+  "name": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filters to only opportunities associated with the given name"
+  },
+  "stage_name": {
+    "type": "string",
+    "description": "Filters to only opportunities associated with the given stage name"
+  },
+  "created_date_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_date_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_date_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "created_date_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "close_date_gt": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "close_date_gte": {
+    "type": "string",
+    "description": "Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "close_date_lt": {
+    "type": "string",
+    "description": "Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "close_date_lte": {
+    "type": "string",
+    "description": "Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."
+  },
+  "is_closed": {
+    "type": "boolean",
+    "description": "Filters to only opportunities that are closed"
+  },
+  "is_won": {
+    "type": "boolean",
+    "description": "Filters to only opportunities that are won"
+  },
+  "most_recent_cadence_id": {
+    "type": "integer",
+    "description": "Filters to only opportunities associated with the most recent cadence id"
+  },
+  "scoped_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specify explicit scoped fields desired on the Opportunity Resource."
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Key to sort on, must be one of: created_at, updated_at, crm_last_updated_date, close_date.",
+    "enum": [
+      "created_at",
+      "updated_at",
+      "crm_last_updated_date",
+      "close_date"
+    ],
+    "default": "updated_at"
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Direction to sort in, must be one of: ASC, DESC.",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "default": "DESC"
+  }
+}
+```

@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "project_url": {
+    "type": "string",
+    "description": "GitHub project URL (e.g., https://github.com/users/username/projects/123 or https://github.com/orgs/orgname/projects/123 or https://github.com/owner/repo/projects/123). PREFERRED method for project identification."
+  },
+  "project_id": {
+    "type": "string",
+    "description": "The global ID of the project (format: PVT_*). Alternative to project_url."
+  },
+  "project_number": {
+    "type": "integer",
+    "description": "The project number. Must be used together with 'owner' parameter. Alternative to project_url or project_id."
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner or organization name. REQUIRED when using project_number parameter."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Only needed for repository projects when using project_number (user/org projects don't need this)."
+  }
+}
+```

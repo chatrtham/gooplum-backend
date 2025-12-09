@@ -1,0 +1,27 @@
+# Teams Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (21 total)
+
+1. **get_teams** - Get the list of teams the user is a member of
+2. **get_team_details** - Get details of a specific Microsoft Teams team using either team ID or name
+3. **get_team_channels** - Get the list of channels in a team using either team ID or name
+4. **create_team_channel** - Create a new channel in a team using either team ID or name
+5. **get_direct_messages** - Get the list of your direct message conversations and group chats
+6. **get_direct_message_history** - Get message history from a direct message or group chat conversation
+7. **send_direct_message** - Send a direct message or message to a group chat
+8. **get_team_channel_messages** - Get messages from a channel using either team/channel IDs or names
+9. **send_team_channel_message** - Send a message to a channel using either team/channel IDs or names
+10. **post_message_reply** - Post a reply to a message in a Teams channel using either team/channel IDs or names
+11. **get_team_members** - Get the list of members in a team using either team ID or name
+12. **add_team_member** - Add a user to a team using either team ID/name and user ID/email
+13. **get_channel_members** - Get the list of members in a channel using either team/channel IDs or names
+14. **add_channel_member** - Add a user to a channel using either team/channel IDs/names and user ID/email
+15. **create_chat** - Create a new direct chat or group chat with users
+16. **get_message_replies** - Get all replies to a specific message in a Teams channel
+17. **search_thread_replies** - Search for a message thread by subject/title in a channel and get all its replies
+18. **create_meeting** - Create a new online meeting in Microsoft Teams
+19. **list_meetings** - List upcoming meetings with Teams integration
+20. **update_meeting** - Update an existing meeting
+21. **delete_meeting** - Delete a meeting

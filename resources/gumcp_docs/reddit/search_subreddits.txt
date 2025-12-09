@@ -1,0 +1,47 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query string (up to 50 characters for name search, 512 for description search)"
+  },
+  "search_type": {
+    "type": "string",
+    "enum": [
+      "names",
+      "description"
+    ],
+    "description": "Type of search - 'names' for subreddits beginning with query, 'description' for subreddits by title and description"
+  },
+  "exact": {
+    "type": "boolean",
+    "description": "If true, only exact matches will be returned (only for name search)"
+  },
+  "include_over_18": {
+    "type": "boolean",
+    "description": "Include subreddits with over-18 content restrictions (default: false)"
+  },
+  "include_unadvertisable": {
+    "type": "boolean",
+    "description": "Include subreddits that hide ads (default: false)"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return",
+    "default": 10,
+    "maximum": 100
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "relevance",
+      "activity"
+    ],
+    "description": "Sort order for description search (default: relevance)"
+  },
+  "show_users": {
+    "type": "boolean",
+    "description": "Include user results in description search (default: false)"
+  }
+}
+```

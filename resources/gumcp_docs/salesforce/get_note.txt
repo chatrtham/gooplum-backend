@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "record_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the record to find notes for (e.g., Opportunity ID, Account ID, Contact ID, etc.)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of notes to return",
+    "default": 10
+  }
+}
+```

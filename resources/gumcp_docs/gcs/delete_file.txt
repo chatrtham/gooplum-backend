@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "bucket_name": {
+    "type": "string",
+    "description": "Name of the bucket containing the file"
+  },
+  "file_name": {
+    "type": "string",
+    "description": "Name/path of the file to delete"
+  }
+}
+```

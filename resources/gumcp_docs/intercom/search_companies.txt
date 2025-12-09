@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the company to filter by (exact match)"
+  },
+  "company_id": {
+    "type": "string",
+    "description": "The company_id of the company to filter by (your system's unique identifier)"
+  },
+  "tag_id": {
+    "type": "string",
+    "description": "The tag_id of the company to filter by"
+  },
+  "segment_id": {
+    "type": "string",
+    "description": "The segment_id of the company to filter by"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of companies to return (default: 10)",
+    "default": 10
+  }
+}
+```

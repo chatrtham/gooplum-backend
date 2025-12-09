@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "conversation_id": {
+    "type": "string",
+    "description": "ID of the conversation to reply to"
+  },
+  "message": {
+    "type": "string",
+    "description": "Reply message content"
+  },
+  "user_id": {
+    "type": "string",
+    "description": "ID of the contact/user to reply on behalf of (optional - only use this if you want to reply as a specific contact rather than as an admin)"
+  },
+  "admin_id": {
+    "type": "string",
+    "description": "ID of the admin sending the reply (optional - will auto-resolve to the currently authenticated admin if not provided)"
+  }
+}
+```

@@ -1,0 +1,103 @@
+Parameters Schema:
+```json
+{
+  "date_range": {
+    "type": "string",
+    "enum": [
+      "all"
+    ],
+    "description": "When set to all, the since and until parameters and defaults are ignored."
+  },
+  "incident_key": {
+    "type": "string",
+    "description": "Incident de-duplication key."
+  },
+  "include": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "acknowledgers",
+        "agents",
+        "assignees",
+        "conference_bridge",
+        "escalation_policies",
+        "first_trigger_log_entries",
+        "priorities",
+        "services",
+        "teams",
+        "users"
+      ]
+    },
+    "description": "Array of additional details to include."
+  },
+  "service_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Returns only incidents associated with these services."
+  },
+  "since": {
+    "type": "string",
+    "description": "The start of the date range over which to search."
+  },
+  "sort_by": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Fields to sort by (incident_number/created_at/resolved_at/urgency) with direction (asc/desc)."
+  },
+  "statuses": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "triggered",
+        "acknowledged",
+        "resolved"
+      ]
+    },
+    "description": "Return only incidents with the given statuses."
+  },
+  "team_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "An array of team IDs to filter incidents by."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone in which results will be rendered."
+  },
+  "until": {
+    "type": "string",
+    "description": "The end of the date range over which to search."
+  },
+  "urgencies": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "high",
+        "low"
+      ]
+    },
+    "description": "Array of urgencies to filter incidents by."
+  },
+  "user_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Returns only incidents currently assigned to these users."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to collect across all pages (automatically handles pagination). If not provided, uses single page with limit parameter.",
+    "default": 10
+  }
+}
+```

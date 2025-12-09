@@ -1,0 +1,41 @@
+# Semrush Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (35 total)
+
+1. **get_domain_rank_report** - Get SEMrush rank report showing the most popular domains ranked by traffic from Google's top 100 organic search results
+2. **get_domain_overview_data** - Get overview data across all regional databases showing keyword rankings in both organic and paid search for domains, subdomains, subfolders, or URLs
+3. **get_winners_losers_report** - Get changes in keyword rankings, traffic, and budget estimates of the most popular websites showing winners and losers
+4. **get_domain_keywords** - Get keywords that bring users to a target via Google's organic or paid search results for domains, subdomains, subfolders, or URLs
+5. **get_domain_ad_copies** - Get unique ad copies that appeared when target ranked in Google's paid search results for domains, subdomains, or subfolders
+6. **get_domain_competitors** - Get domain's competitors in organic or paid search results
+7. **get_domain_ad_history** - Get keywords a domain has bid on in the last 12 months and its positions in paid search results
+8. **compare_domains_by_keywords** - Compare up to five domains by common keywords, unique keywords, or all keywords
+9. **get_domain_pla_keywords** - Get keywords that trigger a domain's product listing ads (PLA) in Google's paid search results
+10. **get_domain_pla_copies** - Get product listing ad (PLA) copies that appeared when domain ranked in Google's paid search results
+11. **get_domain_pla_competitors** - Get domains that compete against the requested domain in Google's paid search results with product listing ads (PLA)
+12. **get_domain_organic_subdomains** - Get subdomains of the analyzed domain ranking in Google's top 100 organic search results
+13. **get_organic_pages** - Get unique pages ranking in Google's top 100 organic search results for domains, subdomains, or subfolders
+14. **get_keyword_overview** - Get keyword overview data for a specific database or across all regional databases including volume, CPC, and competition
+15. **get_keyword_search_results** - Get domains ranking in Google's organic or paid search results for a keyword
+16. **research_related_keywords** - Get keyword research data including related keywords, broad match keywords, or question-based keywords
+17. **get_keyword_ads_history** - Get domains that have bid on a keyword in the last 12 months and their positions
+18. **get_keyword_difficulty_score** - Get keyword difficulty index to estimate how difficult it would be to rank in Google's top 10 for a keyword
+19. **get_backlinks_overview** - Get a summary of backlinks including type, referring domains, and IP addresses for a domain
+20. **get_backlinks_list** - Get a list of backlinks for a domain, root domain, or URL
+21. **analyze_backlinks_data** - Get backlinks analysis data including referring domains, IPs, TLD distribution, geographical distribution, or anchor texts
+22. **get_backlinks_pages** - Get indexed pages of the queried domain
+23. **get_backlinks_competitors** - Get domains that share a similar backlink profile with the analyzed domain
+24. **get_backlinks_authority_score_profile** - Get distribution of referring domains by Authority Score
+25. **get_backlinks_categories_profile** - Get categories that referring domains belong to
+26. **get_domain_categories** - Get categories that the queried domain belongs to
+27. **get_backlinks_historical_data** - Get monthly historical trends of backlinks and referring domains
+28. **get_subdomain_competitors** - Get subdomain's competitors in organic or paid search results
+29. **get_traffic_summary** - Get traffic summary metrics including total visits, unique visitors, pages per visit, and bounce rate for domains
+30. **get_daily_traffic** - Get day-by-day traffic breakdown including visits, traffic sources (direct, organic, paid, social), and engagement metrics
+31. **get_weekly_traffic** - Get week-by-week traffic analysis including visits, traffic sources, and engagement metrics for broader trend analysis
+32. **get_traffic_sources** - Get detailed traffic sources breakdown by channel (direct, search, social, referral, email, display) and type (organic, paid)
+33. **get_purchase_conversion** - Get purchase conversion rate showing percentage of sessions ending in a purchase (desktop only, requires Premium API access)
+34. **get_top_pages** - Get most popular pages of domains showing which content resonates most with the audience
+35. **get_traffic_rank** - Get domains sorted by traffic rank to benchmark against competitors and understand relative market position

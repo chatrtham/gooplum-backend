@@ -1,0 +1,12 @@
+# Youtube Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (6 total)
+
+1. **search_videos** - Search YouTube videos by search terms. Returns video details including titles, views, likes, duration, channel info, and metadata.
+2. **get_video_details** - Get detailed information about specific YouTube videos by URL or video ID. Returns comprehensive video metadata, statistics, and content details.
+3. **get_channel_videos** - Get videos from a specific YouTube channel. Returns channel videos with full metadata and statistics.
+4. **get_playlist_videos** - Get videos from a YouTube playlist. Returns all videos in the playlist with metadata and statistics.
+5. **get_channel_details** - Get detailed information about a YouTube channel including subscriber count, total videos, description, and metadata.
+6. **get_video_comments** - Get comments from YouTube videos. Returns comment text, author information, vote counts, reply counts, and metadata.

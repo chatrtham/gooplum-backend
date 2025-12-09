@@ -1,0 +1,25 @@
+# Beehiiv Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (19 total)
+
+1. **list_automations** - List automations in a BeehiiV publication
+2. **create_custom_field** - Create a custom field on a BeehiiV publication, for use in subscriptions
+3. **list_custom_fields** - List all custom fields on a BeehiiV publication
+4. **list_posts** - Retrieve all posts belonging to a BeehiiV publication
+5. **get_post** - Retrieve a single post from a BeehiiV publication
+6. **create_post** - Create a new post for a BeehiiV publication
+7. **delete_post** - Delete or archive a post from a BeehiiV publication
+8. **list_segments** - List segments for a BeehiiV publication
+9. **get_segment** - Get a specific segment from a BeehiiV publication
+10. **list_segment_subscribers** - List subscribers in a specific segment from a BeehiiV publication
+11. **create_subscription** - Create a new subscription for a BeehiiV publication
+12. **list_subscriptions** - List subscriptions for a BeehiiV publication
+13. **get_subscription_by_email** - Get a subscription by email from a BeehiiV publication
+14. **get_subscription** - Get a subscription by ID from a BeehiiV publication
+15. **update_subscription** - Update a subscription in a BeehiiV publication
+16. **delete_subscription** - Delete a subscription from a BeehiiV publication
+17. **add_subscription_tag** - Add tags to a subscription in a BeehiiV publication
+18. **list_tiers** - List tiers for a BeehiiV publication
+19. **create_tier** - Create a new tier for a BeehiiV publication

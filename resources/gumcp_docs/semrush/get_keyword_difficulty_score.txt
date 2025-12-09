@@ -1,0 +1,69 @@
+Parameters Schema:
+```json
+{
+  "phrase": {
+    "type": "string",
+    "description": "Keyword or keywords separated by semicolons (up to 100 keywords)"
+  },
+  "database": {
+    "type": "string",
+    "description": "Regional database for the report",
+    "enum": [
+      "us",
+      "uk",
+      "ca",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "br",
+      "au",
+      "ar",
+      "be",
+      "ch",
+      "cl",
+      "co",
+      "cz",
+      "dk",
+      "fi",
+      "gr",
+      "hk",
+      "hu",
+      "id",
+      "ie",
+      "il",
+      "in",
+      "jp",
+      "mx",
+      "my",
+      "nl",
+      "no",
+      "nz",
+      "pe",
+      "ph",
+      "pl",
+      "pt",
+      "ro",
+      "se",
+      "sg",
+      "th",
+      "tr",
+      "tw",
+      "ua",
+      "vn"
+    ]
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Ph - Keyword",
+        "Kd - Keyword Difficulty Index"
+      ]
+    },
+    "description": "Specific columns to include in the report. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

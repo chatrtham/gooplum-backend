@@ -1,0 +1,31 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "The unique identifier of the person to update"
+  },
+  "first_name": {
+    "type": "string",
+    "description": "The first name of the person"
+  },
+  "last_name": {
+    "type": "string",
+    "description": "The last name of the person"
+  },
+  "emails": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of email addresses (must include existing emails to keep them)"
+  },
+  "organization_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Array of organization IDs (must include existing IDs to keep them)"
+  }
+}
+```

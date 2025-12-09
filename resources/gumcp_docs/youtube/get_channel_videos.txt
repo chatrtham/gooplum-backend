@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "channel_url": {
+    "type": "string",
+    "description": "YouTube channel URL (e.g., 'https://www.youtube.com/c/channelname' or 'https://www.youtube.com/@username')"
+  },
+  "channel_name": {
+    "type": "string",
+    "description": "YouTube channel name or @username (alternative to URL)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of regular videos to return",
+    "default": 10
+  },
+  "max_shorts": {
+    "type": "integer",
+    "description": "Maximum number of YouTube Shorts to return",
+    "default": 0
+  },
+  "max_streams": {
+    "type": "integer",
+    "description": "Maximum number of live streams to return",
+    "default": 0
+  },
+  "sort_videos_by": {
+    "type": "string",
+    "enum": [
+      "NEWEST",
+      "POPULAR",
+      "OLDEST"
+    ],
+    "description": "Sort order for channel videos"
+  },
+  "published_after": {
+    "type": "string",
+    "description": "Only include videos published after this date. Use ISO 8601 format (e.g., '2023-01-01T00:00:00Z' or '2023-01-01')"
+  }
+}
+```

@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "limit_type": {
+    "type": "string",
+    "description": "Optional specific limit to check (e.g., 'DailyApiRequests', 'DataStorageMB')"
+  }
+}
+```

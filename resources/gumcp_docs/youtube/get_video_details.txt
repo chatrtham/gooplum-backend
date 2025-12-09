@@ -1,0 +1,78 @@
+Parameters Schema:
+```json
+{
+  "video_urls": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of YouTube video URLs (e.g., 'https://www.youtube.com/watch?v=VIDEO_ID')"
+  },
+  "video_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of YouTube video IDs (alternative to URLs)"
+  },
+  "include_subtitles": {
+    "type": "boolean",
+    "description": "Include subtitles in the response for videos that have them available"
+  },
+  "subtitles_language": {
+    "type": "string",
+    "enum": [
+      "any",
+      "en",
+      "de",
+      "es",
+      "fr",
+      "it",
+      "ja",
+      "ko",
+      "nl",
+      "pt",
+      "ru",
+      "ar",
+      "zh",
+      "hi",
+      "tr",
+      "pl",
+      "sv",
+      "da",
+      "no",
+      "fi",
+      "he",
+      "th",
+      "vi",
+      "cs",
+      "hu",
+      "ro",
+      "el",
+      "bg",
+      "hr",
+      "sk",
+      "sl",
+      "et",
+      "lv",
+      "lt",
+      "mt"
+    ],
+    "description": "Language for subtitles to include (requires include_subtitles=true). Supports: any, English (en), German (de), Spanish (es), French (fr), Italian (it), Japanese (ja), Korean (ko), Dutch (nl), Portuguese (pt), Russian (ru), Arabic (ar), Chinese (zh), Hindi (hi), Turkish (tr), Polish (pl), Swedish (sv), Danish (da), Norwegian (no), Finnish (fi), Hebrew (he), Thai (th), Vietnamese (vi), Czech (cs), Hungarian (hu), Romanian (ro), Greek (el), Bulgarian (bg), Croatian (hr), Slovak (sk), Slovenian (sl), Estonian (et), Latvian (lv), Lithuanian (lt), Maltese (mt)"
+  },
+  "subtitles_format": {
+    "type": "string",
+    "enum": [
+      "srt",
+      "vtt",
+      "xml",
+      "plaintext"
+    ],
+    "description": "Format for subtitle text (requires include_subtitles=true)"
+  },
+  "prefer_auto_generated_subtitles": {
+    "type": "boolean",
+    "description": "Prefer automatically generated subtitles over user-created ones when both are available"
+  }
+}
+```

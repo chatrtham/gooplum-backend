@@ -1,0 +1,116 @@
+Parameters Schema:
+```json
+{
+  "name": {
+    "type": "string",
+    "description": "The name of the schedule."
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "The time zone of the schedule."
+  },
+  "description": {
+    "type": "string",
+    "description": "The description of the schedule."
+  },
+  "schedule_layers": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the schedule layer."
+        },
+        "start": {
+          "type": "string",
+          "description": "The start time of the schedule layer."
+        },
+        "rotation_virtual_start": {
+          "type": "string",
+          "description": "The time when the layer starts rotating."
+        },
+        "rotation_turn_length_seconds": {
+          "type": "integer",
+          "description": "The duration of each on-call shift in seconds."
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the user."
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "user_reference"
+                    ],
+                    "description": "The type of reference."
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ]
+              }
+            },
+            "required": [
+              "user"
+            ]
+          },
+          "description": "The users in the layer."
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "daily_restriction",
+                  "weekly_restriction"
+                ],
+                "description": "The type of restriction."
+              },
+              "start_time_of_day": {
+                "type": "string",
+                "description": "The time of day when the restriction starts."
+              },
+              "duration_seconds": {
+                "type": "integer",
+                "description": "The duration of the restriction in seconds."
+              }
+            },
+            "required": [
+              "type",
+              "start_time_of_day",
+              "duration_seconds"
+            ]
+          },
+          "description": "The restrictions for the layer."
+        }
+      },
+      "required": [
+        "name",
+        "start",
+        "rotation_virtual_start",
+        "rotation_turn_length_seconds",
+        "users"
+      ]
+    },
+    "description": "A list of schedule layers."
+  },
+  "overflow": {
+    "type": "boolean",
+    "description": "If true, on-call schedule entries that pass the date range bounds will not be truncated.",
+    "default": false
+  }
+}
+```

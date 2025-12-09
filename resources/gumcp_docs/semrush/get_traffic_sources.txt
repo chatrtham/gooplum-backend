@@ -1,0 +1,91 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Root domain, subdomain, or subfolder to investigate"
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date in UTC ISO format (e.g., '2024-05-15T00:00:00Z'). Defaults to previous month if not specified"
+  },
+  "device_type": {
+    "type": "string",
+    "description": "Device type to retrieve data for",
+    "enum": [
+      "desktop",
+      "mobile"
+    ]
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return (default: 1000, max: 5000)",
+    "minimum": 1,
+    "maximum": 5000
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip before sending report",
+    "minimum": 0,
+    "maximum": 10000
+  },
+  "traffic_channel": {
+    "type": "string",
+    "description": "Filter by specific traffic channel",
+    "enum": [
+      "direct",
+      "referral",
+      "search",
+      "social",
+      "mail",
+      "display_ad"
+    ]
+  },
+  "traffic_type": {
+    "type": "string",
+    "description": "Filter by traffic type",
+    "enum": [
+      "organic",
+      "paid"
+    ]
+  },
+  "sort_order": {
+    "type": "string",
+    "description": "Sort order (append _desc for descending, _asc for ascending)",
+    "enum": [
+      "traffic",
+      "traffic_desc",
+      "traffic_asc",
+      "traffic_diff",
+      "traffic_diff_desc",
+      "traffic_diff_asc",
+      "traffic_share",
+      "traffic_share_desc",
+      "traffic_share_asc"
+    ]
+  },
+  "country": {
+    "type": "string",
+    "description": "Country code (ISO 3166-1 Alpha-2). Defaults to global if not specified"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "target",
+        "from_target",
+        "display_date",
+        "country",
+        "device_type",
+        "traffic",
+        "traffic_share",
+        "traffic_diff",
+        "channel",
+        "type"
+      ]
+    },
+    "description": "Specific columns to include in the report"
+  }
+}
+```

@@ -1,0 +1,16 @@
+# Gcs Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (10 total)
+
+1. **list_buckets** - List Google Cloud Storage buckets accessible to the authenticated user
+2. **search_files** - List files/objects in a Google Cloud Storage bucket
+3. **file_details** - Get detailed information about a specific file/object in Google Cloud Storage
+4. **download_file** - Generate a downloadable signed URL for a file in Google Cloud Storage
+5. **bucket_details** - Get detailed information about a specific Google Cloud Storage bucket
+6. **upload_file** - Upload a file from the local filesystem to a Google Cloud Storage bucket
+7. **delete_file** - Delete a file/object from a Google Cloud Storage bucket
+8. **copy_file** - Copy a file within the same bucket or to a different bucket
+9. **move_file** - Move or rename a file within the same bucket or to a different bucket
+10. **create_bucket** - Create a new Google Cloud Storage bucket

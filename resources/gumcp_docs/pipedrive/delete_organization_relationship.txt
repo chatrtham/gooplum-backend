@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "relationship_id": {
+    "type": "integer",
+    "description": "The ID of the organization relationship"
+  }
+}
+```

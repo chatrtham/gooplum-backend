@@ -1,0 +1,38 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The contact's email address (required)"
+  },
+  "firstName": {
+    "type": "string",
+    "description": "The contact's first name"
+  },
+  "lastName": {
+    "type": "string",
+    "description": "The contact's last name"
+  },
+  "source": {
+    "type": "string",
+    "description": "A custom source value to replace the default 'API'"
+  },
+  "subscribed": {
+    "type": "boolean",
+    "description": "Whether the contact will receive campaign and loops emails",
+    "default": true
+  },
+  "userGroup": {
+    "type": "string",
+    "description": "User group for segmentation (contact can only be in one group)"
+  },
+  "userId": {
+    "type": "string",
+    "description": "A unique user ID from external application"
+  },
+  "mailingLists": {
+    "type": "object",
+    "description": "Mailing list subscriptions as key-value pairs of list IDs and boolean values"
+  }
+}
+```

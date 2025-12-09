@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The ID of the board"
+  }
+}
+```

@@ -1,0 +1,63 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search text in file names and content. Searches both file names and document content."
+  },
+  "file_id": {
+    "type": "string",
+    "description": "Get specific file by Google Drive ID (e.g., '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms')"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Get specific file by Google Drive URL (e.g., 'https://drive.google.com/file/d/ID/view')"
+  },
+  "folder_id": {
+    "type": "string",
+    "description": "Search only within specific folder by Google Drive ID"
+  },
+  "folder_url": {
+    "type": "string",
+    "description": "Search only within specific folder by Google Drive URL"
+  },
+  "mime_type": {
+    "type": "string",
+    "description": "Filter by file type. Common types: 'application/vnd.google-apps.document' (Google Docs), 'application/vnd.google-apps.spreadsheet' (Sheets), 'application/vnd.google-apps.presentation' (Slides), 'application/vnd.google-apps.folder', 'application/pdf', 'text/plain', 'image/jpeg'"
+  },
+  "file_extension": {
+    "type": "string",
+    "description": "Filter by file extension: 'pdf', 'docx', 'xlsx', 'txt', 'jpg' (no dot)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Filter by owner email address"
+  },
+  "shared_with_me": {
+    "type": "boolean",
+    "description": "Search only files shared with you"
+  },
+  "trashed": {
+    "type": "boolean",
+    "description": "Include trashed files (default: false)"
+  },
+  "starred": {
+    "type": "boolean",
+    "description": "Search only starred files"
+  },
+  "modified_after": {
+    "type": "string",
+    "description": "Files modified after date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss)"
+  },
+  "modified_before": {
+    "type": "string",
+    "description": "Files modified before date (YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum results (default: 10, max: 100)",
+    "default": 10,
+    "maximum": 100
+  }
+}
+```

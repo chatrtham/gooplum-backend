@@ -1,0 +1,44 @@
+Parameters Schema:
+```json
+{
+  "id": {
+    "type": "string",
+    "description": "The ID of the project to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The new name of the project"
+  },
+  "description": {
+    "type": "string",
+    "description": "The full project description in Markdown format"
+  },
+  "content": {
+    "type": "string",
+    "description": "The project's content in markdown format"
+  },
+  "startDate": {
+    "type": "string",
+    "description": "The start date of the project in ISO format"
+  },
+  "targetDate": {
+    "type": "string",
+    "description": "The target date of the project in ISO format"
+  },
+  "lead": {
+    "type": "string",
+    "description": "The user to assign (User ID, name, email, or \"me\")"
+  },
+  "state": {
+    "type": "string",
+    "description": "The state of the project"
+  },
+  "labels": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Array of labels or IDs to set on the project"
+  }
+}
+```

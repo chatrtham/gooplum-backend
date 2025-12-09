@@ -1,0 +1,109 @@
+Parameters Schema:
+```json
+{
+  "phrase": {
+    "type": "string",
+    "description": "Keyword or keyword expression to investigate"
+  },
+  "database": {
+    "type": "string",
+    "description": "Regional database for the report",
+    "enum": [
+      "us",
+      "uk",
+      "ca",
+      "ru",
+      "de",
+      "fr",
+      "es",
+      "it",
+      "br",
+      "au",
+      "ar",
+      "be",
+      "ch",
+      "cl",
+      "co",
+      "cz",
+      "dk",
+      "fi",
+      "gr",
+      "hk",
+      "hu",
+      "id",
+      "ie",
+      "il",
+      "in",
+      "jp",
+      "mx",
+      "my",
+      "nl",
+      "no",
+      "nz",
+      "pe",
+      "ph",
+      "pl",
+      "pt",
+      "ro",
+      "se",
+      "sg",
+      "th",
+      "tr",
+      "tw",
+      "ua",
+      "vn"
+    ]
+  },
+  "result_type": {
+    "type": "string",
+    "description": "Type of search results to retrieve",
+    "enum": [
+      "organic",
+      "paid"
+    ],
+    "default": "organic"
+  },
+  "display_limit": {
+    "type": "integer",
+    "description": "Number of results to return (default: 10000, max: 100000)",
+    "minimum": 1,
+    "maximum": 100000
+  },
+  "display_offset": {
+    "type": "integer",
+    "description": "Number of results to skip before sending report",
+    "minimum": 0
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date for the report in UTC ISO format (e.g., '2023-12-15T00:00:00Z')"
+  },
+  "positions_type": {
+    "type": "string",
+    "description": "Type of positions to include (organic results only)",
+    "enum": [
+      "organic",
+      "all"
+    ],
+    "default": "organic"
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "Po - Position",
+        "Pt - Position Type",
+        "Dn - Domain",
+        "Ur - URL",
+        "Vu - Visible URL",
+        "Fk - Keywords SERP Features",
+        "Fp - SERP Features Position",
+        "Tt - Title",
+        "Ds - Description"
+      ]
+    },
+    "description": "Specific columns to include in the report. Use only the ID part (before ' - ') from the available options"
+  }
+}
+```

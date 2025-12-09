@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "folderId": {
+    "type": "string",
+    "description": "ID of the library folder to get content for"
+  }
+}
+```

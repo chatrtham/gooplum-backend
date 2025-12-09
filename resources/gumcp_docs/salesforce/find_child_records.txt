@@ -1,0 +1,24 @@
+Parameters Schema:
+```json
+{
+  "parent_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the parent record"
+  },
+  "child_object_name": {
+    "type": "string",
+    "description": "The API name of the child Salesforce object (e.g., 'LineItem__c')"
+  },
+  "parent_field_name": {
+    "type": "string",
+    "description": "The API name of the field that links to the parent (e.g., 'Order__c')"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Optional list of fields to retrieve (retrieves all fields if not specified)"
+  }
+}
+```

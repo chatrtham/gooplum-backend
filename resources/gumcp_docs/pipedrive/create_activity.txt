@@ -1,0 +1,89 @@
+Parameters Schema:
+```json
+{
+  "subject": {
+    "type": "string",
+    "description": "The subject of the activity"
+  },
+  "type": {
+    "type": "string",
+    "description": "The type of the activity (e.g., call, meeting, lunch, or custom type)"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "The ID of the user who owns the activity"
+  },
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal linked to the activity"
+  },
+  "lead_id": {
+    "type": "string",
+    "description": "The ID of the lead linked to the activity"
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person linked to the activity"
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "The ID of the organization linked to the activity"
+  },
+  "project_id": {
+    "type": "integer",
+    "description": "The ID of the project linked to the activity"
+  },
+  "due_date": {
+    "type": "string",
+    "description": "The due date of the activity. ISO 8601 date format (YYYY-MM-DD)"
+  },
+  "due_time": {
+    "type": "string",
+    "description": "The due time of the activity. HH:MM:SS format"
+  },
+  "duration": {
+    "type": "string",
+    "description": "The duration of the activity. HH:MM:SS format"
+  },
+  "busy": {
+    "type": "boolean",
+    "description": "Whether the activity marks the assignee as busy or not in their calendar"
+  },
+  "done": {
+    "type": "boolean",
+    "description": "Whether the activity is marked as done or not"
+  },
+  "location": {
+    "type": "object",
+    "description": "Location of the activity"
+  },
+  "participants": {
+    "type": "array",
+    "description": "The participants of the activity",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "attendees": {
+    "type": "array",
+    "description": "The attendees of the activity",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "public_description": {
+    "type": "string",
+    "description": "The public description of the activity"
+  },
+  "priority": {
+    "type": "integer",
+    "description": "The priority of the activity. Mappable to a specific string using activityFields API."
+  },
+  "note": {
+    "type": "string",
+    "description": "The note of the activity"
+  }
+}
+```

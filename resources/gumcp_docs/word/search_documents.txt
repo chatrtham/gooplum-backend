@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query to find documents containing this content"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of documents to return",
+    "default": 25
+  }
+}
+```

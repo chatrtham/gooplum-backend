@@ -1,0 +1,38 @@
+Parameters Schema:
+```json
+{
+  "field_id": {
+    "type": "string",
+    "description": "The global ID of the field to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The new name of the field (optional)"
+  },
+  "single_select_options": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "description": "Updated options for single select field (optional)"
+  },
+  "client_mutation_id": {
+    "type": "string",
+    "description": "A unique identifier for the client performing the mutation (optional)"
+  }
+}
+```

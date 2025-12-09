@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "sql": {
+    "type": "string",
+    "description": "SQL query"
+  },
+  "analyze": {
+    "type": "boolean",
+    "description": "Run query and show actual timing",
+    "default": false
+  },
+  "verbose": {
+    "type": "boolean",
+    "description": "Include extra details",
+    "default": false
+  },
+  "format": {
+    "type": "string",
+    "enum": [
+      "text",
+      "json",
+      "yaml",
+      "xml"
+    ],
+    "description": "Output format",
+    "default": "json"
+  }
+}
+```

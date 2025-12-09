@@ -1,0 +1,44 @@
+Parameters Schema:
+```json
+{
+  "organization_id": {
+    "type": "integer",
+    "description": "The ID of the organization to update"
+  },
+  "name": {
+    "type": "string",
+    "description": "The name of the organization"
+  },
+  "owner_id": {
+    "type": "integer",
+    "description": "The ID of the user who owns the organization"
+  },
+  "add_time": {
+    "type": "string",
+    "description": "The creation date and time of the organization"
+  },
+  "update_time": {
+    "type": "string",
+    "description": "The last updated date and time of the organization"
+  },
+  "visible_to": {
+    "type": "integer",
+    "description": "The visibility of the organization"
+  },
+  "label_ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "The IDs of labels assigned to the organization"
+  },
+  "address": {
+    "type": "object",
+    "description": "The address of the organization"
+  },
+  "custom_fields": {
+    "type": "object",
+    "description": "A map of custom fields with hash-based keys"
+  }
+}
+```

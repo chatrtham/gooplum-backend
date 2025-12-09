@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the Excel file"
+  },
+  "worksheet_name": {
+    "type": "string",
+    "description": "Name of the worksheet"
+  },
+  "row_index": {
+    "type": "integer",
+    "description": "Index of the row to update (1-based)"
+  },
+  "values": {
+    "type": "object",
+    "description": "Object with column-value pairs to update"
+  }
+}
+```

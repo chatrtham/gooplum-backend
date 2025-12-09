@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string",
+    "description": "Meeting ID or UUID"
+  },
+  "occurrence_id": {
+    "type": "string",
+    "description": "Meeting occurrence ID for recurring meetings"
+  },
+  "show_previous_occurrences": {
+    "type": "boolean",
+    "description": "Show all previous occurrences of recurring meeting"
+  }
+}
+```

@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The question or query to answer (e.g., 'What is the latest valuation of SpaceX?')"
+  },
+  "includeText": {
+    "type": "boolean",
+    "description": "Include full text content in the search results citations",
+    "default": false
+  }
+}
+```

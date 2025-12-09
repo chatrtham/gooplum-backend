@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "membership_id": {
+    "type": "integer",
+    "description": "Cadence membership ID to fetch"
+  }
+}
+```

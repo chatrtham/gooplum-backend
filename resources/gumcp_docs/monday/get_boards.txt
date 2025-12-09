@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of boards to return",
+    "default": 20
+  },
+  "workspace_id": {
+    "type": "string",
+    "description": "Workspace ID to filter boards by specific workspace"
+  }
+}
+```

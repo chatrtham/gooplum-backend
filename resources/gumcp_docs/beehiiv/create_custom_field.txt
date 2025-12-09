@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "publication_id": {
+    "type": "string",
+    "description": "The prefixed ID of the publication (e.g., pub_00000000-0000-0000-0000-000000000000)"
+  },
+  "kind": {
+    "type": "string",
+    "description": "The type of value being stored in the custom field",
+    "enum": [
+      "string",
+      "integer",
+      "boolean",
+      "date",
+      "datetime",
+      "list",
+      "double"
+    ]
+  },
+  "display": {
+    "type": "string",
+    "description": "The display name of the custom field"
+  }
+}
+```

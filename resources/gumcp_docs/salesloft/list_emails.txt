@@ -1,0 +1,175 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of emails to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of emails to fetch"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns emails updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns emails updated on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns emails updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns emails updated on or before this ISO 8601 timestamp"
+  },
+  "sent_at_gt": {
+    "type": "string",
+    "description": "Returns emails sent after this ISO 8601 timestamp"
+  },
+  "sent_at_gte": {
+    "type": "string",
+    "description": "Returns emails sent on or after this ISO 8601 timestamp"
+  },
+  "sent_at_lt": {
+    "type": "string",
+    "description": "Returns emails sent before this ISO 8601 timestamp"
+  },
+  "sent_at_lte": {
+    "type": "string",
+    "description": "Returns emails sent on or before this ISO 8601 timestamp"
+  },
+  "bounced": {
+    "type": "boolean",
+    "description": "Filter emails by whether they have bounced"
+  },
+  "crm_activity_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by CRM activity IDs"
+  },
+  "action_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by action IDs"
+  },
+  "user_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by user IDs"
+  },
+  "status": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter emails by status"
+  },
+  "cadence_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by cadence IDs"
+  },
+  "step_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by step IDs"
+  },
+  "one_off": {
+    "type": "boolean",
+    "description": "Filter emails by one-off only"
+  },
+  "scoped_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specify explicit scoped fields desired on the Email Resource (available scopes are in outputSchema)"
+  },
+  "person_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by person IDs"
+  },
+  "email_addresses": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter emails by recipient email addresses"
+  },
+  "personalization": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter emails by personalization score"
+  },
+  "email_template_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by email template IDs"
+  },
+  "account_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter emails by account IDs"
+  },
+  "has_replies": {
+    "type": "boolean",
+    "description": "Filter emails by whether they have replies"
+  },
+  "has_clicks": {
+    "type": "boolean",
+    "description": "Filter emails by whether they have clicks"
+  },
+  "has_views": {
+    "type": "boolean",
+    "description": "Filter emails by whether they have views"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "updated_at",
+      "recipient",
+      "send_time",
+      "account",
+      "subject",
+      "views",
+      "clicks",
+      "replies"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of buckets to return (optional)"
+  },
+  "prefix": {
+    "type": "string",
+    "description": "Filter buckets by name prefix (optional)"
+  },
+  "project_id": {
+    "type": "string",
+    "description": "Google Cloud Project ID to list buckets from (optional, uses default project if not specified)"
+  }
+}
+```

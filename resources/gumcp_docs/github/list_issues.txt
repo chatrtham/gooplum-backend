@@ -1,0 +1,71 @@
+Parameters Schema:
+```json
+{
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL (preferred over owner/repo_name)"
+  },
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username. Use repo_url instead if available."
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name. Use repo_url instead if available."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of issues to return. Default: all issues."
+  },
+  "state": {
+    "type": "string",
+    "enum": [
+      "open",
+      "closed",
+      "all"
+    ],
+    "description": "Filter issues by state. Default: open"
+  },
+  "labels": {
+    "type": "string",
+    "description": "Comma-separated list of label names to filter by."
+  },
+  "assignee": {
+    "type": "string",
+    "description": "Filter by user assigned to issues."
+  },
+  "creator": {
+    "type": "string",
+    "description": "Filter by user who created the issues."
+  },
+  "mentioned": {
+    "type": "string",
+    "description": "Filter by user mentioned in issues."
+  },
+  "milestone": {
+    "type": "string",
+    "description": "Filter by milestone name or \"*\" for issues with any milestone"
+  },
+  "since": {
+    "type": "string",
+    "description": "Only issues updated at or after this time (ISO 8601 format)"
+  },
+  "sort": {
+    "type": "string",
+    "enum": [
+      "created",
+      "updated",
+      "comments"
+    ],
+    "description": "Field to sort by"
+  },
+  "direction": {
+    "type": "string",
+    "enum": [
+      "asc",
+      "desc"
+    ],
+    "description": "Direction of sort"
+  }
+}
+```

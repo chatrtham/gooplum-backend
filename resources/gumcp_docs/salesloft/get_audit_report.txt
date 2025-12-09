@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "report_id": {
+    "type": "integer",
+    "description": "Audit report ID to fetch"
+  }
+}
+```

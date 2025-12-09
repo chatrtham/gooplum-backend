@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "email": {
+    "type": "string",
+    "description": "The contact's email address to search for (will be URI-encoded automatically)"
+  },
+  "userId": {
+    "type": "string",
+    "description": "The contact's unique user ID to search for"
+  }
+}
+```

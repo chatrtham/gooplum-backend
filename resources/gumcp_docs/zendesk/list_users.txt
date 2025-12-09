@@ -1,0 +1,48 @@
+Parameters Schema:
+```json
+{
+  "role": {
+    "type": "string",
+    "enum": [
+      "end-user",
+      "agent",
+      "admin"
+    ],
+    "description": "Filter users by role"
+  },
+  "roles": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "end-user",
+        "agent",
+        "admin"
+      ]
+    },
+    "description": "Filter users by multiple roles"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "List users by external ID (must be unique)"
+  },
+  "permission_set": {
+    "type": "integer",
+    "description": "Filter by custom role ID (Enterprise plan only)"
+  },
+  "group_id": {
+    "type": "string",
+    "description": "List users in a specific group"
+  },
+  "organization_id": {
+    "type": "string",
+    "description": "List users in a specific organization"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of users to return (default: 100)",
+    "default": 100
+  }
+}
+```

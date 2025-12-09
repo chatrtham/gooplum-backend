@@ -1,0 +1,89 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "One query/rule/filter for matching Posts. Refer to https://t.co/rulelength to identify the max query length. Required string length: 1 - 4096"
+  },
+  "search_type": {
+    "type": "string",
+    "description": "Type of search: 'recent' for last 7 days or 'all' for full archive",
+    "enum": [
+      "recent",
+      "all"
+    ],
+    "default": "recent"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of results to return across all pages. 10-100 for recent, 10-500 for all",
+    "minimum": 10
+  },
+  "start_time": {
+    "type": "string",
+    "description": "YYYY-MM-DDTHH:mm:ssZ. The oldest UTC timestamp from which the Posts will be provided. Timestamp is in second granularity and is inclusive (i.e. 12:00:01 includes the first second of the minute)."
+  },
+  "end_time": {
+    "type": "string",
+    "description": "YYYY-MM-DDTHH:mm:ssZ. The newest, most recent UTC timestamp to which the Posts will be provided. Timestamp is in second granularity and is exclusive (i.e. 12:00:01 excludes the first second of the minute)."
+  },
+  "since_id": {
+    "type": "string",
+    "description": "Returns results with a Post ID greater than (that is, more recent than) the specified ID."
+  },
+  "until_id": {
+    "type": "string",
+    "description": "Returns results with a Post ID less than (that is, older than) the specified ID."
+  },
+  "sort_order": {
+    "type": "string",
+    "description": "This order in which to return results.",
+    "enum": [
+      "recency",
+      "relevancy"
+    ]
+  },
+  "tweet_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Tweet fields to display. Minimum length: 1"
+  },
+  "expansions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of fields to expand. Minimum length: 1"
+  },
+  "media_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Media fields to display. Minimum length: 1"
+  },
+  "poll_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Poll fields to display. Minimum length: 1"
+  },
+  "user_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of User fields to display. Minimum length: 1"
+  },
+  "place_fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "A comma separated list of Place fields to display. Minimum length: 1"
+  }
+}
+```

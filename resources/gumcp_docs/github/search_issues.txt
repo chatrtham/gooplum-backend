@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query using GitHub search syntax (e.g., 'is:issue state:open author:username repo:owner/name label:bug')"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of issues to return across all pages"
+  }
+}
+```

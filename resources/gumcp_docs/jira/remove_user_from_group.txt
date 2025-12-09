@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "group_name": {
+    "type": "string",
+    "description": "Name of the group to remove the user from"
+  },
+  "account_id": {
+    "type": "string",
+    "description": "Account ID of the user to remove from the group"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

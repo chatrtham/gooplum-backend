@@ -1,0 +1,71 @@
+Parameters Schema:
+```json
+{
+  "target": {
+    "type": "string",
+    "description": "Domain, subdomain, or subfolder to investigate"
+  },
+  "target_type": {
+    "type": "string",
+    "description": "Type of target to analyze",
+    "enum": [
+      "domain",
+      "subdomain",
+      "subfolder"
+    ],
+    "default": "domain"
+  },
+  "display_date": {
+    "type": "string",
+    "description": "Date in UTC ISO format (e.g., '2024-05-15T00:00:00Z'). Defaults to previous month if not specified"
+  },
+  "device_type": {
+    "type": "string",
+    "description": "Device type to retrieve data for",
+    "enum": [
+      "desktop",
+      "mobile"
+    ]
+  },
+  "country": {
+    "type": "string",
+    "description": "Country code (ISO 3166-1 Alpha-2). Defaults to global if not specified"
+  },
+  "include_forecasted_items": {
+    "type": "boolean",
+    "description": "Include forecasted items for next 4 weeks (requires display_date set to current month)",
+    "default": false
+  },
+  "export_columns": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "display_date",
+        "country",
+        "device_type",
+        "target",
+        "rank",
+        "visits",
+        "users",
+        "hits",
+        "direct",
+        "search_organic",
+        "search_paid",
+        "social_organic",
+        "social_paid",
+        "referral",
+        "mail",
+        "display_ad",
+        "time_on_site",
+        "pages_per_visit",
+        "bounce_rate",
+        "desktop_share",
+        "mobile_share",
+        "is_forecasted"
+      ]
+    },
+    "description": "Specific columns to include in the report"
+  }
+}
+```

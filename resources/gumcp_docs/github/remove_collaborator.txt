@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "owner": {
+    "type": "string",
+    "description": "Repository owner username (e.g., 'octocat')"
+  },
+  "repo_name": {
+    "type": "string",
+    "description": "Repository name (e.g., 'Hello-World')"
+  },
+  "username": {
+    "type": "string",
+    "description": "The username to remove as a collaborator"
+  }
+}
+```

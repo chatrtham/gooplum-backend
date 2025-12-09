@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "Filter notes tagged with this person ID"
+  },
+  "organization_id": {
+    "type": "integer",
+    "description": "Filter notes tagged with this organization ID"
+  },
+  "opportunity_id": {
+    "type": "integer",
+    "description": "Filter notes tagged with this opportunity ID"
+  },
+  "creator_id": {
+    "type": "integer",
+    "description": "Filter notes created by this user ID"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of notes to collect across all pages (automatically handles pagination)"
+  }
+}
+```

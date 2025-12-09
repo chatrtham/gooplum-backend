@@ -1,0 +1,30 @@
+Parameters Schema:
+```json
+{
+  "title": {
+    "type": "string",
+    "description": "Title of the file"
+  },
+  "path_on_client": {
+    "type": "string",
+    "description": "Filename with extension (e.g., 'document.pdf')"
+  },
+  "version_data": {
+    "type": "string",
+    "description": "Base64-encoded file content"
+  },
+  "description": {
+    "type": "string",
+    "description": "Optional description of the file"
+  },
+  "record_id": {
+    "type": "string",
+    "description": "Optional record ID to link this file to"
+  },
+  "share_type": {
+    "type": "string",
+    "description": "Optional sharing type if record_id is provided (e.g., 'V' for Viewer)",
+    "default": "V"
+  }
+}
+```

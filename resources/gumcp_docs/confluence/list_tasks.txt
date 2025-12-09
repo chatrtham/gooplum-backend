@@ -1,0 +1,87 @@
+Parameters Schema:
+```json
+{
+  "body_format": {
+    "type": "string",
+    "enum": [
+      "storage",
+      "atlas_doc_format"
+    ],
+    "description": "The content format to return in the body field"
+  },
+  "include_blank_tasks": {
+    "type": "boolean",
+    "description": "Include blank tasks in the response",
+    "default": true
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "complete",
+      "incomplete"
+    ],
+    "description": "Filter by task status"
+  },
+  "task_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by task IDs (max 250)",
+    "maxItems": 250
+  },
+  "space_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by space IDs (max 250)",
+    "maxItems": 250
+  },
+  "page_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by page IDs (max 250)",
+    "maxItems": 250
+  },
+  "blogpost_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter by blog post IDs (max 250)",
+    "maxItems": 250
+  },
+  "created_by": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by creator Account IDs (max 250)",
+    "maxItems": 250
+  },
+  "assigned_to": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by assignee Account IDs (max 250)",
+    "maxItems": 250
+  },
+  "completed_by": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter by completer Account IDs (max 250)",
+    "maxItems": 250
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of tasks to return",
+    "default": 25
+  }
+}
+```

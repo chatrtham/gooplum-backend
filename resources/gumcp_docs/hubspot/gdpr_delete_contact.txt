@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "contact_id": {
+    "type": "string",
+    "description": "The ID of the contact to permanently delete"
+  },
+  "email": {
+    "type": "string",
+    "description": "Email address of the contact to permanently delete (alternative to contact_id)"
+  }
+}
+```

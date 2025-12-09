@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of candidates to return across all pages (automatically handles pagination). Default is 100.",
+    "default": 100
+  },
+  "email": {
+    "type": "string",
+    "description": "Search by candidate's email address."
+  },
+  "name": {
+    "type": "string",
+    "description": "Search by candidate's name."
+  }
+}
+```

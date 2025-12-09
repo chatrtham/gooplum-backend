@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "active": {
+    "type": "boolean",
+    "description": "Filter by active status: true for active forms, false for inactive forms"
+  },
+  "associated_to_brand": {
+    "type": "boolean",
+    "description": "true returns forms of the brand specified by the subdomain"
+  },
+  "end_user_visible": {
+    "type": "boolean",
+    "description": "Filter by end user visibility: true for visible forms, false for hidden forms"
+  },
+  "fallback_to_default": {
+    "type": "boolean",
+    "description": "true returns the default form when criteria results in no active end-user visible forms"
+  }
+}
+```

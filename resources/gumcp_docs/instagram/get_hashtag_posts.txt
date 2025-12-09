@@ -1,0 +1,31 @@
+Parameters Schema:
+```json
+{
+  "hashtag": {
+    "type": "string",
+    "description": "Hashtag to search for (with or without # symbol). Examples: 'nature', '#nature'"
+  },
+  "results_limit": {
+    "type": "integer",
+    "description": "Maximum number of posts to return",
+    "default": 10
+  },
+  "newer_than": {
+    "type": "string",
+    "enum": [
+      "1 hour",
+      "6 hours",
+      "12 hours",
+      "1 day",
+      "3 days",
+      "1 week",
+      "2 weeks",
+      "1 month",
+      "3 months",
+      "6 months",
+      "1 year"
+    ],
+    "description": "Only include posts newer than this time period"
+  }
+}
+```

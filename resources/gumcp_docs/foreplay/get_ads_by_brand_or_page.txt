@@ -1,0 +1,141 @@
+Parameters Schema:
+```json
+{
+  "brand_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Brand ID(s) to search for. Can be a single ID or multiple IDs. Use this OR page_id, not both."
+  },
+  "page_id": {
+    "type": "string",
+    "description": "Facebook page ID to search for (numeric ID). Use this OR brand_ids, not both."
+  },
+  "live": {
+    "type": "boolean",
+    "description": "Filter ads by live status. true means currently active ads, false means inactive ads."
+  },
+  "display_format": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "video",
+        "carousel",
+        "image",
+        "dco",
+        "dpa",
+        "multi_images",
+        "multi_videos",
+        "multi_medias",
+        "event",
+        "text",
+        "page_like"
+      ]
+    },
+    "description": "Filter by display formats."
+  },
+  "publisher_platform": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "facebook",
+        "instagram",
+        "audience_network",
+        "messenger",
+        "tiktok",
+        "youtube",
+        "linkedin",
+        "threads"
+      ]
+    },
+    "description": "Filter by publisher platforms."
+  },
+  "niches": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "accessories",
+        "app/software",
+        "beauty",
+        "business/professional",
+        "education",
+        "entertainment",
+        "fashion",
+        "food/drink",
+        "health/wellness",
+        "home/garden",
+        "jewelry/watches",
+        "other",
+        "parenting",
+        "pets",
+        "real estate",
+        "service business"
+      ]
+    },
+    "description": "Filter by niches."
+  },
+  "market_target": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "b2b",
+        "b2c"
+      ]
+    },
+    "description": "Filter by market target."
+  },
+  "languages": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "dutch, flemish",
+        "english",
+        "french",
+        "german",
+        "italian",
+        "japanese",
+        "latvian",
+        "lithuanian",
+        "polish",
+        "portuguese",
+        "romanian, moldavian, moldovan",
+        "serbian",
+        "slovene",
+        "spanish, castilian",
+        "swedish"
+      ]
+    },
+    "description": "Filter by languages."
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date (inclusive). Format: 'YYYY-MM-DD', 'YYYY-MM-DDTHH:MM:SS', or 'YYYY-MM-DD HH:MM:SS'."
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date (inclusive). Same format as start_date."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of ads to return across all pages (automatically handles pagination). Default 10, max 250.",
+    "default": 10
+  },
+  "order": {
+    "type": "string",
+    "enum": [
+      "newest",
+      "oldest",
+      "longest_running",
+      "most_relevant"
+    ],
+    "description": "Order of results.",
+    "default": "newest"
+  }
+}
+```

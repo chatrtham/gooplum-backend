@@ -1,0 +1,45 @@
+# Asana Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (39 total)
+
+1. **get_user_details** - Get the current logged-in user's details from Asana
+2. **list_projects** - List projects accessible to the current user with optional filtering and pagination
+3. **get_project** - Get detailed information about a specific project by its GID
+4. **add_project_members** - Add specified users as members to a project. Users can be specified by their GID or email address.
+5. **remove_project_members** - Remove specified users from project membership. Users can be specified by their GID or email address.
+6. **add_project_followers** - Add specified users as followers to a project. Followers receive 'tasks added' notifications. If users are not already members, they will become members too.
+7. **remove_project_followers** - Remove specified users from following a project. This will not affect project membership status.
+8. **list_tasks** - List tasks with optional filtering and pagination. You must specify a project, tag, assignee+workspace, or section.
+9. **create_task** - Create a new task in Asana. Task must be created in a workspace and can be added to projects.
+10. **get_task** - Get detailed information about a specific task by its GID
+11. **update_task** - Update an existing task. Only specified fields will be updated.
+12. **delete_task** - Delete a task. Deleted tasks go into trash and can be recovered within 30 days.
+13. **duplicate_task** - Create a duplicate of an existing task with customizable fields to copy
+14. **create_subtask** - Create a new subtask under an existing parent task
+15. **get_subtasks** - Get all subtasks of a parent task with pagination support
+16. **get_task_dependencies** - Get all tasks that this task depends on (dependencies) with pagination support
+17. **add_task_to_project** - Add a task to a project with optional positioning. A task can be in at most 20 projects.
+18. **remove_task_from_project** - Remove a task from a project. The task will still exist but won't be in the project anymore.
+19. **add_tag_to_task** - Add a tag to a task
+20. **remove_tag_from_task** - Remove a tag from a task
+21. **add_followers_to_task** - Add followers to a task. Users can be specified by their GID or email address.
+22. **remove_followers_from_task** - Remove followers from a task. Users can be specified by their GID or email address.
+23. **get_project_sections** - Get all sections in a project with pagination support. Sections are used to organize tasks within projects.
+24. **get_task_tags** - Get all tags associated with a specific task with pagination support
+25. **get_workspace_tags** - Get all tags in a workspace with pagination support. Tags are used to categorize and filter tasks and projects.
+26. **create_tag** - Create a new tag in a workspace. Tags are labels that can be attached to tasks for categorization.
+27. **get_portfolio** - Get detailed information about a specific portfolio by its GID
+28. **get_portfolio_items** - Get all items (projects) in a portfolio with pagination support
+29. **list_goals** - List goals with optional filtering and pagination. Goals can be filtered by workspace, team, project, portfolio, task, or time periods.
+30. **get_goal** - Get detailed information about a specific goal by its GID
+31. **create_goal** - Create a new goal in a workspace or team
+32. **update_goal** - Update an existing goal. Only specified fields will be updated.
+33. **create_goal_metric** - Create and add a goal metric to a specified goal. This replaces an existing goal metric if one already exists.
+34. **update_goal_metric** - Update a goal's existing metric's current_number_value
+35. **add_goal_followers** - Add followers to a goal
+36. **remove_goal_followers** - Remove followers from a goal
+37. **get_goal_parent_goals** - Get all parent goals of a goal
+38. **list_time_periods** - Get time periods for a workspace. Returns compact time period records with their GIDs, display names, periods, and date ranges.
+39. **get_time_period** - Get details of a specific time period by its GID. Returns the full time period record including parent information.

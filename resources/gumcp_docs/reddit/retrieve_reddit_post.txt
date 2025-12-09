@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "sort": {
+    "type": "string",
+    "enum": [
+      "hot",
+      "new",
+      "top",
+      "controversial",
+      "rising"
+    ]
+  },
+  "subreddit": {
+    "type": "string"
+  },
+  "limit": {
+    "type": "integer"
+  }
+}
+```

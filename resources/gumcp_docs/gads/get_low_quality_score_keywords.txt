@@ -1,0 +1,35 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "quality_score_threshold": {
+    "type": "integer",
+    "description": "Quality score threshold (1-10, default: 5)",
+    "minimum": 1,
+    "maximum": 10
+  },
+  "campaign_id": {
+    "type": "string",
+    "description": "Filter by specific campaign ID (optional)"
+  },
+  "asset_group_id": {
+    "type": "string",
+    "description": "Filter by specific asset group ID (optional)"
+  },
+  "include_metrics": {
+    "type": "boolean",
+    "description": "Include performance metrics for analysis (default: true)"
+  },
+  "date_range": {
+    "type": "string",
+    "description": "Date range for metrics (default: LAST_30_DAYS)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of keywords to return"
+  }
+}
+```

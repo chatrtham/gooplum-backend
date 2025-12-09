@@ -1,0 +1,8 @@
+Parameters Schema:
+```json
+{
+  "meeting_id": {
+    "type": "string"
+  }
+}
+```

@@ -1,0 +1,33 @@
+# Webflow Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (27 total)
+
+1. **get_authorized_user** - Get information about the authorized Webflow user
+2. **list_sites** - List all sites the provided access token is able to access
+3. **get_site** - Get details of a specific site by its ID
+4. **get_custom_domains** - Get a list of all custom domains related to a site
+5. **list_forms** - List forms for a given site
+6. **list_form_submissions** - List form submissions for a given form
+7. **get_form_submission** - Get information about a specific form submission
+8. **list_form_submissions_by_site** - List form submissions for a given site
+9. **delete_form_submission** - Delete a form submission
+10. **list_pages** - List all pages for a site
+11. **get_page_metadata** - Get metadata information for a single page
+12. **get_page_content** - Get content from a static page
+13. **list_collections** - List all Collections within a Site
+14. **get_collection** - Get the full details of a collection from its ID
+15. **delete_collection** - Delete a collection using its ID
+16. **create_collection** - Create a Collection for a site
+17. **list_collection_items** - List all Items within a Collection
+18. **get_collection_item** - Get details of a selected Collection Item
+19. **update_collection_item** - Update a selected Item in a Collection
+20. **update_collection_items** - Update a single item or multiple items in a Collection
+21. **create_collection_item** - Create Item in a Collection
+22. **delete_collection_item** - Delete an item from a collection (staging deletes, live unpublishes)
+23. **delete_collection_items** - Delete Items from a Collection (staging deletes, live unpublishes)
+24. **list_users** - Get a list of users for a site
+25. **get_user** - Get a User by ID
+26. **delete_user** - Delete a User by ID
+27. **invite_user** - Create and invite a user with an email address

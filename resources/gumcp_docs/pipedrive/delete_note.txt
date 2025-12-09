@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "note_id": {
+    "type": "integer",
+    "description": "The ID of the note"
+  }
+}
+```

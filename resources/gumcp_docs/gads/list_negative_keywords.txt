@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "customer_id": {
+    "type": "string",
+    "description": "Google Ads customer ID (required)"
+  },
+  "shared_set_id": {
+    "type": "string",
+    "description": "Filter by specific shared negative keyword set ID (optional)"
+  },
+  "asset_group_id": {
+    "type": "string",
+    "description": "Get negative keywords for specific asset group ID (optional)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of negative keywords to return"
+  }
+}
+```

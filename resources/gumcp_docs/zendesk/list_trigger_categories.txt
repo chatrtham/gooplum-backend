@@ -1,0 +1,31 @@
+Parameters Schema:
+```json
+{
+  "sort": {
+    "type": "string",
+    "enum": [
+      "position",
+      "-position",
+      "name",
+      "-name",
+      "created_at",
+      "-created_at",
+      "updated_at",
+      "-updated_at"
+    ],
+    "description": "Sort categories by field. Use minus prefix for descending order (default: position)",
+    "default": "position"
+  },
+  "include_rule_counts": {
+    "type": "boolean",
+    "description": "Include the count of rules/triggers in each category (default: false)",
+    "default": false
+  },
+  "max_limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of categories to return across all pages (default: 100). Pagination is handled internally.",
+    "default": 100
+  }
+}
+```

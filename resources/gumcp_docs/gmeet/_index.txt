@@ -1,0 +1,14 @@
+# Gmeet Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (8 total)
+
+1. **create_meeting** - Create a new meeting
+2. **add_attendees** - Add attendees to a meeting.
+3. **fetch_meetings_by_date** - Fetch all meetings for a given date.
+4. **get_meeting_details** - Get details of a meeting by meeting id.
+5. **update_meeting** - Update a meeting by meeting id.
+6. **delete_meeting** - Delete a meeting by meeting id.
+7. **read_meeting_transcript** - Read transcript for a meeting. Provide either meeting_id (calendar event ID), or meeting_url (Google Meet link). If multiple recordings exist for the same meeting code, the most recent one will be selected unless a date range is specified.
+8. **list_conference_records** - List all conference records (past meetings) with transcripts available.

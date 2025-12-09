@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "video_urls": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of YouTube video URLs to get comments from (e.g., 'https://www.youtube.com/watch?v=VIDEO_ID')"
+  },
+  "video_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of YouTube video IDs to get comments from (alternative to URLs)"
+  },
+  "max_comments": {
+    "type": "integer",
+    "description": "Maximum number of comments to retrieve per video",
+    "default": 10
+  },
+  "sort_by": {
+    "type": "string",
+    "enum": [
+      "top",
+      "newest"
+    ],
+    "description": "Sort comments by top comments or newest first",
+    "default": "top"
+  }
+}
+```

@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "callAccessList": {
+    "type": "array",
+    "description": "List of calls and users to be removed from access",
+    "items": {
+      "type": "object",
+      "properties": {
+        "callId": {
+          "type": "string",
+          "description": "Gong's unique numeric call ID"
+        },
+        "userIds": {
+          "type": "array",
+          "description": "Array of Gong's unique numeric user IDs",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "callId",
+        "userIds"
+      ]
+    }
+  }
+}
+```

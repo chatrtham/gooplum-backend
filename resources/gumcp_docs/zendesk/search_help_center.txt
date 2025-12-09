@@ -1,0 +1,62 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "The search text to be matched. Results are sorted by relevance when query is provided"
+  },
+  "locales": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Limit search to these locales (e.g., ['en-us', 'fr']). Required parameter"
+  },
+  "content_types": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "ARTICLE",
+        "POST"
+      ]
+    },
+    "description": "Limit search to specific content types: ARTICLE, POST. If not specified, searches both"
+  },
+  "brand_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Limit search to articles or posts within these brands"
+  },
+  "category_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Limit search to articles in these categories"
+  },
+  "section_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Limit search to articles in these sections"
+  },
+  "topic_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Limit search to posts in these topics"
+  },
+  "page_size": {
+    "type": "integer",
+    "minimum": 1,
+    "maximum": 50,
+    "description": "Maximum number of results per page (1-50, default: 10)",
+    "default": 10
+  }
+}
+```

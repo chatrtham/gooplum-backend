@@ -1,0 +1,24 @@
+Parameters Schema:
+```json
+{
+  "project_key": {
+    "type": "string",
+    "description": "Project key (e.g., PRJ)"
+  },
+  "permissions": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific permissions to check"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

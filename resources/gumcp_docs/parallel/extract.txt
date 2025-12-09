@@ -1,0 +1,41 @@
+Parameters Schema:
+```json
+{
+  "urls": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "URLs to extract content from"
+  },
+  "objective": {
+    "type": "string",
+    "description": "Search objective to focus extracted content"
+  },
+  "search_queries": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Keyword search queries to focus extracted content"
+  },
+  "excerpts": {
+    "type": "boolean",
+    "description": "Include relevant excerpts",
+    "default": true
+  },
+  "full_content": {
+    "type": "boolean",
+    "description": "Include full page content",
+    "default": false
+  },
+  "max_age_seconds": {
+    "type": "integer",
+    "description": "Maximum age of cached content in seconds (minimum 600)"
+  },
+  "timeout_seconds": {
+    "type": "number",
+    "description": "Timeout for fetching live content"
+  }
+}
+```

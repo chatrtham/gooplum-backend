@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "run_id": {
+    "type": "string",
+    "description": "Task run ID"
+  }
+}
+```

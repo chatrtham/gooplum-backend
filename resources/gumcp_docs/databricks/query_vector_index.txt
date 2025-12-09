@@ -1,0 +1,43 @@
+Parameters Schema:
+```json
+{
+  "index_name": {
+    "type": "string",
+    "description": "Name of the vector index to query"
+  },
+  "columns": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of column names to include in the response"
+  },
+  "query_vector": {
+    "type": "array",
+    "items": {
+      "type": "number"
+    },
+    "description": "Query vector for Direct Vector Access Index"
+  },
+  "query_text": {
+    "type": "string",
+    "description": "Query text for Delta Sync Index using model endpoint"
+  },
+  "num_results": {
+    "type": "integer",
+    "description": "Number of results to return (default: 10)"
+  },
+  "filters_json": {
+    "type": "string",
+    "description": "JSON string representing query filters"
+  },
+  "query_type": {
+    "type": "string",
+    "enum": [
+      "ANN",
+      "HYBRID"
+    ],
+    "description": "Query type (default: ANN)"
+  }
+}
+```

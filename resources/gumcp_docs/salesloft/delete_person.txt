@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "person_id": {
+    "type": "integer",
+    "description": "Person ID to delete"
+  }
+}
+```

@@ -1,0 +1,28 @@
+# Linear Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (22 total)
+
+1. **list_issues** - List issues in the user's Linear workspace.
+2. **get_issue** - Retrieve detailed information about an issue by ID, including attachments and git branch name
+3. **list_comments** - List comments for a specific Linear issue
+4. **create_comment** - Create a comment on a specific Linear issue
+5. **list_cycles** - Retrieve cycles for a specific Linear team
+6. **list_documents** - List documents in the user's Linear workspace
+7. **get_document** - Retrieve a Linear document by ID or slug
+8. **create_issue** - Create a new Linear issue
+9. **update_issue** - Update an existing Linear issue
+10. **list_issue_statuses** - List available issue statuses in a Linear team
+11. **get_issue_status** - Retrieve detailed information about an issue status in Linear by name or ID
+12. **list_issue_labels** - List available issue labels in a Linear workspace or team
+13. **create_issue_label** - Create a new Linear issue label
+14. **list_projects** - List projects in the user's Linear workspace
+15. **get_project** - Retrieve details of a specific project in Linear
+16. **create_project** - Create a new project in Linear
+17. **update_project** - Update an existing Linear project
+18. **list_project_labels** - List available project labels in the Linear workspace
+19. **list_teams** - List teams in the user's Linear workspace
+20. **get_team** - Retrieve details of a specific Linear team
+21. **list_users** - Retrieve users in the Linear workspace
+22. **get_user** - Retrieve details of a specific Linear user

@@ -1,0 +1,31 @@
+# Monday Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (25 total)
+
+1. **get_boards** - Get all boards accessible to the user
+2. **get_board** - Get a specific board by ID
+3. **get_workspaces** - Get all workspaces accessible to the user
+4. **create_board** - Create a new board within a workspace
+5. **create_item** - Create a new item in a board
+6. **get_group** - Get a specific group within a board
+7. **get_item** - Get a specific item by its ID
+8. **search_items** - List all items in a board or search by column values
+9. **delete_item** - Delete a specific item by its ID
+10. **delete_group** - Delete a specific group from a board
+11. **change_column_value** - Change the value of a column for a specific item. Browse column resources first to see available columns, their IDs, and types.
+12. **clear_column_value** - Clear/empty the value of a column for a specific item
+13. **create_column** - Create a new column in a board
+14. **create_group** - Create a new group in a board
+15. **create_subitem** - Create a new sub-item under a parent item
+16. **delete_subitem** - Delete a sub-item by its ID
+17. **get_subitems** - Get all subitems of a specific item
+18. **archive_item** - Archive a specific item by its ID
+19. **archive_group** - Archive a specific group in a board
+20. **archive_board** - Archive a specific board by its ID
+21. **get_updates** - Get updates (comments) for an item, board, or all updates across your account with automatic pagination and date filtering
+22. **create_update** - Create a new update (comment) on an item and replies to existing updates
+23. **pin_update** - Pin an update (comment) to the top of an item to highlight important information
+24. **unpin_update** - Unpin an update (comment) from the top of an item
+25. **delete_update** - Permanently delete an update (comment) and all its replies

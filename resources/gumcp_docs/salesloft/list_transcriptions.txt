@@ -1,0 +1,88 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of transcriptions to return (will handle pagination automatically)",
+    "default": 25
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter transcriptions by specific identifiers"
+  },
+  "language_code": {
+    "type": "string",
+    "description": "Filter transcriptions by language code of the transcription",
+    "enum": [
+      "en-AU",
+      "en-AB",
+      "en-GB",
+      "en-IN",
+      "en-IE",
+      "en-NZ",
+      "en-ZA",
+      "en-US",
+      "en-WL",
+      "es-ES",
+      "es-US",
+      "nl-NL",
+      "it-IT",
+      "fr-FR",
+      "fr-CA",
+      "de-DE",
+      "de-CH"
+    ]
+  },
+  "created_at_lt": {
+    "type": "string",
+    "description": "Returns transcriptions created before this ISO 8601 timestamp"
+  },
+  "created_at_lte": {
+    "type": "string",
+    "description": "Returns transcriptions created on or before this ISO 8601 timestamp"
+  },
+  "created_at_gt": {
+    "type": "string",
+    "description": "Returns transcriptions created after this ISO 8601 timestamp"
+  },
+  "created_at_gte": {
+    "type": "string",
+    "description": "Returns transcriptions created on or after this ISO 8601 timestamp"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns transcriptions updated before this ISO 8601 timestamp"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns transcriptions updated on or before this ISO 8601 timestamp"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns transcriptions updated after this ISO 8601 timestamp"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns transcriptions updated on or after this ISO 8601 timestamp"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

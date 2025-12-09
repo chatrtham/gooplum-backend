@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "channel": {
+    "type": "string",
+    "description": "Channel ID or User ID in the case of DMs"
+  },
+  "timestamp": {
+    "type": "string",
+    "description": "Timestamp of the message to delete"
+  },
+  "as_user": {
+    "type": "boolean",
+    "description": "Whether to use user token instead of bot token (default: true)"
+  }
+}
+```

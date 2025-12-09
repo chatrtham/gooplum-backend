@@ -1,0 +1,24 @@
+# Slack Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (18 total)
+
+1. **read_messages** - Read messages from a Slack channel
+2. **send_message** - Send a message to a Slack channel or user. Supports both plain text and Block Kit UI elements. Either 'text' or 'blocks' parameter must be provided.
+3. **send_ephemeral_message** - Send an ephemeral message to a user in a channel (only visible to that user)
+4. **create_canvas** - Create a Slack canvas message with rich content
+5. **add_user_to_channel** - Add a user to a Slack channel
+6. **delete_message** - Delete a Slack message
+7. **get_message_thread** - Retrieve a message and its replies
+8. **get_user_presence** - Check a user's online status
+9. **search_users** - Search for users across the Slack workspace by email, user ID, or name and get detailed user information
+10. **remove_from_channel** - Remove a user from a channel
+11. **create_channel** - Create a new public or private Slack channel
+12. **update_channel_topic** - Update a channel's topic
+13. **update_channel_purpose** - Update a channel's purpose
+14. **archive_channel** - Archive a Slack channel
+15. **unarchive_channel** - Unarchive a Slack channel
+16. **list_users_in_channel** - List all users in a Slack channel
+17. **get_conversation_info** - Retrieve information about a conversation
+18. **search** - Find messages, files, channels, and people across your entire Slack workspace. Ask questions naturally (e.g., 'What did Sarah say about Q1 goals?') or search by keywords. Filter by user, channel, date, file type, and more to quickly locate exactly what you need.

@@ -1,0 +1,78 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query string to search across company properties"
+  },
+  "filter_property": {
+    "type": "string",
+    "description": "Property to filter on (e.g., 'name', 'domain', 'industry')"
+  },
+  "filter_operator": {
+    "type": "string",
+    "description": "Filter operator (e.g., 'EQ', 'CONTAINS_TOKEN', 'GT', 'LT', 'NEQ')"
+  },
+  "filter_value": {
+    "type": "string",
+    "description": "Value to filter for"
+  },
+  "filter_groups": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "propertyName": {
+                "type": "string"
+              },
+              "operator": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "highValue": {
+                "type": "string"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "description": "Advanced filter groups for complex filtering logic"
+  },
+  "sorts": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Sort criteria (e.g., ['name', '-createdate'] for name ascending, createdate descending)"
+  },
+  "limit": {
+    "type": "integer",
+    "description": "Maximum number of companies to return (max 100)"
+  },
+  "after": {
+    "type": "string",
+    "description": "Pagination cursor for getting next page of results"
+  },
+  "properties": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Specific company properties to return"
+  }
+}
+```

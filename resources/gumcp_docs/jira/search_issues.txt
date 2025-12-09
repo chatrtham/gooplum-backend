@@ -1,0 +1,60 @@
+Parameters Schema:
+```json
+{
+  "project_key": {
+    "type": "string",
+    "description": "Project key to search within (e.g., PROJ)"
+  },
+  "text": {
+    "type": "string",
+    "description": "Text to search for in issue summary or description"
+  },
+  "status": {
+    "type": "string",
+    "description": "Status of issues to find (e.g., 'Open', 'In Progress', 'Done')"
+  },
+  "assignee": {
+    "type": "string",
+    "description": "Account ID or 'currentUser' to find issues assigned to specific user"
+  },
+  "issue_type": {
+    "type": "string",
+    "description": "Type of issue to find (e.g., 'Bug', 'Task', 'Story')"
+  },
+  "created_after": {
+    "type": "string",
+    "description": "Find issues created after this date (format: YYYY-MM-DD)"
+  },
+  "updated_after": {
+    "type": "string",
+    "description": "Find issues updated after this date (format: YYYY-MM-DD)"
+  },
+  "max_results": {
+    "type": "integer",
+    "description": "Maximum number of results to return (default: 50, max: 100)"
+  },
+  "start_at": {
+    "type": "integer",
+    "description": "Index of the first issue to return (0-based, used for pagination)"
+  },
+  "fields": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of fields to include in the response (e.g., summary, description, assignee)"
+  },
+  "expand": {
+    "type": "string",
+    "description": "Comma-separated list of expand options: renderedFields, names, schema, transitions, operations, editmeta, changelog, versionedRepresentations (e.g., 'names,changelog')"
+  },
+  "cloud_id": {
+    "type": "string",
+    "description": "Specific Atlassian Cloud ID to use (required only if you have multiple sites)"
+  },
+  "site_name": {
+    "type": "string",
+    "description": "Atlassian site name to use (required only if you have multiple sites)"
+  }
+}
+```

@@ -1,0 +1,29 @@
+Parameters Schema:
+```json
+{
+  "base_id": {
+    "type": "string",
+    "description": "Airtable base ID"
+  },
+  "table_id": {
+    "type": "string",
+    "description": "Airtable table ID"
+  },
+  "records": {
+    "type": "array",
+    "description": "Array of records to create",
+    "items": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "object",
+          "description": "Record fields"
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    }
+  }
+}
+```

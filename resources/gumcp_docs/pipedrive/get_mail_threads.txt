@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "folder": {
+    "type": "string",
+    "enum": [
+      "inbox",
+      "drafts",
+      "sent",
+      "archive"
+    ],
+    "description": "The type of folder to fetch. Default: inbox",
+    "default": "inbox"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of threads to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

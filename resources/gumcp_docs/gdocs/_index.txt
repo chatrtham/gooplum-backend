@@ -1,0 +1,10 @@
+# Gdocs Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (4 total)
+
+1. **read_doc** - Read content from a Google Doc
+2. **update_doc** - Update or modify content in an existing Google Doc
+3. **insert_table** - Insert a table into a Google Doc
+4. **update_table_cell** - Update content and styling of a table cell

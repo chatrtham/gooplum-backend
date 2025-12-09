@@ -1,0 +1,101 @@
+Parameters Schema:
+```json
+{
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of actions to return (will handle pagination automatically)",
+    "default": 10
+  },
+  "ids": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "IDs of actions to fetch"
+  },
+  "step_id": {
+    "type": "integer",
+    "description": "Fetch actions by step ID"
+  },
+  "type": {
+    "type": "string",
+    "description": "Filter actions by type (e.g. phone, email, other)"
+  },
+  "due_on_gt": {
+    "type": "string",
+    "description": "Returns actions due after this timestamp (ISO 8601 format)"
+  },
+  "due_on_gte": {
+    "type": "string",
+    "description": "Returns actions due on or after this timestamp (ISO 8601 format)"
+  },
+  "due_on_lt": {
+    "type": "string",
+    "description": "Returns actions due before this timestamp (ISO 8601 format)"
+  },
+  "due_on_lte": {
+    "type": "string",
+    "description": "Returns actions due on or before this timestamp (ISO 8601 format)"
+  },
+  "user_guid": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "Filter actions by USER GUIDs - these are internal organization/team member GUIDs (NOT person_id from external contacts). Team admin required for other users"
+  },
+  "person_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter actions by person IDs"
+  },
+  "cadence_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter actions by cadence IDs"
+  },
+  "multitouch_group_id": {
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "description": "Filter actions by multitouch group IDs"
+  },
+  "updated_at_gt": {
+    "type": "string",
+    "description": "Returns actions updated after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_gte": {
+    "type": "string",
+    "description": "Returns actions updated on or after this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lt": {
+    "type": "string",
+    "description": "Returns actions updated before this timestamp (ISO 8601 format)"
+  },
+  "updated_at_lte": {
+    "type": "string",
+    "description": "Returns actions updated on or before this timestamp (ISO 8601 format)"
+  },
+  "sort_by": {
+    "type": "string",
+    "description": "Field to sort by",
+    "enum": [
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "sort_direction": {
+    "type": "string",
+    "description": "Sort direction",
+    "enum": [
+      "ASC",
+      "DESC"
+    ]
+  }
+}
+```

@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "site_id": {
+    "type": "string",
+    "description": "Unique identifier for a Site"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of forms to return",
+    "default": 100
+  }
+}
+```

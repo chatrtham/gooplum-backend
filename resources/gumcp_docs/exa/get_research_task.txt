@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "researchId": {
+    "type": "string",
+    "description": "The unique identifier of the research request to retrieve (from create_research_task)"
+  },
+  "includeEvents": {
+    "type": "boolean",
+    "description": "Include the detailed event log of all operations performed (searches, crawls, reasoning)",
+    "default": false
+  }
+}
+```

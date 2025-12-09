@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "metric_ids": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "List of Pulse Metric IDs (36-character UUIDs)"
+  }
+}
+```

@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "file_id": {
+    "type": "string",
+    "description": "ID of the file or folder to rename"
+  },
+  "file_url": {
+    "type": "string",
+    "description": "Preferred: Google Drive URL of the file or folder to rename"
+  },
+  "new_name": {
+    "type": "string",
+    "description": "New name for the file or folder"
+  }
+}
+```

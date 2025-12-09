@@ -1,0 +1,19 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search query using Zendesk search syntax (name, email, phone, notes, etc.)"
+  },
+  "external_id": {
+    "type": "string",
+    "description": "Search by external ID (exact match only)"
+  },
+  "limit": {
+    "type": "integer",
+    "minimum": 1,
+    "description": "Maximum number of users to return (default: 100)",
+    "default": 100
+  }
+}
+```

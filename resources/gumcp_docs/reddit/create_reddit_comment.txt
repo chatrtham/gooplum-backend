@@ -1,0 +1,12 @@
+Parameters Schema:
+```json
+{
+  "parent_id": {
+    "type": "string",
+    "description": "ID of the parent (post or comment to reply to). Use 't3_' prefix for posts or 't1_' prefix for comments. If no prefix provided, assumes it's a post ID."
+  },
+  "content": {
+    "type": "string"
+  }
+}
+```

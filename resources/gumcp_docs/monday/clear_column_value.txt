@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "board_id": {
+    "type": "integer",
+    "description": "The unique identifier of the board containing the item."
+  },
+  "item_id": {
+    "type": "integer",
+    "description": "The unique identifier of the item (row) to clear the column value for."
+  },
+  "column_id": {
+    "type": "string",
+    "description": "The unique identifier of the column to clear. Browse column resources to see available column IDs."
+  }
+}
+```

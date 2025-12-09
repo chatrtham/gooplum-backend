@@ -1,0 +1,11 @@
+# Foreplay Tools Index
+
+*Generated on: 2025-12-09*
+
+## Available Tools (5 total)
+
+1. **search_brands** - Search for brands by domain name OR brand name. Provide both parameters to get merged results from both search types.
+2. **search_and_filter_ads** - Search and filter ads by text content, date ranges, platforms, formats, niches, market targets, and languages. Leave query empty to filter without text search.
+3. **get_ads_by_brand_or_page** - Get ads for specific brand IDs or Facebook page ID with filtering options. Provide either brand_ids or page_id parameter.
+4. **get_brand_analytics** - Get comprehensive analytics data for a brand or Facebook page including running ads distribution and creative velocity over a date range.
+5. **get_ad_details** - Get comprehensive details of a specific ad by its ID including metadata, creative content, targeting info, and performance data.

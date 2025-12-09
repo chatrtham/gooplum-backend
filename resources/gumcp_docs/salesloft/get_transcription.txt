@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "transcription_id": {
+    "type": "string",
+    "description": "Transcription ID to fetch complete transcript for"
+  },
+  "conversation_id": {
+    "type": "string",
+    "description": "Conversation ID to fetch transcription for"
+  }
+}
+```

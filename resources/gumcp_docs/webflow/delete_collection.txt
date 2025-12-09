@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "collection_id": {
+    "type": "string",
+    "description": "Unique identifier for a Collection"
+  }
+}
+```

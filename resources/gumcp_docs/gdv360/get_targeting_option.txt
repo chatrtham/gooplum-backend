@@ -1,0 +1,21 @@
+Parameters Schema:
+```json
+{
+  "advertiser_id": {
+    "type": "string",
+    "description": "Required. The ID of the advertiser the line item belongs to (int64 format as string)"
+  },
+  "line_item_id": {
+    "type": "string",
+    "description": "Required. The ID of the line item (int64 format as string)"
+  },
+  "targeting_type": {
+    "type": "string",
+    "description": "Required. The targeting type (e.g., 'TARGETING_TYPE_GEO_REGION', 'TARGETING_TYPE_AGE_RANGE')"
+  },
+  "assigned_targeting_option_id": {
+    "type": "string",
+    "description": "Required. The ID of the assigned targeting option"
+  }
+}
+```

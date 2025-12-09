@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "feed_item_id": {
+    "type": "string",
+    "description": "The ID of the feed item to comment on"
+  },
+  "message": {
+    "type": "string",
+    "description": "The comment message. Use {mention_email_id:user@example.com} or {mention_user_id:005xx...} to @mention users."
+  }
+}
+```

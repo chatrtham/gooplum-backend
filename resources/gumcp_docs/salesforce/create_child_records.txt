@@ -1,0 +1,25 @@
+Parameters Schema:
+```json
+{
+  "parent_id": {
+    "type": "string",
+    "description": "The 15 or 18-character Salesforce ID of the parent record"
+  },
+  "child_object_name": {
+    "type": "string",
+    "description": "The API name of the child Salesforce object (e.g., 'LineItem__c')"
+  },
+  "parent_field_name": {
+    "type": "string",
+    "description": "The API name of the field that links to the parent (e.g., 'Order__c')"
+  },
+  "records": {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "description": "Array of records to create as children, each with field data as key-value pairs"
+  }
+}
+```

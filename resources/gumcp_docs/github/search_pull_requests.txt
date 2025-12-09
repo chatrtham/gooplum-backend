@@ -1,0 +1,17 @@
+Parameters Schema:
+```json
+{
+  "query": {
+    "type": "string",
+    "description": "Search terms to find pull requests (e.g., 'bug fix', 'feature update', 'author:username', 'state:open', 'is:draft'). You can use plain text or GitHub search syntax."
+  },
+  "repo_url": {
+    "type": "string",
+    "description": "GitHub repository URL to search only within that specific repository (optional). If not provided, searches across all accessible repositories."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of pull requests to return across all pages"
+  }
+}
+```

@@ -1,0 +1,26 @@
+Parameters Schema:
+```json
+{
+  "page_size": {
+    "type": "integer",
+    "description": "Maximum number of conference records to return (default: 10, max: 100)",
+    "default": 10
+  },
+  "start_date": {
+    "type": "string",
+    "description": "Start date to filter meetings from (YYYY-MM-DD format, e.g., '2024-01-15')"
+  },
+  "end_date": {
+    "type": "string",
+    "description": "End date to filter meetings until (YYYY-MM-DD format, e.g., '2024-01-31')"
+  },
+  "meeting_code": {
+    "type": "string",
+    "description": "Filter by specific Google Meet meeting code (e.g., 'abc-defg-hij')"
+  },
+  "filter": {
+    "type": "string",
+    "description": "Advanced filter for technical users. Valid formats: 'space.meeting_code=\"abc-defg-hij\"' or 'start_time >= \"2023-01-01T00:00:00Z\"'"
+  }
+}
+```

@@ -1,0 +1,33 @@
+Parameters Schema:
+```json
+{
+  "org_name": {
+    "type": "string",
+    "description": "The name of the organization"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of teams to return across all pages"
+  },
+  "query": {
+    "type": "string",
+    "description": "Filters teams with query on team name"
+  },
+  "orderBy_field": {
+    "type": "string",
+    "enum": [
+      "NAME",
+      "CREATED_AT"
+    ],
+    "description": "The field to order teams by"
+  },
+  "orderBy_direction": {
+    "type": "string",
+    "enum": [
+      "ASC",
+      "DESC"
+    ],
+    "description": "The ordering direction"
+  }
+}
+```

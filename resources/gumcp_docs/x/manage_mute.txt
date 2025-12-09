@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "target_user_id": {
+    "type": "string",
+    "description": "The ID of the User that the source User is requesting to mute/unmute."
+  },
+  "mute": {
+    "type": "boolean",
+    "description": "True to mute, false to unmute."
+  }
+}
+```

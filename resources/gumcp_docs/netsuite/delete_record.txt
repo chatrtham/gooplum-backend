@@ -1,0 +1,13 @@
+Parameters Schema:
+```json
+{
+  "record_type": {
+    "type": "string",
+    "description": "Record type (e.g., customer, invoice, salesOrder)"
+  },
+  "id": {
+    "type": "string",
+    "description": "Internal identifier"
+  }
+}
+```

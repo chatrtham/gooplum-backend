@@ -1,0 +1,113 @@
+Parameters Schema:
+```json
+{
+  "calendar_id": {
+    "type": "string",
+    "description": "Calendar ID (optional - defaults to primary)"
+  },
+  "event_id": {
+    "type": "string",
+    "description": "Event ID to update"
+  },
+  "summary": {
+    "type": "string",
+    "description": "New event title (optional)"
+  },
+  "start_datetime": {
+    "type": "string",
+    "description": "New start date/time (format: YYYY-MM-DD HH:MM or YYYY-MM-DD) (optional)"
+  },
+  "end_datetime": {
+    "type": "string",
+    "description": "New end date/time (format: YYYY-MM-DD HH:MM or YYYY-MM-DD) (optional)"
+  },
+  "description": {
+    "type": "string",
+    "description": "New event description (optional)"
+  },
+  "location": {
+    "type": "string",
+    "description": "New event location (optional)"
+  },
+  "attendees": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "New list of attendee emails (optional)"
+  },
+  "time_zone": {
+    "type": "string",
+    "description": "Time zone for the event (default: UTC)"
+  },
+  "recurrence": {
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "description": "RRULE, EXRULE, RDATE and EXDATE rules for recurrence (e.g., ['RRULE:FREQ=DAILY;COUNT=2'])"
+  },
+  "reminders": {
+    "type": "object",
+    "properties": {
+      "use_default": {
+        "type": "boolean",
+        "description": "Whether to use the default reminders"
+      },
+      "overrides": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "email",
+                "popup"
+              ],
+              "description": "Method of reminder"
+            },
+            "minutes": {
+              "type": "integer",
+              "description": "Minutes before event to trigger reminder"
+            }
+          }
+        },
+        "description": "Custom reminders to override the default"
+      }
+    },
+    "description": "Reminders settings for the event"
+  },
+  "transparency": {
+    "type": "string",
+    "enum": [
+      "opaque",
+      "transparent"
+    ],
+    "description": "Whether the event blocks time on the calendar (opaque) or not (transparent)"
+  },
+  "visibility": {
+    "type": "string",
+    "enum": [
+      "default",
+      "public",
+      "private",
+      "confidential"
+    ],
+    "description": "Visibility of the event"
+  },
+  "color_id": {
+    "type": "string",
+    "description": "Color ID for the event (1-11)"
+  },
+  "send_updates": {
+    "type": "string",
+    "enum": [
+      "all",
+      "externalOnly",
+      "none"
+    ],
+    "description": "Specifies who should receive confirmations (default: none)"
+  }
+}
+```

@@ -1,0 +1,11 @@
+Parameters Schema:
+```json
+{
+  "post_id": {
+    "type": "string"
+  },
+  "content": {
+    "type": "string"
+  }
+}
+```

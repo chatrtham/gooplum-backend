@@ -1,0 +1,9 @@
+Parameters Schema:
+```json
+{
+  "ticket_id": {
+    "type": "string",
+    "description": "HubSpot ticket ID (required)"
+  }
+}
+```

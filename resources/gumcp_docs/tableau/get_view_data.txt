@@ -1,0 +1,14 @@
+Parameters Schema:
+```json
+{
+  "view_id": {
+    "type": "string",
+    "description": "The ID of the view to get data for"
+  },
+  "upload_to_workspace": {
+    "type": "boolean",
+    "description": "If true, uploads file to workspace. Default: false.",
+    "default": false
+  }
+}
+```

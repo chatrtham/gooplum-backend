@@ -1,0 +1,44 @@
+Parameters Schema:
+```json
+{
+  "term": {
+    "type": "string",
+    "description": "The search term to look for. Minimum 2 characters (or 1 if using exact_match). Search term should be URL encoded."
+  },
+  "fields": {
+    "type": "string",
+    "description": "A comma-separated string array of fields to perform the search from. Values: custom_fields, notes, title. Defaults to all fields if omitted."
+  },
+  "exact_match": {
+    "type": "boolean",
+    "description": "When enabled, only full exact matches against the given term are returned. It is not case sensitive.",
+    "default": false
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "Will filter deals by the provided person ID. Upper limit of 2000 found deals."
+  },
+  "organization_id": {
+    "type": "integer",
+    "description": "Will filter deals by the provided organization ID. Upper limit of 2000 found deals."
+  },
+  "status": {
+    "type": "string",
+    "enum": [
+      "open",
+      "won",
+      "lost"
+    ],
+    "description": "Will filter deals by the provided specific status. Upper limit of 2000 found deals."
+  },
+  "include_fields": {
+    "type": "string",
+    "description": "Supports including optional fields in the results. Values: deal.cc_email"
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of deals to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  }
+}
+```

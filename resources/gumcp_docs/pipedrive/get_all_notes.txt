@@ -1,0 +1,86 @@
+Parameters Schema:
+```json
+{
+  "user_id": {
+    "type": "integer",
+    "description": "The ID of the user whose notes to fetch. If omitted, notes by all users will be returned."
+  },
+  "lead_id": {
+    "type": "string",
+    "description": "The ID of the lead which notes to fetch. If omitted, notes about all leads will be returned (UUID format)."
+  },
+  "deal_id": {
+    "type": "integer",
+    "description": "The ID of the deal which notes to fetch. If omitted, notes about all deals will be returned."
+  },
+  "person_id": {
+    "type": "integer",
+    "description": "The ID of the person whose notes to fetch. If omitted, notes about all persons will be returned."
+  },
+  "org_id": {
+    "type": "integer",
+    "description": "The ID of the organization which notes to fetch. If omitted, notes about all organizations will be returned."
+  },
+  "project_id": {
+    "type": "integer",
+    "description": "The ID of the project which notes to fetch. If omitted, notes about all projects will be returned."
+  },
+  "max_limit": {
+    "type": "integer",
+    "description": "Maximum number of notes to return across all pages (automatically handles pagination). Default: 100",
+    "default": 100
+  },
+  "sort": {
+    "type": "string",
+    "description": "The field names and sorting mode separated by a comma (field_name_1 ASC, field_name_2 DESC). Supported fields: id, user_id, deal_id, person_id, org_id, content, add_time, update_time."
+  },
+  "start_date": {
+    "type": "string",
+    "description": "The date in YYYY-MM-DD format from which notes to fetch"
+  },
+  "end_date": {
+    "type": "string",
+    "description": "The date in YYYY-MM-DD format until which notes to fetch"
+  },
+  "pinned_to_lead_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "If set, filter by note to lead pinning state. 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_deal_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "If set, filter by note to deal pinning state. 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_organization_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "If set, filter by note to organization pinning state. 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_person_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "If set, filter by note to person pinning state. 0 = Not pinned, 1 = Pinned"
+  },
+  "pinned_to_project_flag": {
+    "type": "integer",
+    "enum": [
+      0,
+      1
+    ],
+    "description": "If set, filter by note to project pinning state. 0 = Not pinned, 1 = Pinned"
+  }
+}
+```
