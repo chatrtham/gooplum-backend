@@ -173,23 +173,63 @@ class FlowDiscovery:
         """Extract default value from AST node."""
         try:
             if isinstance(default_node, ast.Constant):
-                return repr(default_node.value)
+                value = default_node.value
+                # Return raw string without quotes for better UX
+                if isinstance(value, str):
+                    return value
+                # Keep repr() for numbers, booleans, None
+                return repr(value)
             elif isinstance(default_node, ast.Str):  # Python < 3.8
-                return repr(default_node.s)
+                # Return raw string without quotes
+                return default_node.value
             elif isinstance(default_node, ast.Num):  # Python < 3.8
                 return repr(default_node.n)
             elif isinstance(default_node, ast.NameConstant):  # Python < 3.8
                 return repr(default_node.value)
             elif isinstance(default_node, ast.List):
                 elements = [self._get_default_value(elt) for elt in default_node.elts]
-                return f"[{', '.join(filter(None, elements))}]"
+                # Quote string elements for clarity in list representation
+                quoted_elements = []
+                for elem in filter(None, elements):
+                    # If element looks like a plain string (no quotes), add quotes
+                    if elem and not (
+                        elem.startswith('"')
+                        or elem.startswith("'")
+                        or elem[0].isdigit()
+                        or elem in ["True", "False", "None"]
+                    ):
+                        quoted_elements.append(f'"{elem}"')
+                    else:
+                        quoted_elements.append(elem)
+                return f"[{', '.join(quoted_elements)}]"
             elif isinstance(default_node, ast.Dict):
                 items = []
                 for k, v in zip(default_node.keys, default_node.values):
                     key = self._get_default_value(k)
                     value = self._get_default_value(v)
                     if key and value:
-                        items.append(f"{key}: {value}")
+                        # Quote string keys/values for clarity
+                        quoted_key = (
+                            key
+                            if (
+                                key.startswith('"')
+                                or key.startswith("'")
+                                or key[0].isdigit()
+                                or key in ["True", "False", "None"]
+                            )
+                            else f'"{key}"'
+                        )
+                        quoted_value = (
+                            value
+                            if (
+                                value.startswith('"')
+                                or value.startswith("'")
+                                or value[0].isdigit()
+                                or value in ["True", "False", "None"]
+                            )
+                            else f'"{value}"'
+                        )
+                        items.append(f"{quoted_key}: {quoted_value}")
                 return f"{{{', '.join(items)}}}"
             else:
                 return None
