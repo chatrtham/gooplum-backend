@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 import logging
 
 from src.flows.routes import router as flows_router
+from src.agents.routes import router as agents_router
 
 
 # Configure logging
@@ -43,6 +44,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(flows_router)
+app.include_router(agents_router)
 
 
 # Global exception handler

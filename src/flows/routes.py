@@ -27,6 +27,10 @@ class FlowExecutionRequest(BaseModel):
         ..., description="Parameters to pass to the flow"
     )
     timeout: Optional[int] = Field(300, description="Execution timeout in seconds")
+    run_id: Optional[str] = Field(
+        None,
+        description="Optional run ID to use. If provided, execution will use this ID instead of generating a new one. Useful when agent pre-generates run_id for tracking.",
+    )
 
 
 class FlowInfo(BaseModel):
@@ -99,6 +103,24 @@ class PaginatedFlowRuns(BaseModel):
     runs: List[FlowRunInfo]
     total: int
     page: int
+    limit: int
+
+
+class FlowListInfo(BaseModel):
+    """Lightweight flow info for list view (no parameters or return_type)."""
+
+    id: str
+    name: str
+    description: str
+    created_at: Optional[str] = None
+
+
+class PaginatedFlows(BaseModel):
+    """Paginated response for flows listing."""
+
+    flows: List[FlowListInfo]
+    total: int
+    offset: int
     limit: int
 
 
@@ -182,17 +204,28 @@ async def activate_flow(flow_id: str):
         raise HTTPException(status_code=500, detail=f"Error activating flow: {str(e)}")
 
 
-@router.get("/", response_model=List[FlowInfo])
-async def list_flows():
+@router.get("/", response_model=PaginatedFlows)
+async def list_flows(offset: int = 0, limit: int = 12):
     """
-    List all available ready flows.
+    List all available ready flows with pagination.
+
+    Args:
+        offset: Offset for pagination
+        limit: Number of flows per page
 
     Returns:
-        List of available flows
+        Paginated list of flows
     """
     try:
-        flows = await flow_executor.get_available_flows()
-        return [FlowInfo(**flow) for flow in flows]
+        flows, total = await flow_executor.get_available_flows(
+            limit=limit, offset=offset
+        )
+        return PaginatedFlows(
+            flows=[FlowListInfo(**flow) for flow in flows],
+            total=total,
+            offset=offset,
+            limit=limit,
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error listing flows: {str(e)}")
 
@@ -279,16 +312,21 @@ async def execute_flow(flow_id: str, request: FlowExecutionRequest):
         parameters = validation_result.sanitized_parameters or request.parameters
 
         # Execute the flow by ID
-        result = await flow_executor.execute_flow_by_id(
+        result, run_id = await flow_executor.execute_flow_by_id(
             flow_id=flow_id, parameters=parameters, timeout=request.timeout
         )
+
+        # Include run_id in metadata
+        metadata = result.metadata or {}
+        if run_id:
+            metadata["run_id"] = str(run_id)
 
         return ExecutionResponse(
             success=result.success,
             data=result.data,
             error=result.error,
             execution_time=result.execution_time,
-            metadata=result.metadata,
+            metadata=metadata,
         )
 
     except HTTPException:
@@ -333,8 +371,9 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
             # Use validated/sanitized parameters if available
             parameters = validation_result.sanitized_parameters or request.parameters
 
-            # Get flow name for logging
-            flow_name = flow_executor._get_flow_name_by_id(flow_id)
+            # Get flow record for logging
+            flow_record = await flow_db.get_flow(UUID(flow_id))
+            flow_name = flow_record.name if flow_record else None
 
             # Send start event
             start_data = {
@@ -372,6 +411,7 @@ async def execute_flow_stream(flow_id: str, request: FlowExecutionRequest):
                         parameters=parameters,
                         timeout=request.timeout,
                         on_stream=on_stream,
+                        run_id=request.run_id,  # Pass optional run_id
                     )
                     final_result = result
                 except Exception as e:
@@ -510,13 +550,9 @@ async def get_flow_code(flow_id: str):
                 status_code=404, detail=f"Flow with ID '{flow_id}' not found"
             )
 
-        flow_name = flow_executor._get_flow_name_by_id(flow_id)
-        if not flow_name:
-            flow_name = flow_record.name
-
         return {
             "flow_id": flow_id,
-            "flow_name": flow_name,
+            "flow_name": flow_record.name,
             "source_code": flow_record.source_code,
         }
 

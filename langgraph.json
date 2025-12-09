@@ -1,7 +1,8 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "goopie": "./src/flows/goopie/agent.py:agent"
+    "goopie": "./src/flows/goopie/agent.py:agent",
+    "custom_agent": "./src/agents/core/agent_factory.py:make_agent"
   },
   "env": ".env",
   "python_version": "3.12",

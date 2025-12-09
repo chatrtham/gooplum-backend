@@ -1,8 +1,12 @@
--- GraphLoop Backend Database Setup
+-- GoopLum Backend Database Setup
 -- Run these commands in your Supabase SQL editor to set up the database
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- ============================================
+-- FLOWS TABLES
+-- ============================================
 
 -- Main flows table
 CREATE TABLE IF NOT EXISTS flows (
@@ -64,6 +68,7 @@ CREATE INDEX IF NOT EXISTS idx_flow_runs_flow_id ON flow_runs(flow_id);
 CREATE INDEX IF NOT EXISTS idx_flow_runs_created_at ON flow_runs(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_flow_runs_status ON flow_runs(status);
 CREATE INDEX IF NOT EXISTS idx_stream_events_run_id ON flow_stream_events(run_id);
+
 
 -- Optional: Add comments for documentation
 COMMENT ON TABLE flows IS 'Stores compiled flow definitions and metadata';

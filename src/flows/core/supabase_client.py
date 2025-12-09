@@ -25,6 +25,15 @@ class FlowRecord(BaseModel):
     created_at: datetime
 
 
+class FlowListRecord(BaseModel):
+    """Lightweight model for flow list view (no source_code or return_type)."""
+
+    id: UUID
+    name: str
+    description: Optional[str] = None
+    created_at: datetime
+
+
 class FlowParameterRecord(BaseModel):
     """Database model for flow parameter records."""
 
@@ -129,17 +138,34 @@ class SupabaseFlowDB:
             return FlowRecord(**result.data[0])
         return None
 
-    async def list_flows(self, include_drafts: bool = False) -> List[FlowRecord]:
-        """List flows. By default only returns ready flows."""
+    async def list_flows(
+        self, include_drafts: bool = False, limit: int = 12, offset: int = 0
+    ) -> Tuple[List[FlowListRecord], int]:
+        """List flows with pagination. By default only returns ready flows.
+
+        Args:
+            include_drafts: Whether to include draft flows
+            limit: Maximum number of flows to return
+            offset: Number of flows to skip
+
+        Returns:
+            Tuple of (flow_records, total_count)
+        """
         await self._ensure_client()
-        query = self.client.table("flows").select("*")
+        query = self.client.table("flows").select(
+            "id, name, description, created_at", count="exact"
+        )
 
         if not include_drafts:
             query = query.eq("status", "ready")
 
-        result = await query.order("created_at", desc=True).execute()
+        result = (
+            await query.order("created_at", desc=True)
+            .range(offset, offset + limit - 1)
+            .execute()
+        )
 
-        return [FlowRecord(**flow) for flow in result.data]
+        return [FlowListRecord(**flow) for flow in result.data], result.count
 
     async def activate_flow(self, flow_id: UUID) -> FlowRecord:
         """Activate a flow by setting its status to ready."""
@@ -197,8 +223,16 @@ class SupabaseFlowDB:
         flow_id: UUID,
         parameters: Dict[str, Any],
         metadata: Optional[Dict[str, Any]] = None,
+        run_id: Optional[UUID] = None,
     ) -> FlowRunRecord:
-        """Create a new flow run record with RUNNING status."""
+        """Create a new flow run record with RUNNING status.
+
+        Args:
+            flow_id: ID of the flow being executed
+            parameters: Parameters passed to the flow
+            metadata: Optional metadata for the run
+            run_id: Optional pre-generated run ID. If not provided, database generates one.
+        """
         await self._ensure_client()
 
         run_data = {
@@ -207,6 +241,10 @@ class SupabaseFlowDB:
             "status": "RUNNING",
             "metadata": metadata,
         }
+
+        # Use provided run_id if specified
+        if run_id:
+            run_data["id"] = str(run_id)
 
         result = await self.client.table("flow_runs").insert(run_data).execute()
 
