@@ -36,7 +36,7 @@ def build_system_prompt(
 
     # 1. User instructions (only if provided)
     if instructions and instructions.strip():
-        sections.append(instructions.strip())
+        sections.append(f"# Instructions:\n\n{instructions.strip()}\n\n---")
 
     # 2. GoopLum platform context (only if user has tools)
     has_any_tools = has_flow_tools or has_gumcp_tools
