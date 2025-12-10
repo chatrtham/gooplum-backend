@@ -1,3 +1,5 @@
+For frontend: go to https://github.com/chatrtham/gooplum-frontend
+
 # ✨ GoopLum
 GoopLum is an experimental project inspired by [GumLoop](https://www.gumloop.com/) that explores what's possible with the state of AI in 2025 to lower the barrier to entry for building AI workflows and agents. GoopLum is built on top of `langgraph`, `guMCP`, and `e2b`.
 
@@ -18,7 +20,6 @@ https://mcp.gumloop.com/gumloop/` and `/mcp`)
 - [Anthropic API Key](https://console.anthropic.com/settings/keys)
 - [Gemini API Key](https://aistudio.google.com/api-keys)
 - [ZAI API Key](https://z.ai/manage-apikey/apikey-list)
-- [GoopLum frontend](https://github.com/chatrtham/gooplum-frontend) for UI
 
 ### Database Setup
 
