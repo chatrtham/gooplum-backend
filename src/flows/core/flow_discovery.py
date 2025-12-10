@@ -79,10 +79,8 @@ class FlowDiscovery:
             # Extract docstring
             docstring = ast.get_docstring(node) or ""
 
-            # Extract description from docstring (first line)
-            description = (
-                docstring.split("\n")[0].strip() if docstring else f"Flow: {name}"
-            )
+            # Extract description from docstring (everything before Args/Returns/Raises sections)
+            description = self._extract_description_from_docstring(docstring, name)
 
             # Extract parameters
             parameters = self._extract_parameters(node)
@@ -106,6 +104,55 @@ class FlowDiscovery:
         except Exception as e:
             print(f"Error extracting metadata for function {node.name}: {e}")
             return None
+
+    def _extract_description_from_docstring(
+        self, docstring: str, fallback_name: str
+    ) -> str:
+        """
+        Extract the description from a docstring.
+
+        The description is everything before Args:, Returns:, Raises:, or similar sections.
+        Multi-line descriptions are joined with spaces.
+        """
+        if not docstring:
+            return f"Flow: {fallback_name}"
+
+        # Common docstring section headers
+        section_headers = [
+            "Args:",
+            "Arguments:",
+            "Parameters:",
+            "Returns:",
+            "Return:",
+            "Raises:",
+            "Yields:",
+            "Examples:",
+            "Example:",
+            "Note:",
+            "Notes:",
+            "Attributes:",
+        ]
+
+        # Find the earliest section header
+        description_end = len(docstring)
+        for header in section_headers:
+            idx = docstring.find(header)
+            if idx != -1 and idx < description_end:
+                description_end = idx
+
+        # Extract description part
+        description_text = docstring[:description_end].strip()
+
+        if not description_text:
+            return f"Flow: {fallback_name}"
+
+        # Join multi-line descriptions into a single line
+        # Split by newlines, strip each line, filter empty lines, join with space
+        lines = [line.strip() for line in description_text.split("\n")]
+        lines = [line for line in lines if line]
+        description = " ".join(lines)
+
+        return description
 
     def _extract_parameters(self, node: ast.AsyncFunctionDef) -> List[FlowParameter]:
         """Extract parameter information from function definition."""
