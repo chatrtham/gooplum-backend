@@ -156,7 +156,8 @@ client = MultiServerMCPClient({
     "service_name": {
         "transport": "streamable_http",
         "url": f"https://mcp.gumloop.com/service_name/{GUMCP_CREDENTIALS}/mcp"
-    }
+    },
+    ... # Add other services as needed
 })
 tools = await client.get_tools()
 ```
