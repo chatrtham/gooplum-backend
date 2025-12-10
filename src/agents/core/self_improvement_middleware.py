@@ -57,7 +57,7 @@ class SelfImprovementMiddleware(AgentMiddleware):
         # Learning LLM - fast and cheap for background analysis
         self.learning_model = ChatOpenAI(
             temperature=0.7,
-            model="gemini-2.5-flash-lite",
+            model="gemini-2.5-flash",
             openai_api_key=os.getenv("GOOGLE_API_KEY"),
             openai_api_base="https://generativelanguage.googleapis.com/v1beta/openai/",
             reasoning_effort=None,
