@@ -1,0 +1,18 @@
+Parameters Schema:
+```json
+{
+  "email_id": {
+    "type": "string",
+    "description": "The ID of the email to get attachments from (required)"
+  },
+  "attachment_id": {
+    "type": "string",
+    "description": "Specific attachment ID to retrieve. If not provided, returns all attachments."
+  },
+  "upload_to_workspace": {
+    "type": "boolean",
+    "description": "If true, uploads to workspace storage. If false, uploads to personal storage. Default is false.",
+    "default": false
+  }
+}
+```

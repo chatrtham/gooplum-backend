@@ -1,8 +1,8 @@
 # Outlook Tools Index
 
-*Generated on: 2025-12-09*
+*Generated on: 2025-12-10*
 
-## Available Tools (7 total)
+## Available Tools (8 total)
 
 1. **read_emails** - Read emails from Outlook. Supports Microsoft Graph OData filters and content search.
 2. **send_email** - Send an email using Outlook
@@ -11,3 +11,4 @@
 5. **forward_email** - Forward an email to specified recipients
 6. **archive_email** - Archive an email by moving it to the Archive folder
 7. **trash_email** - Move an email to the Trash/Deleted Items folder
+8. **get_attachments** - Get attachments from an email. Downloads and uploads to Gumloop storage, returns filenames.
