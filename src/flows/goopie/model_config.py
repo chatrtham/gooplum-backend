@@ -14,7 +14,7 @@ def get_model():
 
     # model = ChatOpenAI(
     #     temperature=0,
-    #     model="glm-4.6",
+    #     model="glm-4.7",
     #     openai_api_key=os.getenv("ZAI_API_KEY"),
     #     openai_api_base="https://api.z.ai/api/coding/paas/v4/",
     # )
@@ -24,16 +24,16 @@ def get_model():
 
 def get_discovery_model():
     """Get the configured model for the discovery subagent."""
-    model = ChatOpenAI(
-        temperature=0,
-        model="glm-4.6",
-        openai_api_key=os.getenv("ZAI_API_KEY"),
-        openai_api_base="https://api.z.ai/api/coding/paas/v4/",
-    )
+    # model = ChatOpenAI(
+    #     temperature=0,
+    #     model="glm-4.7",
+    #     openai_api_key=os.getenv("ZAI_API_KEY"),
+    #     openai_api_base="https://api.z.ai/api/coding/paas/v4/",
+    # )
 
     # model = init_chat_model("anthropic:claude-haiku-4-5-20251001", temperature=0)
 
-    # model = init_chat_model("anthropic:claude-sonnet-4-5-20250929", temperature=0)
+    model = init_chat_model("anthropic:claude-sonnet-4-5-20250929", temperature=0)
 
     return model
 
